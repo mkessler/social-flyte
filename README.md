@@ -1,24 +1,82 @@
-# README
+[ ![Codeship Status for mkessler/yoala](https://app.codeship.com/projects/c3298b20-7cae-0134-5149-164a30546007/status?branch=master)](https://app.codeship.com/projects/181143)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application Name Overview
+==============================================
 
-Things you may want to cover:
+1-2 paragraphs with an overview of the app
 
-* Ruby version
 
-* System dependencies
+Required Environment / Minimum Setup
+----------------------------------------------
 
-* Configuration
+Ruby version.
+Minimum setup required to run the app. This should be checked by `rake dev:setup`.
 
-* Database creation
 
-* Database initialization
+Notable Deviations
+----------------------------------------------
 
-* How to run the test suite
+Document any case where this project deviates from the standard policies.
+Not using git flow? What's the branching model.
+Esoteric release schedule? Document it.
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+Accessing the Site
+----------------------------------------------
 
-* ...
+Is it running WEBrick, pow, unicorn?
+Do you need to use custom subdomains or hosts?
+
+
+Configuration
+----------------------------------------------
+
+Who do I speak with to get the values for configuration files?
+Who/where do I go to for dev/production database dumps?
+
+
+Walkthrough / Smoke Test
+----------------------------------------------
+
+Describe a manual smoke test process to ensure that the env is running as it should be.
+
+
+Testing
+----------------------------------------------
+
+How do you run the tests?
+
+
+Staging Environment
+----------------------------------------------
+
+Where is it?
+How do I access it?
+Who do I speak with to get access?
+
+
+Production Environment
+----------------------------------------------
+
+Where is it?
+How do I access it?
+Who do I speak with to get access?
+Is there a CDN? How does it work?
+Is there a particular release process?
+
+
+Design
+----------------------------------------------
+
+Spot for designers to put any information they need.
+
+
+Known Issues / Gotcha
+----------------------------------------------
+
+
+
+Extended Resources
+----------------------------------------------
+
+link to extended resources
