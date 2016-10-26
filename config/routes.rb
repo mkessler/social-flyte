@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'marketing/index'
 
   root 'marketing#index'
