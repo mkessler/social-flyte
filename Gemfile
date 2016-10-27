@@ -35,6 +35,8 @@ group :development, :test do
   # and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl'
+  gem 'faker'
 end
 
 group :development do
