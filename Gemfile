@@ -35,7 +35,7 @@ group :development, :test do
   # and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl'
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'faker'
 end
 
@@ -59,3 +59,6 @@ gem 'devise'
 # Code audit gems
 gem 'rubocop', require: false
 gem 'rubycritic', require: false
+
+# Facebook API wrapper
+gem 'koala', '~> 2.2'

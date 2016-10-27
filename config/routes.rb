@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :authentications
   devise_for :users
   get 'marketing/index'
 

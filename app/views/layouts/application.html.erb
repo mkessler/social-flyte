@@ -12,6 +12,9 @@
     <ul class="hmenu">
       <%= render 'devise/menu/registration_items' %>
       <%= render 'devise/menu/login_items' %>
+      <li>
+        <a class="nav_link" href="#" onclick="fblogin(); return false;">Facebook Auth</a>
+      </li>
     </ul>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

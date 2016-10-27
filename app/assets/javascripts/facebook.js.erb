@@ -1,0 +1,51 @@
+// Additional JS functions here
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : <%= Rails.application.secrets.facebook_app_id %>, // App ID
+    status     : true, // check login status
+    cookie     : true, // enable cookies to allow the server to access the session
+    xfbml      : true  // parse XFBML
+  });
+};
+
+// Load the SDK Asynchronously
+(function(d){
+   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement('script'); js.id = id; js.async = true;
+   js.src = "//connect.facebook.net/en_US/all.js";
+   ref.parentNode.insertBefore(js, ref);
+}(document));
+
+function fblogin() {
+  FB.getLoginStatus(function(response) {
+    if(response.status == "connected") {
+      addAuthentication(response.authResponse);
+    } else {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          addAuthentication(response.authResponse);
+        }
+      });
+    }
+  });
+};
+
+function addAuthentication(response) {
+  $.ajax({
+    url: "/authentications",
+    type: "POST",
+    data: {
+      authentication: {
+        provider: '<%= NETWORK_PROVIDERS[:facebook] %>',
+        uid: response.userID,
+        oauth_token: response.accessToken,
+        oauth_expires_at: response.expiresIn
+      }
+    },
+    dataType: "json",
+    success: function(data){
+      console.log(data);
+    }
+  });
+}
