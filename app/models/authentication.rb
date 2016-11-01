@@ -1,15 +1,16 @@
 class Authentication < ApplicationRecord
   belongs_to :user
+  belongs_to :network
 
   def self.from_omniauth(user, params)
-    get_long_lived_token(params[:token]) if params[:provider] == NETWORK_PROVIDERS[:facebook]
+    get_long_lived_token(params[:token]) if params[:network_id] == Network.facebook.id
 
-    where(provider: params[:provider]).
-    where(provider_user_id: params[:provider_user_id]).
+    where(network_id: params[:network_id]).
+    where(network_user_id: params[:network_user_id]).
     first_or_initialize.tap do |authentication|
       authentication.user = user
-      authentication.provider = params[:provider]
-      authentication.provider_user_id = params[:provider_user_id]
+      authentication.network_id = params[:network_id]
+      authentication.network_user_id = params[:network_user_id]
       authentication.token = @long_lived_token || params[:token]
       authentication.expires_at = @long_lived_token_expires_at || DateTime.now.utc + params[:expires_at].to_i.seconds
       authentication.save!

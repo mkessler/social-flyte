@@ -5,9 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :authentications
+  has_many :authentications, dependent: :destroy
 
   def facebook_authentication
-    authentications.find_by_provider(NETWORK_PROVIDERS[:facebook])
+    authentications.find_by_network_id(Network.facebook.id)
   end
 end

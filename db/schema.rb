@@ -16,16 +16,23 @@ ActiveRecord::Schema.define(version: 20161027033541) do
   enable_extension "plpgsql"
 
   create_table "authentications", force: :cascade do |t|
-    t.integer  "user_id",          null: false
-    t.string   "provider",         null: false
-    t.string   "provider_user_id", null: false
-    t.string   "token",            null: false
-    t.datetime "expires_at",       null: false
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["provider"], name: "index_authentications_on_provider", using: :btree
-    t.index ["user_id", "provider"], name: "index_authentications_on_user_id_and_provider", unique: true, using: :btree
+    t.integer  "user_id",         null: false
+    t.integer  "network_id",      null: false
+    t.string   "network_user_id", null: false
+    t.string   "token",           null: false
+    t.datetime "expires_at",      null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["network_id"], name: "index_authentications_on_network_id", using: :btree
+    t.index ["user_id", "network_id"], name: "index_authentications_on_user_id_and_network_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  end
+
+  create_table "networks", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "slug",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -45,5 +52,6 @@ ActiveRecord::Schema.define(version: 20161027033541) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "authentications", "networks"
   add_foreign_key "authentications", "users"
 end

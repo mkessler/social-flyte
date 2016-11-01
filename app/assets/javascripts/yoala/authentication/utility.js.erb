@@ -12,8 +12,8 @@ Yoala.authentication.utility = {
       type: 'POST',
       data: {
         authentication: {
-          provider: args.provider,
-          provider_user_id: args.response.userID,
+          network_id: args.network_id,
+          network_user_id: args.response.userID,
           token: args.response.accessToken,
           expires_at: args.response.expiresIn
         }
