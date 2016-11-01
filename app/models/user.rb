@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :authentications
 
-  def facebook_auth
+  def facebook_authentication
     authentications.find_by_provider(NETWORK_PROVIDERS[:facebook])
   end
 end
