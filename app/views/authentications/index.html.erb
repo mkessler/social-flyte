@@ -1,0 +1,27 @@
+<h1>Authentications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Provider</th>
+      <th>Uid</th>
+      <th>Oauth token</th>
+      <th>Oauth expires at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @authentications.each do |authentication| %>
+      <tr>
+        <td><%= authentication.user_id %></td>
+        <td><%= authentication.provider %></td>
+        <td><%= authentication.uid %></td>
+        <td><%= authentication.oauth_token %></td>
+        <td><%= authentication.oauth_expires_at %></td>
+        <td><%= link_to 'Destroy', authentication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
