@@ -2,8 +2,8 @@ FactoryGirl.define do
   factory :authentication do
     user
     provider NETWORK_PROVIDERS.values.sample
-    uid Faker::Number.number(7)
-    oauth_token Faker::Number.number(18)
-    oauth_expires_at DateTime.now.utc + 1000000
+    provider_user_id Faker::Number.number(7)
+    token Faker::Number.number(18)
+    expires_at DateTime.now.utc + 1000000
   end
 end

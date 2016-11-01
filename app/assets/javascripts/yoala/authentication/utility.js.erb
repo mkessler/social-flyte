@@ -13,9 +13,9 @@ Yoala.authentication.utility = {
       data: {
         authentication: {
           provider: args.provider,
-          uid: args.response.userID,
-          oauth_token: args.response.accessToken,
-          oauth_expires_at: args.response.expiresIn
+          provider_user_id: args.response.userID,
+          token: args.response.accessToken,
+          expires_at: args.response.expiresIn
         }
       },
       dataType: 'json',
