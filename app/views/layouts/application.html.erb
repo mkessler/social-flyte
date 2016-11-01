@@ -9,15 +9,23 @@
   </head>
 
   <body>
-    <ul class="hmenu">
+    <ul>
       <%= render 'devise/menu/registration_items' %>
       <%= render 'devise/menu/login_items' %>
-      <li>
-        <a class="nav_link" href="#" onclick="fblogin(); return false;">Facebook Auth</a>
-      </li>
+      <% if current_user %>
+        <li>
+          <a class="nav_link" href="#" onclick="Yoala.authentication.facebook.login(); return false;">Facebook Auth</a>
+        </li>
+      <% end %>
     </ul>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        Yoala.authentication.facebook.init();
+      }
+      Yoala.authentication.facebook.loadSDK();
+    </script>
   </body>
 </html>

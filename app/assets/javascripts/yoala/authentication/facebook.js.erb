@@ -1,0 +1,38 @@
+var Yoala = Yoala || {};
+Yoala.authentication = Yoala.authentication || {};
+
+/*
+Facebook Authentication Module
+********************************/
+
+Yoala.authentication.facebook = {
+  init: function() {
+    FB.init({
+      appId: <%= Rails.application.secrets.facebook_app_id %>,
+      status: true,
+      cookie: true,
+      xfbml: true
+    });
+  },
+  loadSDK: function() {
+    (function(d){
+      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement('script'); js.id = id; js.async = true;
+      js.src = "//connect.facebook.net/en_US/all.js";
+      ref.parentNode.insertBefore(js, ref);
+    }(document));
+  },
+  login: function(args={}) {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        Yoala.authentication.utility.create({
+          provider: '<%= NETWORK_PROVIDERS[:facebook] %>',
+          response: response.authResponse
+        });
+      } else {
+        alert('Authentication cancelled.');
+      }
+    });
+  }
+}
