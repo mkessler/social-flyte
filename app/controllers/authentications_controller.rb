@@ -15,9 +15,11 @@ class AuthenticationsController < ApplicationController
 
     respond_to do |format|
       if @authentication
-        render json: @authentication, status: :created
+        format.html { redirect_to authentications_url, notice: 'Authentication was successfully created.' }
+        format.json { render json: @authentication, status: :created }
       else
-        render json: @authentication.errors, status: :unprocessable_entity
+        format.html { render :index }
+        format.json { render json: @authentication.errors, status: :unprocessable_entity }
       end
     end
   end

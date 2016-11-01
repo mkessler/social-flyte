@@ -1,0 +1,27 @@
+var Yoala = Yoala || {};
+Yoala.authentication = Yoala.authentication || {};
+
+/*
+Authentication Module
+********************************/
+
+Yoala.authentication.utility = {
+  create: function(args={}) {
+    $.ajax({
+      url: '/authentications',
+      type: 'POST',
+      data: {
+        authentication: {
+          provider: args.provider,
+          uid: args.response.userID,
+          oauth_token: args.response.accessToken,
+          oauth_expires_at: args.response.expiresIn
+        }
+      },
+      dataType: 'json',
+      success: function(data){
+        console.log(data);
+      }
+    });
+  }
+}
