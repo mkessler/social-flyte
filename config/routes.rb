@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   resources :authentications, except: [:new, :edit, :show]
   devise_for :users
   get 'marketing/index'
