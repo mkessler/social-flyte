@@ -27,7 +27,7 @@ Yoala.authentication.facebook = {
     FB.login(function(response) {
       if (response.authResponse) {
         Yoala.authentication.utility.create({
-          provider: '<%= NETWORK_PROVIDERS[:facebook] %>',
+          network_id: '<%= Network.facebook.id %>',
           response: response.authResponse
         });
       } else {

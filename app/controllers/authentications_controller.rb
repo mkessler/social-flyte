@@ -56,6 +56,6 @@ class AuthenticationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def authentication_params
-      params.require(:authentication).permit(:provider, :provider_user_id, :token, :expires_at)
+      params.require(:authentication).permit(:network_id, :network_user_id, :token, :expires_at)
     end
 end
