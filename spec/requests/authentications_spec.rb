@@ -20,16 +20,13 @@ RSpec.describe "Authentications", type: :request do
   describe "POST /authentications" do
     it "denies access without logged in user" do
       user = FactoryGirl.create(:user)
-      headers = {
-        "ACCEPT" => "application/json",
-      }
       authentication_attributes = FactoryGirl.attributes_for(
         :authentication,
         user_id: user.id
       )
 
       expect {
-        post authentications_path, { authentication: authentication_attributes }, headers
+        post authentications_path, params: { authentication: authentication_attributes, format: :json }
       }.to_not change(Authentication, :count)
       expect(response).to have_http_status(401)
       expect(response.content_type).to eq('application/json')
@@ -44,7 +41,7 @@ RSpec.describe "Authentications", type: :request do
     #   )
     #
     #   expect {
-    #     post authentications_path, { authentication: authentication_attributes }, headers
+    #     post authentications_path, params: { authentication: authentication_attributes, format: :json }
     #   }.to change(Authentication, :count)
     #   expect(response).to have_http_status(200)
     #   expect(response.content_type).to eq('application/json')
