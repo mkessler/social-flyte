@@ -33,16 +33,30 @@ ActiveRecord::Schema.define(version: 20161102051850) do
     t.string   "slug",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_networks_on_slug", using: :btree
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "network_id",        null: false
+    t.string   "network_post_id",   null: false
+    t.string   "network_parent_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
   end
 
   create_table "reactions", force: :cascade do |t|
-    t.string   "network_user_id"
+    t.integer  "post_id",              null: false
+    t.string   "network_user_id",      null: false
     t.string   "network_user_link"
     t.string   "network_user_name"
     t.string   "network_user_picture"
-    t.string   "category"
+    t.string   "category",             null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.index ["category"], name: "index_reactions_on_category", using: :btree
+    t.index ["post_id", "network_user_id"], name: "index_reactions_on_post_id_and_network_user_id", unique: true, using: :btree
+    t.index ["post_id"], name: "index_reactions_on_post_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +78,6 @@ ActiveRecord::Schema.define(version: 20161102051850) do
 
   add_foreign_key "authentications", "networks"
   add_foreign_key "authentications", "users"
+  add_foreign_key "posts", "networks"
+  add_foreign_key "reactions", "posts"
 end

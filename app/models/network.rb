@@ -1,5 +1,6 @@
 class Network < ApplicationRecord
-  has_many :authentications
+  #has_many :authentications
+  #has_many :posts
 
   def self.facebook
     find_by_slug('facebook')

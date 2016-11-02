@@ -1,9 +1,10 @@
 require 'koala'
 
 class FacebookService
-  def initialize(user, parent_id, post_id)
+  def initialize(user, post)
     @graph = Koala::Facebook::API.new(user.facebook_authentication.token)
-    @object_id = "#{parent_id}_#{post_id}"
+    @post_id = post.id
+    @object_id = "#{post.network_parent_id}_#{post.network_post_id}"
   end
 
   def aggregate_reactions
@@ -20,7 +21,7 @@ class FacebookService
 
   def build_reactions(results)
     results.each do |result|
-      Reaction.find_or_create_by(network_user_id: result["id"]) do |reaction|
+      Reaction.find_or_create_by(post_id: @post_id, network_user_id: result["id"]) do |reaction|
         reaction.network_user_link = result["link"]
         reaction.network_user_name = result["name"]
         reaction.network_user_picture = result["picture"]
