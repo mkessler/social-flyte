@@ -15,7 +15,7 @@ class FacebookService
   end
 
   def get_reactions
-    @graph.get_object("#{@object_id}/reactions?fields=id,link,name,pic_square,type&limit=4000")
+    @graph.get_object("#{@object_id}/reactions?fields=id,link,name,pic_square,type&limit=2000")
   end
 
   def get_shares
