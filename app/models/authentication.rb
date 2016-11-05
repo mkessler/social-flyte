@@ -1,6 +1,6 @@
 class Authentication < ApplicationRecord
   belongs_to :user
-  #belongs_to :network
+  belongs_to :network
 
   def self.from_omniauth(user, params)
     get_long_lived_token(params[:token]) if params[:network_id] == Network.facebook.id.to_s
