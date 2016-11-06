@@ -19,6 +19,18 @@ class FacebookService
     end
   end
 
+  def aggregate_comments
+    results = get_comments
+    build_comments(results)
+
+    results = results.next_page
+
+    while results.present?
+      build_comments(results)
+      results = results.next_page
+    end
+  end
+
   def build_reactions(results)
     results.each do |result|
       Reaction.find_or_create_by(post_id: @post_id, network_user_id: result["id"]) do |reaction|
@@ -26,6 +38,17 @@ class FacebookService
         reaction.network_user_name = result["name"]
         reaction.network_user_picture = result["picture"]
         reaction.category = result["type"]
+      end
+    end
+  end
+
+  def build_comments(results)
+    results.each do |result|
+      Comment.find_or_create_by(post_id: @post_id, network_comment_id: result["id"]) do |comment|
+        comment.network_user_id = result["from"]["id"]
+        comment.network_user_name = result["from"]["name"]
+        comment.like_count = result["like_count"]
+        comment.message = result["message"]
       end
     end
   end

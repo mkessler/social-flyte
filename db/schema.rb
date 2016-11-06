@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102051850) do
+ActiveRecord::Schema.define(version: 20161106165330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20161102051850) do
     t.index ["network_id"], name: "index_authentications_on_network_id", using: :btree
     t.index ["user_id", "network_id"], name: "index_authentications_on_user_id_and_network_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "post_id",            null: false
+    t.string   "network_comment_id", null: false
+    t.string   "network_user_id",    null: false
+    t.string   "network_user_name",  null: false
+    t.string   "like_count",         null: false
+    t.text     "message",            null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["post_id", "network_comment_id"], name: "index_comments_on_post_id_and_network_comment_id", unique: true, using: :btree
+    t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
   end
 
   create_table "networks", force: :cascade do |t|
@@ -78,6 +91,7 @@ ActiveRecord::Schema.define(version: 20161102051850) do
 
   add_foreign_key "authentications", "networks"
   add_foreign_key "authentications", "users"
+  add_foreign_key "comments", "posts"
   add_foreign_key "posts", "networks"
   add_foreign_key "reactions", "posts"
 end
