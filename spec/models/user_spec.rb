@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
       authentication = FactoryGirl.create(
         :authentication,
         user: user,
-        network_id: Network.facebook.id
+        network: Network.facebook
       )
 
       expect(user.facebook_authentication).to eq(authentication)

@@ -2,17 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "posts/show", type: :view do
   before(:each) do
-    @post = assign(:post, Post.create!(
-      :network => Network.facebook,
-      :network_post_id => "Network Post",
-      :network_parent_id => "Network Parent"
-    ))
+    @post = assign(:post, FactoryGirl.create(:post))
   end
 
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(//)
-    expect(rendered).to match(/Network Post/)
-    expect(rendered).to match(/Network Parent/)
+    expect(rendered).to match(@post.network_post_id)
+    expect(rendered).to match(@post.network_parent_id)
   end
 end
