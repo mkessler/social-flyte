@@ -2,6 +2,8 @@ class Network < ApplicationRecord
   has_many :authentications
   has_many :posts
 
+  validates :name, :slug, presence: true
+
   def self.facebook
     find_by_slug('facebook')
   end
