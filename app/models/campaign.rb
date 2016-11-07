@@ -1,6 +1,7 @@
 class Campaign < ApplicationRecord
   extend FriendlyId
   belongs_to :organization
+  has_many :posts, dependent: :destroy
   friendly_id :name, use: :scoped, scope: :organization
 
   validates :organization_id, presence: true

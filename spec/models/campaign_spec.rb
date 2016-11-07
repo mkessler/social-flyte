@@ -6,9 +6,9 @@ RSpec.describe Campaign, type: :model do
       expect(Campaign.reflect_on_association(:organization).macro).to eql(:belongs_to)
     end
 
-    # it 'has many posts' do
-    #   expect(Campaign.reflect_on_association(:post).macro).to eql(:has_many)
-    # end
+    it 'has many posts' do
+      expect(Campaign.reflect_on_association(:posts).macro).to eql(:has_many)
+    end
   end
 
   describe 'validations' do
