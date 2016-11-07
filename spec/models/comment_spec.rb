@@ -75,5 +75,15 @@ RSpec.describe Comment, type: :model do
 
       expect(comment).to_not be_valid
     end
+
+    it 'is not valid with missing posted_at' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :comment,
+        posted_at: nil
+      )
+      comment = Comment.new(invalid_attributes)
+
+      expect(comment).to_not be_valid
+    end
   end
 end
