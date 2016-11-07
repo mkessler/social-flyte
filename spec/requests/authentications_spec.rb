@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Authentications", type: :request do
-  describe "GET /authentications" do
-    it "denies access without logged in user" do
+RSpec.describe 'Authentications', type: :request do
+  describe 'GET /authentications' do
+    it 'denies access without logged in user' do
       get authentications_path
       expect(response).to have_http_status(302)
       expect(response).to redirect_to new_user_session_path
     end
 
-    it "accesses index with logged in user" do
+    it 'accesses index with logged in user' do
       user = FactoryGirl.create(:user)
       sign_in(user)
 
@@ -17,8 +17,8 @@ RSpec.describe "Authentications", type: :request do
     end
   end
 
-  describe "POST /authentications" do
-    it "denies access without logged in user" do
+  describe 'POST /authentications' do
+    it 'denies access without logged in user' do
       user = FactoryGirl.create(:user)
       authentication_attributes = FactoryGirl.attributes_for(
         :authentication,
@@ -32,7 +32,7 @@ RSpec.describe "Authentications", type: :request do
       expect(response.content_type).to eq('application/json')
     end
 
-    # it "creates an authentication record with logged in user" do
+    # it 'creates an authentication record with logged in user' do
     #   user = FactoryGirl.create(:user)
     #   sign_in(user)
     #   authentication_attributes = FactoryGirl.attributes_for(
