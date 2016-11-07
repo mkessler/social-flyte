@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107081146) do
+ActiveRecord::Schema.define(version: 20161107195314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(version: 20161107081146) do
     t.index ["network_id"], name: "index_authentications_on_network_id", using: :btree
     t.index ["user_id", "network_id"], name: "index_authentications_on_user_id_and_network_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_authentications_on_user_id", using: :btree
+  end
+
+  create_table "campaigns", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id", "name"], name: "index_campaigns_on_organization_id_and_name", unique: true, using: :btree
+    t.index ["organization_id", "slug"], name: "index_campaigns_on_organization_id_and_slug", unique: true, using: :btree
+    t.index ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
@@ -122,6 +133,7 @@ ActiveRecord::Schema.define(version: 20161107081146) do
 
   add_foreign_key "authentications", "networks"
   add_foreign_key "authentications", "users"
+  add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "posts"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
