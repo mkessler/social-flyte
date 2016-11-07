@@ -5,6 +5,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :memberships, dependent: :destroy
+  has_many :organizations, through: :memberships
   has_many :authentications, dependent: :destroy
 
   def facebook_authentication
