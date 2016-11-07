@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :campaigns
   resources :organizations, except: [:index]
   resources :posts, except: [:edit, :update]
   resources :authentications, except: [:new, :edit, :show]
