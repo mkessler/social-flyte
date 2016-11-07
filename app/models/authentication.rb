@@ -28,6 +28,8 @@ class Authentication < ApplicationRecord
 
     @long_lived_token = access_token_info["access_token"]
     @long_lived_token_expires_at = DateTime.now.utc + access_token_info["expires"].to_i.seconds
+  rescue Koala::Facebook::APIError => e
+    Rails.logger.error("Koala::Facebook API Error (Access Token: #{access_token}) - #{e.message}")
   end
 
   def expired?
