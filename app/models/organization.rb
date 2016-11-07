@@ -2,6 +2,9 @@ class Organization < ApplicationRecord
   extend FriendlyId
   friendly_id :slug_candidates, use: :slugged
 
+  has_many :memberships, dependent: :destroy
+  has_many :users, through: :memberships
+
   validates :name, presence: true
 
   after_create :regenerate_slug
