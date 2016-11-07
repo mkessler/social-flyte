@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe Organization, type: :model do
+  describe 'associations' do
+    it 'has many memberships' do
+      expect(Organization.reflect_on_association(:memberships).macro).to eql(:has_many)
+    end
+
+    it 'has many users' do
+      expect(Organization.reflect_on_association(:users).macro).to eql(:has_many)
+    end
+
+    it 'has many campaigns' do
+      expect(Organization.reflect_on_association(:campaigns).macro).to eql(:has_many)
+    end
+  end
+
   describe 'validations' do
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(:organization)

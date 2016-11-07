@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Network, type: :model do
+  describe 'associations' do
+    it 'has many authentications' do
+      expect(Network.reflect_on_association(:authentications).macro).to eql(:has_many)
+    end
+
+    it 'has many posts' do
+      expect(Network.reflect_on_association(:posts).macro).to eql(:has_many)
+    end
+  end
+
   describe 'validations' do
     it 'is valid with valid attributes' do
       valid_attributes = {name: 'Example', slug: 'example'}
