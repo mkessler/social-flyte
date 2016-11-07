@@ -66,3 +66,6 @@ gem 'rubycritic', require: false
 
 # Facebook API wrapper
 gem 'koala', '~> 2.2'
+
+# Friendly IDs
+gem 'friendly_id', '~> 5.1.0'
