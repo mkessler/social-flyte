@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Reaction, type: :model do
+  describe 'associations' do
+    it 'belongs to post' do
+      expect(Reaction.reflect_on_association(:post).macro).to eql(:belongs_to)
+    end
+  end
+
   describe 'validations' do
     before(:each) do
       @post = FactoryGirl.create(:post)

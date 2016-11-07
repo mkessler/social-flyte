@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  describe 'associations' do
+    it 'has many memberships' do
+      expect(User.reflect_on_association(:memberships).macro).to eql(:has_many)
+    end
+
+    it 'has many organizations' do
+      expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
+    end
+
+    it 'has many authentications' do
+      expect(User.reflect_on_association(:authentications).macro).to eql(:has_many)
+    end
+  end
+
   describe "#facebook_authentication" do
     it "should return the user's Facebook Authentication record if exists" do
       user = FactoryGirl.create(:user)

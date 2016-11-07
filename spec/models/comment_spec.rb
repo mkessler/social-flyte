@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  describe 'associations' do
+    it 'belongs to post' do
+      expect(Comment.reflect_on_association(:post).macro).to eql(:belongs_to)
+    end
+  end
+
   describe 'validations' do
     before(:each) do
       @post = FactoryGirl.create(:post)

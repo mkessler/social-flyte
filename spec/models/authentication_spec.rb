@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Authentication, type: :model do
+  describe 'associations' do
+    it 'belongs to organization' do
+      expect(Authentication.reflect_on_association(:user).macro).to eql(:belongs_to)
+    end
+
+    it 'belongs to network' do
+      expect(Authentication.reflect_on_association(:network).macro).to eql(:belongs_to)
+    end
+  end
+
   describe 'validations' do
     before(:each) do
       @user = FactoryGirl.create(:user)
