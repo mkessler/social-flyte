@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107195314) do
+ActiveRecord::Schema.define(version: 20161107211836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,9 @@ ActiveRecord::Schema.define(version: 20161107195314) do
     t.string   "network_parent_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "campaign_id"
+    t.index ["campaign_id", "network_post_id"], name: "index_posts_on_campaign_id_and_network_post_id", unique: true, using: :btree
+    t.index ["campaign_id"], name: "index_posts_on_campaign_id", using: :btree
     t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
   end
 
@@ -137,6 +140,7 @@ ActiveRecord::Schema.define(version: 20161107195314) do
   add_foreign_key "comments", "posts"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
+  add_foreign_key "posts", "campaigns"
   add_foreign_key "posts", "networks"
   add_foreign_key "reactions", "posts"
 end
