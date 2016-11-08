@@ -35,6 +35,7 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing network_comment_id' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         network_comment_id: nil
       )
       comment = Comment.new(invalid_attributes)
@@ -45,6 +46,7 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing network_user_id' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         network_user_id: nil
       )
       comment = Comment.new(invalid_attributes)
@@ -55,6 +57,7 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing network_user_name' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         network_user_name: nil
       )
       comment = Comment.new(invalid_attributes)
@@ -65,6 +68,7 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing like_count' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         like_count: nil
       )
       comment = Comment.new(invalid_attributes)
@@ -75,6 +79,7 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing message' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         message: nil
       )
       comment = Comment.new(invalid_attributes)
@@ -85,7 +90,20 @@ RSpec.describe Comment, type: :model do
     it 'is not valid with missing posted_at' do
       invalid_attributes = FactoryGirl.attributes_for(
         :comment,
+        post_id: @post.id,
         posted_at: nil
+      )
+      comment = Comment.new(invalid_attributes)
+
+      expect(comment).to_not be_valid
+    end
+
+    it 'is not valid if comment with network_comment_id already exists within post' do
+      FactoryGirl.create(:comment, post_id: @post.id, network_comment_id: '1234')
+      invalid_attributes = FactoryGirl.attributes_for(
+        :comment,
+        post_id: @post.id,
+        network_comment_id: '1234'
       )
       comment = Comment.new(invalid_attributes)
 

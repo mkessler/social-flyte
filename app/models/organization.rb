@@ -7,6 +7,7 @@ class Organization < ApplicationRecord
   has_many :campaigns, dependent: :destroy
 
   validates :name, presence: true
+  validates :slug, presence: true, uniqueness: true
 
   after_create :regenerate_slug
 

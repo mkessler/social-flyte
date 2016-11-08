@@ -61,5 +61,20 @@ RSpec.describe Campaign, type: :model do
 
       expect(campaign).to_not be_valid
     end
+
+    it 'is not valid when campaign with same slug already exists within organization' do
+      organization = FactoryGirl.create(:organization)
+      FactoryGirl.create(
+        :campaign,
+        organization: organization,
+        slug: 'summer-sale-contest'
+      )
+      campaign = Campaign.new(
+        organization: organization,
+        slug: 'summer-sale-contest'
+      )
+
+      expect(campaign).to_not be_valid
+    end
   end
 end

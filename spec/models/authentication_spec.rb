@@ -79,6 +79,17 @@ RSpec.describe Authentication, type: :model do
 
       expect(authentication).to_not be_valid
     end
+
+    it 'is not valid when authentication already exists for user and network' do
+      FactoryGirl.create(:authentication, user_id: @user.id)
+      invalid_attributes = FactoryGirl.attributes_for(
+        :authentication,
+        user_id: @user_id
+      )
+      authentication = Authentication.new(invalid_attributes)
+
+      expect(authentication).to_not be_valid
+    end
   end
 
   describe '.expired?' do
