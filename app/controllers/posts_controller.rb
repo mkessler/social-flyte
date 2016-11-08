@@ -1,31 +1,33 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_organization
+  before_action :set_campaign
   before_action :set_post, only: [:show, :destroy]
 
-  # GET /posts
-  # GET /posts.json
+  # GET organizations/friendly_id/campaigns/friendly_id/posts
+  # GET organizations/friendly_id/campaigns/friendly_id/posts.json
   def index
-    @posts = Post.all
+    @posts = @campaign.posts
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
+  # GET organizations/friendly_id/campaigns/friendly_id/posts
+  # GET organizations/friendly_id/campaigns/friendly_id/posts.json
   def show
   end
 
-  # GET /posts/new
+  # GET organizations/friendly_id/campaigns/friendly_id/posts/new
   def new
-    @post = Post.new
+    @post = @campaign.posts.new
   end
 
-  # POST /posts
-  # POST /posts.json
+  # POST organizations/friendly_id/campaigns/friendly_id/posts
+  # POST organizations/friendly_id/campaigns/friendly_id/posts.json
   def create
-    @post = Post.new(post_params)
+    @post = @campaign.posts.new(post_params)
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -34,12 +36,12 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
+  # DELETE organizations/friendly_id/campaigns/friendly_id/posts
+  # DELETE organizations/friendly_id/campaigns/friendly_id/posts.json
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to organization_campaign_posts_url(@organization, @campaign), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -47,7 +49,15 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      @post = @campaign.posts.find(params[:id])
+    end
+
+    def set_campaign
+      @campaign = @organization.campaigns.friendly.find(params[:campaign_id])
+    end
+
+    def set_organization
+      @organization = current_user.organizations.friendly.find(params[:organization_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -12,7 +12,6 @@ RSpec.describe 'organizations/edit', type: :view do
 
       assert_select 'input#organization_name[name=?]', 'organization[name]'
 
-      assert_select 'input#organization_slug[name=?]', 'organization[slug]'
     end
   end
 end

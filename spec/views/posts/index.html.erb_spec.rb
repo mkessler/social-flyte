@@ -2,9 +2,22 @@ require 'rails_helper'
 
 RSpec.describe 'posts/index', type: :view do
   before(:each) do
+    @organization = FactoryGirl.create(:organization)
+    @campaign = FactoryGirl.create(
+      :campaign,
+      organization: @organization
+    )
     assign(:posts, [
-      FactoryGirl.create(:post),
-      FactoryGirl.create(:post)
+      FactoryGirl.create(
+        :post,
+        campaign: @campaign,
+        network_post_id: '1234'
+      ),
+      FactoryGirl.create(
+        :post,
+        campaign: @campaign,
+        network_post_id: '5678'
+      )
     ])
   end
 
