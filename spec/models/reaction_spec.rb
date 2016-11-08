@@ -86,10 +86,22 @@ RSpec.describe Reaction, type: :model do
 
       expect(reaction).to_not be_valid
     end
+
+    it 'is not valid if reaction with network_user_id already exists for post' do
+      FactoryGirl.create(:reaction, post_id: @post.id, network_user_id: '1234')
+      invalid_attributes = FactoryGirl.attributes_for(
+        :reaction,
+        post_id: @post.id,
+        network_user_id: '1234'
+      )
+      reaction = Reaction.new(invalid_attributes)
+
+      expect(reaction).to_not be_valid
+    end
   end
 
   describe 'scope' do
-    before(:example) do
+    before(:context) do
       2.times { FactoryGirl.create(:reaction, category: 'ANGRY') }
       4.times { FactoryGirl.create(:reaction, category: 'HAHA') }
       6.times { FactoryGirl.create(:reaction, category: 'LIKE') }
