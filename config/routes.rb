@@ -2,12 +2,12 @@ Rails.application.routes.draw do
 
   # Users
   devise_for :users, path: 'account'
-  
+
   # Authentications
   resources :authentications, except: [:new, :edit, :show]
 
   # Organzations, Campaigns, & Posts
-  resources :organizations, except: [:index] do
+  resources :organizations, except: [:index], path: 'o' do
     resources :campaigns do
       resources :posts, except: [:edit, :update]
     end
