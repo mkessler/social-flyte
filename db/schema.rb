@@ -29,9 +29,9 @@ ActiveRecord::Schema.define(version: 20161107211836) do
   end
 
   create_table "campaigns", force: :cascade do |t|
-    t.integer  "organization_id"
-    t.string   "name"
-    t.string   "slug"
+    t.integer  "organization_id", null: false
+    t.string   "name",            null: false
+    t.string   "slug",            null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["organization_id", "name"], name: "index_campaigns_on_organization_id_and_name", unique: true, using: :btree
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20161107211836) do
   end
 
   create_table "memberships", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "organization_id"
+    t.integer  "user_id",         null: false
+    t.integer  "organization_id", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.index ["organization_id", "user_id"], name: "index_memberships_on_organization_id_and_user_id", unique: true, using: :btree
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20161107211836) do
   end
 
   create_table "organizations", force: :cascade do |t|
-    t.string   "name"
-    t.string   "slug"
+    t.string   "name",       null: false
+    t.string   "slug",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20161107211836) do
     t.string   "network_parent_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-    t.integer  "campaign_id"
+    t.integer  "campaign_id",       null: false
     t.index ["campaign_id", "network_post_id"], name: "index_posts_on_campaign_id_and_network_post_id", unique: true, using: :btree
     t.index ["campaign_id"], name: "index_posts_on_campaign_id", using: :btree
     t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 20161107211836) do
   create_table "reactions", force: :cascade do |t|
     t.integer  "post_id",              null: false
     t.string   "network_user_id",      null: false
-    t.string   "network_user_link"
-    t.string   "network_user_name"
-    t.string   "network_user_picture"
+    t.string   "network_user_link",    null: false
+    t.string   "network_user_name",    null: false
+    t.string   "network_user_picture", null: false
     t.string   "category",             null: false
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false

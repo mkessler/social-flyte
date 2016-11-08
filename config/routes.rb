@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
-  resources :campaigns
-  resources :organizations, except: [:index]
-  resources :posts, except: [:edit, :update]
+
+  # Users
+  devise_for :users, path: 'account'
+  
+  # Authentications
   resources :authentications, except: [:new, :edit, :show]
-  devise_for :users
+
+  # Organzations, Campaigns, & Posts
+  resources :organizations, except: [:index] do
+    resources :campaigns do
+      resources :posts, except: [:edit, :update]
+    end
+  end
+
+  # Marketing Pages
   get 'marketing/index'
 
+  # Home Pages
   root 'marketing#index'
-  # For details on the DSL available within this file, see
-  # http://guides.rubyonrails.org/routing.html
 end

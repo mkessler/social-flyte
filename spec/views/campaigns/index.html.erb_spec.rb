@@ -2,14 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'campaigns/index', type: :view do
   before(:each) do
+    @organization = FactoryGirl.create(:organization)
     assign(:campaigns, [
       FactoryGirl.create(
         :campaign,
-        organization: FactoryGirl.create(:organization)
+        organization: @organization,
+        name: 'Summer Sale Contest'
       ),
       FactoryGirl.create(
         :campaign,
-        organization: FactoryGirl.create(:organization)
+        organization: @organization,
+        name: 'Winter Sale Contest'
       )
     ])
   end

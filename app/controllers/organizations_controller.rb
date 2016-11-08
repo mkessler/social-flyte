@@ -59,11 +59,12 @@ class OrganizationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_organization
-      @organization = Organization.friendly.find(params[:id])
+      @organization = current_user.organizations.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # Don't allow :slug
     def organization_params
-      params.require(:organization).permit(:name, :slug)
+      params.require(:organization).permit(:name)
     end
 end
