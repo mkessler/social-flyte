@@ -3,8 +3,8 @@ require 'koala'
 class FacebookService
   def initialize(user, post)
     @graph = Koala::Facebook::API.new(user.facebook_authentication.token)
-    @user_id = user.id
-    @post_id = post.id
+    @user = user
+    @post = post
     @object_id = "#{post.network_parent_id}_#{post.network_post_id}"
   end
 
@@ -34,10 +34,10 @@ class FacebookService
 
   def build_reactions(results)
     results.each do |result|
-      Reaction.find_or_create_by(post_id: @post_id, network_user_id: result['id']) do |reaction|
+      @post.reactions.find_or_create_by(network_user_id: result['id']) do |reaction|
         reaction.network_user_link = result['link']
         reaction.network_user_name = result['name']
-        reaction.network_user_picture = result['picture']
+        reaction.network_user_picture = result['pic_square']
         reaction.category = result['type']
       end
     end
@@ -45,7 +45,7 @@ class FacebookService
 
   def build_comments(results)
     results.each do |result|
-      Comment.find_or_create_by(post_id: @post_id, network_comment_id: result['id']) do |comment|
+      @post.comments.find_or_create_by(network_comment_id: result['id']) do |comment|
         comment.network_user_id = result['from']['id']
         comment.network_user_name = result['from']['name']
         comment.like_count = result['like_count']
@@ -58,24 +58,24 @@ class FacebookService
   def get_post
     @graph.get_object("#{@object_id}?fields=from,created_time,permalink_url")
   rescue Koala::Facebook::APIError => e
-    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user_id} | Post ID: #{@post_id}) - #{e.message}")
+    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
 
   def get_comments
     @graph.get_object("#{@object_id}/comments?fields=attachment,created_time,from,id,like_count,message,parent&limit=1000")
   rescue Koala::Facebook::APIError => e
-    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user_id} | Post ID: #{@post_id}) - #{e.message}")
+    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
 
   def get_reactions
-    @graph.get_object("#{@object_id}/reactions?fields=id,link,name,pic_square,type&limit=2000")
+    @graph.get_object("#{@object_id}/reactions?fields=id,link,name,pic_square,type&limit=1000")
   rescue Koala::Facebook::APIError => e
-    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user_id} | Post ID: #{@post_id}) - #{e.message}")
+    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
 
   def get_shares
-    @graph.get_object("#{@object_id}/sharedposts?limit=5000")
+    @graph.get_object("#{@object_id}/sharedposts?limit=1000")
   rescue Koala::Facebook::APIError => e
-    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user_id} | Post ID: #{@post_id}) - #{e.message}")
+    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
 end
