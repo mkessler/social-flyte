@@ -4,6 +4,8 @@ class PostsController < ApplicationController
   before_action :set_campaign
   before_action :set_post, only: [:show, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   # GET organizations/friendly_id/campaigns/friendly_id/posts
   # GET organizations/friendly_id/campaigns/friendly_id/posts.json
   def index
@@ -63,5 +65,18 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:network_id, :network_post_id, :network_parent_id)
+    end
+
+    def record_not_found
+      if @organization.present? && @campaign.present?
+        flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
+        redirect_to organization_campaign_posts_url(@organization, @campaign)
+      elsif @organization.present?
+        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+        redirect_to organization_campaigns_url(@organization)
+      else
+        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+        redirect_to organizations_url
+      end
     end
 end

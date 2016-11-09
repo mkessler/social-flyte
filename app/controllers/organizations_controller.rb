@@ -2,6 +2,8 @@ class OrganizationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization, only: [:show, :edit, :update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   # GET /organizations/friendly_id
   # GET /organizations/friendly_id.json
   def show
@@ -66,5 +68,10 @@ class OrganizationsController < ApplicationController
     # Don't allow :slug
     def organization_params
       params.require(:organization).permit(:name)
+    end
+
+    def record_not_found
+      flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+      redirect_to organizations_url
     end
 end

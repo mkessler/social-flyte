@@ -3,6 +3,8 @@ class CampaignsController < ApplicationController
   before_action :set_organization
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   # GET organizations/friendly_id/campaigns/friendly_id
   # GET organizations/friendly_id/campaigns/friendly_id.json
   def index
@@ -77,5 +79,15 @@ class CampaignsController < ApplicationController
     # Don't allow :organization_id, :slug
     def campaign_params
       params.require(:campaign).permit(:name)
+    end
+
+    def record_not_found
+      if @organization.present?
+        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+        redirect_to organization_campaigns_url(@organization)
+      else
+        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+        redirect_to organizations_url
+      end
     end
 end

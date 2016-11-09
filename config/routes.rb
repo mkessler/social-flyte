@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :authentications, except: [:new, :edit, :show]
 
   # Organzations, Campaigns, & Posts
-  resources :organizations, except: [:index], path: 'o' do
+  resources :organizations, path: 'o' do
     resources :campaigns do
       resources :posts, except: [:edit, :update]
     end
