@@ -4,22 +4,27 @@ class OrganizationsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET /organizations/friendly_id
-  # GET /organizations/friendly_id.json
+  # GET /o
+  # Platform dashboard
+  def index
+  end
+
+  # GET /o/:id
+  # GET /o/:id.json
   def show
   end
 
-  # GET /organizations/new
+  # GET /o/new
   def new
     @organization = Organization.new
   end
 
-  # GET /organizations/friendly_id/edit
+  # GET /o/:id/edit
   def edit
   end
 
-  # POST /organizations
-  # POST /organizations.json
+  # POST /o
+  # POST /o.json
   def create
     @organization = Organization.new(organization_params)
 
@@ -35,8 +40,8 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /organizations/friendly_id
-  # PATCH/PUT /organizations/friendly_id.json
+  # PATCH/PUT /o/:id
+  # PATCH/PUT /o/:id.json
   def update
     respond_to do |format|
       if @organization.update(organization_params)
@@ -49,8 +54,8 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # DELETE /organizations/friendly_id
-  # DELETE /organizations/friendly_id.json
+  # DELETE /o/:id
+  # DELETE /o/:id.json
   def destroy
     @organization.destroy
     respond_to do |format|
