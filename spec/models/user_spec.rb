@@ -15,6 +15,55 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'validations' do
+    it 'is valid with valid attributes' do
+      valid_attributes = FactoryGirl.attributes_for(:user)
+      user = User.new(valid_attributes)
+
+      expect(user).to be_valid
+    end
+
+    it 'is not valid with missing first_name' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :user,
+        first_name: nil
+      )
+      user = User.new(invalid_attributes)
+
+      expect(user).to_not be_valid
+    end
+
+    it 'is not valid with missing last_name' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :user,
+        last_name: nil
+      )
+      user = User.new(invalid_attributes)
+
+      expect(user).to_not be_valid
+    end
+
+    it 'is not valid with missing email' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :user,
+        email: nil
+      )
+      user = User.new(invalid_attributes)
+
+      expect(user).to_not be_valid
+    end
+
+    it 'is not valid with missing password' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :user,
+        password: nil
+      )
+      user = User.new(invalid_attributes)
+
+      expect(user).to_not be_valid
+    end
+  end
+
   describe "#facebook_authentication" do
     it "should return the user's Facebook Authentication record if exists" do
       user = FactoryGirl.create(:user)
