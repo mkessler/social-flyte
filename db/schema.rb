@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161107211836) do
+ActiveRecord::Schema.define(version: 20161111032944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,12 +92,14 @@ ActiveRecord::Schema.define(version: 20161107211836) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "network_id",        null: false
-    t.string   "network_post_id",   null: false
+    t.integer  "network_id",                    null: false
+    t.string   "network_post_id",               null: false
     t.string   "network_parent_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "campaign_id",       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "campaign_id",                   null: false
+    t.integer  "sync_count",        default: 0, null: false
+    t.datetime "synced_at"
     t.index ["campaign_id", "network_post_id"], name: "index_posts_on_campaign_id_and_network_post_id", unique: true, using: :btree
     t.index ["campaign_id"], name: "index_posts_on_campaign_id", using: :btree
     t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
