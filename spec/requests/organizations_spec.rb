@@ -256,6 +256,10 @@ RSpec.describe 'Organizations', type: :request do
             post organizations_path, params: { organization: valid_attributes }
           end
 
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
+          end
+
           it 'responds with 302' do
             expect(response).to have_http_status(302)
           end
@@ -268,6 +272,10 @@ RSpec.describe 'Organizations', type: :request do
         context 'json request' do
           before(:example) do
             post organizations_path, params: { organization: valid_attributes, format: :json }
+          end
+
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
           end
 
           it 'responds with 201' do
@@ -312,6 +320,10 @@ RSpec.describe 'Organizations', type: :request do
             post organizations_path, params: { organization: invalid_attributes }
           end
 
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
+          end
+
           it 'responds with 200' do
             expect(response).to have_http_status(200)
           end
@@ -324,6 +336,10 @@ RSpec.describe 'Organizations', type: :request do
         context 'json request' do
           before(:example) do
             post organizations_path, params: { organization: invalid_attributes, format: :json }
+          end
+
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
           end
 
           it 'responds with 422' do
@@ -364,6 +380,10 @@ RSpec.describe 'Organizations', type: :request do
             post organizations_path, params: { organization: protected_attributes }
           end
 
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
+          end
+
           it 'responds with 200' do
             expect(response).to have_http_status(200)
           end
@@ -376,6 +396,10 @@ RSpec.describe 'Organizations', type: :request do
         context 'json request' do
           before(:example) do
             post organizations_path, params: { organization: protected_attributes, format: :json }
+          end
+
+          it 'assigns organization' do
+            expect(assigns(:organization)).to be_an(Organization)
           end
 
           it 'responds with 422' do
@@ -440,6 +464,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'html request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: update_attributes }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 302' do
               put organization_path(organization), params: { organization: update_attributes }
               expect(response).to have_http_status(302)
@@ -452,6 +481,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'json request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: update_attributes, format: :json }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 200' do
               put organization_path(organization), params: { organization: update_attributes, format: :json }
               expect(response).to have_http_status(200)
@@ -477,6 +511,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'html request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: invalid_update_attributes }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 200' do
               put organization_path(organization), params: { organization: invalid_update_attributes }
               expect(response).to have_http_status(200)
@@ -489,6 +528,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'json request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: invalid_update_attributes, format: :json }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 422' do
               put organization_path(organization), params: { organization: invalid_update_attributes, format: :json }
               expect(response).to have_http_status(422)
@@ -509,6 +553,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'html request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: protected_attributes }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 200' do
               put organization_path(organization), params: { organization: protected_attributes }
               expect(response).to have_http_status(200)
@@ -521,6 +570,11 @@ RSpec.describe 'Organizations', type: :request do
           end
 
           context 'json request' do
+            it 'assigns organization' do
+              put organization_path(organization), params: { organization: protected_attributes, format: :json }
+              expect(assigns(:organization)).to eql(organization)
+            end
+
             it 'responds with 422' do
               put organization_path(organization), params: { organization: invalid_attributes, format: :json }
               expect(response).to have_http_status(422)
@@ -598,6 +652,11 @@ RSpec.describe 'Organizations', type: :request do
             }.to change(Organization, :count).by(-1)
           end
 
+          it 'assigns organization' do
+            delete organization_path(organization)
+            expect(assigns(:organization)).to eql(organization)
+          end
+
           it 'responds with 302' do
             delete organization_path(organization)
             expect(response).to have_http_status(302)
@@ -612,8 +671,13 @@ RSpec.describe 'Organizations', type: :request do
         context 'json request' do
           it 'deletes organization' do
             expect{
-              delete organization_path(organization)
+              delete organization_path(organization), params: { format: :json }
             }.to change(Organization, :count).by(-1)
+          end
+
+          it 'assigns organization' do
+            delete organization_path(organization), params: { format: :json }
+            expect(assigns(:organization)).to eql(organization)
           end
         end
       end

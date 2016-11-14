@@ -260,6 +260,18 @@ RSpec.describe 'Posts', type: :request do
               post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
+            end
+
             it 'responds with 302' do
               expect(response).to have_http_status(302)
             end
@@ -272,6 +284,18 @@ RSpec.describe 'Posts', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
             end
 
             it 'responds with 201' do
@@ -300,6 +324,18 @@ RSpec.describe 'Posts', type: :request do
               post organization_campaign_posts_path(organization, campaign), params: { post: invalid_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -312,6 +348,18 @@ RSpec.describe 'Posts', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaign_posts_path(organization, campaign), params: { post: invalid_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
             end
 
             it 'responds with 422' do
@@ -336,6 +384,18 @@ RSpec.describe 'Posts', type: :request do
               post organization_campaign_posts_path(organization, campaign), params: { post: protected_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -348,6 +408,18 @@ RSpec.describe 'Posts', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaign_posts_path(organization, campaign), params: { post: protected_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
+            it 'assigns post' do
+              expect(assigns(:post)).to be_a(Post)
             end
 
             it 'responds with 422' do
@@ -432,6 +504,21 @@ RSpec.describe 'Posts', type: :request do
             }.to change(Post, :count).by(-1)
           end
 
+          it 'assigns organization' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post)
+            expect(assigns(:organization)).to eql(organization)
+          end
+
+          it 'assigns campaign' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post)
+            expect(assigns(:campaign)).to eql(campaign)
+          end
+
+          it 'assigns post' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post)
+            expect(assigns(:post)).to eql(campaign_post)
+          end
+
           it 'responds with 302' do
             delete organization_campaign_post_path(organization, campaign, campaign_post)
             expect(response).to have_http_status(302)
@@ -446,8 +533,23 @@ RSpec.describe 'Posts', type: :request do
         context 'json request' do
           it 'deletes campaign' do
             expect{
-              delete organization_campaign_post_path(organization, campaign, campaign_post)
+              delete organization_campaign_post_path(organization, campaign, campaign_post), params: { format: :json }
             }.to change(Post, :count).by(-1)
+          end
+
+          it 'assigns organization' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post), params: { format: :json }
+            expect(assigns(:organization)).to eql(organization)
+          end
+
+          it 'assigns campaign' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post), params: { format: :json }
+            expect(assigns(:campaign)).to eql(campaign)
+          end
+
+          it 'assigns post' do
+            delete organization_campaign_post_path(organization, campaign, campaign_post), params: { format: :json }
+            expect(assigns(:post)).to eql(campaign_post)
           end
         end
       end

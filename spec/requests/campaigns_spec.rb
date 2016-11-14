@@ -307,6 +307,14 @@ RSpec.describe 'Campaigns', type: :request do
               post organization_campaigns_path(organization), params: { campaign: valid_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
+            end
+
             it 'responds with 302' do
               expect(response).to have_http_status(302)
             end
@@ -319,6 +327,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaigns_path(organization), params: { campaign: valid_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
             end
 
             it 'responds with 201' do
@@ -347,6 +363,14 @@ RSpec.describe 'Campaigns', type: :request do
               post organization_campaigns_path(organization), params: { campaign: invalid_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -359,6 +383,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaigns_path(organization), params: { campaign: invalid_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
             end
 
             it 'responds with 422' do
@@ -383,6 +415,14 @@ RSpec.describe 'Campaigns', type: :request do
               post organization_campaigns_path(organization), params: { campaign: protected_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -395,6 +435,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               post organization_campaigns_path(organization), params: { campaign: protected_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to be_a(Campaign)
             end
 
             it 'responds with 422' do
@@ -490,6 +538,14 @@ RSpec.describe 'Campaigns', type: :request do
               put organization_campaign_path(organization, campaign), params: { campaign: update_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
             it 'responds with 302' do
               expect(response).to have_http_status(302)
             end
@@ -502,6 +558,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               put organization_campaign_path(organization, campaign), params: { campaign: update_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
             end
 
             it 'responds with 200' do
@@ -530,6 +594,14 @@ RSpec.describe 'Campaigns', type: :request do
               put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -542,6 +614,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
             end
 
             it 'responds with 422' do
@@ -566,6 +646,14 @@ RSpec.describe 'Campaigns', type: :request do
               put organization_campaign_path(organization, campaign), params: { campaign: protected_attributes }
             end
 
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
+            end
+
             it 'responds with 200' do
               expect(response).to have_http_status(200)
             end
@@ -578,6 +666,14 @@ RSpec.describe 'Campaigns', type: :request do
           context 'json request' do
             before(:example) do
               put organization_campaign_path(organization, campaign), params: { campaign: protected_attributes, format: :json }
+            end
+
+            it 'assigns organization' do
+              expect(assigns(:organization)).to eql(organization)
+            end
+
+            it 'assigns campaign' do
+              expect(assigns(:campaign)).to eql(campaign)
             end
 
             it 'responds with 422' do
@@ -662,6 +758,16 @@ RSpec.describe 'Campaigns', type: :request do
             }.to change(Campaign, :count).by(-1)
           end
 
+          it 'assigns organization' do
+            delete organization_campaign_path(organization, campaign)
+            expect(assigns(:organization)).to eql(organization)
+          end
+
+          it 'assigns campaign' do
+            delete organization_campaign_path(organization, campaign)
+            expect(assigns(:campaign)).to eql(campaign)
+          end
+
           it 'responds with 302' do
             delete organization_campaign_path(organization, campaign)
             expect(response).to have_http_status(302)
@@ -676,8 +782,18 @@ RSpec.describe 'Campaigns', type: :request do
         context 'json request' do
           it 'deletes campaign' do
             expect{
-              delete organization_campaign_path(organization, campaign)
+              delete organization_campaign_path(organization, campaign), params: { format: :json }
             }.to change(Campaign, :count).by(-1)
+          end
+
+          it 'assigns organization' do
+            delete organization_campaign_path(organization, campaign), params: { format: :json }
+            expect(assigns(:organization)).to eql(organization)
+          end
+
+          it 'assigns campaign' do
+            delete organization_campaign_path(organization, campaign), params: { format: :json }
+            expect(assigns(:campaign)).to eql(campaign)
           end
         end
       end
