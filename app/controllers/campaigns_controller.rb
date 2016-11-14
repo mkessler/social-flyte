@@ -33,7 +33,7 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       if @campaign.save
         format.html { redirect_to organization_campaign_url(@organization, @campaign), notice: 'Campaign was successfully created.' }
-        format.json { render :show, status: :created, location: @campaign }
+        format.json { render :show, status: :created, location: organization_campaign_url(@organization, @campaign) }
       else
         format.html { render :new }
         format.json { render json: @campaign.errors, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       if @campaign.update(campaign_params)
         format.html { redirect_to organization_campaign_url(@organization, @campaign), notice: 'Campaign was successfully updated.' }
-        format.json { render :show, status: :ok, location: @campaign }
+        format.json { render :show, status: :ok, location: organization_campaign_url(@organization, @campaign) }
       else
         format.html { render :edit }
         format.json { render json: @campaign.errors, status: :unprocessable_entity }

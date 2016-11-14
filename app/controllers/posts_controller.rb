@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+        format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }

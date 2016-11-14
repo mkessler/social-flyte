@@ -4,9 +4,7 @@ RSpec.describe 'Organizations', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) {FactoryGirl.create(:organization) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:organization) }
-  let(:invalid_attributes) {
-    FactoryGirl.attributes_for(:organization, name: nil)
-  }
+  let(:invalid_attributes) { FactoryGirl.attributes_for(:organization, name: nil) }
   let(:protected_attributes) { { slug: Faker::Team.creature } }
   let(:update_attributes) { { name: Faker::Company.name } }
   let(:invalid_update_attributes) { { name: nil } }
@@ -230,13 +228,13 @@ RSpec.describe 'Organizations', type: :request do
       end
 
       context 'with valid attributes' do
-        it 'increases Organization count by 1' do
+        it 'increases organization count by 1' do
           expect{
             post organizations_path, params: { organization: valid_attributes }
           }.to change(Organization, :count).by(1)
         end
 
-        it 'increases Membership count by 1' do
+        it 'increases membership count by 1' do
           expect{
             post organizations_path, params: { organization: valid_attributes }
           }.to change(Membership, :count).by(1)
@@ -286,16 +284,16 @@ RSpec.describe 'Organizations', type: :request do
       end
 
       context 'with invalid attributes' do
-        it 'does not change Organization count' do
+        it 'does not change organization count' do
           expect{
             post organizations_path, params: { organization: invalid_attributes }
           }.to_not change(Organization, :count)
         end
 
-        it 'does not change Membership count' do
+        it 'does not change membership count' do
           expect{
             post organizations_path, params: { organization: invalid_attributes }
-          }.to_not change(Organization, :count)
+          }.to_not change(Membership, :count)
         end
 
         it 'does not create user/organization membership' do
@@ -338,16 +336,16 @@ RSpec.describe 'Organizations', type: :request do
       end
 
       context 'with protected attributes' do
-        it 'does not change Organization count' do
+        it 'does not change organization count' do
           expect{
             post organizations_path, params: { organization: protected_attributes }
           }.to_not change(Organization, :count)
         end
 
-        it 'does not change Membership count' do
+        it 'does not change membership count' do
           expect{
             post organizations_path, params: { organization: protected_attributes }
-          }.to_not change(Organization, :count)
+          }.to_not change(Membership, :count)
         end
 
         it 'does not create user/organization membership' do
@@ -472,9 +470,9 @@ RSpec.describe 'Organizations', type: :request do
 
         context 'with invalid attributes' do
           it 'does not update organization' do
-            previous_organization = organization
+            previous_name = organization.name
             put organization_path(organization), params: { organization: invalid_update_attributes }
-            expect(organization).to eq(previous_organization)
+            expect(organization.name).to eq(previous_name)
           end
 
           context 'html request' do
@@ -504,9 +502,9 @@ RSpec.describe 'Organizations', type: :request do
 
         context 'with protected attributes' do
           it 'does not update organization' do
-            previous_organization = organization
-            put organization_path(organization), params: { organization: protected_attributes }
-            expect(organization).to eq(previous_organization)
+            previous_name = organization.name
+            put organization_path(organization), params: { organization: invalid_update_attributes }
+            expect(organization.name).to eq(previous_name)
           end
 
           context 'html request' do
