@@ -3,10 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Campaigns', type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { FactoryGirl.create(:organization) }
-  let(:campaign) { FactoryGirl.create(:campaign, organization_id: organization.id) }
+  let(:membership) { FactoryGirl.create(:membership, user: user, organization: organization) }
+  let(:campaign) { FactoryGirl.create(:campaign, organization: organization) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:campaign) }
   let(:invalid_attributes) { FactoryGirl.attributes_for(:campaign, name: nil) }
-  let(:protected_attributes) { { organization_id: organization.id } }
+  let(:protected_attributes) { { organization_id: Faker::Number.number(2) } }
   let(:update_attributes) { { name: Faker::Company.name } }
   let(:invalid_update_attributes) { { name: nil } }
 
@@ -32,8 +33,8 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
-          FactoryGirl.create(:campaign, organization_id: organization.id)
+          membership
+          campaign
           get organization_campaigns_path(organization)
         end
 
@@ -92,7 +93,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           get new_organization_campaign_path(organization)
         end
 
@@ -151,7 +152,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           get organization_campaign_path(organization, campaign)
         end
 
@@ -210,7 +211,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           get edit_organization_campaign_path(organization, campaign)
         end
 
@@ -291,7 +292,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
         end
 
         context 'with valid attributes' do
@@ -393,7 +394,7 @@ RSpec.describe 'Campaigns', type: :request do
 
           context 'json request' do
             before(:example) do
-              post organization_campaigns_path(organization), params: { campaign: invalid_attributes, format: :json }
+              post organization_campaigns_path(organization), params: { campaign: protected_attributes, format: :json }
             end
 
             it 'responds with 422' do
@@ -411,7 +412,7 @@ RSpec.describe 'Campaigns', type: :request do
         context 'with valid attributes' do
           it 'does not change Campaign count' do
             expect{
-              post organization_campaigns_path(organization), params: { campaign: invalid_attributes }
+              post organization_campaigns_path(organization), params: { campaign: valid_attributes }
             }.to_not change(Campaign, :count)
           end
 
@@ -473,7 +474,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
         end
 
         context 'with valid attributes' do
@@ -556,13 +557,13 @@ RSpec.describe 'Campaigns', type: :request do
         context 'with protected attributes' do
           it 'does not update campaign' do
             previous_name = campaign.name
-            put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes }
+            put organization_campaign_path(organization, campaign), params: { campaign: protected_attributes }
             expect(campaign.name).to eq(previous_name)
           end
 
           context 'html request' do
             before(:example) do
-              put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes }
+              put organization_campaign_path(organization, campaign), params: { campaign: protected_attributes }
             end
 
             it 'responds with 200' do
@@ -576,7 +577,7 @@ RSpec.describe 'Campaigns', type: :request do
 
           context 'json request' do
             before(:example) do
-              put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes, format: :json }
+              put organization_campaign_path(organization, campaign), params: { campaign: protected_attributes, format: :json }
             end
 
             it 'responds with 422' do
@@ -594,7 +595,7 @@ RSpec.describe 'Campaigns', type: :request do
         context 'with valid attributes' do
           it 'does not update campaign' do
             previous_name = campaign.name
-            put organization_campaign_path(organization, campaign), params: { organization: invalid_update_attributes }
+            put organization_campaign_path(organization, campaign), params: { organization: update_attributes }
             expect(campaign.name).to eq(previous_name)
           end
 
@@ -612,7 +613,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'DESTROY /o/:id' do
+  describe 'DESTROY /o/:organization_id/campaign/:id' do
     context 'when logged out' do
       context 'html request' do
         before(:example) do
@@ -650,7 +651,7 @@ RSpec.describe 'Campaigns', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           campaign
         end
 

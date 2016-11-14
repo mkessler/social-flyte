@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Organizations', type: :request do
   let(:user) { FactoryGirl.create(:user) }
-  let(:organization) {FactoryGirl.create(:organization) }
+  let(:organization) { FactoryGirl.create(:organization) }
+  let(:membership) { FactoryGirl.create(:membership, user: user, organization: organization) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:organization) }
   let(:invalid_attributes) { FactoryGirl.attributes_for(:organization, name: nil) }
   let(:protected_attributes) { { slug: Faker::Team.creature } }
@@ -97,7 +98,7 @@ RSpec.describe 'Organizations', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           get organization_path(organization)
         end
 
@@ -152,7 +153,7 @@ RSpec.describe 'Organizations', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
           get edit_organization_path(organization)
         end
 
@@ -374,7 +375,7 @@ RSpec.describe 'Organizations', type: :request do
 
         context 'json request' do
           before(:example) do
-            post organizations_path, params: { organization: invalid_attributes, format: :json }
+            post organizations_path, params: { organization: protected_attributes, format: :json }
           end
 
           it 'responds with 422' do
@@ -427,7 +428,7 @@ RSpec.describe 'Organizations', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
         end
 
         context 'with valid attributes' do
@@ -503,19 +504,19 @@ RSpec.describe 'Organizations', type: :request do
         context 'with protected attributes' do
           it 'does not update organization' do
             previous_name = organization.name
-            put organization_path(organization), params: { organization: invalid_update_attributes }
+            put organization_path(organization), params: { organization: protected_attributes }
             expect(organization.name).to eq(previous_name)
           end
 
           context 'html request' do
-            it 'responds with 302' do
+            it 'responds with 200' do
               put organization_path(organization), params: { organization: protected_attributes }
-              expect(response).to have_http_status(302)
+              expect(response).to have_http_status(200)
             end
 
-            it 'redirects to organization' do
-              put organization_path(organization), params: { organization: update_attributes }
-              expect(response).to redirect_to(assigns(:organization))
+            it 'renders edit' do
+              put organization_path(organization), params: { organization: protected_attributes }
+              expect(response).to render_template(:edit)
             end
           end
 
@@ -587,7 +588,7 @@ RSpec.describe 'Organizations', type: :request do
 
       context 'when member' do
         before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
+          membership
         end
 
         context 'html request' do

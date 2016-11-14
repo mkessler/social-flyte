@@ -29,7 +29,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
 
     respond_to do |format|
-      if @organization.save
+      if organization_params.present? && @organization.save
         @organization.memberships.create(user: current_user)
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
@@ -44,7 +44,7 @@ class OrganizationsController < ApplicationController
   # PATCH/PUT /o/:id.json
   def update
     respond_to do |format|
-      if @organization.update(organization_params)
+      if organization_params.present? && @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       else

@@ -31,7 +31,7 @@ class CampaignsController < ApplicationController
     @campaign = @organization.campaigns.new(campaign_params)
 
     respond_to do |format|
-      if @campaign.save
+      if campaign_params.present? && @campaign.save
         format.html { redirect_to organization_campaign_url(@organization, @campaign), notice: 'Campaign was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_url(@organization, @campaign) }
       else
@@ -45,7 +45,7 @@ class CampaignsController < ApplicationController
   # PATCH/PUT organizations/friendly_id/campaigns/friendly_id.json
   def update
     respond_to do |format|
-      if @campaign.update(campaign_params)
+      if campaign_params.present? && @campaign.update(campaign_params)
         format.html { redirect_to organization_campaign_url(@organization, @campaign), notice: 'Campaign was successfully updated.' }
         format.json { render :show, status: :ok, location: organization_campaign_url(@organization, @campaign) }
       else

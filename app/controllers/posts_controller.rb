@@ -26,9 +26,8 @@ class PostsController < ApplicationController
   # POST organizations/friendly_id/campaigns/friendly_id/posts.json
   def create
     @post = @campaign.posts.new(post_params)
-
     respond_to do |format|
-      if @post.save
+      if post_params.present? && @post.save
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
@@ -63,8 +62,9 @@ class PostsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # Don't allow :campaign_id
     def post_params
-      params.require(:post).permit(:network_id, :network_post_id, :network_parent_id)
+      params.require(:post).permit(:network_id, :network_post_id, :network_parent_id, :sync_count, :synced_at)
     end
 
     def record_not_found
