@@ -4,27 +4,32 @@ class OrganizationsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET /organizations/friendly_id
-  # GET /organizations/friendly_id.json
+  # GET /o
+  # Platform dashboard
+  def index
+  end
+
+  # GET /o/:id
+  # GET /o/:id.json
   def show
   end
 
-  # GET /organizations/new
+  # GET /o/new
   def new
     @organization = Organization.new
   end
 
-  # GET /organizations/friendly_id/edit
+  # GET /o/:id/edit
   def edit
   end
 
-  # POST /organizations
-  # POST /organizations.json
+  # POST /o
+  # POST /o.json
   def create
     @organization = Organization.new(organization_params)
 
     respond_to do |format|
-      if @organization.save
+      if organization_params.present? && @organization.save
         @organization.memberships.create(user: current_user)
         format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
         format.json { render :show, status: :created, location: @organization }
@@ -35,11 +40,11 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /organizations/friendly_id
-  # PATCH/PUT /organizations/friendly_id.json
+  # PATCH/PUT /o/:id
+  # PATCH/PUT /o/:id.json
   def update
     respond_to do |format|
-      if @organization.update(organization_params)
+      if organization_params.present? && @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
         format.json { render :show, status: :ok, location: @organization }
       else
@@ -49,8 +54,8 @@ class OrganizationsController < ApplicationController
     end
   end
 
-  # DELETE /organizations/friendly_id
-  # DELETE /organizations/friendly_id.json
+  # DELETE /o/:id
+  # DELETE /o/:id.json
   def destroy
     @organization.destroy
     respond_to do |format|
