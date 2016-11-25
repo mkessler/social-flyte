@@ -28,6 +28,7 @@ class PostsController < ApplicationController
     @post = @campaign.posts.new(post_params)
     respond_to do |format|
       if post_params.present? && @post.save
+        SyncPostJob.perform_later(current_user, @post)
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
