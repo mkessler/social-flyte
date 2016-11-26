@@ -75,7 +75,7 @@ RSpec.describe 'Authentications', type: :request do
         end
       end
     end
-    
+
     # it 'creates an authentication record with logged in user' do
     #   user = FactoryGirl.create(:user)
     #   sign_in(@user)
