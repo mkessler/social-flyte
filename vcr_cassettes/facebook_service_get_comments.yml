@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/564071993697787_958246924280290/comments?access_token=EAAXuaK0yoQIBAD1TqcWcO8hw57ze9PfdFyfFZAsyIRXOkYo5CbwnfJc1oDiFtbfEAbJ1PX61p524MbicZC0MbxPGOHYKOVvUfvNNsgn8qvbkYyUy6S0ZAZAZBOcbJf0ZCj6HybFA4iLxalhxEKcyt0kN9GOyuZChGsZD&fields=attachment,created_time,from,id,like_count,message,parent&limit=1000
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - '"b2aee71fe8c767cb88073fb12c4a52e4c3af63b9"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Facebook-Api-Version:
+      - v2.8
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - Dnrq3WLTNtd
+      X-Fb-Rev:
+      - '2702404'
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - 3E4pLSeH7Nd0s77CSFcJVEnkV1zVAR/15xW+ds3qkRA+kvVwlSy0aonzGXhRpWGB4YQXsbaxaVCfMV3O6L3GTg==
+      Date:
+      - Sat, 26 Nov 2016 04:38:22 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '685'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":[{"created_time":"2016-11-16T19:56:24+0000","from":{"name":"Maite
+        Lucia","id":"10157800978245076"},"id":"958246924280290_958253674279615","like_count":1,"message":"\ud83c\uddfa\ud83c\uddfe\ud83c\uddfa\ud83c\uddfe\u26bd\ufe0f\u26bd\ufe0f\ud83d\udc99\ud83d\udc99\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc\ud83d\udc4f\ud83c\udffc"},{"created_time":"2016-11-16T19:57:36+0000","from":{"name":"Jill
+        Coen Pierce","id":"10210266987166894"},"id":"958246924280290_958255197612796","like_count":2,"message":"YAY!  Excited
+        to be able to watch Alex and Enzo play again next season!"},{"created_time":"2016-11-16T22:43:16+0000","from":{"name":"Wesley
+        Ford Paschal","id":"10208938887402943"},"id":"958246924280290_958355287602787","like_count":1,"message":"Awesome!
+        Great news!!!"},{"created_time":"2016-11-17T01:28:52+0000","from":{"name":"Jonathan
+        Pata","id":"10205585109747024"},"id":"958246924280290_958451600926489","like_count":1,"message":"YESSS!!"},{"created_time":"2016-11-17T03:20:08+0000","from":{"name":"Michelle
+        Gritz Vandrovec Benedetti","id":"10154406176592740"},"id":"958246924280290_958502707588045","like_count":1,"message":"This
+        is awesome!!!"},{"created_time":"2016-11-17T14:37:08+0000","from":{"name":"Jairo
+        Santos","id":"1409798889030442"},"id":"958246924280290_958826510888998","like_count":1,"message":"Indepence
+        charlotte arriba arriba"}],"paging":{"cursors":{"before":"WTI5dGJXVnVkRjlqZAFhKemIzSTZAPVFU0TWpVek5qYzBNamM1TmpFMU9qRTBOemt6TWpZAeE9EUT0ZD","after":"WTI5dGJXVnVkRjlqZAFhKemIzSTZAPVFU0T0RJMk5URXdPRGc0T1RrNE9qRTBOemt6T1RNME1qZAz0ZD"}}}'
+    http_version: 
+  recorded_at: Sat, 26 Nov 2016 04:38:22 GMT
+recorded_with: VCR 3.0.3
