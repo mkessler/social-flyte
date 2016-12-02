@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+
+  # Sidekiq Monitoring
+  mount Sidekiq::Web => '/sidekiq'
 
   # Users
   devise_for :users, path: 'account'

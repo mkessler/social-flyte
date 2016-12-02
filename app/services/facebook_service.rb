@@ -13,8 +13,6 @@ class FacebookService
     aggregate_comments
   end
 
-  private
-
   def aggregate_reactions
     results = get_reactions
     build_reactions(results)

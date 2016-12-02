@@ -73,3 +73,6 @@ gem 'koala', '~> 2.2'
 
 # Friendly IDs
 gem 'friendly_id', '~> 5.1.0'
+
+# Background Jobs
+gem 'sidekiq'

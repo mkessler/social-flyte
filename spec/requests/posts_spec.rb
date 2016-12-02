@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
+  ActiveJob::Base.queue_adapter = :test
+
   let(:user) { FactoryGirl.create(:user) }
   let(:organization) { FactoryGirl.create(:organization) }
   let(:membership) { FactoryGirl.create(:membership, user: user, organization: organization) }
@@ -208,6 +210,12 @@ RSpec.describe 'Posts', type: :request do
         }.to_not change(Post, :count)
       end
 
+      it 'does not enqueues sync post job' do
+        expect {
+          post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes }
+        }.to_not have_enqueued_job(SyncPostJob)
+      end
+
       context 'html request' do
         before(:example) do
           post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes }
@@ -253,6 +261,12 @@ RSpec.describe 'Posts', type: :request do
             expect{
               post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes }
             }.to change(Post, :count).by(1)
+          end
+
+          it 'enqueues sync post job' do
+            expect {
+              post organization_campaign_posts_path(organization, campaign), params: { post: valid_attributes }
+            }.to have_enqueued_job(SyncPostJob)
           end
 
           context 'html request' do
@@ -319,6 +333,12 @@ RSpec.describe 'Posts', type: :request do
             }.to_not change(Post, :count)
           end
 
+          it 'does not enqueues sync post job' do
+            expect {
+              post organization_campaign_posts_path(organization, campaign), params: { post: invalid_attributes }
+            }.to_not have_enqueued_job(SyncPostJob)
+          end
+
           context 'html request' do
             before(:example) do
               post organization_campaign_posts_path(organization, campaign), params: { post: invalid_attributes }
@@ -377,6 +397,12 @@ RSpec.describe 'Posts', type: :request do
             expect{
               post organization_campaign_posts_path(organization, campaign), params: { post: protected_attributes }
             }.to_not change(Post, :count)
+          end
+
+          it 'does not enqueues sync post job' do
+            expect {
+              post organization_campaign_posts_path(organization, campaign), params: { post: protected_attributes }
+            }.to_not have_enqueued_job(SyncPostJob)
           end
 
           context 'html request' do
