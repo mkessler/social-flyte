@@ -15,5 +15,8 @@ module Yoala
 
     # Load service classes
     config.autoload_paths += %W(#{config.root}/services)
+
+    # Configure sidekiq
+    config.active_job.queue_adapter = :sidekiq
   end
 end

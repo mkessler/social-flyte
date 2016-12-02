@@ -8,6 +8,11 @@ class FacebookService
     @object_id = "#{post.network_parent_id}_#{post.network_post_id}"
   end
 
+  def sync
+    aggregate_reactions
+    aggregate_comments
+  end
+
   def aggregate_reactions
     results = get_reactions
     build_reactions(results)
