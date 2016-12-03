@@ -49,19 +49,6 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = @campaign.posts.find(params[:id])
-    end
-
-    def set_campaign
-      @campaign = @organization.campaigns.friendly.find(params[:campaign_id])
-    end
-
-    def set_organization
-      @organization = current_user.organizations.friendly.find(params[:organization_id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     # Don't allow :campaign_id
     def post_params
