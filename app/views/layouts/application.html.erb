@@ -17,11 +17,10 @@
         </li>
       <% end %>
     </ul>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'shared/toastr_notifications' %>
     <script type="text/javascript">
       window.fbAsyncInit = function() {
         Yoala.authentication.facebook.init();

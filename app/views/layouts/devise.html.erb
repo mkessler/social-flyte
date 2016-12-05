@@ -8,8 +8,6 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <div class="container">
     <div class="row">
       <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
@@ -18,5 +16,6 @@
     </div>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'shared/toastr_notifications' %>
   </body>
 </html>
