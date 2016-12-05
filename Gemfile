@@ -76,3 +76,6 @@ gem 'friendly_id', '~> 5.1.0'
 
 # Background Jobs
 gem 'sidekiq'
+
+# Font Awesome
+gem 'font-awesome-rails'
