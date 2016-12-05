@@ -15,5 +15,5 @@
 //= require turbolinks
 //= require tether.min
 //= require bootstrap.min
-//= require mdb.min
+//= require mdb/mdb.min
 //= require_tree .
