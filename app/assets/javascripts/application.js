@@ -17,3 +17,4 @@
 //= require bootstrap.min
 //= require mdb/mdb.min
 //= require_tree .
+//= require yoala/init

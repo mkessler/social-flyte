@@ -1,0 +1,61 @@
+<ul id="slide-out" class="side-nav fixed custom-scrollbar" style="transform: translateX(-100%);">
+  <li>
+    <div class="logo-wrapper waves-light">
+      <a href="#"><img src="http://mdbootstrap.com/wp-content/uploads/2015/12/mdb-white2.png" class="img-fluid flex-center"></a>
+    </div>
+  </li>
+
+  <li>
+    <ul class="collapsible collapsible-accordion">
+      <% current_user.organizations.each do |organization| %>
+        <li>
+          <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> <%= organization.name %><i class="fa fa-angle-down rotate-icon"></i></a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+                <a href="<%= organization_path(organization) %>" class="waves-effect">Dashboard</a>
+              </li>
+              <li>
+                <a href="<%= organization_campaigns_path(organization) %>" class="waves-effect">Campaigns</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+      <li>
+        <a class="collapsible-header waves-effect arrow-r">
+          <i class="fa fa-eye"></i>
+          About<i class="fa fa-angle-down rotate-icon">
+          </i>
+        </a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a href="#" class="waves-effect">Introduction</a>
+            </li>
+            <li>
+              <a href="#" class="waves-effect">Monthly meetings</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <a class="collapsible-header waves-effect arrow-r">
+          <i class="fa fa-envelope-o"></i>
+          Support
+          <i class="fa fa-angle-down rotate-icon"></i>
+        </a>
+        <div class="collapsible-body">
+          <ul>
+            <li>
+              <a href="#" class="waves-effect">FAQ</a>
+            </li>
+            <li>
+              <a href="#" class="waves-effect">Write a message</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>

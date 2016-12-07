@@ -1,0 +1,15 @@
+var Yoala = Yoala || {};
+Yoala.bootstrap = Yoala.bootstrap || {};
+
+/*
+Authentication Module
+********************************/
+
+Yoala.bootstrap.utility = {
+  init: function(args={}) {
+    $('.button-collapse').sideNav();
+    // Custom scrollbar init
+    var el = document.querySelector('.custom-scrollbar');
+    Ps.initialize(el);
+  }
+}
