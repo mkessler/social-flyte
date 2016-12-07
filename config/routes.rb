@@ -17,9 +17,13 @@ Rails.application.routes.draw do
     end
   end
 
-  # Marketing Pages
+  # Marketing
   get 'marketing/index'
 
-  # Home Pages
+  # Roots
+  authenticated :user do
+    root to: redirect('/o'), as: :authenticated_root
+  end
+
   root 'marketing#index'
 end
