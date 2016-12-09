@@ -20,17 +20,12 @@
         <ul>
           <%= render 'devise/menu/registration_items' %>
           <%= render 'devise/menu/login_items' %>
-          <% if current_user %>
-            <li>
-              <a class="nav_link" href="#" onclick="Yoala.authentication.facebook.login(); return false;">Facebook Auth</a>
-            </li>
-          <% end %>
         </ul>
         <%= yield %>
       </div>
     </main>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-eval': 'false' %>
     <%= render 'shared/toastr_notifications' %>
   </body>
 </html>

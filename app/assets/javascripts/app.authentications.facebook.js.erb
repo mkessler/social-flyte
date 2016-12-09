@@ -1,0 +1,44 @@
+(function() {
+  this.App || (this.App = {});
+
+  App.authentications.facebook = {
+    init: function() {
+      FB.init({
+        appId: <%= Rails.application.secrets.facebook_app_id %>,
+        status: true,
+        cookie: true,
+        xfbml: true
+      });
+    },
+    loadSDK: function() {
+      (function(d){
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document));
+    },
+    login: function(args={}) {
+      FB.login(function(response) {
+        if (response.authResponse) {
+          App.authentications.create({
+            network_id: '<%= Network.facebook.id %>',
+            response: response.authResponse
+          });
+        } else {
+          alert('Authentication cancelled. Please try again.');
+        }
+      });
+    }
+  };
+
+  $(document).on('turbolinks:load', function() {
+    window.fbAsyncInit = function() {
+      App.authentications.facebook.init();
+    }
+    App.authentications.facebook.loadSDK();
+    console.log('Facebook Authentication ready.');
+  });
+
+}).call(this);
