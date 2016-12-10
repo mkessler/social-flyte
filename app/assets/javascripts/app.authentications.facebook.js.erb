@@ -33,7 +33,7 @@
     }
   };
 
-  $(document).on('turbolinks:load', function() {
+  $(document).on('ready', function() {
     window.fbAsyncInit = function() {
       App.authentications.facebook.init();
     }

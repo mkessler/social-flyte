@@ -10,7 +10,7 @@
     }
   };
 
-  $(document).on('turbolinks:load', function() {
+  $(document).on('ready', function() {
     App.mdb();
     console.log('MDB ready.');
   });
