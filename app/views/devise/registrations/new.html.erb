@@ -1,55 +1,28 @@
-<%= devise_error_messages! %>
-<!--Form without header-->
 <div class="card">
   <div class="card-block">
 
-    <!--Header-->
     <div class="text-xs-center">
       <h3><i class="fa fa-cloud"></i> Sign Up</h3>
       <hr class="mt-2 mb-2">
     </div>
 
-    <!--Body-->
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-      <div class="md-form">
-        <i class="fa fa-user prefix"></i>
-        <%= f.text_field :first_name, class: 'form-control' %>
-        <%= f.label :first_name, 'First Name' %>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-inputs">
+        <%= f.input :first_name, icon: 'user', required: true %>
+        <%= f.input :last_name, icon: 'user', required: true %>
+        <%= f.input :email, icon: 'envelope', required: true %>
+        <%= f.input :password, icon: 'lock', required: true %>
       </div>
 
-      <div class="md-form">
-        <i class="fa fa-user prefix"></i>
-        <%= f.text_field :last_name, class: 'form-control' %>
-        <%= f.label :last_name, 'Last Name' %>
-      </div>
-
-      <div class="md-form">
-        <i class="fa fa-envelope prefix"></i>
-        <%= f.email_field :email, class: 'form-control' %>
-        <%= f.label :email %>
-      </div>
-
-      <div class="md-form">
-        <i class="fa fa-lock prefix"></i>
-        <%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
-        <%= f.label :password %>
-      </div>
-
-      <% if devise_mapping.rememberable? -%>
-        <fieldset class="form-group">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </fieldset>
-      <% end -%>
-
-      <div class="text-xs-center">
-        <%= f.button 'Submit', class: 'btn btn-default' %>
+      <div class="form-actions text-xs-center">
+        <%= f.button :button, "Submit" %>
       </div>
     <% end %>
 
   </div>
 
-  <!--Footer-->
   <div class="modal-footer">
     <div class="options">
       <%= render "devise/shared/links" %>
@@ -57,4 +30,3 @@
   </div>
 
 </div>
-<!--/Form without header-->
