@@ -1,35 +1,15 @@
-<%= devise_error_messages! %>
-<!--Form without header-->
-<div class="card">
-  <div class="card-block">
+<h2>Forgot your password?</h2>
 
-    <!--Header-->
-    <div class="text-xs-center">
-      <h3><i class="fa fa-lock"></i> Reset Password</h3>
-      <hr class="mt-2 mb-2">
-    </div>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
 
-    <!--Body-->
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <div class="md-form">
-        <i class="fa fa-envelope prefix"></i>
-        <%= f.email_field :email, class: 'form-control', autofocus: true %>
-        <%= f.label :email %>
-      </div>
-
-      <div class="text-xs-center">
-        <%= f.button 'Submit', class: 'btn btn-default' %>
-      </div>
-    <% end %>
-
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true %>
   </div>
 
-  <!--Footer-->
-  <div class="modal-footer">
-    <div class="options">
-      <%= render "devise/shared/links" %>
-    </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Send me reset password instructions" %>
   </div>
+<% end %>
 
-</div>
-<!--/Form without header-->
+<%= render "devise/shared/links" %>

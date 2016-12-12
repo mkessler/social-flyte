@@ -65,6 +65,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # User authentication
 gem 'devise'
 
+# Simple Form
+gem 'simple_form'
+
 # Code audit gems
 gem 'rubocop', require: false
 gem 'rubycritic', require: false
