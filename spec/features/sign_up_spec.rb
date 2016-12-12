@@ -25,8 +25,7 @@ RSpec.feature 'User sign up', :type => :feature do
     fill_in 'Password', with: Faker::Lorem.characters(3)
     click_button 'Submit'
 
-    expect(page).to have_text('1 error prohibited this user from being saved')
-    expect(page).to have_text('Password is too short (minimum is 6 characters)')
+    expect(page).to have_text('is too short (minimum is 6 characters)')
   end
 
   scenario 'with empty first name' do
@@ -38,8 +37,7 @@ RSpec.feature 'User sign up', :type => :feature do
     fill_in 'Password', with: Faker::Lorem.characters(10)
     click_button 'Submit'
 
-    expect(page).to have_text('1 error prohibited this user from being saved')
-    expect(page).to have_text('First name can\'t be blank')
+    expect(page).to have_text('can\'t be blank')
   end
 
   scenario 'with empty last name' do
@@ -51,8 +49,7 @@ RSpec.feature 'User sign up', :type => :feature do
     fill_in 'Password', with: Faker::Lorem.characters(10)
     click_button 'Submit'
 
-    expect(page).to have_text('1 error prohibited this user from being saved')
-    expect(page).to have_text('Last name can\'t be blank')
+    expect(page).to have_text('can\'t be blank')
   end
 
   scenario 'with empty email' do
@@ -64,8 +61,7 @@ RSpec.feature 'User sign up', :type => :feature do
     fill_in 'Password', with: Faker::Lorem.characters(10)
     click_button 'Submit'
 
-    expect(page).to have_text('1 error prohibited this user from being saved')
-    expect(page).to have_text('Email can\'t be blank')
+    expect(page).to have_text('can\'t be blank')
   end
 
   scenario 'with empty password' do
@@ -77,7 +73,6 @@ RSpec.feature 'User sign up', :type => :feature do
     fill_in 'Password', with: ''
     click_button 'Submit'
 
-    expect(page).to have_text('1 error prohibited this user from being saved')
-    expect(page).to have_text('Password can\'t be blank')
+    expect(page).to have_text('can\'t be blank')
   end
 end

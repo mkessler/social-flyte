@@ -1,6 +1,6 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
-  config.error_notification_class = 'alert danger-color white-text'
+  config.error_notification_class = 'alert danger-color white-text mb-2'
   config.button_class = 'btn btn-default'
   config.boolean_label_class = nil
 
