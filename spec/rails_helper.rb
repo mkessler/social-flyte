@@ -76,4 +76,7 @@ RSpec.configure do |config|
 
   # Factory Girl
   config.include FactoryGirl::Syntax::Methods
+
+  # Needed to stub user for feature tests
+  config.include Warden::Test::Helpers
 end
