@@ -9,6 +9,7 @@ class CampaignsController < ApplicationController
   # GET organizations/friendly_id/campaigns/friendly_id.json
   def index
     @campaigns = @organization.campaigns
+    @campaign = Campaign.new
   end
 
   # GET organizations/friendly_id/campaigns/friendly_id
@@ -69,7 +70,7 @@ class CampaignsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # Don't allow :organization_id, :slug
     def campaign_params
-      params.require(:campaign).permit(:name)
+      params.require(:campaign).permit(:name).merge(organization_id: @organization.id)
     end
 
     def record_not_found
