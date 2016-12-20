@@ -5,8 +5,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
     @user = FactoryGirl.create(:user)
     @organization = FactoryGirl.create(:organization)
     FactoryGirl.create(:membership, user: @user, organization: @organization)
-    @campaign_one = FactoryGirl.create(:campaign, organization: @organization)
-    @campaign_two = FactoryGirl.create(:campaign, organization: @organization, name: Faker::Beer.name)
+    @campaign = FactoryGirl.create(:campaign, organization: @organization)
   end
 
   before(:each) do
@@ -16,25 +15,35 @@ RSpec.feature 'Campaigns index', :type => :feature do
   scenario 'clicks campaign name' do
     visit organization_campaigns_path(@organization)
 
-    click_link @campaign_one.name
+    click_link @campaign.name
 
-    expect(page).to have_text(@campaign_one.name)
+    expect(page).to have_text(@campaign.name)
   end
 
-  # scenario 'clicks edit icon' do
-  #   visit organization_campaigns_path(@organization)
-  #
-  #   # find(:xpath, "//a[@href='#{edit_organization_campaign_path(@organization, @campaign_one)}']").click
-  #   find("tr[id='campaign-#{@campaign_one.id}'] a[class='edit-campaign']")
-  #
-  #   expect(page).to have_text('Editing Campaign')
-  # end
-  #
+  scenario 'clicks add campaign' do
+    visit organization_campaigns_path(@organization)
+
+    find(:xpath, "//a[@href='#{new_organization_campaign_path(@organization)}']").click
+
+    expect(page).to have_selector("form#new_campaign")
+  end
+
+  scenario 'clicks edit icon' do
+    visit organization_campaigns_path(@organization)
+
+    find(:xpath, "//a[@href='#{edit_organization_campaign_path(@organization, @campaign)}']").click
+
+    expect(page).to have_selector("form#edit_campaign_#{@campaign.id}")
+    expect(page).to have_field('Name', with: @campaign.name)
+  end
+
   # scenario 'clicks delete icon' do
   #   visit organization_campaigns_path(@organization)
   #
-  #   find(:xpath, "//a[@href='#{organization_campaign_path(@organization, @campaign_one)}' @data-method='delete']").click
+  #   accept_confirm do
+  #     find(:xpath, "//a[@href='#{organization_campaign_path(@organization, @campaign)}'][@data-method='delete']").click
+  #   end
   #
-  #   expect(page).to have_text('Campaigns')
+  #   expect(page).to have_content('Campaign was successfully destroyed.')
   # end
 end
