@@ -3,10 +3,6 @@ require 'rails_helper'
 RSpec.describe CampaignsController, type: :routing do
   describe 'routing' do
 
-    it 'routes to #index' do
-      expect(:get => '/o/1/c').to route_to('campaigns#index', organization_id: '1')
-    end
-
     it 'routes to #new' do
       expect(:get => '/o/1/c/new').to route_to('campaigns#new', organization_id: '1')
     end

@@ -12,70 +12,6 @@ RSpec.describe 'Posts', type: :request do
   let(:invalid_attributes) { FactoryGirl.attributes_for(:post, network_post_id: nil) }
   let(:protected_attributes) { { campaign_id: campaign.id } }
 
-  describe 'GET /o/:organization_id/c/:campaign_id/posts' do
-    context 'when logged out' do
-      before(:example) do
-        get organization_campaign_posts_path(organization, campaign)
-      end
-
-      it 'responds with 302' do
-        expect(response).to have_http_status(302)
-      end
-
-      it 'redirects to sign in' do
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context 'when logged in' do
-      before(:example) do
-        sign_in(user)
-      end
-
-      context 'when member' do
-        before(:example) do
-          Membership.create(user_id: user.id, organization_id: organization.id)
-          campaign_post
-          get organization_campaign_posts_path(organization, campaign)
-        end
-
-        it 'responds with 200' do
-          expect(response).to have_http_status(200)
-        end
-
-        it 'assigns organization' do
-          expect(assigns(:organization)).to eql(organization)
-        end
-
-        it 'assigns campaign' do
-          expect(assigns(:campaign)).to eq(campaign)
-        end
-
-        it 'assigns posts' do
-          expect(assigns(:posts)).to eq(campaign.posts)
-        end
-
-        it 'renders index' do
-          expect(response).to render_template(:index)
-        end
-      end
-
-      context 'when non-member' do
-        before(:example) do
-          get organization_campaign_posts_path(organization, campaign)
-        end
-
-        it 'responds with 302' do
-          expect(response).to have_http_status(302)
-        end
-
-        it 'redirects to index' do
-          expect(response).to redirect_to(organizations_path)
-        end
-      end
-    end
-  end
-
   describe 'GET /o/:organization_id/c/:campaign_id/p/new' do
     context 'when logged out' do
       before(:example) do
@@ -202,7 +138,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'CREATE /o/:organization_id/c/:campaign_id/posts' do
+  describe 'CREATE /o/:organization_id/c/:campaign_id/p' do
     context 'when logged out' do
       it 'does not change Post count' do
         expect{
@@ -481,7 +417,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'DESTROY /o/:organization_id/campaign/:campaign_id/post/:id' do
+  describe 'DESTROY /o/:organization_id/c/:campaign_id/p/:id' do
     context 'when logged out' do
       context 'html request' do
         before(:example) do

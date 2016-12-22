@@ -8,17 +8,12 @@ class PostsController < ApplicationController
 
   # GET organizations/friendly_id/c/friendly_id/posts
   # GET organizations/friendly_id/c/friendly_id/posts.json
-  def index
-    @posts = @campaign.posts
-  end
-
-  # GET organizations/friendly_id/c/friendly_id/posts
-  # GET organizations/friendly_id/c/friendly_id/posts.json
   def show
   end
 
   # GET organizations/friendly_id/c/friendly_id/p/new
   def new
+    add_breadcrumb 'Add Post', new_organization_campaign_post_path(@organization, @campaign)
     @post = @campaign.posts.new
   end
 

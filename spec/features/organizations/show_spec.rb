@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Campaigns index', :type => :feature do
+RSpec.feature 'Organization Show', :type => :feature do
   before(:all) do
     @user = FactoryGirl.create(:user)
     @organization = FactoryGirl.create(:organization)
@@ -13,7 +13,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
   end
 
   scenario 'clicks campaign name' do
-    visit organization_campaigns_path(@organization)
+    visit organization_path(@organization)
 
     click_link @campaign.name
 
@@ -21,7 +21,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
   end
 
   scenario 'clicks add campaign' do
-    visit organization_campaigns_path(@organization)
+    visit organization_path(@organization)
 
     find(:xpath, "//a[@href='#{new_organization_campaign_path(@organization)}']").click
 
@@ -29,7 +29,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
   end
 
   scenario 'clicks edit icon' do
-    visit organization_campaigns_path(@organization)
+    visit organization_path(@organization)
 
     find(:xpath, "//a[@href='#{edit_organization_campaign_path(@organization, @campaign)}']").click
 
@@ -38,7 +38,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
   end
 
   # scenario 'clicks delete icon' do
-  #   visit organization_campaigns_path(@organization)
+  #   visit organization_path(@organization)
   #
   #   accept_confirm do
   #     find(:xpath, "//a[@href='#{organization_campaign_path(@organization, @campaign)}'][@data-method='delete']").click

@@ -11,66 +11,6 @@ RSpec.describe 'Campaigns', type: :request do
   let(:update_attributes) { { name: Faker::Company.name } }
   let(:invalid_update_attributes) { { name: nil } }
 
-  describe 'GET /o/:organization_id/campaigns' do
-    context 'when logged out' do
-      before(:example) do
-        get organization_campaigns_path(organization)
-      end
-
-      it 'responds with 302' do
-        expect(response).to have_http_status(302)
-      end
-
-      it 'redirects to sign in' do
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context 'when logged in' do
-      before(:example) do
-        sign_in(user)
-      end
-
-      context 'when member' do
-        before(:example) do
-          membership
-          campaign
-          get organization_campaigns_path(organization)
-        end
-
-        it 'responds with 200' do
-          expect(response).to have_http_status(200)
-        end
-
-        it 'assigns organization' do
-          expect(assigns(:organization)).to eql(organization)
-        end
-
-        it 'assigns campaign' do
-          expect(assigns(:campaigns)).to eq(organization.campaigns)
-        end
-
-        it 'renders index' do
-          expect(response).to render_template(:index)
-        end
-      end
-
-      context 'when non-member' do
-        before(:example) do
-          get organization_campaigns_path(organization)
-        end
-
-        it 'responds with 302' do
-          expect(response).to have_http_status(302)
-        end
-
-        it 'redirects to index' do
-          expect(response).to redirect_to(organizations_path)
-        end
-      end
-    end
-  end
-
   describe 'GET /o/:organization_id/c/new' do
     context 'when logged out' do
       before(:example) do
@@ -248,7 +188,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'CREATE /o/:organization_id/campaigns' do
+  describe 'CREATE /o/:organization_id/c' do
     context 'when logged out' do
       it 'does not change Campaign count' do
         expect{
@@ -709,7 +649,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'DESTROY /o/:organization_id/campaign/:id' do
+  describe 'DESTROY /o/:organization_id/c/:id' do
     context 'when logged out' do
       context 'html request' do
         before(:example) do
