@@ -9,17 +9,9 @@
     <ul class="collapsible collapsible-accordion">
       <% current_user.organizations.each do |organization| %>
         <li>
-          <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> <%= organization.name %><i class="fa fa-angle-down rotate-icon"></i></a>
-          <div class="collapsible-body">
-            <ul>
-              <li>
-                <a href="<%= organization_path(organization) %>" class="waves-effect">Dashboard</a>
-              </li>
-              <li>
-                <a href="<%= organization_campaigns_path(organization) %>" class="waves-effect">Campaigns</a>
-              </li>
-            </ul>
-          </div>
+          <%= link_to organization_path(organization), class: 'waves-effect' do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o', aria: { hidden: true }) %> <%= organization.name %>
+          <% end %>
         </li>
       <% end %>
       <li>

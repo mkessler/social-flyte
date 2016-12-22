@@ -11,12 +11,15 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body class="fixed-sn blue-grey lighten-5">
+  <body class="fixed-sn grey lighten-2">
     <header>
       <%= render 'shared/navigation/side' %>
       <%= render 'shared/navigation/top' %>
     </header>
 
+    <div class="container-fluid breadcrumb-container rgba-white-strong">
+      <%= render_breadcrumbs builder: ::BootstrapBreadcrumbsBuilder %>
+    </div>
     <main>
       <div class="container-fluid">
         <!-- <ul>
@@ -26,7 +29,6 @@
             <a class="nav_link" href="#" onclick="App.authentications.facebook.login(); return false;">Facebook Auth</a>
           </li>
         </ul> -->
-        <%= render_breadcrumbs builder: ::BootstrapBreadcrumbsBuilder %>
         <%= yield %>
       </div>
     </main>
