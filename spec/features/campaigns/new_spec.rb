@@ -15,7 +15,7 @@ RSpec.feature 'Campaigns index', :type => :feature do
   scenario 'clicks campaigns' do
     visit new_organization_campaign_path(@organization)
 
-    find(:xpath, "//a[@class='nav-link'][@href='#{organization_campaigns_path(@organization)}']").click
+    find(:xpath, "//a[@class='nav-link'][@href='#{organization_path(@organization)}']").click
 
     expect(page).to have_selector("div#campaigns-list")
   end

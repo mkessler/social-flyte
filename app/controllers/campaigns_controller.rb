@@ -7,20 +7,13 @@ class CampaignsController < ApplicationController
 
   # GET organizations/friendly_id/c/friendly_id
   # GET organizations/friendly_id/c/friendly_id.json
-  def index
-    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
-    @campaigns = @organization.campaigns
-  end
-
-  # GET organizations/friendly_id/c/friendly_id
-  # GET organizations/friendly_id/c/friendly_id.json
   def show
+    @posts = @campaign.posts
   end
 
   # GET organizations/friendly_id/c/friendly_id/new
   def new
-    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
-    add_breadcrumb 'Add', new_organization_campaign_path(@organization)
+    add_breadcrumb 'Add Campaign', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 

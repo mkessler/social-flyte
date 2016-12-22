@@ -12,15 +12,18 @@ class OrganizationsController < ApplicationController
   # GET /o/:id
   # GET /o/:id.json
   def show
+    @campaigns = @organization.campaigns
   end
 
   # GET /o/new
   def new
+    add_breadcrumb 'New Organization', new_organization_path
     @organization = Organization.new
   end
 
   # GET /o/:id/edit
   def edit
+    add_breadcrumb 'Edit', edit_organization_path(@organization)
   end
 
   # POST /o

@@ -2,7 +2,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-  add_breadcrumb 'Dashboard', :root_path
 
   def set_organization
     if params[:organization_id]
@@ -19,13 +18,11 @@ class ApplicationController < ActionController::Base
     else
       @campaign = @organization.campaigns.friendly.find(params[:id])
     end
-    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
     add_breadcrumb @campaign.name, organization_campaign_path(@organization, @campaign)
   end
 
   def set_post
     @post = @campaign.posts.find(params[:id])
-    add_breadcrumb 'Posts', organization_campaigns_path(@organization)
     add_breadcrumb '<i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>', organization_campaign_post_path(@organization, @campaign, @post)
   end
 
