@@ -8,6 +8,7 @@ class CampaignsController < ApplicationController
   # GET organizations/friendly_id/campaigns/friendly_id
   # GET organizations/friendly_id/campaigns/friendly_id.json
   def index
+    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
     @campaigns = @organization.campaigns
   end
 
@@ -18,11 +19,14 @@ class CampaignsController < ApplicationController
 
   # GET organizations/friendly_id/campaigns/friendly_id/new
   def new
+    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
+    add_breadcrumb 'Add', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 
   # GET organizations/friendly_id/campaigns/friendly_id/edit
   def edit
+    add_breadcrumb 'Edit', edit_organization_campaign_path(@organization)
   end
 
   # POST organizations/friendly_id/campaigns/friendly_id

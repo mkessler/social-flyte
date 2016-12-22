@@ -13,6 +13,9 @@ module Yoala
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Load lib classes
+    config.autoload_paths += %W(#{config.root}/lib)
+
     # Load service classes
     config.autoload_paths += %W(#{config.root}/services)
 
