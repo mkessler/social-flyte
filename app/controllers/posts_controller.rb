@@ -6,24 +6,24 @@ class PostsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET organizations/friendly_id/campaigns/friendly_id/posts
-  # GET organizations/friendly_id/campaigns/friendly_id/posts.json
+  # GET organizations/friendly_id/c/friendly_id/posts
+  # GET organizations/friendly_id/c/friendly_id/posts.json
   def index
     @posts = @campaign.posts
   end
 
-  # GET organizations/friendly_id/campaigns/friendly_id/posts
-  # GET organizations/friendly_id/campaigns/friendly_id/posts.json
+  # GET organizations/friendly_id/c/friendly_id/posts
+  # GET organizations/friendly_id/c/friendly_id/posts.json
   def show
   end
 
-  # GET organizations/friendly_id/campaigns/friendly_id/posts/new
+  # GET organizations/friendly_id/c/friendly_id/p/new
   def new
     @post = @campaign.posts.new
   end
 
-  # POST organizations/friendly_id/campaigns/friendly_id/posts
-  # POST organizations/friendly_id/campaigns/friendly_id/posts.json
+  # POST organizations/friendly_id/c/friendly_id/posts
+  # POST organizations/friendly_id/c/friendly_id/posts.json
   def create
     @post = @campaign.posts.new(post_params)
     respond_to do |format|
@@ -38,8 +38,8 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE organizations/friendly_id/campaigns/friendly_id/posts
-  # DELETE organizations/friendly_id/campaigns/friendly_id/posts.json
+  # DELETE organizations/friendly_id/c/friendly_id/posts
+  # DELETE organizations/friendly_id/c/friendly_id/posts.json
   def destroy
     @post.destroy
     respond_to do |format|

@@ -71,7 +71,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'GET /o/:organization_id/campaigns/new' do
+  describe 'GET /o/:organization_id/c/new' do
     context 'when logged out' do
       before(:example) do
         get new_organization_campaign_path(organization)
@@ -130,7 +130,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'GET /o/:organization_id/campaigns/:id' do
+  describe 'GET /o/:organization_id/c/:id' do
     context 'when logged out' do
       before(:example) do
         get organization_campaign_path(organization, campaign)
@@ -189,7 +189,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'GET /o/:organization_id/campaigns/:id/edit' do
+  describe 'GET /o/:organization_id/c/:id/edit' do
     context 'when logged out' do
       before(:example) do
         get edit_organization_campaign_path(organization, campaign)
@@ -478,7 +478,7 @@ RSpec.describe 'Campaigns', type: :request do
     end
   end
 
-  describe 'UPDATE /o/:organization_id/campaigns/:id' do
+  describe 'UPDATE /o/:organization_id/c/:id' do
     context 'when logged out' do
       it 'does not update campaign' do
         previous_name = campaign.name

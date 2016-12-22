@@ -5,32 +5,32 @@ class CampaignsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET organizations/friendly_id/campaigns/friendly_id
-  # GET organizations/friendly_id/campaigns/friendly_id.json
+  # GET organizations/friendly_id/c/friendly_id
+  # GET organizations/friendly_id/c/friendly_id.json
   def index
     add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
     @campaigns = @organization.campaigns
   end
 
-  # GET organizations/friendly_id/campaigns/friendly_id
-  # GET organizations/friendly_id/campaigns/friendly_id.json
+  # GET organizations/friendly_id/c/friendly_id
+  # GET organizations/friendly_id/c/friendly_id.json
   def show
   end
 
-  # GET organizations/friendly_id/campaigns/friendly_id/new
+  # GET organizations/friendly_id/c/friendly_id/new
   def new
     add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
     add_breadcrumb 'Add', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 
-  # GET organizations/friendly_id/campaigns/friendly_id/edit
+  # GET organizations/friendly_id/c/friendly_id/edit
   def edit
     add_breadcrumb 'Edit', edit_organization_campaign_path(@organization)
   end
 
-  # POST organizations/friendly_id/campaigns/friendly_id
-  # POST organizations/friendly_id/campaigns/friendly_id.json
+  # POST organizations/friendly_id/c/friendly_id
+  # POST organizations/friendly_id/c/friendly_id.json
   def create
     @campaign = @organization.campaigns.new(campaign_params)
 
@@ -45,8 +45,8 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # PATCH/PUT organizations/friendly_id/campaigns/friendly_id
-  # PATCH/PUT organizations/friendly_id/campaigns/friendly_id.json
+  # PATCH/PUT organizations/friendly_id/c/friendly_id
+  # PATCH/PUT organizations/friendly_id/c/friendly_id.json
   def update
     respond_to do |format|
       if campaign_params.present? && @campaign.update(campaign_params)
@@ -59,8 +59,8 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # DELETE organizations/friendly_id/campaigns/friendly_id
-  # DELETE organizations/friendly_id/campaigns/friendly_id.json
+  # DELETE organizations/friendly_id/c/friendly_id
+  # DELETE organizations/friendly_id/c/friendly_id.json
   def destroy
     @campaign.destroy
     respond_to do |format|

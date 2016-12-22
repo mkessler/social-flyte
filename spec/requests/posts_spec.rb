@@ -12,7 +12,7 @@ RSpec.describe 'Posts', type: :request do
   let(:invalid_attributes) { FactoryGirl.attributes_for(:post, network_post_id: nil) }
   let(:protected_attributes) { { campaign_id: campaign.id } }
 
-  describe 'GET /o/:organization_id/campaigns/:campaign_id/posts' do
+  describe 'GET /o/:organization_id/c/:campaign_id/posts' do
     context 'when logged out' do
       before(:example) do
         get organization_campaign_posts_path(organization, campaign)
@@ -76,7 +76,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'GET /o/:organization_id/campaigns/:campaign_id/posts/new' do
+  describe 'GET /o/:organization_id/c/:campaign_id/p/new' do
     context 'when logged out' do
       before(:example) do
         get new_organization_campaign_post_path(organization, campaign)
@@ -139,7 +139,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'GET /o/:organization_id/campaigns/:campaign_id/posts/:id' do
+  describe 'GET /o/:organization_id/c/:campaign_id/p/:id' do
     context 'when logged out' do
       before(:example) do
         get organization_campaign_post_path(organization, campaign, campaign_post)
@@ -202,7 +202,7 @@ RSpec.describe 'Posts', type: :request do
     end
   end
 
-  describe 'CREATE /o/:organization_id/campaigns/:campaign_id/posts' do
+  describe 'CREATE /o/:organization_id/c/:campaign_id/posts' do
     context 'when logged out' do
       it 'does not change Post count' do
         expect{
