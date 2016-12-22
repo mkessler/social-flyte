@@ -1,5 +1,24 @@
+.breadcrumb {
+  background: transparent;
+  margin-bottom: 0;
+  padding: .75rem .55rem;
+  i {
+    margin-right: .75rem
+  }
+}
+
+.breadcrumb-container {
+  margin-top: 60px;
+}
+
+@media (max-width: 992px) {
+  .breadcrumb-container {
+    margin-top: 42px;
+  }
+}
+
 .fixed-sn main {
-  padding-top: 7rem;
+  padding-top: 3.5rem;
 }
 
 .tab-content {
@@ -11,5 +30,13 @@
   margin-bottom: 0;
   a {
     margin: 0 0.5rem;
+  }
+}
+
+.tabs-1 {
+  text-align: center;
+  li {
+    width: 50%;
+    margin-left: 25%;
   }
 }

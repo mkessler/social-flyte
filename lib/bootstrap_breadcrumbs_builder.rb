@@ -1,6 +1,9 @@
 class BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
   def render
     @context.content_tag(:ul, class: 'breadcrumb') do
+      @context.content_tag(:li, class: 'pull-left') do
+        '<i class="fa fa-map-marker fa-lg" aria-hidden="true"></i>'.html_safe
+      end +
       @elements.collect do |element|
         render_element(element)
       end.join.html_safe

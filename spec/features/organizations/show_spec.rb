@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Organization Show', :type => :feature do
+RSpec.feature 'Organizations Show', :type => :feature do
   before(:all) do
     @user = FactoryGirl.create(:user)
     @organization = FactoryGirl.create(:organization)

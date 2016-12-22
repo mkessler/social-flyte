@@ -1,25 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @organization.name %>
-</p>
-
-<p>
-  <strong>Slug:</strong>
-  <%= @organization.slug %>
-</p>
-
-<%= link_to 'Edit', edit_organization_path(@organization) %> |
-<%= link_to 'Back', organizations_path %>
-
 <ul class="nav nav-tabs tabs-2 light-blue darken-2" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#campaigns-list" role="tab"><i class="fa fa-th-list" aria-hidden="true"></i> Campaigns</a>
   </li>
   <li class="nav-item">
     <%= link_to new_organization_campaign_path(@organization), class: 'nav-link' do %>
-      <i class="fa fa-plus" aria-hidden="true"></i> Add New
+      <i class="fa fa-plus" aria-hidden="true"></i> Add
     <% end %>
   </li>
 </ul>
@@ -33,10 +18,10 @@
             <td><i class="fa fa-hashtag" aria-hidden="true"></i><%= link_to campaign.name, organization_campaign_path(@organization, campaign), class: 'light-blue-text' %></td>
             <td class="text-xs-right">
               <%= link_to edit_organization_campaign_path(@organization, campaign), class: 'edit-campaign light-blue-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit' do %>
-                <%= content_tag(:i, nil, :class => 'fa fa-pencil') %>
+                <%= content_tag(:i, nil, :class => 'fa fa-pencil', aria: { hidden: true }) %>
               <% end %>
               <%= link_to organization_campaign_path(@organization, campaign), class: 'delete-campaign pink-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
-                <%= content_tag(:i, nil, :class => 'fa fa-times') %>
+                <%= content_tag(:i, nil, :class => 'fa fa-times', aria: { hidden: true }) %>
               <% end %>
             </td>
           </tr>

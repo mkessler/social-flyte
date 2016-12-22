@@ -1,22 +1,13 @@
-<%= form_for(organization) do |f| %>
-  <% if organization.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    <%= simple_form_for(organization) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :name, icon: 'hand-pointer-o' %>
+      </div>
 
-      <ul>
-      <% organization.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+      <div class="form-actions text-xs-center">
+        <%= f.button :button, 'Submit' %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

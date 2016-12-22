@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'Campaigns index', :type => :feature do
+RSpec.feature 'Campaigns Edit', :type => :feature do
   before(:all) do
     @user = FactoryGirl.create(:user)
     @organization = FactoryGirl.create(:organization)
