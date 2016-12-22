@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
-    resources :campaigns do
-      resources :posts, except: [:edit, :update]
+    resources :campaigns, path: 'c' do
+      resources :posts, path: 'p', except: [:edit, :update]
     end
   end
 
