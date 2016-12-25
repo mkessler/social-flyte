@@ -34,16 +34,16 @@ RSpec.describe Post, type: :model do
       expect(post).to be_valid
     end
 
-    it 'is valid with valid with missing network_parent_id' do
-      valid_attributes = FactoryGirl.attributes_for(
-        :post,
-        campaign_id: @campaign.id,
-        network_parent_id: nil
-      )
-      post = Post.new(valid_attributes)
-
-      expect(post).to be_valid
-    end
+    # it 'is valid with valid with missing network_parent_id' do
+    #   valid_attributes = FactoryGirl.attributes_for(
+    #     :post,
+    #     campaign_id: @campaign.id,
+    #     network_parent_id: nil
+    #   )
+    #   post = Post.new(valid_attributes)
+    #
+    #   expect(post).to be_valid
+    # end
 
     it 'is not valid with missing campaign' do
       invalid_attributes = FactoryGirl.attributes_for(

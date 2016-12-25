@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     # Don't allow :campaign_id
     def post_params
-      params.require(:post).permit(:network_id, :network_post_id, :network_parent_id, :sync_count, :synced_at)
+      params.require(:post).permit(:network_post_id, :network_parent_id, :sync_count, :synced_at).merge(network_id: Network.facebook.id)
     end
 
     def record_not_found
