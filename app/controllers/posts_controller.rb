@@ -9,6 +9,8 @@ class PostsController < ApplicationController
   # GET organizations/friendly_id/c/friendly_id/posts
   # GET organizations/friendly_id/c/friendly_id/posts.json
   def show
+    @comments = @post.comments.order(:posted_at).page params[:comments_page]
+    @reactions = @post.reactions.order(:network_user_name).page params[:reactions_page]
   end
 
   # GET organizations/friendly_id/c/friendly_id/p/new

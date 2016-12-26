@@ -66,10 +66,14 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 # Breadcrumbs
-gem "breadcrumbs_on_rails"
+gem 'breadcrumbs_on_rails'
 
 # Simple Form
 gem 'simple_form'
+
+# Pagination
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
 
 # Code audit gems
 gem 'rubocop', require: false
