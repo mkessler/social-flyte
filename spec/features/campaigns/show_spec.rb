@@ -18,7 +18,8 @@ RSpec.feature 'Campaigns Show', :type => :feature do
 
     click_link @post.network.name
 
-    expect(page).to have_text(@post.network_post_id)
+    expect(page).to have_text('Comments')
+    expect(page).to have_text('Reactions')
   end
 
   scenario 'clicks add' do
