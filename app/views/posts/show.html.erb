@@ -1,16 +1,38 @@
-<p id="notice"><%= notice %></p>
+<ul class="nav nav-tabs tabs-2 light-blue darken-2" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#post-comments" role="tab"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#post-reactions" role="tab"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Reactions</a>
+  </li>
+</ul>
 
-<p>
-  <strong>Network:</strong>
-  <%= @post.network %>
-</p>
-
-<p>
-  <strong>Network post:</strong>
-  <%= @post.network_post_id %>
-</p>
-
-<p>
-  <strong>Network parent:</strong>
-  <%= @post.network_parent_id %>
-</p>
+<div class="tab-content card">
+  <div class="tab-pane fade in active" id="post-comments" role="tabpanel">
+    <table class="table table-striped">
+      <tbody>
+        <% @post.comments.each do |comment| %>
+          <tr id="comment-<%= comment.id %>">
+            <td><%= comment.network_user_name %></td>
+            <td><%= comment.message %></td>
+            <td><%= comment.like_count %></td>
+            <td><%= comment.posted_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade in" id="post-reactions" role="tabpanel">
+    <table class="table table-striped">
+      <tbody>
+        <% @post.reactions.each do |reaction| %>
+          <tr id="reaction-<%= reaction.id %>">
+            <td><%= reaction.network_user_name %></td>
+            <td><%= reaction.category %></td>
+            <td><%= reaction.created_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
