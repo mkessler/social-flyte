@@ -3,37 +3,55 @@
     <a class="nav-link <%= comments_active_class %>" data-toggle="tab" href="#post-comments" role="tab"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link <%= reactions_active_class %>" data-toggle="tab" href="#post-reactions" role="tab"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Reactions</a>
+    <a class="nav-link <%= reactions_active_class %>" data-toggle="tab" href="#post-reactions" role="tab"><i class="fa fa-hand-spock-o" aria-hidden="true"></i> Reactions</a>
   </li>
 </ul>
 
 <div class="tab-content card">
   <div class="tab-pane fade in <%= comments_active_class %>" id="post-comments" role="tabpanel">
     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-xs-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></th>
+          <th>Name</th>
+          <th>Comment</th>
+          <th>Posted At</th>
+        </tr>
+      </thead>
       <tbody>
         <% @comments.each do |comment| %>
           <tr id="comment-<%= comment.id %>">
+            <td class="text-xs-center"><%= comment.like_count %></td>
             <td><%= comment.network_user_name %></td>
             <td><%= comment.message %></td>
-            <td><%= comment.like_count %></td>
-            <td><%= comment.posted_at %></td>
+            <td><%= comment.posted_at.strftime('%l:%M%P') %><br><small><%= comment.posted_at.strftime('%-d %b %Y') %></small></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= paginate @comments, param_name: :comments_page, params: { reactions_page: nil }, theme: 'twitter-bootstrap-4', pagination_class: 'pg-darkgrey' %>
+    <div class="text-xs-center">
+      <%= paginate @comments, param_name: :comments_page, params: { reactions_page: nil }, theme: 'twitter-bootstrap-4', pagination_class: 'pg-darkgrey' %>
+    </div>
   </div>
   <div class="tab-pane fade in <%= reactions_active_class %>" id="post-reactions" role="tabpanel">
     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-xs-center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></th>
+          <th>Name</th>
+        </tr>
+      </thead>
       <tbody>
         <% @reactions.each do |reaction| %>
           <tr id="reaction-<%= reaction.id %>">
-            <td><%= reaction.network_user_name %></td>
             <td><%= reaction.category %></td>
+            <td><%= reaction.network_user_name %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= paginate @reactions, param_name: :reactions_page, params: { comments_page: nil }, theme: 'twitter-bootstrap-4', pagination_class: 'pg-darkgrey'  %>
+    <div class="text-xs-center">
+      <%= paginate @reactions, param_name: :reactions_page, params: { comments_page: nil }, theme: 'twitter-bootstrap-4', pagination_class: 'pg-darkgrey'  %>
+    </div>
   </div>
 </div>
