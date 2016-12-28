@@ -2,6 +2,9 @@
 //= require jquery_ujs
 //= require tether.min
 //= require bootstrap.min
+//= require jquery.dataTables.min
+//= require dataTables.bootstrap4.min
 //= require app.authentications
 //= require app.mdb
+//= require app.datatables
 //= require_tree .

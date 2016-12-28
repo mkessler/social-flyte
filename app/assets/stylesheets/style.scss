@@ -7,6 +7,12 @@
   }
 }
 
+@media (min-width: 1441px) {
+  .breadcrumb {
+    padding-left: 240px;
+  }
+}
+
 .breadcrumb-container {
   margin-top: 60px;
 }
@@ -15,6 +21,10 @@
   .breadcrumb-container {
     margin-top: 42px;
   }
+}
+
+.dataTables_filter {
+  display: none;
 }
 
 .fixed-sn main {
@@ -30,6 +40,12 @@
   margin-bottom: 0;
   a {
     margin: 0 0.5rem;
+  }
+  td, th {
+    border-top: 0;
+  }
+  th {
+    white-space: nowrap;
   }
 }
 
