@@ -1,3 +1,5 @@
+<!-- <div class="fb-post" data-href="https://www.facebook.com/20531316728/posts/<%= post.network_post_id %>/" data-width="auto" data-show-text="true"></div> -->
+
 <ul class="nav nav-tabs tabs-2 light-blue darken-2" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#post-comments" role="tab"><i class="fa fa-comments-o" aria-hidden="true"></i> Comments</a>
@@ -18,7 +20,7 @@
       <thead>
         <tr>
           <th class="text-xs-center" data-toggle="tooltip" title="Likes">
-            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
           </th>
           <th class="text-xs-center" data-toggle="tooltip" title="User">
             <i class="fa fa-user" aria-hidden="true">
@@ -32,12 +34,12 @@
         </tr>
       </thead>
       <tbody>
-        <% @post.comments.each do |comment| %>
+        <% post.comments.each do |comment| %>
           <tr id="comment-<%= comment.id %>">
-            <td><%= comment.like_count %></td>
-            <td><%= comment.network_user_name %></td>
+            <td class="text-xs-center"><%= comment.like_count %></td>
+            <td><%= link_to comment.network_user_name, post.network.user_link(comment.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank' %></td>
             <td data-order="<%= comment.message.size %>"><%= comment.message %></td>
-            <td data-order="<%= comment.posted_at.to_i %>"><%= comment.posted_at.strftime('%l:%M%P') %><br><small><%= comment.posted_at.strftime('%-d %b %Y') %></small></td>
+            <td class="text-xs-center groala-no-wrap" data-order="<%= comment.posted_at.to_i %>"><%= comment.posted_at.strftime('%l:%M%P') %><br><small><%= comment.posted_at.strftime('%-d %b %Y') %></small></td>
           </tr>
         <% end %>
       </tbody>
@@ -52,8 +54,8 @@
     <table id="facebook-reactions-table" class="table table-striped groala-data-table" cellspacing="0" width="100%">
       <thead>
         <tr>
-          <th class="text-xs-center" data-toggle="tooltip" title="Likes">
-            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          <th class="text-xs-center" data-toggle="tooltip" title="Reaction">
+            <i class="fa fa-heart" aria-hidden="true"></i>
           </th>
           <th class="text-xs-center" data-toggle="tooltip" title="User">
             <i class="fa fa-user" aria-hidden="true">
@@ -61,9 +63,9 @@
         </tr>
       </thead>
       <tbody>
-        <% @post.reactions.each do |reaction| %>
+        <% post.reactions.each do |reaction| %>
           <tr id="reaction-<%= reaction.id %>">
-            <td data-search="<%= reaction.category %>"><%= reaction.category %></td>
+            <td class="text-xs-center" data-order="<%= reaction.category %>" data-search="<%= reaction.category %>"><span class="facebook-reaction <%= reaction.category.downcase %>"></span></td>
             <td><%= reaction.network_user_name %></td>
           </tr>
         <% end %>

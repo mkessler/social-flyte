@@ -6,6 +6,10 @@
       $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
         deferRender: true,
+        drawCallback: function(settings) {
+          $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
+          $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
+        },
         language: {
           aria: {
             paginate: {
@@ -15,10 +19,15 @@
               last:     'Last'
             }
           },
-          info: '<small><i class="fa fa-flag" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>'
+          info: '<small><i class="fa fa-flag" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
+          paginate: {
+            next: 'Next',
+            previous: 'Prev'
+          }
         },
         lengthChange: false
       });
+      $.fn.DataTable.ext.pager.numbers_length = 4;
     }
   }
 

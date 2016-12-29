@@ -1,3 +1,9 @@
+a {
+  &:focus {
+    outline: 0;
+  }
+}
+
 .breadcrumb {
   background: transparent;
   margin-bottom: 0;
@@ -40,12 +46,18 @@
   margin-bottom: 0;
   a {
     margin: 0 0.5rem;
+    &.groala-standard-link {
+      margin: 0;
+    }
   }
   td, th {
     border-top: 0;
   }
-  th {
+  th, .groala-no-wrap {
     white-space: nowrap;
+  }
+  .groala-break-word {
+    word-break: break-word;
   }
 }
 

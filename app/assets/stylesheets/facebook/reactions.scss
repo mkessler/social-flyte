@@ -1,0 +1,24 @@
+.facebook-reaction {
+  display: inline-block;
+  width: 25px;
+  height: 24px;
+  background: url('../facebook-reactions.png');
+  &.angry {
+    background-position: right center;
+  }
+  &.haha {
+    background-position: -61px center;
+  }
+  &.like {
+    background-position: left center;
+  }
+  &.love {
+    background-position: -30px center;
+  }
+  &.sad {
+    background-position: -122px center;
+  }
+  &.wow {
+    background-position: -90px center;
+  }
+}

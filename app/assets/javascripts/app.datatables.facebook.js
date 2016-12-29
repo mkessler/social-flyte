@@ -4,6 +4,12 @@
   App.dataTables.facebook = {
     comments: function() {
       var table = $('#facebook-comments-table').DataTable({
+        columns: [
+          { width: '10%' },
+          { width: '15%' },
+          { width: '60%', className: 'groala-break-word' },
+          { width: '15%' }
+        ],
         language: {
           info: '<small><i class="fa fa-flag" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Comments</small>'
         },
@@ -17,6 +23,10 @@
     },
     reactions: function() {
       var table = $('#facebook-reactions-table').DataTable({
+        columns: [
+          { width: '10%' },
+          null
+        ],
         language: {
           info: '<small><i class="fa fa-flag" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
         },
