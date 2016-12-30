@@ -43,17 +43,6 @@ RSpec.describe Reaction, type: :model do
       expect(reaction).to_not be_valid
     end
 
-    it 'is not valid with missing network_user_link' do
-      invalid_attributes = FactoryGirl.attributes_for(
-        :reaction,
-        post_id: @post.id,
-        network_user_link: nil
-      )
-      reaction = Reaction.new(invalid_attributes)
-
-      expect(reaction).to_not be_valid
-    end
-
     it 'is not valid with missing network_user_name' do
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
