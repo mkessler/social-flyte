@@ -40,7 +40,6 @@ class FacebookService
   def build_reactions(results)
     results.each do |result|
       @post.reactions.find_or_create_by(network_user_id: result['id']) do |reaction|
-        reaction.network_user_link = result['link']
         reaction.network_user_name = result['name']
         reaction.network_user_picture = result['pic_square']
         reaction.category = result['type']
@@ -73,7 +72,7 @@ class FacebookService
   end
 
   def get_reactions
-    @graph.get_object("#{@object_id}/reactions?fields=id,link,name,pic_square,type&limit=1000")
+    @graph.get_object("#{@object_id}/reactions?fields=id,name,pic_square,type&limit=1000")
   rescue Koala::Facebook::APIError => e
     Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
