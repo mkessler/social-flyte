@@ -18,6 +18,17 @@ class Network < ApplicationRecord
     find_by_slug('instagram')
   end
 
+  def user_link(user_id)
+    case self
+      when Network.facebook
+        "https://facebook.com/#{user_id}"
+      when Network.twitter
+
+      when Network.instagram
+
+    end
+  end
+
   private
 
   def set_slug

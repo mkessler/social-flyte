@@ -61,4 +61,14 @@ RSpec.describe Network, type: :model do
       end
     end
   end
+
+  describe '.user_id' do
+    context 'facebook' do
+      it 'returns url' do
+        network = Network.facebook
+        comment = FactoryGirl.create(:comment)
+        expect(network.user_link(comment.network_user_id)).to eql("https://facebook.com/#{comment.network_user_id}")
+      end
+    end
+  end
 end

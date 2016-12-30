@@ -1,9 +1,21 @@
+a {
+  &:focus {
+    outline: 0;
+  }
+}
+
 .breadcrumb {
   background: transparent;
   margin-bottom: 0;
   padding: .75rem .55rem;
   i {
     margin-right: .75rem
+  }
+}
+
+@media (min-width: 1441px) {
+  .breadcrumb {
+    padding-left: 240px;
   }
 }
 
@@ -15,6 +27,10 @@
   .breadcrumb-container {
     margin-top: 42px;
   }
+}
+
+.dataTables_filter {
+  display: none;
 }
 
 .fixed-sn main {
@@ -30,6 +46,18 @@
   margin-bottom: 0;
   a {
     margin: 0 0.5rem;
+    &.groala-standard-link {
+      margin: 0;
+    }
+  }
+  td, th {
+    border-top: 0;
+  }
+  th, .groala-no-wrap {
+    white-space: nowrap;
+  }
+  .groala-break-word {
+    word-break: break-word;
   }
 }
 
