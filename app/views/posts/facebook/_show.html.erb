@@ -38,7 +38,18 @@
           <tr id="comment-<%= comment.id %>">
             <td class="text-xs-center"><%= comment.like_count %></td>
             <td><%= link_to comment.network_user_name, post.network.user_link(comment.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank' %></td>
-            <td data-order="<%= comment.message.size %>"><%= comment.message %></td>
+            <td data-order="<%= comment.message.size %>">
+              <% if comment.attachment_image.present? && comment.attachment_url.present? %>
+                <div class="media">
+                  <a href="<%= comment.attachment_url%>" class="media-left" target="_blank">
+                    <img class="media-object" src="<%= comment.attachment_image %>" alt="Comment Media">
+                  </a>
+                  <div class="media-body"><%= comment.message %></div>
+                </div>
+              <% else %>
+                <%= comment.message %>
+              <% end %>
+            </td>
             <td class="text-xs-center groala-no-wrap" data-order="<%= comment.posted_at.to_i %>"><%= comment.posted_at.strftime('%l:%M%P') %><br><small><%= comment.posted_at.strftime('%-d %b %Y') %></small></td>
           </tr>
         <% end %>
@@ -66,7 +77,7 @@
         <% post.reactions.each do |reaction| %>
           <tr id="reaction-<%= reaction.id %>">
             <td class="text-xs-center" data-order="<%= reaction.category %>" data-search="<%= reaction.category %>"><span class="facebook-reaction <%= reaction.category.downcase %>"></span></td>
-            <td><%= reaction.network_user_name %></td>
+            <td><%= link_to reaction.network_user_name, post.network.user_link(reaction.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank'%></td>
           </tr>
         <% end %>
       </tbody>
