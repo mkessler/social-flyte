@@ -55,6 +55,10 @@ class FacebookService
         comment.like_count = result['like_count']
         comment.message = result['message']
         comment.posted_at = result['created_time']
+        if result['attachment'].present?
+          comment.attachment_image = result['attachment']['media']['image']['src']
+          comment.attachment_url = result['attachment']['url']
+        end
       end
     end
   end

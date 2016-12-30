@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230054225) do
+ActiveRecord::Schema.define(version: 20161230063405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20161230054225) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.datetime "posted_at",          null: false
+    t.string   "attachment_image"
+    t.string   "attachment_url"
     t.index ["post_id", "network_comment_id"], name: "index_comments_on_post_id_and_network_comment_id", unique: true, using: :btree
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
   end
