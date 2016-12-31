@@ -3,7 +3,6 @@ class CreateReactions < ActiveRecord::Migration[5.0]
     create_table :reactions do |t|
       t.references :post, index: true, foreign_key: true, null: false
       t.string :network_user_id, null: false
-      t.string :network_user_link, null: false
       t.string :network_user_name, null: false
       t.string :network_user_picture, null: false
       t.string :category, index: true, null: false

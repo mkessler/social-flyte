@@ -5,7 +5,10 @@ class CreateComments < ActiveRecord::Migration[5.0]
       t.string :network_comment_id, null: false
       t.string :network_user_id, null: false
       t.string :network_user_name, null: false
-      t.string :like_count, null: false
+      t.string :attachment_image
+      t.string :attachment_url
+      t.string :network_user_name, null: false
+      t.integer :like_count, null: false, default: 0
       t.text :message, null: false
 
       t.timestamps

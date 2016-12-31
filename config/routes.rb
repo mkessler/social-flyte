@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
     resources :campaigns, path: 'c', except: [:index] do
-      resources :posts, path: 'p', except: [:index, :edit, :update]
+      resources :posts, path: 'p', except: [:index, :edit, :update] do
+        get 'comments', on: :member
+      end
     end
   end
 

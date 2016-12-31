@@ -19,13 +19,16 @@
               last:     'Last'
             }
           },
-          info: '<small><i class="fa fa-flag" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
+          info: '<small><i class="fa fa-list deep-orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
+          infoFiltered: '<br/><small><i class="fa fa-filter deep-orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
           paginate: {
             next: 'Next',
             previous: 'Prev'
           }
         },
-        lengthChange: false
+        lengthChange: false,
+        processing: true,
+        serverSide: true
       });
       $.fn.DataTable.ext.pager.numbers_length = 4;
     }

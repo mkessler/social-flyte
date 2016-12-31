@@ -1,0 +1,5 @@
+json.draw 'draw_param'
+json.recordsTotal 'total_param'
+json.recordsFiltered 'total_param'
+json.data 'test'
+json.error 'error_message'

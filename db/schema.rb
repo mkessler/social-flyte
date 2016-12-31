@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230063405) do
+ActiveRecord::Schema.define(version: 20161111035558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,17 +40,17 @@ ActiveRecord::Schema.define(version: 20161230063405) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "post_id",            null: false
-    t.string   "network_comment_id", null: false
-    t.string   "network_user_id",    null: false
-    t.string   "network_user_name",  null: false
-    t.string   "like_count",         null: false
-    t.text     "message",            null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.datetime "posted_at",          null: false
+    t.integer  "post_id",                        null: false
+    t.string   "network_comment_id",             null: false
+    t.string   "network_user_id",                null: false
+    t.string   "network_user_name",              null: false
     t.string   "attachment_image"
     t.string   "attachment_url"
+    t.integer  "like_count",         default: 0, null: false
+    t.text     "message",                        null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.datetime "posted_at",                      null: false
     t.index ["post_id", "network_comment_id"], name: "index_comments_on_post_id_and_network_comment_id", unique: true, using: :btree
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
   end
