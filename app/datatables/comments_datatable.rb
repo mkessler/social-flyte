@@ -41,7 +41,11 @@ private
   end
 
   def fetch_comments
-    comments = @post.comments.order("#{sort_column} #{sort_direction}")
+    if sort_column == 'message'
+      comments = @post.comments.order("LENGTH(#{sort_column}) #{sort_direction}")
+    else
+      comments = @post.comments.order("#{sort_column} #{sort_direction}")
+    end
     comments = comments.page(page).per(per_page)
     if params[:search].present?
       comments = comments.where("LOWER(network_user_name) like :search or LOWER(message) like :search", search: "%#{params[:search].try(:[], :value).downcase}%")
