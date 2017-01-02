@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :campaigns, path: 'c', except: [:index] do
       resources :posts, path: 'p', except: [:index, :edit, :update] do
         get 'comments', on: :member
+        get 'reactions', on: :member
       end
     end
   end

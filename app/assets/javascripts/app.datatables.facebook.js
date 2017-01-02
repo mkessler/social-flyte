@@ -58,9 +58,26 @@
     },
     reactions: function() {
       var table = $('#facebook-reactions-table').DataTable({
+        ajax: $('#facebook-reactions-table').data('source'),
         columns: [
-          { width: '10%' },
-          null
+          { data: 'category', width: '10%', className: 'text-xs-center' },
+          { data: 'user' }
+        ],
+        columnDefs: [
+          {
+            targets: 0,
+            data: 'category',
+            render: function ( data, type, full, meta ) {
+              return '<span class="facebook-reaction '+data+'"></span>';
+            }
+          },
+          {
+            targets: 1,
+            data: 'user',
+            render: function ( data, type, full, meta ) {
+              return '<a class="light-blue-text groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
+            }
+          }
         ],
         language: {
           info: '<small><i class="fa fa-list deep-orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
@@ -77,7 +94,7 @@
 
   $(document).on('ready', function() {
     App.dataTables.facebook.comments();
-    //App.dataTables.facebook.reactions();
+    App.dataTables.facebook.reactions();
   });
 
 }).call(this);

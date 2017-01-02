@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :comments, :destroy]
+  before_action :set_post, only: [:show, :comments, :reactions, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -15,6 +15,13 @@ class PostsController < ApplicationController
   def comments
     respond_to do |format|
       format.json { render json: CommentsDatatable.new(view_context, @post) }
+    end
+  end
+
+  # GET o/:organization_id/c/:campaign_id/posts/:id/comments.json
+  def reactions
+    respond_to do |format|
+      format.json { render json: ReactionsDatatable.new(view_context, @post) }
     end
   end
 

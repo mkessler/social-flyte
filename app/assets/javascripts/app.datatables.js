@@ -28,6 +28,9 @@
         },
         lengthChange: false,
         processing: true,
+        search: {
+          search: App.utility.getParameterByName('search')
+        },
         serverSide: true
       });
       $.fn.DataTable.ext.pager.numbers_length = 4;
