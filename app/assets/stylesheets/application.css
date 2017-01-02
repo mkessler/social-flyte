@@ -13,6 +13,7 @@
  *= require font-awesome
  *= require bootstrap.min
  *= require dataTables.bootstrap4.min
+ *= require responsive.bootstrap4.min
  *= require dataTables.fontAwesome
  *= require mdb
  *= require style
