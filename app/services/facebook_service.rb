@@ -56,7 +56,7 @@ class FacebookService
         comment.message = result['message']
         comment.posted_at = result['created_time']
         if result['attachment'].present?
-          comment.attachment_image = result['attachment']['media']['image']['src']
+          comment.attachment_image = result['attachment']['media']['image']['src'] if result['attachment']['media'].present?
           comment.attachment_url = result['attachment']['url']
         end
       end
@@ -70,7 +70,7 @@ class FacebookService
   end
 
   def get_comments
-    @graph.get_object("#{@object_id}/comments?fields=attachment,created_time,from,id,like_count,message,parent&limit=1000")
+    @graph.get_object("#{@object_id}/comments?fields=attachment,created_time,from,id,like_count,message,parent&limit=500")
   rescue Koala::Facebook::APIError => e
     Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end
