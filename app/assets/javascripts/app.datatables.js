@@ -10,6 +10,11 @@
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
           $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
         },
+        initComplete: function(settings, json) {
+          var table = this.api();
+          App.dataTables.history(table);
+          App.dataTables.search(table, '#'+settings.sTableId+'-search');
+        },
         language: {
           aria: {
             paginate: {
@@ -34,6 +39,21 @@
         serverSide: true
       });
       $.fn.DataTable.ext.pager.numbers_length = 4;
+    },
+    history: function(table) {
+      table.on( 'xhr', function () {
+        var data = table.ajax.params();
+        if (data.search.value == null || data.search.value == '') {
+          history.pushState('', '', window.location.href.split("?")[0]);
+        } else {
+          history.pushState('', '', '?search='+data.search.value);
+        }
+      });
+    },
+    search: function(table, id) {
+      $(id).on('keyup', function() {
+        table.search(this.value).draw();
+      });
     }
   }
 

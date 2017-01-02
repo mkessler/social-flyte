@@ -52,9 +52,6 @@
           [3, 'desc']
         ]
       });
-      $('#facebook-comments-search').on('keyup', function() {
-        table.search(this.value).draw();
-      });
     },
     reactions: function() {
       var table = $('#facebook-reactions-table').DataTable({
@@ -85,9 +82,6 @@
         order: [
           [1, 'asc']
         ]
-      });
-      $('#facebook-reactions-search').on('keyup', function() {
-        table.search(this.value).draw();
       });
     }
   }
