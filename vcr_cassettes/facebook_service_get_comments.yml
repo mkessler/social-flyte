@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/564071993697787_958246924280290/comments?access_token=EAAXuaK0yoQIBAD1TqcWcO8hw57ze9PfdFyfFZAsyIRXOkYo5CbwnfJc1oDiFtbfEAbJ1PX61p524MbicZC0MbxPGOHYKOVvUfvNNsgn8qvbkYyUy6S0ZAZAZBOcbJf0ZCj6HybFA4iLxalhxEKcyt0kN9GOyuZChGsZD&fields=attachment,created_time,from,id,like_count,message,parent&limit=1000
+    uri: https://graph.facebook.com/564071993697787_958246924280290/comments?access_token=EAAXuaK0yoQIBAD1TqcWcO8hw57ze9PfdFyfFZAsyIRXOkYo5CbwnfJc1oDiFtbfEAbJ1PX61p524MbicZC0MbxPGOHYKOVvUfvNNsgn8qvbkYyUy6S0ZAZAZBOcbJf0ZCj6HybFA4iLxalhxEKcyt0kN9GOyuZChGsZD&fields=attachment,created_time,from,id,like_count,message,parent&limit=500
     body:
       encoding: US-ASCII
       string: ''
@@ -33,19 +33,19 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       X-Fb-Trace-Id:
-      - Dnrq3WLTNtd
+      - Da9iwcmfMnp
       X-Fb-Rev:
-      - '2702404'
+      - '2761076'
       Vary:
       - Accept-Encoding
       X-Fb-Debug:
-      - 3E4pLSeH7Nd0s77CSFcJVEnkV1zVAR/15xW+ds3qkRA+kvVwlSy0aonzGXhRpWGB4YQXsbaxaVCfMV3O6L3GTg==
+      - hSWDkQtdHNb2MCbPn7QvPj6VDLze0YXr2Fn9z+Ciq5y3dJqoSptGxkmX21c1GcaJIuZgasx4hZGqt6NyPw3PZA==
       Date:
-      - Sat, 26 Nov 2016 04:38:22 GMT
+      - Mon, 02 Jan 2017 09:57:53 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '685'
+      - '689'
     body:
       encoding: ASCII-8BIT
       string: '{"data":[{"created_time":"2016-11-16T19:56:24+0000","from":{"name":"Maite
@@ -60,5 +60,5 @@ http_interactions:
         Santos","id":"1409798889030442"},"id":"958246924280290_958826510888998","like_count":1,"message":"Indepence
         charlotte arriba arriba"}],"paging":{"cursors":{"before":"WTI5dGJXVnVkRjlqZAFhKemIzSTZAPVFU0TWpVek5qYzBNamM1TmpFMU9qRTBOemt6TWpZAeE9EUT0ZD","after":"WTI5dGJXVnVkRjlqZAFhKemIzSTZAPVFU0T0RJMk5URXdPRGc0T1RrNE9qRTBOemt6T1RNME1qZAz0ZD"}}}'
     http_version: 
-  recorded_at: Sat, 26 Nov 2016 04:38:22 GMT
+  recorded_at: Mon, 02 Jan 2017 09:57:53 GMT
 recorded_with: VCR 3.0.3
