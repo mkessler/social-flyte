@@ -38,12 +38,19 @@
             display: $.fn.dataTable.Responsive.display.modal({
               header: function (row) {
                 var data = row.data();
-                return 'Details for '+data[0]+' '+data[1];
+                return 'Details';
               }
             }),
-            renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-              tableClass: 'table'
-            })
+            renderer: function (api, rowIdx, columns) {
+              var data = $.map(columns, function (col, i){
+                return '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+                  '<td>'+col.title+'</td>'+
+                  '<td>'+col.data+'</td>'+
+                '</tr>'
+              }).join('');
+
+              return $('<table class="table groala-break-word" />').append(data);
+            }
           }
         },
         search: {

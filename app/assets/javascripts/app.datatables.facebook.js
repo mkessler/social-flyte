@@ -29,6 +29,7 @@
                   '<a href="'+data.attachment.url+'" class="media-left" target="_blank">' +
                     '<img class="media-object" src="'+data.attachment.image+'" alt="Comment Media">' +
                   '</a>' +
+                  '<br class="hidden-sm-up">' +
                   '<div class="media-body">'+data.message+'</div>' +
                 '</div>';
               } else {
