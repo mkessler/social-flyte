@@ -11,12 +11,8 @@
 
 <div class="tab-content card">
   <div class="tab-pane fade in active" id="post-comments" role="tabpanel">
-    <div class="md-form">
-      <i class="fa fa-search prefix"></i>
-      <input type="text" id="facebook-comments-search" class="form-control">
-      <label for="facebook-comments-search" class="">Search</label>
-    </div>
-    <table id="facebook-comments-table" class="table table-striped groala-data-table" cellspacing="0" width="100%">
+    <%= render "shared/datatables_search", table_id: 'facebook-comments-table' %>
+    <table id="facebook-comments-table" class="table table-striped groala-data-table" cellspacing="0" width="100%" data-source="<%= comments_organization_campaign_post_url(organization, campaign, post, format: :json) %>">
       <thead>
         <tr>
           <th class="text-xs-center" data-toggle="tooltip" title="Likes">
@@ -34,35 +30,12 @@
         </tr>
       </thead>
       <tbody>
-        <% post.comments.each do |comment| %>
-          <tr id="comment-<%= comment.id %>">
-            <td class="text-xs-center"><%= comment.like_count %></td>
-            <td><%= link_to comment.network_user_name, post.network.user_link(comment.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank' %></td>
-            <td data-order="<%= comment.message.size %>">
-              <% if comment.attachment_image.present? && comment.attachment_url.present? %>
-                <div class="media">
-                  <a href="<%= comment.attachment_url%>" class="media-left" target="_blank">
-                    <img class="media-object" src="<%= comment.attachment_image %>" alt="Comment Media">
-                  </a>
-                  <div class="media-body"><%= comment.message %></div>
-                </div>
-              <% else %>
-                <%= comment.message %>
-              <% end %>
-            </td>
-            <td class="text-xs-center groala-no-wrap" data-order="<%= comment.posted_at.to_i %>"><%= comment.posted_at.strftime('%l:%M%P') %><br><small><%= comment.posted_at.strftime('%-d %b %Y') %></small></td>
-          </tr>
-        <% end %>
       </tbody>
     </table>
   </div>
   <div class="tab-pane fade in" id="post-reactions" role="tabpanel">
-    <div class="md-form">
-      <i class="fa fa-search prefix"></i>
-      <input type="text" id="facebook-reactions-search" class="form-control">
-      <label for="facebook-reactions-search" class="">Search</label>
-    </div>
-    <table id="facebook-reactions-table" class="table table-striped groala-data-table" cellspacing="0" width="100%">
+    <%= render "shared/datatables_search", table_id: 'facebook-reactions-table' %>
+    <table id="facebook-reactions-table" class="table table-striped groala-data-table" cellspacing="0" width="100%" data-source="<%= reactions_organization_campaign_post_url(organization, campaign, post, format: :json) %>">
       <thead>
         <tr>
           <th class="text-xs-center" data-toggle="tooltip" title="Reaction">
@@ -74,12 +47,6 @@
         </tr>
       </thead>
       <tbody>
-        <% post.reactions.each do |reaction| %>
-          <tr id="reaction-<%= reaction.id %>">
-            <td class="text-xs-center" data-order="<%= reaction.category %>" data-search="<%= reaction.category %>"><span class="facebook-reaction <%= reaction.category.downcase %>"></span></td>
-            <td><%= link_to reaction.network_user_name, post.network.user_link(reaction.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank'%></td>
-          </tr>
-        <% end %>
       </tbody>
     </table>
   </div>

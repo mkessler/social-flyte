@@ -4,6 +4,7 @@
 //= require bootstrap.min
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap4.min
+//= require app.utility
 //= require app.authentications
 //= require app.mdb
 //= require app.datatables

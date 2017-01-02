@@ -86,3 +86,6 @@ gem 'sidekiq'
 
 # Font Awesome
 gem 'font-awesome-rails'
+
+# pagination
+gem 'kaminari'

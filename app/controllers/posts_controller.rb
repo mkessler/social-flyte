@@ -2,23 +2,37 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :destroy]
+  before_action :set_post, only: [:show, :comments, :reactions, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET organizations/friendly_id/c/friendly_id/posts
-  # GET organizations/friendly_id/c/friendly_id/posts.json
+  # GET o/:organization_id/c/:campaign_id/posts/:id
+  # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
   end
 
-  # GET organizations/friendly_id/c/friendly_id/p/new
+  # GET o/:organization_id/c/:campaign_id/posts/:id/comments.json
+  def comments
+    respond_to do |format|
+      format.json { render json: CommentsDatatable.new(view_context, @post) }
+    end
+  end
+
+  # GET o/:organization_id/c/:campaign_id/posts/:id/comments.json
+  def reactions
+    respond_to do |format|
+      format.json { render json: ReactionsDatatable.new(view_context, @post) }
+    end
+  end
+
+  # GET o/:organization_id/c/:campaign_id/p/new
   def new
     add_breadcrumb 'Add Post', new_organization_campaign_post_path(@organization, @campaign)
     @post = @campaign.posts.new
   end
 
-  # POST organizations/friendly_id/c/friendly_id/posts
-  # POST organizations/friendly_id/c/friendly_id/posts.json
+  # POST o/:organization_id/c/:campaign_id/posts
+  # POST o/:organization_id/c/:campaign_id/posts.json
   def create
     @post = @campaign.posts.new(post_params)
     respond_to do |format|
@@ -33,8 +47,8 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE organizations/friendly_id/c/friendly_id/posts
-  # DELETE organizations/friendly_id/c/friendly_id/posts.json
+  # DELETE o/:organization_id/c/:campaign_id/posts
+  # DELETE o/:organization_id/c/:campaign_id/posts.json
   def destroy
     @post.destroy
     respond_to do |format|
