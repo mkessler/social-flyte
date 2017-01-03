@@ -9,6 +9,7 @@
         drawCallback: function(settings) {
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
           $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
+          $('table tbody [data-toggle="tooltip"]').tooltip();
         },
         initComplete: function(settings, json) {
           var table = this.api();
@@ -24,8 +25,8 @@
               last:     'Last'
             }
           },
-          info: '<small><i class="fa fa-list deep-orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
-          infoFiltered: '<br/><small><i class="fa fa-filter deep-orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
+          infoFiltered: '<br/><small><i class="fa fa-filter orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
           paginate: {
             next: 'Next',
             previous: 'Prev'
@@ -59,6 +60,19 @@
         serverSide: true
       });
       $.fn.DataTable.ext.pager.numbers_length = 4;
+    },
+    flagToggle: function($el, status) {
+      var tooltip = status ? 'Unflag' : 'Flag'
+      if (status == true) {
+        $el.find('i').addClass('orange-text');
+      } else {
+        $el.find('i').removeClass('orange-text');
+      }
+
+      $el.tooltip('hide')
+        .attr('data-original-title', tooltip)
+        .tooltip('fixTitle')
+        .tooltip('show');
     },
     history: function(table) {
       table.on( 'xhr', function () {

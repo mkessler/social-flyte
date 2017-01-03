@@ -1,5 +1,4 @@
 class ReactionsDatatable < Datatable
-  delegate :params, :link_to, :content_tag, :tag, to: :@view
 
   def as_json(options = {})
     {
@@ -20,6 +19,10 @@ private
         user: {
           name: reaction.network_user_name,
           url: @post.network.user_link(reaction.network_user_id)
+        },
+        flagged: {
+          status: reaction.flagged,
+          url: organization_campaign_post_reaction_path(@organization, @campaign, @post, reaction)
         }
       }
     end
@@ -39,7 +42,7 @@ private
   end
 
   def sort_column
-    columns = %w[category network_user_name]
+    columns = %w[category network_user_name flagged]
     columns[params[:order].try(:[], "0").try(:[], :column).to_i]
   end
 end

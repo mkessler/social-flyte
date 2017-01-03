@@ -1,0 +1,18 @@
+<%= render "shared/datatables_search", table_id: 'facebook-reactions-table' %>
+<table id="facebook-reactions-table" class="table table-striped groala-data-table" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_reactions_url(organization, campaign, post, format: :json) %>">
+  <thead>
+    <tr>
+      <th class="text-xs-center" data-toggle="tooltip" title="Reaction">
+        <i class="fa fa-heart" aria-hidden="true"></i>
+      </th>
+      <th class="text-xs-center" data-toggle="tooltip" title="User">
+        <i class="fa fa-user" aria-hidden="true">
+      </th>
+      <th class="text-xs-center" data-toggle="tooltip" title="Flagged">
+        <i class="fa fa-flag" aria-hidden="true">
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>

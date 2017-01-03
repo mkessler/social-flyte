@@ -1,5 +1,4 @@
 class CommentsDatatable < Datatable
-  delegate :params, :link_to, :content_tag, :tag, to: :@view
 
   def as_json(options = {})
     {
@@ -31,6 +30,10 @@ private
         posted_at: {
           time: comment.posted_at.strftime('%l:%M%P'),
           date: comment.posted_at.strftime('%-d %b %Y')
+        },
+        flagged: {
+          status: comment.flagged,
+          url: organization_campaign_post_comment_path(@organization, @campaign, @post, comment)
         }
       }
     end
@@ -54,7 +57,7 @@ private
   end
 
   def sort_column
-    columns = %w[like_count network_user_name message posted_at]
+    columns = %w[like_count network_user_name message posted_at flagged]
     columns[params[:order].try(:[], "0").try(:[], :column).to_i]
   end
 end
