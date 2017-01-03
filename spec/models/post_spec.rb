@@ -93,4 +93,35 @@ RSpec.describe Post, type: :model do
       expect(post).to_not be_valid
     end
   end
+
+  describe ".engagement_count" do
+    before(:each) do
+      @post = FactoryGirl.create(:post)
+    end
+
+    context 'facebook' do
+      it 'returns the total number of comments and reactions' do
+        10.times do
+          FactoryGirl.create(:comment, network_comment_id: Faker::Number.number(10), post: @post)
+        end
+        4.times do
+          FactoryGirl.create(:reaction, network_user_id: Faker::Number.number(10),post: @post)
+        end
+
+        expect(@post.engagement_count).to eql(14)
+      end
+    end
+  end
+
+  describe ".engagement_types" do
+    before(:each) do
+      @post = FactoryGirl.create(:post)
+    end
+
+    context 'facebook' do
+      it 'returns comments and reactions' do
+        expect(@post.engagement_types).to eql('Comments & Reactions')
+      end
+    end
+  end
 end
