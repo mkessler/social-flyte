@@ -27,7 +27,7 @@ class PostsController < ApplicationController
 
   # GET o/:organization_id/c/:campaign_id/p/new
   def new
-    add_breadcrumb 'Add Post', new_organization_campaign_post_path(@organization, @campaign)
+    add_breadcrumb 'Import Post', new_organization_campaign_post_path(@organization, @campaign)
     @post = @campaign.posts.new
   end
 
