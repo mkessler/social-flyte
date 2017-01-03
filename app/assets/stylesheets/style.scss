@@ -67,6 +67,10 @@ a {
   }
 }
 
+.no-shadow {
+  box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0);
+}
+
 .tab-content {
   padding-bottom: 2rem;
   padding-top: 3.5rem;
@@ -97,5 +101,11 @@ a {
   li {
     width: 50%;
     margin-left: 25%;
+  }
+}
+
+.tab-pane {
+  .jumbotron {
+    margin-bottom: 0;
   }
 }
