@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'reactions/index'
+
+  get 'reactions/update'
+
   require 'sidekiq/web'
 
   # Sidekiq Monitoring
@@ -14,8 +18,8 @@ Rails.application.routes.draw do
   resources :organizations, path: 'o' do
     resources :campaigns, path: 'c', except: [:index] do
       resources :posts, path: 'p', except: [:index, :edit, :update] do
-        get 'comments', on: :member
-        get 'reactions', on: :member
+        resources :comments, except: [:new, :edit, :show, :create, :destroy]
+        resources :reactions, except: [:new, :edit, :show, :create, :destroy]
       end
     end
   end

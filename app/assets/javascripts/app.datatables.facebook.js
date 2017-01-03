@@ -9,7 +9,8 @@
           { data: 'like_count', width: '10%', className: 'text-xs-center' },
           { data: 'user', width: '15%' },
           { data: 'comment', className: 'groala-break-word' },
-          { data: 'posted_at', width: '15%', className: 'text-xs-center' }
+          { data: 'posted_at', width: '15%', className: 'text-xs-center' },
+          { data: 'flagged', width: '10%', className: 'text-xs-center' }
         ],
         columnDefs: [
           {
@@ -44,10 +45,21 @@
             render: function ( data, type, full, meta ) {
               return data.time + '<br/><small>'+data.date+'</small>';
             }
+          },
+          {
+            targets: 4,
+            data: 'flagged',
+            render: function ( data, type, full, meta ) {
+              var tooltip = data.status ? 'Unflag' : 'Flag';
+              var flagged_class = data.status ? 'orange-text' : '';
+              return '<a class="flag-element grey-text" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<i class="fa fa-flag '+flagged_class+'" aria-hidden="true"></i>' +
+              '</a>';
+            }
           }
         ],
         language: {
-          info: '<small><i class="fa fa-list deep-orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Comments</small>'
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Comments</small>'
         },
         order: [
           [3, 'desc']
@@ -59,7 +71,8 @@
         ajax: $('#facebook-reactions-table').data('source'),
         columns: [
           { data: 'category', width: '10%', className: 'text-xs-center' },
-          { data: 'user' }
+          { data: 'user' },
+          { data: 'flagged', width: '10%', className: 'text-xs-center' }
         ],
         columnDefs: [
           {
@@ -75,10 +88,21 @@
             render: function ( data, type, full, meta ) {
               return '<a class="light-blue-text groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
             }
+          },
+          {
+            targets: 2,
+            data: 'flagged',
+            render: function ( data, type, full, meta ) {
+              var tooltip = data.status ? 'Unflag' : 'Flag';
+              var flagged_class = data.status ? 'orange-text' : '';
+              return '<a class="flag-element grey-text" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<i class="fa fa-flag '+flagged_class+'" aria-hidden="true"></i>' +
+              '</a>';
+            }
           }
         ],
         language: {
-          info: '<small><i class="fa fa-list deep-orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
         },
         order: [
           [1, 'asc']

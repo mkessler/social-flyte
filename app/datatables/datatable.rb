@@ -1,9 +1,12 @@
 class Datatable
-  delegate :params, :link_to, :content_tag, :tag, to: :@view
+  include Rails.application.routes.url_helpers
+  delegate :params, to: :@view
 
   def initialize(view, post)
     @view = view
     @post = post
+    @campaign = @post.campaign
+    @organization = @campaign.organization
   end
 
 private

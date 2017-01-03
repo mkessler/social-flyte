@@ -22,7 +22,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_post
-    @post = @campaign.posts.find(params[:id])
+    if params[:post_id]
+      @post = @campaign.posts.find(params[:post_id])
+    else
+      @post = @campaign.posts.find(params[:id])
+    end
     add_breadcrumb '<i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>', organization_campaign_post_path(@organization, @campaign, @post)
   end
 
