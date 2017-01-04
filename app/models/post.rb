@@ -6,16 +6,16 @@ class Post < ApplicationRecord
 
   # Make network_parent_id conditional on facebook when more networks added
   validates :campaign_id, :network_id, :network_parent_id, presence: true
-  validates :network_post_id, presence: true, uniqueness: { scope: :campaign_id }
+  validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
 
   def engagement_count
     case network
       when Network.facebook
         comments.count + reactions.count
       when Network.twitter
-
+        0
       when Network.instagram
-
+        0
       else
         0
     end
@@ -26,9 +26,9 @@ class Post < ApplicationRecord
       when Network.facebook
         'Comments & Reactions'
       when Network.twitter
-
+        0
       when Network.instagram
-
+        0
       else
         0
     end

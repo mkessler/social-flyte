@@ -10,4 +10,12 @@ class Campaign < ApplicationRecord
   def should_generate_new_friendly_id?
     slug.blank? || name_changed?
   end
+
+  def engagement_count
+    posts.map(&:engagement_count).sum
+  end
+
+  def networks
+    posts.map(&:network).map(&:slug).uniq
+  end
 end

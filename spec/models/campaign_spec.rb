@@ -77,4 +77,39 @@ RSpec.describe Campaign, type: :model do
       expect(campaign).to_not be_valid
     end
   end
+
+  describe ".engagement_count" do
+    it 'returns the total number of post interactions' do
+      campaign = FactoryGirl.create(:campaign)
+      post = FactoryGirl.create(:post, campaign: campaign)
+      post_two = FactoryGirl.create(:post, campaign: campaign, network_post_id: Faker::Number.number(10))
+
+      10.times do
+        FactoryGirl.create(:comment, network_comment_id: Faker::Number.number(10), post: post)
+      end
+      4.times do
+        FactoryGirl.create(:reaction, network_user_id: Faker::Number.number(10),post: post)
+      end
+
+      5.times do
+        FactoryGirl.create(:comment, network_comment_id: Faker::Number.number(10), post: post)
+      end
+      8.times do
+        FactoryGirl.create(:reaction, network_user_id: Faker::Number.number(10),post: post)
+      end
+
+      expect(campaign.engagement_count).to eql(27)
+    end
+  end
+
+  describe ".networks" do
+    it 'returns an array of post networks' do
+      campaign = FactoryGirl.create(:campaign)
+      FactoryGirl.create(:post, campaign: campaign)
+      FactoryGirl.create(:post, campaign: campaign, network: Network.twitter)
+      FactoryGirl.create(:post, campaign: campaign, network: Network.instagram)
+
+      expect(campaign.networks).to eql(['facebook', 'twitter', 'instagram'])
+    end
+  end
 end
