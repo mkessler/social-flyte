@@ -12,20 +12,7 @@
 <div class="tab-content card">
   <div class="tab-pane fade in active" id="posts-list" role="tabpanel">
     <% if @posts.present? %>
-      <table class="table table-striped">
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr id="post-<%= post.id %>">
-              <td><i class="fa fa-<%= post.network.slug %>-official" aria-hidden="true"></i><%= link_to post.network.name, organization_campaign_post_path(@organization, @campaign, post), class: 'light-blue-text' %></td>
-              <td class="text-xs-right">
-                <%= link_to organization_campaign_post_path(@organization, @campaign, post), class: 'delete-post pink-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
-                  <%= content_tag(:i, nil, :class => 'fa fa-times', aria: { hidden: true }) %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <%= render "posts/datatable", organization: @organization, campaign: @campaign, posts: @posts %>
     <% else %>
       <div class="jumbotron no-shadow">
           <h1 class="h1-responsive"><i class="fa fa-hashtag" aria-hidden="true"></i> <%= @campaign.name %> is ready to go!</h1>

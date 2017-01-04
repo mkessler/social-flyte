@@ -55,7 +55,7 @@
           }
         },
         search: {
-          search: App.utility.getParameterByName('search')
+          search: App.utility.getParameterByName('search') !== null ? App.utility.getParameterByName('search') : ''
         },
         serverSide: true
       });
