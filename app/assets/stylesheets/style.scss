@@ -13,7 +13,8 @@ a {
     i {
       position: absolute;
       left: 9px;
-      top: 14px;
+      top: 50%;
+      margin-top: -7px;
     }
   }
 }
@@ -34,6 +35,14 @@ a {
   }
 }
 
+.dashboard-title {
+  border-top: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  padding: 2rem 0;
+  margin: 0rem 0 3.5rem;
+  text-transform: uppercase;
+}
+
 .dataTables_filter {
   display: none;
 }
@@ -44,6 +53,18 @@ a {
 
 .dataTables_wrapper .dataTables_paginate .pagination {
   font-size: .85em;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 #000;
+  color: #00c853;
+  content: "\f0fe";
+  font: normal normal normal 18px/1 FontAwesome;
+  left: 6px;
 }
 
 .fixed-sn main {
