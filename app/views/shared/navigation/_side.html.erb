@@ -1,8 +1,9 @@
 <ul id="slide-out" class="side-nav fixed light-blue darken-2 custom-scrollbar" style="transform: translateX(-100%);">
-  <li>
-    <div class="logo-wrapper waves-light">
-      <a href="#"><%= image_tag 'logo/groala-white-sm.png', class: 'img-fluid flex-center' %></a>
-    </div>
+  <div>
+  <li class="text-xs-center">
+    <%= link_to edit_user_registration_path, class: 'user-image waves-effect' do %>
+      <%= gravatar_for(current_user) %>
+    <% end %>
   </li>
 
   <li>
@@ -73,4 +74,5 @@
   <li class="logo-container text-xs-center">
     <%= image_tag 'logo/groala-white-sm.png', class: 'logo' %> groala
   </li>
+  </div>
 </ul>
