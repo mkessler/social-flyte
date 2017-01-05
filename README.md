@@ -1,16 +1,28 @@
 [ ![Codeship Status for mkessler/yoala](https://app.codeship.com/projects/c3298b20-7cae-0134-5149-164a30546007/status?branch=master)](https://app.codeship.com/projects/181143)
 
-Application Name Overview
+Groala
 ==============================================
 
-1-2 paragraphs with an overview of the app
+Groala is a social media campaign analysis tool that allows users to easily import and consume post interactions across today's most popular social networks. Groala enables end users the ability to monitor cross-network campaigns and digest engagement in an intuitive, meaningful way.
 
 
 Required Environment / Minimum Setup
 ----------------------------------------------
 
-Ruby version.
-Minimum setup required to run the app. This should be checked by `rake dev:setup`.
+Requirements:
+
+* Ruby (v2.3.0)
+
+* PostgreSQL (v9.5.4)
+
+
+Setup:
+
+1. Clone repo `git clone git@bitbucket.org:USERNAME/yoala.git`
+
+2. `cd yoala`
+
+3. `./bin/setup`
 
 
 Notable Deviations
@@ -44,7 +56,17 @@ Describe a manual smoke test process to ensure that the env is running as it sho
 Testing
 ----------------------------------------------
 
-How do you run the tests?
+Tests are run using [RSpec](https://relishapp.com/rspec).
+
+
+To run the entire test suite use the following command:
+`bundle exec rspec`
+
+
+Acceptance tests are enabled by [Capybara](https://github.com/teamcapybara/capybara#using-capybara-with-rspec).
+
+
+When in need of dummy data, [Faker](https://github.com/stympy/faker#usage) is used to generate random, realistic data on the fly.
 
 
 Staging Environment
@@ -68,7 +90,7 @@ Is there a particular release process?
 Design
 ----------------------------------------------
 
-Spot for designers to put any information they need.
+Groala uses [Material Bootsrap Design](http://mdbootstrap.com/components/).
 
 
 Known Issues / Gotcha
