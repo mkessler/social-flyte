@@ -75,6 +75,28 @@ a {
   box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0);
 }
 
+.side-nav {
+  i {
+    opacity: 0.6;
+  }
+  .logo-container {
+    width: 80%;
+    border-top: 1px solid rgba(255,255,255,0.6);
+    margin: 0 auto;
+    padding: 0.5em 0 1em;
+    color: rgba(255,255,255,0.6);
+    font-size: 2em;
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    .logo {
+      display: inline;
+      height: 32px;
+      opacity: 0.6;
+    }
+  }
+}
+
 .tab-content {
   padding-bottom: 2rem;
   padding-top: 3.5rem;
