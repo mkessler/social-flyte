@@ -1,19 +1,39 @@
 <ul id="slide-out" class="side-nav fixed light-blue darken-2 custom-scrollbar" style="transform: translateX(-100%);">
-  <li>
-    <div class="logo-wrapper waves-light">
-      <a href="#"><img src="http://mdbootstrap.com/wp-content/uploads/2015/12/mdb-white2.png" class="img-fluid flex-center"></a>
-    </div>
+  <div>
+  <li class="text-xs-center">
+    <%= link_to edit_user_registration_path, class: 'user-image waves-effect' do %>
+      <%= gravatar_for(current_user) %>
+    <% end %>
   </li>
 
   <li>
     <ul class="collapsible collapsible-accordion">
-      <% current_user.organizations.each do |organization| %>
-        <li>
-          <%= link_to organization_path(organization), class: 'waves-effect' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o', aria: { hidden: true }) %> <%= organization.name %>
+      <li>
+        <% if current_user.organizations.count > 1 %>
+          <a class="collapsible-header waves-effect arrow-r">
+            <i class="fa fa-hand-pointer-o"></i>
+            Organizations<i class="fa fa-angle-down rotate-icon">
+            </i>
+          </a>
+          <div class="collapsible-body">
+            <ul>
+              <li>
+                <% current_user.organizations.each do |organization| %>
+                  <%= link_to organization.name, organization_path(organization), class: 'waves-effect' %>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        <% elsif current_user.organizations.present? %>
+          <%= link_to organization_path(current_user.organizations.first), class: 'waves-effect' do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o', aria: { hidden: true }) %> <%= current_user.organizations.first.name %>
           <% end %>
-        </li>
-      <% end %>
+        <% else %>
+          <%= link_to new_organization_path, class: 'waves-effect' do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o', aria: { hidden: true }) %> New Organization
+          <% end %>
+        <% end %>
+      </li>
       <li>
         <a class="collapsible-header waves-effect arrow-r">
           <i class="fa fa-eye"></i>
@@ -50,4 +70,9 @@
       </li>
     </ul>
   </li>
+
+  <li class="logo-container text-xs-center">
+    <%= image_tag 'logo/groala-white-sm.png', class: 'logo' %> groala
+  </li>
+  </div>
 </ul>
