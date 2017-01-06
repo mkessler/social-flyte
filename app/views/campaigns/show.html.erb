@@ -16,16 +16,38 @@
     <% if @posts.present? %>
       <%= render "posts/datatable", organization: @organization, campaign: @campaign, posts: @posts %>
     <% else %>
-      <div class="jumbotron no-shadow">
-          <h1 class="h1-responsive"><i class="fa fa-hashtag" aria-hidden="true"></i> <%= @campaign.name %> is ready to go!</h1>
-          <p class="lead">Your campaign is fresh out of the oven and ready to import posts from our supported networks.</p>
-          <hr class="my-2">
-          <p>Import your first post for <b><%= @campaign.name %></b> now!</p>
-          <p class="lead text-xs-center">
-              <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn green accent-4' do %>
-                <i class="fa fa-cloud-download left" aria-hidden="true"></i> Import Post
-              <% end %>
-          </p>
+      <div class="row m-t-1">
+        <div class="col-md-12">
+          <ul class="stepper stepper-vertical">
+            <li class="active">
+              <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
+                <span class="circle">1</span>
+                <span class="label">Import your first post</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Our platform is built with simplicity in mind and groala removes all of the hastle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
+              </div>
+            </li>
+            <li class="active">
+              <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
+                <span class="circle">2</span>
+                <span class="label">Analyze &amp; reward</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Monitor your post interactions all in one centralized location to quickly track top contributors among your audience. Tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="row m-t-1">
+        <div class="col-md-12 text-xs-right">
+          <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn green accent-4' do %>
+            <i class="fa fa-cloud-download left" aria-hidden="true"></i> Import Post
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
