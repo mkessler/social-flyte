@@ -21,7 +21,7 @@ a {
 
 @media (min-width: 1441px) {
   .breadcrumb {
-    padding-left: 240px;
+    margin-left: 240px;
   }
 }
 
@@ -69,6 +69,16 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
 
 .fixed-sn main {
   padding-top: 3.5rem;
+}
+
+footer.page-footer {
+  background-color: transparent;
+  margin-top: 0;
+  opacity: 0.8;
+  padding-top: 0;
+  .logo {
+    height: 22px;
+  }
 }
 
 .groala-break-word {

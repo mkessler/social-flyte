@@ -33,6 +33,13 @@
       </div>
     </main>
 
+    <footer class="page-footer center-on-small-only">
+      <div class="footer-copyright">
+        <div class="container-fluid">
+          <%= image_tag 'logo/groala-white-sm.png', class: 'logo' %> <%= link_to 'groala', root_url %> <small><i class="fa fa-copyright" aria-hidden="true"></i> <%= Time.now.year %></small>
+        </div>
+      </div>
+    </footer>
     <%= javascript_include_tag 'mdb/mdb.min' %>
     <%= render 'shared/toastr_notifications' %>
   </body>
