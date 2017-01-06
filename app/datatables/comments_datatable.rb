@@ -29,7 +29,7 @@ private
         },
         posted_at: {
           time: comment.posted_at.strftime('%l:%M%P'),
-          date: comment.posted_at.strftime('%-d %b %Y')
+          date: comment.posted_at.strftime('%b %-d %Y')
         },
         flagged: {
           status: comment.flagged,

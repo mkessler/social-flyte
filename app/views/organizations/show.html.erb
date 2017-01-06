@@ -1,3 +1,5 @@
+<h2 class="dashboard-title"><%= @organization.name %></h2>
+
 <ul class="nav nav-tabs tabs-2 light-blue darken-2" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" data-toggle="tab" href="#campaigns-list" role="tab"><i class="fa fa-th-list" aria-hidden="true"></i> Campaigns</a>
@@ -20,9 +22,9 @@
           <hr class="my-2">
           <p>Create your first campaign for <b><%= @organization.name %></b> now!</p>
           <p class="lead text-xs-center">
-              <%= link_to new_organization_campaign_path(@organization), class: 'btn green accent-4' do %>
-                <i class="fa fa-plus left" aria-hidden="true"></i> Create Campaign
-              <% end %>
+            <%= link_to new_organization_campaign_path(@organization), class: 'btn green accent-4' do %>
+              <i class="fa fa-plus left" aria-hidden="true"></i> Create Campaign
+            <% end %>
           </p>
       </div>
     <% end %>
