@@ -1,15 +1,22 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the OrganizationsHelper. For example:
-#
-# describe OrganizationsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe OrganizationsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'organization_title' do
+    context 'has no campaigns' do
+      it 'returns welcome title' do
+        organization = FactoryGirl.create(:organization)
+
+        expect(organization_title(organization)).to eql('Welcome to groala')
+      end
+    end
+
+    context 'has campaigns' do
+      it 'returns organization name' do
+        organization = FactoryGirl.create(:organization)
+        FactoryGirl.create(:campaign, organization: organization)
+
+        expect(organization_title(organization)).to eql(organization.name)
+      end
+    end
+  end
 end
