@@ -15,7 +15,7 @@
     <% posts.each do |post| %>
       <tr id="post-<%= post.id %>">
         <td data-order="<%= post.network.slug %>"><i class="fa fa-<%= post.network.slug %>-official" aria-hidden="true"></i><%= link_to post.network.name, organization_campaign_post_path(organization, campaign, post), class: 'light-blue-text' %></td>
-        <td class="text-xs-center"><%= number_with_delimiter(post.engagement_count) %> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="<%= post.engagement_types %>"></i></td>
+        <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(post.engagement_count) %> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="<%= post.engagement_types %>"></i></td>
         <td class="text-xs-center groala-no-wrap">
           <%= link_to organization_campaign_post_path(organization, campaign, post), class: 'view-camppostaign light-blue-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-eye', aria: { hidden: true }) %>

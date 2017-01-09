@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   # Users
-  devise_for :users, path: 'account'
+  devise_for :users, path: 'account', controllers: { registrations: 'users/registrations' }
 
   # Authentications
   resources :authentications, except: [:new, :edit, :show]
