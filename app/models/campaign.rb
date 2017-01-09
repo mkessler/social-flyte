@@ -16,6 +16,6 @@ class Campaign < ApplicationRecord
   end
 
   def networks
-    posts.map(&:network).map(&:slug).uniq
+    posts.map(&:network).map(&:slug).uniq.sort
   end
 end

@@ -109,7 +109,7 @@ RSpec.describe Campaign, type: :model do
       FactoryGirl.create(:post, campaign: campaign, network: Network.twitter)
       FactoryGirl.create(:post, campaign: campaign, network: Network.instagram)
 
-      expect(campaign.networks).to eql(['facebook', 'twitter', 'instagram'])
+      expect(campaign.networks).to eql(['facebook', 'instagram', 'twitter'])
     end
   end
 end

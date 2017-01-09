@@ -5,7 +5,7 @@
     init: function() {
       FB.init({
         appId: <%= Rails.application.secrets.facebook_app_id %>,
-        status: true,
+        status: false,
         cookie: true,
         xfbml: true
       });
@@ -30,15 +30,35 @@
           alert('Authentication cancelled. Please try again.');
         }
       });
+    },
+    loggedIn: function() {
+      console.log('Logged In.');
+      if ($('#connected-facebook span').length) {
+        $('.facebook-login').remove();
+        $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
+      }
+    },
+    status: function() {
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          var uid = response.authResponse.userID;
+          var accessToken = response.authResponse.accessToken;
+          $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
+        } else if (response.status === 'not_authorized') {
+          // the user is logged in to Facebook,
+          // but has not authenticated your app
+          $('#connected-facebook span').html('Status: Not Connected <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Connect</button>');
+          FB.Event.subscribe('auth.login', App.authentications.facebook.loggedIn);
+        } else {
+          // the user isn't logged in to Facebook.
+          $('#connected-facebook span').html('Status: Logged Out <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Log In</button>');
+          FB.Event.subscribe('auth.login', App.authentications.facebook.loggedIn);
+        }
+      });
+      $('body').on('click', '.facebook-login', function(){
+        App.authentications.facebook.login();
+      });
     }
   };
-
-  $(document).on('ready', function() {
-    window.fbAsyncInit = function() {
-      App.authentications.facebook.init();
-    }
-    App.authentications.facebook.loadSDK();
-    console.log('Facebook Authentication ready.');
-  });
 
 }).call(this);
