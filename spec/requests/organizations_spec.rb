@@ -28,15 +28,52 @@ RSpec.describe 'Organizations', type: :request do
     context 'when logged in' do
       before(:example) do
         sign_in(user)
-        get organizations_path
       end
 
-      it 'responds with 200' do
-        expect(response).to have_http_status(200)
+      context 'when user is not member of any organizations' do
+        before(:example) do
+          get organizations_path
+        end
+
+        it 'responds with 302' do
+          expect(response).to have_http_status(302)
+        end
+
+        it 'redirects to organization' do
+          expect(response).to redirect_to(new_organization_path)
+        end
       end
 
-      it 'renders index' do
-        expect(response).to render_template(:index)
+      context 'when user is member of one organization' do
+        before(:example) do
+          membership
+          get organizations_path
+        end
+
+        it 'responds with 302' do
+          expect(response).to have_http_status(302)
+        end
+
+        it 'redirects to organization' do
+          expect(response).to redirect_to(organization_path(organization))
+        end
+      end
+
+      context 'when user is member of multiple organizations' do
+        before(:example) do
+          membership
+          organization_two = FactoryGirl.create(:organization)
+          FactoryGirl.create(:membership, user: user, organization: organization_two)
+          get organizations_path
+        end
+
+        it 'responds with 200' do
+          expect(response).to have_http_status(200)
+        end
+
+        it 'renders index' do
+          expect(response).to render_template(:index)
+        end
       end
     end
   end
