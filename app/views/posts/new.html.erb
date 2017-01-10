@@ -18,3 +18,14 @@
     <%= render 'form', organization: @organization, campaign: @campaign, post: @post %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).on('ready', function() {
+    window.fbAsyncInit = function() {
+      App.authentications.facebook.init();
+      App.authentications.facebook.status();
+    }
+    App.authentications.facebook.loadSDK();
+    console.log('Facebook Authentication ready.');
+  });
+</script>

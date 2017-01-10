@@ -17,6 +17,13 @@
         dataType: 'json',
         success: function(data){
           console.log(data);
+          if ($('#connected-facebook span').length) {
+            $('.facebook-login').remove();
+            $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
+          }
+          if ($('#new_post').length) {
+            $('#new_post').submit();
+          }
         }
       });
     }

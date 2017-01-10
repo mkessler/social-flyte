@@ -21,12 +21,15 @@ class PostsController < ApplicationController
   # POST o/:organization_id/c/:campaign_id/posts.json
   def create
     @post = @campaign.posts.new(post_params)
+    network = Network.find(post_params[:network_id])
+    network_token_exists = current_user.has_valid_network_token?(network)
     respond_to do |format|
-      if post_params.present? && @post.save
+      if network_token_exists && post_params.present? && @post.save
         SyncPostJob.perform_later(current_user, @post)
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
+        flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

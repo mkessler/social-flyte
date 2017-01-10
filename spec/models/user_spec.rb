@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  let (:user) { FactoryGirl.create(:user) }
+
   describe 'associations' do
     it 'has many memberships' do
       expect(User.reflect_on_association(:memberships).macro).to eql(:has_many)
@@ -64,9 +66,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#facebook_authentication" do
+  describe ".facebook_authentication" do
     it "should return the user's Facebook Authentication record if exists" do
-      user = FactoryGirl.create(:user)
       authentication = FactoryGirl.create(
         :authentication,
         user: user,
@@ -77,9 +78,38 @@ RSpec.describe User, type: :model do
     end
 
     it "should return nil if the user's Facebook Authentication record does not exist" do
-      user = FactoryGirl.create(:user)
-
       expect(user.facebook_authentication).to be_nil
+    end
+  end
+
+  describe '.has_valid_network_token?' do
+    context 'facebook' do
+      context 'does not have valid token' do
+        it 'returns false if token doesn\'t exist' do
+          expect(user.has_valid_network_token?(Network.facebook)).to eql(false)
+        end
+
+        it 'returns false if token is expired' do
+          authentication = FactoryGirl.create(
+            :authentication,
+            user: user,
+            network: Network.facebook,
+            expires_at: 1.day.ago
+          )
+          expect(user.has_valid_network_token?(Network.facebook)).to eql(false)
+        end
+      end
+
+      context 'does have valid token' do
+        it 'returns true' do
+          authentication = FactoryGirl.create(
+            :authentication,
+            user: user,
+            network: Network.facebook
+          )
+          expect(user.has_valid_network_token?(Network.facebook)).to eql(true)
+        end
+      end
     end
   end
 end
