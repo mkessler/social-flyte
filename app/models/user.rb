@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def has_valid_network_token?(network)
     case network
     when Network.facebook
-      true unless facebook_authentication.nil? || facebook_authentication.expired?
+      facebook_authentication.present? && !facebook_authentication.expired?
     else
       false
     end
