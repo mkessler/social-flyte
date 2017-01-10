@@ -7,6 +7,11 @@ class OrganizationsController < ApplicationController
   # GET /o
   # Platform dashboard
   def index
+    add_breadcrumb 'My Organizations', organizations_path
+    @organizations = current_user.organizations
+
+    redirect_to new_organization_url if @organizations.empty?
+    redirect_to organization_url(@organizations.first) if @organizations.count == 1
   end
 
   # GET /o/:id

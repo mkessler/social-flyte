@@ -11,7 +11,22 @@
           { width: '15%' }
         ],
         language: {
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Posts</small>'
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Campaigns</small>'
+        },
+        processing: false,
+        serverSide: false
+      });
+    },
+    organizations: function() {
+      $('#groala-organizations-table').DataTable({
+        columns: [
+          null,
+          { width: '20%' },
+          { width: '20%' },
+          { width: '15%' }
+        ],
+        language: {
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Organizations</small>'
         },
         processing: false,
         serverSide: false
@@ -35,6 +50,7 @@
 
   $(document).on('ready', function() {
     App.dataTables.groala.campaigns();
+    App.dataTables.groala.organizations();
     App.dataTables.groala.posts();
   });
 
