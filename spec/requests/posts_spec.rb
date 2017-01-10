@@ -4,6 +4,7 @@ RSpec.describe 'Posts', type: :request do
   ActiveJob::Base.queue_adapter = :test
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:authentication) { FactoryGirl.create(:authentication, user: user) }
   let(:organization) { FactoryGirl.create(:organization) }
   let(:membership) { FactoryGirl.create(:membership, user: user, organization: organization) }
   let(:campaign) { FactoryGirl.create(:campaign, organization: organization) }
@@ -184,6 +185,7 @@ RSpec.describe 'Posts', type: :request do
     context 'when logged in' do
       before(:example) do
         sign_in(user)
+        authentication
         campaign_post
       end
 

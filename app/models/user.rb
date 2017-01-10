@@ -13,6 +13,15 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :name, presence: true
 
+  def has_valid_network_token?(network)
+    case network
+    when Network.facebook
+      true unless facebook_authentication.nil? || facebook_authentication.expired?
+    else
+      false
+    end
+  end
+
   def facebook_authentication
     authentications.find_by_network_id(Network.facebook.id)
   end
