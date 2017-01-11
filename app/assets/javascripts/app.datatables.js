@@ -30,7 +30,8 @@
           paginate: {
             next: 'Next',
             previous: 'Prev'
-          }
+          },
+          processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Updating...</span>'
         },
         lengthChange: false,
         processing: true,
