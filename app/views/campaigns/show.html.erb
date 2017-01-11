@@ -1,7 +1,10 @@
-<h2 class="dashboard-title">
+<h2 class="dashboard-title extended-title-nav">
   <%= @campaign.name %>
-  <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn-floating btn-small green accent-4 mr-0' do %>
-    <i class="fa fa-cloud-download" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="Import Post"></i>
+  <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn-floating btn-small green accent-4 mr-0 extended-nav-1' do %>
+    <i class="fa fa-cloud-download" aria-hidden="true" data-toggle="tooltip" title="Import Post"></i>
+  <% end %>
+  <%= link_to organization_path(@organization), class: 'btn-floating btn-small mr-0' do %>
+    <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
   <% end %>
 </h2>
 
