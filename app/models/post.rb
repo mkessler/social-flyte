@@ -33,4 +33,13 @@ class Post < ApplicationRecord
         0
     end
   end
+
+  def flagged_interactions
+    case network
+      when Network.facebook
+        comments.flagged + reactions.flagged
+      else
+        []
+    end
+  end
 end

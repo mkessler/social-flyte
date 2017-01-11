@@ -10,4 +10,5 @@ class Reaction < ApplicationRecord
   scope :love, -> { where(category: 'LOVE') }
   scope :sad, -> { where(category: 'SAD') }
   scope :wow, -> { where(category: 'WOW') }
+  scope :flagged, -> { where(flagged: true) }
 end
