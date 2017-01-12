@@ -15,6 +15,10 @@ class Campaign < ApplicationRecord
     posts.map(&:engagement_count).sum
   end
 
+  def flagged_interactions
+    posts.map(&:flagged_interactions).flatten
+  end
+
   def networks
     posts.map(&:network).map(&:slug).uniq.sort
   end

@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:flagged_interactions, :show, :edit, :update, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -9,6 +9,12 @@ class CampaignsController < ApplicationController
   # GET organizations/friendly_id/c/friendly_id.json
   def show
     @posts = @campaign.posts
+  end
+
+  def flagged_interactions
+    respond_to do |format|
+      format.json { render json: FlaggedInteractionsDatatable.new(view_context, @campaign.posts.first) }
+    end
   end
 
   # GET organizations/friendly_id/c/friendly_id/new

@@ -3,7 +3,7 @@
 
   App.dataTables.facebook = {
     comments: function() {
-      var table = $('#facebook-comments-table').DataTable({
+      $('#facebook-comments-table').DataTable({
         ajax: $('#facebook-comments-table').data('source'),
         columns: [
           { data: 'like_count', width: '10%', className: 'text-xs-center' },
@@ -67,7 +67,7 @@
       });
     },
     reactions: function() {
-      var table = $('#facebook-reactions-table').DataTable({
+      $('#facebook-reactions-table').DataTable({
         ajax: $('#facebook-reactions-table').data('source'),
         columns: [
           { data: 'category', width: '10%', className: 'text-xs-center' },
