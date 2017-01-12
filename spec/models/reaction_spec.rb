@@ -92,7 +92,7 @@ RSpec.describe Reaction, type: :model do
   describe 'scope' do
     before(:context) do
       2.times { FactoryGirl.create(:reaction, category: 'ANGRY') }
-      4.times { FactoryGirl.create(:reaction, category: 'HAHA') }
+      4.times { FactoryGirl.create(:reaction, category: 'HAHA', flagged: true) }
       6.times { FactoryGirl.create(:reaction, category: 'LIKE') }
       8.times { FactoryGirl.create(:reaction, category: 'LOVE') }
       10.times { FactoryGirl.create(:reaction, category: 'SAD') }
@@ -138,6 +138,13 @@ RSpec.describe Reaction, type: :model do
       it 'should return only wow reactions' do
         expect(Reaction.wow).to eq(Reaction.where(category: 'WOW'))
         expect(Reaction.wow.count).to eql(12)
+      end
+    end
+
+    describe 'flagged' do
+      it 'should return only flagged comments' do
+        expect(Reaction.flagged).to eq(Reaction.where(flagged: true))
+        expect(Reaction.flagged.count).to eql(4)
       end
     end
   end

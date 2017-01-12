@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
+  let(:post) { FactoryGirl.create(:post) }
+  let(:campaign) { FactoryGirl.create(:campaign) }
+
   describe 'associations' do
     it 'belongs to campaign' do
       expect(Post.reflect_on_association(:campaign).macro).to eql(:belongs_to)
@@ -21,13 +24,13 @@ RSpec.describe Post, type: :model do
 
   describe 'validations' do
     before(:each) do
-      @campaign = FactoryGirl.create(:campaign)
+      campaign = FactoryGirl.create(:campaign)
     end
 
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(
         :post,
-        campaign_id: @campaign.id
+        campaign_id: campaign.id
       )
       post = Post.new(valid_attributes)
 
@@ -37,7 +40,7 @@ RSpec.describe Post, type: :model do
     # it 'is valid with valid with missing network_parent_id' do
     #   valid_attributes = FactoryGirl.attributes_for(
     #     :post,
-    #     campaign_id: @campaign.id,
+    #     campaign_id: campaign.id,
     #     network_parent_id: nil
     #   )
     #   post = Post.new(valid_attributes)
@@ -58,7 +61,7 @@ RSpec.describe Post, type: :model do
     it 'is not valid with missing network' do
       invalid_attributes = FactoryGirl.attributes_for(
         :post,
-        campaign_id: @campaign.id,
+        campaign_id: campaign.id,
         network_id: nil
       )
       post = Post.new(invalid_attributes)
@@ -69,7 +72,7 @@ RSpec.describe Post, type: :model do
     it 'is not valid with missing network_post_id' do
       invalid_attributes = FactoryGirl.attributes_for(
         :post,
-        campaign_id: @campaign.id,
+        campaign_id: campaign.id,
         network_post_id: nil
       )
       post = Post.new(invalid_attributes)
@@ -80,12 +83,12 @@ RSpec.describe Post, type: :model do
     it 'is not valid if post with network_post_id already exists within campaign' do
       FactoryGirl.create(
         :post,
-        campaign_id: @campaign.id,
+        campaign_id: campaign.id,
         network_post_id: '1234'
       )
       invalid_attributes = FactoryGirl.attributes_for(
         :post,
-        campaign_id: @campaign.id,
+        campaign_id: campaign.id,
         network_post_id: '1234'
       )
       post = Post.new(invalid_attributes)
@@ -94,33 +97,50 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe ".engagement_count" do
-    before(:each) do
-      @post = FactoryGirl.create(:post)
-    end
-
+  describe '.engagement_count' do
     context 'facebook' do
       it 'returns the total number of comments and reactions' do
         10.times do
-          FactoryGirl.create(:comment, network_comment_id: Faker::Number.number(10), post: @post)
+          FactoryGirl.create(:comment, post: post, network_comment_id: Faker::Number.number(10))
         end
         4.times do
-          FactoryGirl.create(:reaction, network_user_id: Faker::Number.number(10),post: @post)
+          FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10))
         end
 
-        expect(@post.engagement_count).to eql(14)
+        expect(post.engagement_count).to eql(14)
       end
     end
   end
 
-  describe ".engagement_types" do
-    before(:each) do
-      @post = FactoryGirl.create(:post)
-    end
-
+  describe '.engagement_types' do
     context 'facebook' do
       it 'returns comments and reactions' do
-        expect(@post.engagement_types).to eql('Comments & Reactions')
+        expect(post.engagement_types).to eql('Comments & Reactions')
+      end
+    end
+  end
+
+  describe '.flagged_interactions' do
+    context 'facebook' do
+      it 'returns array of comments and reactions' do
+        4.times do
+          FactoryGirl.create(:comment, post: post, network_comment_id: Faker::Number.number(10))
+        end
+        5.times do
+          FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10))
+        end
+        comments = [
+          FactoryGirl.create(:comment, post: post, network_comment_id: Faker::Number.number(10), flagged: true),
+          FactoryGirl.create(:comment, post: post, network_comment_id: Faker::Number.number(10), flagged: true)
+        ]
+        reactions = [
+          FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10), flagged: true),
+          FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10), flagged: true),
+          FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10), flagged: true)
+        ]
+
+        expect(post.flagged_interactions).to eql(comments.sort + reactions.sort)
+        expect(post.flagged_interactions.count).to eql(5)
       end
     end
   end

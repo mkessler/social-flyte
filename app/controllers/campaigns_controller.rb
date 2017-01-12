@@ -9,6 +9,7 @@ class CampaignsController < ApplicationController
   # GET organizations/friendly_id/c/friendly_id.json
   def show
     @posts = @campaign.posts
+    @flagged_interactions = @campaign.flagged_interactions
   end
 
   # GET organizations/friendly_id/c/friendly_id/new

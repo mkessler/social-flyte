@@ -38,9 +38,22 @@ a {
 .dashboard-title {
   border-top: 1px solid #bbb;
   border-bottom: 1px solid #bbb;
-  padding: 2rem 0;
   margin: 0rem 0 3.5rem;
+  padding: 2rem 5rem 2rem 0;
+  position: relative;
   text-transform: uppercase;
+  &.extended-title-nav {
+    padding: 2rem 8rem 2rem 0;
+  }
+  .btn-floating {
+    margin-top: -24px !important;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
+  .extended-nav-1 {
+    right: 60px;
+  }
 }
 
 .dataTables_filter {

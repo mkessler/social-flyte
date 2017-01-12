@@ -17,6 +17,23 @@
         serverSide: false
       });
     },
+    flagged_interactions: function() {
+      $('#campaign-flagged-interactions-table').DataTable({
+        columns: [
+          { width: '10%' },
+          null,
+          { width: '20%' },
+        ],
+        language: {
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Flagged Interactions</small>'
+        },
+        order: [
+          [1, 'asc']
+        ],
+        processing: false,
+        serverSide: false
+      });
+    },
     organizations: function() {
       $('#groala-organizations-table').DataTable({
         columns: [
@@ -50,6 +67,7 @@
 
   $(document).on('ready', function() {
     App.dataTables.groala.campaigns();
+    App.dataTables.groala.flagged_interactions();
     App.dataTables.groala.organizations();
     App.dataTables.groala.posts();
   });

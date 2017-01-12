@@ -1,0 +1,27 @@
+<%= render "shared/datatables_search", table_id: 'campaign-flagged-interactions-table' %>
+<table id="campaign-flagged-interactions-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="text-xs-center" data-toggle="tooltip" title="Network">
+        <i class="fa fa-globe fa-lg" aria-hidden="true"></i>
+      </th>
+      <th class="text-xs-center" data-toggle="tooltip" title="User">
+        <i class="fa fa-user fa-lg" aria-hidden="true">
+      </th>
+      <th class="text-xs-center" data-toggle="tooltip" title="Type">
+        <i class="fa fa-flag fa-lg" aria-hidden="true">
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% flagged_interactions.each do |flagged_interaction| %>
+      <tr id="flagged_interaction-<%= flagged_interaction.id %>">
+        <% post = flagged_interaction.post %>
+        <% network = post.network %>
+        <td class="text-xs-center" data-search="<%= network.name %>"><i class="fa fa-<%= network.slug %>-official" aria-hidden="true"></i></td>
+        <td data-search="<%= flagged_interaction.network_user_name %>"><%= link_to flagged_interaction.network_user_name, network.user_link(flagged_interaction.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank' %></td>
+        <td class="text-xs-center"><%= flagged_interaction.class.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
