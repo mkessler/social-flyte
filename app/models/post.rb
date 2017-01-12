@@ -37,7 +37,7 @@ class Post < ApplicationRecord
   def flagged_interactions
     case network
       when Network.facebook
-        comments.flagged + reactions.flagged
+        comments.flagged.sort + reactions.flagged.sort
       else
         []
     end

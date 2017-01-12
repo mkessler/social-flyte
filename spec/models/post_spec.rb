@@ -139,7 +139,7 @@ RSpec.describe Post, type: :model do
           FactoryGirl.create(:reaction, post: post, network_user_id: Faker::Number.number(10), flagged: true)
         ]
 
-        expect(post.flagged_interactions).to eql(comments + reactions.reverse)
+        expect(post.flagged_interactions).to eql(comments.sort + reactions.sort)
         expect(post.flagged_interactions.count).to eql(5)
       end
     end

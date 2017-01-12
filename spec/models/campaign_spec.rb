@@ -133,7 +133,7 @@ RSpec.describe Campaign, type: :model do
         FactoryGirl.create(:reaction, post: facebook_post, network_user_id: Faker::Number.number(10), flagged: true)
       ]
 
-      expect(campaign.flagged_interactions).to eql(comments + reactions.reverse)
+      expect(campaign.flagged_interactions).to eql(comments.sort + reactions.sort)
       expect(campaign.flagged_interactions.count).to eql(5)
     end
   end
