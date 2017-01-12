@@ -112,4 +112,29 @@ RSpec.describe Campaign, type: :model do
       expect(campaign.networks).to eql(['facebook', 'instagram', 'twitter'])
     end
   end
+
+  describe '.flagged_interactions' do
+    it 'returns array of campaign\'s posts\' flagged interactions' do
+      campaign = FactoryGirl.create(:campaign)
+      facebook_post = FactoryGirl.create(:post, campaign: campaign)
+      4.times do
+        FactoryGirl.create(:comment, post: facebook_post, network_comment_id: Faker::Number.number(10))
+      end
+      5.times do
+        FactoryGirl.create(:reaction, post: facebook_post, network_user_id: Faker::Number.number(10))
+      end
+      comments = [
+        FactoryGirl.create(:comment, post: facebook_post, network_comment_id: Faker::Number.number(10), flagged: true),
+        FactoryGirl.create(:comment, post: facebook_post, network_comment_id: Faker::Number.number(10), flagged: true)
+      ]
+      reactions = [
+        FactoryGirl.create(:reaction, post: facebook_post, network_user_id: Faker::Number.number(10), flagged: true),
+        FactoryGirl.create(:reaction, post: facebook_post, network_user_id: Faker::Number.number(10), flagged: true),
+        FactoryGirl.create(:reaction, post: facebook_post, network_user_id: Faker::Number.number(10), flagged: true)
+      ]
+
+      expect(campaign.flagged_interactions).to eql(comments + reactions.reverse)
+      expect(campaign.flagged_interactions.count).to eql(5)
+    end
+  end
 end

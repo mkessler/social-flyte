@@ -19,4 +19,52 @@ RSpec.describe OrganizationsHelper, type: :helper do
       end
     end
   end
+
+  describe 'organization_title_class' do
+    context 'member of more than 1 organization' do
+      it 'returns extended class name' do
+        user =  FactoryGirl.create(:user)
+        organization = FactoryGirl.create(:organization)
+        organization_two = FactoryGirl.create(:organization)
+        FactoryGirl.create(:membership, organization: organization, user: user)
+        FactoryGirl.create(:membership, organization: organization_two, user: user)
+
+        expect(organization_title_class(user)).to eql('dashboard-title extended-title-nav')
+      end
+    end
+
+    context 'not member of more than 1 organization' do
+      it 'returns standard class name' do
+        user =  FactoryGirl.create(:user)
+        organization = FactoryGirl.create(:organization)
+        FactoryGirl.create(:membership, organization: organization, user: user)
+
+        expect(organization_title_class(user)).to eql('dashboard-title')
+      end
+    end
+  end
+
+  describe 'organization_title_nav_class' do
+    context 'member of more than 1 organization' do
+      it 'returns extended class name' do
+        user =  FactoryGirl.create(:user)
+        organization = FactoryGirl.create(:organization)
+        organization_two = FactoryGirl.create(:organization)
+        FactoryGirl.create(:membership, organization: organization, user: user)
+        FactoryGirl.create(:membership, organization: organization_two, user: user)
+
+        expect(organization_title_nav_class(user)).to eql('extended-nav-1')
+      end
+    end
+
+    context 'not member of more than 1 organization' do
+      it 'returns nil' do
+        user =  FactoryGirl.create(:user)
+        organization = FactoryGirl.create(:organization)
+        FactoryGirl.create(:membership, organization: organization, user: user)
+
+        expect(organization_title_nav_class(user)).to be_nil
+      end
+    end
+  end
 end

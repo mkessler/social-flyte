@@ -110,4 +110,18 @@ RSpec.describe Comment, type: :model do
       expect(comment).to_not be_valid
     end
   end
+
+  describe 'scope' do
+    before(:context) do
+      10.times { FactoryGirl.create(:comment) }
+      4.times { FactoryGirl.create(:comment, flagged: true) }
+    end
+
+    describe 'flagged' do
+      it 'should return only flagged comments' do
+        expect(Comment.flagged).to eq(Comment.where(flagged: true))
+        expect(Comment.flagged.count).to eql(4)
+      end
+    end
+  end
 end
