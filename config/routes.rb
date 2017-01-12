@@ -17,7 +17,6 @@ Rails.application.routes.draw do
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
     resources :campaigns, path: 'c', except: [:index] do
-      get 'flagged_interactions', on: :member
       resources :posts, path: 'p', except: [:index, :edit, :update] do
         resources :comments, except: [:new, :edit, :show, :create, :destroy]
         resources :reactions, except: [:new, :edit, :show, :create, :destroy]

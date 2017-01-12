@@ -1,5 +1,5 @@
 <%= render "shared/datatables_search", table_id: 'campaign-flagged-interactions-table' %>
-<table id="campaign-flagged-interactions-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%" data-source="<%= flagged_interactions_organization_campaign_url(organization, campaign, format: :json) %>">
+<table id="campaign-flagged-interactions-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th class="text-xs-center" data-toggle="tooltip" title="Network">
@@ -14,5 +14,14 @@
     </tr>
   </thead>
   <tbody>
+    <% flagged_interactions.each do |flagged_interaction| %>
+      <tr id="flagged_interaction-<%= flagged_interaction.id %>">
+        <% post = flagged_interaction.post %>
+        <% network = post.network %>
+        <td class="text-xs-center" data-search="<%= network.name %>"><i class="fa fa-<%= network.slug %>-official" aria-hidden="true"></i></td>
+        <td data-search="<%= flagged_interaction.network_user_name %>"><%= link_to flagged_interaction.network_user_name, network.user_link(flagged_interaction.network_user_id), class: 'light-blue-text groala-standard-link', target: '_blank' %></td>
+        <td class="text-xs-center"><%= flagged_interaction.class.name %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
