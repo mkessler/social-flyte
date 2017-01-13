@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
     else
       @organization = current_user.organizations.friendly.find(params[:id])
     end
+    add_breadcrumb 'My Organizations', root_url if current_user.organizations.count > 1
     add_breadcrumb @organization.name, organization_path(@organization)
   end
 
