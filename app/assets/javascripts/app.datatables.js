@@ -28,8 +28,8 @@
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
           infoFiltered: '<br/><small><i class="fa fa-filter orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
           paginate: {
-            next: 'Next',
-            previous: 'Prev'
+            next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
+            previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
           },
           processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Updating...</span>'
         },
@@ -60,7 +60,7 @@
         },
         serverSide: true
       });
-      $.fn.DataTable.ext.pager.numbers_length = 4;
+      $.fn.DataTable.ext.pager.numbers_length = 5;
     },
     flagToggle: function($el, status) {
       var tooltip = status ? 'Unflag' : 'Flag'
