@@ -9,8 +9,9 @@ class FacebookService
   end
 
   def sync
-    aggregate_reactions
     aggregate_comments
+    aggregate_reactions
+    @post.update_sync_status
   end
 
   def aggregate_reactions

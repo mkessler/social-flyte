@@ -1,4 +1,6 @@
 class SyncPostJob < ApplicationJob
+  include ActiveJobStatus::Hooks
+
   queue_as :default
 
   def perform(user, post)
@@ -10,11 +12,5 @@ class SyncPostJob < ApplicationJob
       when 'Instagram'
 
     end
-
-    post.reload
-    post.update_attributes(
-      synced_at: DateTime.now.utc,
-      sync_count: post.sync_count + 1
-    )
   end
 end

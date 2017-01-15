@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :posts, path: 'p', except: [:index, :edit, :update] do
         resources :comments, except: [:new, :edit, :show, :create, :destroy]
         resources :reactions, except: [:new, :edit, :show, :create, :destroy]
+        get :sync_status
       end
     end
   end

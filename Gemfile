@@ -82,7 +82,9 @@ gem 'koala', '~> 2.2'
 gem 'friendly_id', '~> 5.1.0'
 
 # Background Jobs
+gem 'active_job_status'
 gem 'sidekiq'
+gem 'redis-rails'
 
 # Font Awesome
 gem 'font-awesome-rails'
