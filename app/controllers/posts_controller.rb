@@ -2,13 +2,27 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :destroy]
+  before_action :set_post, only: [:show, :sync_status, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
+    @status = ActiveJobStatus.fetch(@post.job_id)
+
+    if @post.sync_count > 0
+      flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
+      flash[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
+    end
+  end
+
+  # GET o/:organization_id/c/:campaign_id/posts/:id/sync_status.json
+  def sync_status
+    status = ActiveJobStatus.fetch(@post.job_id)
+    respond_to do |format|
+      format.json { render json: status.to_json }
+    end
   end
 
   # GET o/:organization_id/c/:campaign_id/p/new
@@ -25,7 +39,7 @@ class PostsController < ApplicationController
     network_token_exists = current_user.has_valid_network_token?(network)
     respond_to do |format|
       if network_token_exists && post_params.present? && @post.save
-        SyncPostJob.perform_later(current_user, @post)
+        @post.sync(current_user)
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else

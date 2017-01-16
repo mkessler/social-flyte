@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
+  ActiveJob::Base.queue_adapter = :test
+  let(:user) { FactoryGirl.create(:user) }
   let(:post) { FactoryGirl.create(:post) }
   let(:campaign) { FactoryGirl.create(:campaign) }
 
@@ -142,6 +144,31 @@ RSpec.describe Post, type: :model do
         expect(post.flagged_interactions).to eql(comments.sort + reactions.sort)
         expect(post.flagged_interactions.count).to eql(5)
       end
+    end
+  end
+
+  describe 'sync' do
+    it 'enqueues post sync job' do
+      expect{post.sync(user)}.to have_enqueued_job(SyncPostJob)
+    end
+
+    it 'updates job id' do
+      job_id = post.job_id
+      post.sync(user)
+      expect(post.job_id).to be_truthy
+      expect(post.job_id).to_not eql(job_id)
+    end
+  end
+
+  describe 'update_sync_status' do
+    it 'updates synced_at timestamp' do
+      sync_time = post.synced_at
+      post.update_sync_status
+      expect(post.synced_at).to be > sync_time
+    end
+
+    it 'updates sync count by 1' do
+      expect{post.update_sync_status}.to change{post.sync_count}.by(1)
     end
   end
 end
