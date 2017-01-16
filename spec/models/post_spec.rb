@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   ActiveJob::Base.queue_adapter = :test
+  
   let(:user) { FactoryGirl.create(:user) }
   let(:post) { FactoryGirl.create(:post) }
   let(:campaign) { FactoryGirl.create(:campaign) }
