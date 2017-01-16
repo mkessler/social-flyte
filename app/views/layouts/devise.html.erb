@@ -11,7 +11,7 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
+  <body class="registration grey lighten-2">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
@@ -20,6 +20,13 @@
       </div>
     </div>
 
+    <footer class="page-footer center-on-small-only">
+      <div class="footer-copyright">
+        <div class="container-fluid">
+          <%= image_tag 'logo/groala-white-sm.png', class: 'logo' %> <%= link_to 'groala', root_url %> <small><i class="fa fa-copyright" aria-hidden="true"></i> <%= Time.now.year %></small>
+        </div>
+      </div>
+    </footer>
     <%= javascript_include_tag 'mdb/mdb.min' %>
     <%= render 'shared/toastr_notifications' %>
   </body>
