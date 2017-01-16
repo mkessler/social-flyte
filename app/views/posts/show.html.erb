@@ -4,4 +4,10 @@
     <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
   <% end %>
 </h2>
-<%= render "posts/#{@post.network.slug}/show", organization: @organization, campaign: @campaign, post: @post %>
+<% if @post.sync_count == 0 && @status.queued? %>
+  <%= render "posts/first_sync/queued", post: @post %>
+<% elsif @post.sync_count == 0 && @status.working? %>
+  <%= render "posts/first_sync/working", post: @post %>
+<% else %>
+  <%= render "posts/#{@post.network.slug}/show", organization: @organization, campaign: @campaign, post: @post %>
+<% end %>

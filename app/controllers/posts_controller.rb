@@ -9,13 +9,19 @@ class PostsController < ApplicationController
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
+    @status = ActiveJobStatus.fetch(@post.job_id)
+
+    if @post.sync_count > 0
+      flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
+      flash[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
+    end
   end
 
   # GET o/:organization_id/c/:campaign_id/posts/:id/sync_status.json
   def sync_status
-    data = ActiveJobStatus.fetch(@post.job_id)
+    status = ActiveJobStatus.fetch(@post.job_id)
     respond_to do |format|
-      format.json { render json: data.to_json }
+      format.json { render json: status.to_json }
     end
   end
 
