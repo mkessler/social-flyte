@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resources :comments, except: [:new, :edit, :show, :create, :destroy]
         resources :reactions, except: [:new, :edit, :show, :create, :destroy]
         get :sync_status
+        post :sync_post
       end
     end
   end

@@ -24,6 +24,9 @@
           if ($('#new_post').length) {
             $('#new_post').submit();
           }
+          if ($('#sync-info').length) {
+            App.posts.sync();
+          }
         }
       });
     }

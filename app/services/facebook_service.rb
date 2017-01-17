@@ -11,6 +11,7 @@ class FacebookService
   def sync
     aggregate_comments
     aggregate_reactions
+    @post.reload
     @post.update_sync_status
   end
 

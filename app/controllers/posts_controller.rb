@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :sync_status, :destroy]
+  before_action :set_post, only: [:show, :sync_status, :sync_post, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -12,8 +12,8 @@ class PostsController < ApplicationController
     @status = ActiveJobStatus.fetch(@post.job_id)
 
     if @post.sync_count > 0
-      flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
-      flash[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
+      flash.now[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
+      flash.now[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
     end
   end
 
@@ -22,6 +22,17 @@ class PostsController < ApplicationController
     status = ActiveJobStatus.fetch(@post.job_id)
     respond_to do |format|
       format.json { render json: status.to_json }
+    end
+  end
+
+  # POST o/:organization_id/c/:campaign_id/posts/:id/sync_post.json
+  def sync_post
+    respond_to do |format|
+      if @post.can_be_synced? && @post.sync(current_user)
+        format.json { render json: status.to_json }
+      else
+        format.json { render json: {error: true}.to_json, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -43,7 +54,7 @@ class PostsController < ApplicationController
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
-        flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
+        flash.now[:warning] = "Connected account required for #{network.name}" unless network_token_exists
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -69,13 +80,13 @@ class PostsController < ApplicationController
 
     def record_not_found
       if @organization.present? && @campaign.present?
-        flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
+        flash.now[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
         redirect_to organization_campaign_posts_url(@organization, @campaign)
       elsif @organization.present?
-        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+        flash.now[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
         redirect_to organization_campaigns_url(@organization)
       else
-        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+        flash.now[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
         redirect_to organizations_url
       end
     end
