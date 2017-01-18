@@ -72,10 +72,10 @@ class CampaignsController < ApplicationController
 
     def record_not_found
       if @organization.present?
-        flash.now[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
         redirect_to organization_campaigns_url(@organization)
       else
-        flash.now[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
         redirect_to organizations_url
       end
     end

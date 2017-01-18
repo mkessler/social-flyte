@@ -20,7 +20,8 @@
       });
     },
     syncAlert: function() {
-      $('<div class="col-lg-12 mb-3"><div class="card card-warning text-xs-center z-depth-1"><div class="card-block"><span class="white-text"><i class="fa fa-refresh fa-spin fa-lg fa-fw"></i> Sync started! We\'ll refresh this page when your sync is complete.</span></div></div></div>').insertAfter($('h2[class*="dashboard-title"]'));
+      $('<div class="post-sync-alert col-lg-12 mb-3" style="display:none;"><div class="card card-warning text-xs-center z-depth-1"><div class="card-block"><span class="white-text"><i class="fa fa-refresh fa-spin fa-lg fa-fw"></i> Sync started! We\'ll refresh this page when your sync is complete.</span></div></div></div>').insertAfter($('.post-timestamp'));
+      $('.post-sync-alert').slideDown();
     }
   }
 

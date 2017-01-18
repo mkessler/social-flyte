@@ -9,11 +9,12 @@ class PostsController < ApplicationController
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
+    @network_slug = @post.network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
 
     if @post.sync_count > 0
-      flash.now[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
-      flash.now[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
+      flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
+      flash[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
     end
   end
 
@@ -54,7 +55,7 @@ class PostsController < ApplicationController
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
-        flash.now[:warning] = "Connected account required for #{network.name}" unless network_token_exists
+        flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
@@ -80,13 +81,13 @@ class PostsController < ApplicationController
 
     def record_not_found
       if @organization.present? && @campaign.present?
-        flash.now[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
-        redirect_to organization_campaign_posts_url(@organization, @campaign)
+        flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
+        redirect_to organization_campaign_url(@organization, @campaign)
       elsif @organization.present?
-        flash.now[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
         redirect_to organization_campaigns_url(@organization)
       else
-        flash.now[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
         redirect_to organizations_url
       end
     end

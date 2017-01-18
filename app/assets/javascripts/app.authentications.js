@@ -24,7 +24,7 @@
           if ($('#new_post').length) {
             $('#new_post').submit();
           }
-          if ($('#sync-info').length) {
+          if ($('#last-sync').length) {
             App.posts.sync();
           }
         }
