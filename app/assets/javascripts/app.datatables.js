@@ -15,6 +15,7 @@
           var table = this.api();
           App.dataTables.history(table);
           App.dataTables.search(table, '#'+settings.sTableId+'-search');
+          $('#'+settings.sTableId).fadeTo(2000, 1);
         },
         language: {
           aria: {

@@ -1,5 +1,5 @@
 <%= render "shared/datatables_search", table_id: 'groala-posts-table' %>
-<table id="groala-posts-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%">
+<table id="groala-posts-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th class="text-xs-center" data-toggle="tooltip" title="Network">
@@ -17,10 +17,10 @@
         <td data-order="<%= post.network.slug %>"><i class="fa fa-<%= post.network.slug %>-official" aria-hidden="true"></i><%= link_to post.network.name, organization_campaign_post_path(organization, campaign, post), class: 'light-blue-text' %></td>
         <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(post.engagement_count) %> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="<%= post.engagement_types %>"></i></td>
         <td class="text-xs-center groala-no-wrap">
-          <%= link_to organization_campaign_post_path(organization, campaign, post), class: 'view-camppostaign light-blue-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
+          <%= link_to organization_campaign_post_path(organization, campaign, post), class: 'btn-floating btn-xtra-small light-blue white-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-eye', aria: { hidden: true }) %>
           <% end %>
-          <%= link_to organization_campaign_post_path(organization, campaign, post), class: 'delete-post pink-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
+          <%= link_to organization_campaign_post_path(organization, campaign, post), class: 'btn-floating btn-xtra-small pink white-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-times', aria: { hidden: true }) %>
           <% end %>
         </td>
