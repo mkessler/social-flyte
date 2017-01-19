@@ -2,13 +2,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :sync_status, :destroy]
+  before_action :set_post, only: [:show, :sync_status, :sync_post, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
+    @network_slug = @post.network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
 
     if @post.sync_count > 0
@@ -22,6 +23,17 @@ class PostsController < ApplicationController
     status = ActiveJobStatus.fetch(@post.job_id)
     respond_to do |format|
       format.json { render json: status.to_json }
+    end
+  end
+
+  # POST o/:organization_id/c/:campaign_id/posts/:id/sync_post.json
+  def sync_post
+    respond_to do |format|
+      if @post.can_be_synced? && @post.sync(current_user)
+        format.json { render json: status.to_json }
+      else
+        format.json { render json: {error: true}.to_json, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -70,7 +82,7 @@ class PostsController < ApplicationController
     def record_not_found
       if @organization.present? && @campaign.present?
         flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
-        redirect_to organization_campaign_posts_url(@organization, @campaign)
+        redirect_to organization_campaign_url(@organization, @campaign)
       elsif @organization.present?
         flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
         redirect_to organization_campaigns_url(@organization)

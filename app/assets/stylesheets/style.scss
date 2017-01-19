@@ -117,6 +117,10 @@ footer.page-footer {
   word-break: break-word;
 }
 
+.groala-page-header-details {
+  margin-top: -2em;
+}
+
 .modal {
   .table {
     tr {
@@ -136,6 +140,14 @@ footer.page-footer {
 
 .no-shadow {
   box-shadow: 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0);
+}
+
+#post-embed {
+  min-height: 200px;
+  background-image: url('loading.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .registration {

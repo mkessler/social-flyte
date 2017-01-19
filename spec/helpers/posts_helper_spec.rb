@@ -1,15 +1,22 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the PostsHelper. For example:
-#
-# describe PostsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe PostsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '.synced_at_formatted' do
+    context 'synced_at date exists' do
+      it 'returns the formatted date string' do
+        post = FactoryGirl.create(
+          :post,
+          synced_at: DateTime.new(2017, 1, 1, 10, 15)
+        )
+        expect(synced_at_formatted(post.synced_at)).to eql('Jan 1, 2017 10:15am UTC')
+      end
+    end
+
+    context 'synced_at date nil' do
+      it 'returns default response' do
+        post = FactoryGirl.create(:post, synced_at: nil)
+        expect(synced_at_formatted(post.synced_at)).to eql('Never')
+      end
+    end
+  end
 end

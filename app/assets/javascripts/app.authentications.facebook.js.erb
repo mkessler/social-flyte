@@ -31,33 +31,46 @@
         }
       });
     },
-    loggedOut: function(status) {
-      if (status === 'not_authorized') {
-        $('#connected-facebook span').html('Status: Not Connected <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Connect</button>');
-      } else {
-        $('#connected-facebook span').html('Status: Logged Out <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Log In</button>');
-      }
-      $('#new_post button[type="submit"]').replaceWith('<button name="button" type="button" class="btn green accent-4 facebook-login waves-effect waves-light"><i class="fa fa-check-circle-o left" aria-hidden="true"></i> Submit</button>');
-    },
     status: function() {
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
           var uid = response.authResponse.userID;
           var accessToken = response.authResponse.accessToken;
           $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
-          $('#new_post button').removeAttr('disabled');
+          $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         } else if (response.status === 'not_authorized') {
           // the user is logged in to Facebook,
           // but has not authenticated your app
-          App.authentications.facebook.loggedOut(response.status);
+          App.authentications.facebook.userLoggedOut(response.status);
         } else {
           // the user isn't logged in to Facebook.
-          App.authentications.facebook.loggedOut();
+          App.authentications.facebook.userLoggedOut();
         }
       });
       $('body').on('click', '.facebook-login', function(){
         App.authentications.facebook.login();
       });
+    },
+    userLoggedIn: function() {
+      if ($('#connected-facebook span').length) {
+        $('.facebook-login').remove();
+        $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
+      }
+      if ($('#new_post').length) {
+        $('#new_post').submit();
+      }
+      if ($('#last-sync').length) {
+        App.posts.sync();
+      }
+    },
+    userLoggedOut: function(status) {
+      if (status === 'not_authorized') {
+        $('#connected-facebook span').html('Status: Not Connected <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Connect</button>');
+      } else {
+        $('#connected-facebook span').html('Status: Logged Out <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Log In</button>');
+      }
+      $('#new_post button[type="submit"]').replaceWith('<button type="button" class="btn green accent-4 facebook-login waves-effect waves-light"><i class="fa fa-check-circle-o left" aria-hidden="true"></i> Submit</button>');
+      $('#post-sync-trigger').replaceWith('<button type="button" class="btn green accent-4 facebook-login waves-effect waves-light"><i class="fa fa-refresh left" aria-hidden="true"></i> Sync Now</button>');
     }
   };
 

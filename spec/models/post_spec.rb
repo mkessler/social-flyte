@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   ActiveJob::Base.queue_adapter = :test
-  
+
   let(:user) { FactoryGirl.create(:user) }
   let(:post) { FactoryGirl.create(:post) }
   let(:campaign) { FactoryGirl.create(:campaign) }
@@ -148,7 +148,42 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe 'sync' do
+  describe '.can_be_synced?' do
+    context 'synced within last 15 minutes' do
+      it 'returns false' do
+        post.synced_at = Time.now.utc
+        post.save
+        post.reload
+        expect(post.can_be_synced?).to be false
+
+        post.synced_at = Time.now.utc - 5.minutes
+        post.save
+        post.reload
+        expect(post.can_be_synced?).to be false
+
+        post.synced_at = Time.now.utc - 14.minutes
+        post.save
+        post.reload
+        expect(post.can_be_synced?).to be false
+      end
+    end
+
+    context 'synced longer than 15 minutes ago' do
+      it 'returns true' do
+        post.synced_at = Time.now.utc - 15.minutes
+        post.save
+        post.reload
+        expect(post.can_be_synced?).to be true
+
+        post.synced_at = Time.now.utc - 3.months
+        post.save
+        post.reload
+        expect(post.can_be_synced?).to be true
+      end
+    end
+  end
+
+  describe '.sync' do
     it 'enqueues post sync job' do
       expect{post.sync(user)}.to have_enqueued_job(SyncPostJob)
     end
@@ -161,7 +196,7 @@ RSpec.describe Post, type: :model do
     end
   end
 
-  describe 'update_sync_status' do
+  describe '.update_sync_status' do
     it 'updates synced_at timestamp' do
       sync_time = post.synced_at
       post.update_sync_status
