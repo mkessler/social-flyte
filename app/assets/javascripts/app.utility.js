@@ -15,6 +15,9 @@
         '</div>'
       ).insertAfter($('.dashboard-title-wrapper'));
       $('.groala-alert').slideDown();
+      $('html, body').animate({
+        scrollTop: $('.groala-alert').offset().top - 80
+      }, 2000);
     },
     getParameterByName: function(name, url) {
       if (!url) {
