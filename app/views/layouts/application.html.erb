@@ -22,7 +22,9 @@
     </div>
     <main>
       <div class="container-fluid">
-        <%= yield :page_title %>
+        <div class="dashboard-title-wrapper">
+          <%= yield :page_title %>
+        </div>
         <%= yield %>
       </div>
     </main>

@@ -5,6 +5,11 @@
       <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
     <% end %>
   </h2>
+  <h6 class="mb-3">
+    <span data-toggle="tooltip" data-placement="right" title="Last Sync">
+      <i class="fa fa-clock-o" aria-hidden="true"></i> <%= synced_at_formatted(@post.synced_at) %>
+    </span>
+  </h6>
 <% end %>
 
 <% if @post.sync_count == 0 && @status.queued? %>
