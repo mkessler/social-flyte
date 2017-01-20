@@ -15,6 +15,7 @@
           var table = this.api();
           App.dataTables.history(table);
           App.dataTables.search(table, '#'+settings.sTableId+'-search');
+          $('#'+settings.sTableId).fadeTo(2000, 1);
         },
         language: {
           aria: {
@@ -65,9 +66,9 @@
     flagToggle: function($el, status) {
       var tooltip = status ? 'Unflag' : 'Flag'
       if (status == true) {
-        $el.find('i').addClass('orange-text');
+        $el.addClass('orange').removeClass('grey');
       } else {
-        $el.find('i').removeClass('orange-text');
+        $el.addClass('grey').removeClass('orange');
       }
 
       $el.tooltip('hide')

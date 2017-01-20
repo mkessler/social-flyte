@@ -1,5 +1,5 @@
 <%= render "shared/datatables_search", table_id: 'facebook-comments-table' %>
-<table id="facebook-comments-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_comments_url(organization, campaign, post, format: :json) %>">
+<table id="facebook-comments-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_comments_url(organization, campaign, post, format: :json) %>">
   <thead>
     <tr>
       <th class="text-xs-center" data-toggle="tooltip" title="Likes">

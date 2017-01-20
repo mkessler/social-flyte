@@ -1,5 +1,5 @@
 <%= render "shared/datatables_search", table_id: 'groala-organizations-table' %>
-<table id="groala-organizations-table" class="table table-striped table-bordered groala-data-table" cellspacing="0" width="100%">
+<table id="groala-organizations-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th class="text-xs-center" data-toggle="tooltip" title="Organization">
@@ -21,13 +21,13 @@
         <td class="text-xs-center"><%= number_with_delimiter(organization.campaigns.count) %></td>
         <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(organization.users.count) %></td>
         <td class="text-xs-center groala-no-wrap">
-          <%= link_to organization_path(organization), class: 'light-blue-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
+          <%= link_to organization_path(organization), class: 'btn-floating btn-xtra-small light-blue white-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-eye', aria: { hidden: true }) %>
           <% end %>
-          <%= link_to edit_organization_path(organization), class: 'purple-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit' do %>
+          <%= link_to edit_organization_path(organization), class: 'btn-floating btn-xtra-small purple white-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-pencil', aria: { hidden: true }) %>
           <% end %>
-          <%= link_to organization_path(organization), class: 'pink-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
+          <%= link_to organization_path(organization), class: 'btn-floating btn-xtra-small pink white-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-times', aria: { hidden: true }) %>
           <% end %>
         </td>
