@@ -85,6 +85,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'active_job_status'
 gem 'sidekiq'
 gem 'redis-rails'
+gem 'redis-namespace'
 
 # Font Awesome
 gem 'font-awesome-rails'

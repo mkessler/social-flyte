@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113071157) do
+ActiveRecord::Schema.define(version: 20170128070825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,18 @@ ActiveRecord::Schema.define(version: 20170113071157) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "organization_id",                 null: false
+    t.integer  "sender_id",                       null: false
+    t.integer  "recipient_id"
+    t.string   "email",                           null: false
+    t.string   "token",                           null: false
+    t.boolean  "accepted",        default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["organization_id"], name: "index_invitations_on_organization_id", using: :btree
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -147,6 +159,7 @@ ActiveRecord::Schema.define(version: 20170113071157) do
   add_foreign_key "authentications", "users"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "posts"
+  add_foreign_key "invitations", "organizations"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
   add_foreign_key "posts", "campaigns"
