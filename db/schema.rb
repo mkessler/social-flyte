@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 20170128070825) do
     t.boolean  "accepted",        default: false, null: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.index ["organization_id", "email"], name: "index_invitations_on_organization_id_and_email", unique: true, using: :btree
     t.index ["organization_id"], name: "index_invitations_on_organization_id", using: :btree
   end
 

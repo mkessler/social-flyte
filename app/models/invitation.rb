@@ -7,8 +7,11 @@ class Invitation < ApplicationRecord
   before_create :set_recipient_id
   after_update :process
 
-  validates :email, :organization, :sender_id, :token, presence: true
+  validates :organization_id, :sender_id, :token, presence: true
+  validates :email, presence: true, uniqueness: { scope: :organization_id }
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+
+  scope :pending, -> { where(accepted: false) }
 
   private
 

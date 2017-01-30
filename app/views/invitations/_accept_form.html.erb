@@ -1,0 +1,10 @@
+<%= simple_form_for([organization, invitation], html: { class: 'utility-inline-block ml-1' }) do |f| %>
+  <%= f.hidden_field :accepted, value: true %>
+
+  <div class="form-actions text-xs-right">
+    <%= f.button :button do %>
+      <i class="fa fa-handshake-o left" aria-hidden="true"></i>
+      Accept
+    <% end %>
+  </div>
+<% end %>
