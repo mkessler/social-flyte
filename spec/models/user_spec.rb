@@ -66,7 +66,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".facebook_authentication" do
+  describe '.facebook_authentication' do
     it "should return the user's Facebook Authentication record if exists" do
       authentication = FactoryGirl.create(
         :authentication,

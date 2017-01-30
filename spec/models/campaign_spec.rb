@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Campaign, type: :model do
+  let(:organization) { FactoryGirl.create(:organization) }
+
   describe 'associations' do
     it 'belongs to organization' do
       expect(Campaign.reflect_on_association(:organization).macro).to eql(:belongs_to)
@@ -12,14 +14,10 @@ RSpec.describe Campaign, type: :model do
   end
 
   describe 'validations' do
-    before(:each) do
-      @organization = FactoryGirl.create(:organization)
-    end
-
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(
         :campaign,
-        organization_id: @organization.id
+        organization_id: organization.id
       )
       campaign = Campaign.new(valid_attributes)
 
@@ -39,7 +37,7 @@ RSpec.describe Campaign, type: :model do
     it 'is not valid with missing name' do
       invalid_attributes = FactoryGirl.attributes_for(
         :campaign,
-        organization_id: @organization.id,
+        organization_id: organization.id,
         name: nil
       )
       campaign = Campaign.new(invalid_attributes)
@@ -78,7 +76,7 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
-  describe ".engagement_count" do
+  describe '.engagement_count' do
     it 'returns the total number of post interactions' do
       campaign = FactoryGirl.create(:campaign)
       post = FactoryGirl.create(:post, campaign: campaign)
@@ -102,7 +100,7 @@ RSpec.describe Campaign, type: :model do
     end
   end
 
-  describe ".networks" do
+  describe '.networks' do
     it 'returns an array of post networks' do
       campaign = FactoryGirl.create(:campaign)
       FactoryGirl.create(:post, campaign: campaign)

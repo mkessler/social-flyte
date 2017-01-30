@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Membership, type: :model do
+  let(:user) { FactoryGirl.create(:user) }
+  let(:organization) { FactoryGirl.create(:organization) }
+
   describe 'associations' do
     it 'belongs to user' do
       expect(Membership.reflect_on_association(:user).macro).to eql(:belongs_to)
@@ -12,16 +15,11 @@ RSpec.describe Membership, type: :model do
   end
 
   describe 'validations' do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-      @organization = FactoryGirl.create(:organization)
-    end
-
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(
         :membership,
-        user_id: @user.id,
-        organization_id: @organization.id
+        user_id: user.id,
+        organization_id: organization.id
       )
       membership = Membership.new(valid_attributes)
 
@@ -32,7 +30,7 @@ RSpec.describe Membership, type: :model do
       invalid_attributes = FactoryGirl.attributes_for(
         :membership,
         user_id: nil,
-        organization_id: @organization.id
+        organization_id: organization.id
       )
       membership = Membership.new(invalid_attributes)
 
@@ -42,7 +40,7 @@ RSpec.describe Membership, type: :model do
     it 'is not valid with missing organization' do
       invalid_attributes = FactoryGirl.attributes_for(
         :membership,
-        user_id: @user.id,
+        user_id: user.id,
         organization_id: nil
       )
       membership = Membership.new(invalid_attributes)
@@ -53,13 +51,13 @@ RSpec.describe Membership, type: :model do
     it 'is not valid if membership already exists for organization and user' do
       FactoryGirl.create(
         :membership,
-        user_id: @user.id,
-        organization_id: @organization.id
+        user_id: user.id,
+        organization_id: organization.id
       )
       valid_attributes = FactoryGirl.attributes_for(
         :membership,
-        user_id: @user.id,
-        organization_id: @organization.id
+        user_id: user.id,
+        organization_id: organization.id
       )
       membership = Membership.new(valid_attributes)
 

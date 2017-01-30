@@ -5,7 +5,7 @@ class Invitation < ApplicationRecord
 
   before_validation :generate_token, on: :create
   before_create :set_recipient_id
-  after_update :process
+  after_update :create_membership
 
   validates :organization_id, :sender_id, :token, presence: true
   validates :email, presence: true, uniqueness: { scope: :organization_id }
@@ -15,14 +15,14 @@ class Invitation < ApplicationRecord
 
   private
 
-  def generate_token
-    self.token = Digest::SHA1.hexdigest([self.organization_id, Time.now, rand].join)
-  end
-
-  def process
+  def create_membership
     if accepted? && recipient.present?
       recipient.memberships.create(organization: organization)
     end
+  end
+
+  def generate_token
+    self.token = Digest::SHA1.hexdigest([self.organization_id, Time.now, rand].join)
   end
 
   def set_recipient_id
@@ -30,5 +30,4 @@ class Invitation < ApplicationRecord
       self.recipient_id = User.find_by_email(self.email).id
     end
   end
-
 end
