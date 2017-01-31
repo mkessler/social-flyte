@@ -422,7 +422,7 @@ RSpec.describe 'Campaigns', type: :request do
     context 'when logged out' do
       it 'does not update campaign' do
         previous_name = campaign.name
-        put organization_campaign_path(organization, campaign), params: { organization: invalid_update_attributes }
+        put organization_campaign_path(organization, campaign), params: { campaign: invalid_update_attributes }
         expect(campaign.name).to eq(previous_name)
       end
 
@@ -631,7 +631,7 @@ RSpec.describe 'Campaigns', type: :request do
         context 'with valid attributes' do
           it 'does not update campaign' do
             previous_name = campaign.name
-            put organization_campaign_path(organization, campaign), params: { organization: update_attributes }
+            put organization_campaign_path(organization, campaign), params: { campaign: update_attributes }
             expect(campaign.name).to eq(previous_name)
           end
 
