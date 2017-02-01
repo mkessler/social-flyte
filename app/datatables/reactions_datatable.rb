@@ -21,8 +21,9 @@ private
           url: @post.network.user_link(reaction.network_user_id)
         },
         flagged: {
+          id: reaction.id,
           status: reaction.flagged,
-          url: organization_campaign_post_reaction_path(@organization, @campaign, @post, reaction)
+          url: organization_campaign_post_reaction_path(@organization, @campaign, @post, reaction, reaction: { flagged: !reaction.flagged })
         }
       }
     end

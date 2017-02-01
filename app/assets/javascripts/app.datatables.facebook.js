@@ -52,7 +52,7 @@
             render: function ( data, type, full, meta ) {
               var tooltip = data.status ? 'Unflag' : 'Flag';
               var flagged_class = data.status ? 'orange' : 'grey';
-              return '<a class="btn-floating btn-xtra-small flag-interaction '+flagged_class+' waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+              return '<a id="comment-flag-'+data.id+'" class="btn-floating btn-xtra-small flag-interaction '+flagged_class+' waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
                 '<i class="fa fa-flag white-text" aria-hidden="true"></i>' +
               '</a>';
             }
@@ -95,7 +95,7 @@
             render: function ( data, type, full, meta ) {
               var tooltip = data.status ? 'Unflag' : 'Flag';
               var flagged_class = data.status ? 'orange' : 'grey';
-              return '<a class="btn-floating btn-xtra-small flag-interaction '+flagged_class+' waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+              return '<a id="reaction-flag-'+data.id+'" class="btn-floating btn-xtra-small flag-interaction '+flagged_class+' waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="'+tooltip+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
                 '<i class="fa fa-flag white-text" aria-hidden="true"></i>' +
               '</a>';
             }

@@ -15,9 +15,8 @@ class ReactionsController < ApplicationController
   # PATCH/PUT organizations/:organization_id/c/:campaign_id/posts/:post_id/reactions/:id
   # PATCH/PUT organizations/:organization_id/c/:campaign_id/posts/:post_id/reactions/:id.json
   def update
-    @reaction.flagged = !@reaction.flagged
     respond_to do |format|
-      if @reaction.save
+      if reaction_params.present? && @reaction.update(reaction_params)
         format.js
       else
         format.js { render json: @reaction.errors, status: :unprocessable_entity }

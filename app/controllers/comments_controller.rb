@@ -14,9 +14,8 @@ class CommentsController < ApplicationController
   # PATCH/PUT organizations/:organization_id/c/:campaign_id/posts/:post_id/comments/:id
   # PATCH/PUT organizations/:organization_id/c/:campaign_id/posts/:post_id/comments/:id.json
   def update
-    @comment.flagged = !@comment.flagged
     respond_to do |format|
-      if @comment.save
+      if comment_params.present? && @comment.update(comment_params)
         format.js
       else
         format.js { render json: @comment.errors, status: :unprocessable_entity }

@@ -63,13 +63,15 @@
       });
       $.fn.DataTable.ext.pager.numbers_length = 5;
     },
-    flagToggle: function($el, status) {
+    flagToggle: function($el, status, update_link) {
       var tooltip = status ? 'Unflag' : 'Flag'
       if (status == true) {
         $el.addClass('orange').removeClass('grey');
       } else {
         $el.addClass('grey').removeClass('orange');
       }
+
+      $el.attr('href', update_link);
 
       $el.tooltip('hide')
         .attr('data-original-title', tooltip)
