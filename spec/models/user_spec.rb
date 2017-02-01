@@ -66,7 +66,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".facebook_authentication" do
+  describe '.facebook_authentication' do
     it "should return the user's Facebook Authentication record if exists" do
       authentication = FactoryGirl.create(
         :authentication,
@@ -109,6 +109,30 @@ RSpec.describe User, type: :model do
           )
           expect(user.has_valid_network_token?(Network.facebook)).to eql(true)
         end
+      end
+    end
+  end
+
+  describe '.process_invitation' do
+    context 'has valid invitation' do
+      it 'returns true' do
+        invitation = FactoryGirl.create(:invitation, email: user.email)
+        user.process_invitation(invitation.token)
+        invitation.reload
+
+        expect(invitation.accepted).to eql(true)
+        expect(invitation.recipient_id).to eql(user.id)
+      end
+    end
+
+    context 'does not have valid invitation' do
+      it 'returns false' do
+        invitation = FactoryGirl.create(:invitation)
+        user.process_invitation(invitation.token)
+        invitation.reload
+
+        expect(invitation.accepted).to eql(false)
+        expect(invitation.recipient_id).to be_nil
       end
     end
   end

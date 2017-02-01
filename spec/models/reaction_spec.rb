@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Reaction, type: :model do
+  let(:post) { FactoryGirl.create(:post) }
+
   describe 'associations' do
     it 'belongs to post' do
       expect(Reaction.reflect_on_association(:post).macro).to eql(:belongs_to)
@@ -8,14 +10,10 @@ RSpec.describe Reaction, type: :model do
   end
 
   describe 'validations' do
-    before(:each) do
-      @post = FactoryGirl.create(:post)
-    end
-
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id
+        post_id: post.id
       )
       reaction = Reaction.new(valid_attributes)
 
@@ -35,7 +33,7 @@ RSpec.describe Reaction, type: :model do
     it 'is not valid with missing network_user_id' do
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id,
+        post_id: post.id,
         network_user_id: nil
       )
       reaction = Reaction.new(invalid_attributes)
@@ -46,7 +44,7 @@ RSpec.describe Reaction, type: :model do
     it 'is not valid with missing network_user_name' do
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id,
+        post_id: post.id,
         network_user_name: nil
       )
       reaction = Reaction.new(invalid_attributes)
@@ -57,7 +55,7 @@ RSpec.describe Reaction, type: :model do
     it 'is not valid with missing network_user_picture' do
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id,
+        post_id: post.id,
         network_user_picture: nil
       )
       reaction = Reaction.new(invalid_attributes)
@@ -68,7 +66,7 @@ RSpec.describe Reaction, type: :model do
     it 'is not valid with missing category' do
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id,
+        post_id: post.id,
         category: nil
       )
       reaction = Reaction.new(invalid_attributes)
@@ -77,10 +75,10 @@ RSpec.describe Reaction, type: :model do
     end
 
     it 'is not valid if reaction with network_user_id already exists for post' do
-      FactoryGirl.create(:reaction, post_id: @post.id, network_user_id: '1234')
+      FactoryGirl.create(:reaction, post_id: post.id, network_user_id: '1234')
       invalid_attributes = FactoryGirl.attributes_for(
         :reaction,
-        post_id: @post.id,
+        post_id: post.id,
         network_user_id: '1234'
       )
       reaction = Reaction.new(invalid_attributes)

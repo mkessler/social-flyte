@@ -6,11 +6,13 @@
 
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= f.error_notification %>
+      <%= hidden_field_tag :invitation_token, params[:invitation] %>
+      <%= f.hidden_field :email, value: params[:email] if params[:email].present? %>
 
       <div class="form-inputs">
         <%= f.input :first_name, label: 'First Name', icon: 'user', required: true %>
         <%= f.input :last_name, label: 'Last Name', icon: 'user', required: true %>
-        <%= f.input :email, icon: 'envelope', required: true %>
+        <%= f.input :email, icon: 'envelope', required: true, input_html: { value: params[:email] }, disabled: params[:email].present? %>
         <%= f.input :password, icon: 'lock', required: true %>
       </div>
 

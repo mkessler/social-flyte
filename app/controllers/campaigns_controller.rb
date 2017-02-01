@@ -5,26 +5,26 @@ class CampaignsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET organizations/friendly_id/c/friendly_id
-  # GET organizations/friendly_id/c/friendly_id.json
+  # GET /o/:organization_id/c/:campaign_id
+  # GET /o/:organization_id/c/:campaign_id.json
   def show
     @posts = @campaign.posts
     @flagged_interactions = @campaign.flagged_interactions
   end
 
-  # GET organizations/friendly_id/c/friendly_id/new
+  # GET /o/:organization_id/c/:campaign_id/new
   def new
     add_breadcrumb 'Add Campaign', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 
-  # GET organizations/friendly_id/c/friendly_id/edit
+  # GET /o/:organization_id/c/:campaign_id/edit
   def edit
     add_breadcrumb 'Edit', edit_organization_campaign_path(@organization)
   end
 
-  # POST organizations/friendly_id/c/friendly_id
-  # POST organizations/friendly_id/c/friendly_id.json
+  # POST /o/:organization_id/c/:campaign_id
+  # POST /o/:organization_id/c/:campaign_id.json
   def create
     @campaign = @organization.campaigns.new(campaign_params)
 
@@ -39,8 +39,8 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # PATCH/PUT organizations/friendly_id/c/friendly_id
-  # PATCH/PUT organizations/friendly_id/c/friendly_id.json
+  # PATCH/PUT /o/:organization_id/c/:campaign_id
+  # PATCH/PUT /o/:organization_id/c/:campaign_id.json
   def update
     respond_to do |format|
       if campaign_params.present? && @campaign.update(campaign_params)
@@ -53,8 +53,8 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # DELETE organizations/friendly_id/c/friendly_id
-  # DELETE organizations/friendly_id/c/friendly_id.json
+  # DELETE /o/:organization_id/c/:campaign_id
+  # DELETE /o/:organization_id/c/:campaign_id.json
   def destroy
     @campaign.destroy
     respond_to do |format|

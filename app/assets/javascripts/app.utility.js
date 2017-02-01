@@ -3,13 +3,15 @@
 
   App.utility ={
     alert: function(args={}) {
-      $('<div class="groala-alert col-lg-12 mb-3" style="display:none;">'+
-          '<div class="card '+args.class+' text-xs-center z-depth-1">'+
-            '<div class="card-block">'+
-              '<span class="white-text">'+
-                '<i class="fa fa-'+args.icon+' fa-lg fa-fw"></i> '+
-                args.message+
-              '</span>'+
+      $('<div class="row">'+
+          '<div class="groala-alert col-lg-12 mb-3" style="display:none;">'+
+            '<div class="card '+args.class+' text-xs-center z-depth-1">'+
+              '<div class="card-block">'+
+                '<span class="white-text">'+
+                  '<i class="fa fa-'+args.icon+' fa-lg fa-fw"></i> '+
+                  args.message+
+                '</span>'+
+              '</div>'+
             '</div>'+
           '</div>'+
         '</div>'
