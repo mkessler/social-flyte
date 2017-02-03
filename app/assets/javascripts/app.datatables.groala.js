@@ -62,6 +62,19 @@
         processing: false,
         serverSide: false
       });
+    },
+    users: function() {
+      $('#groala-users-table').DataTable({
+        columns: [
+          null,
+          { width: '10%' }
+        ],
+        language: {
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Users</small>'
+        },
+        processing: false,
+        serverSide: false
+      });
     }
   }
 
@@ -70,6 +83,7 @@
     App.dataTables.groala.flagged_interactions();
     App.dataTables.groala.organizations();
     App.dataTables.groala.posts();
+    App.dataTables.groala.users();
   });
 
 }).call(this);
