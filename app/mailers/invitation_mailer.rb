@@ -2,6 +2,7 @@ class InvitationMailer < ApplicationMailer
   default from: 'invitations@groala.com'
 
   def invite_user(invitation)
+    @invitation = invitation
     @organization = invitation.organization
     @sender = User.find(invitation.sender_id)
     if invitation.recipient_id
