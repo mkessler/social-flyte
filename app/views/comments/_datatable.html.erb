@@ -2,21 +2,23 @@
 <table id="facebook-comments-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_comments_url(organization, campaign, post, format: :json) %>">
   <thead>
     <tr>
-      <th class="text-xs-center" data-toggle="tooltip" title="Likes">
-        <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+      <th class="text-xs-center">
+        <i class="fa fa-thumbs-up grey-text" aria-hidden="true"></i>
+        <span class="hidden-xs-down">Likes</span>
       </th>
-      <th class="text-xs-center" data-toggle="tooltip" title="User">
-        <i class="fa fa-user fa-lg" aria-hidden="true">
+      <th class="text-xs-center">
+        <i class="fa fa-user grey-text" aria-hidden="true"></i>
+        <span class="hidden-xs-down">User</span>
       </th>
-      <th class="text-xs-center" data-toggle="tooltip" title="Comment">
-        <i class="fa fa-comment fa-lg" aria-hidden="true">
+      <th class="text-xs-center">
+        <i class="fa fa-comment grey-text" aria-hidden="true"></i>
+        <span class="hidden-xs-down">Comment</span>
       </th>
-      <th class="text-xs-center" data-toggle="tooltip" title="Posted At">
-        <i class="fa fa-calendar fa-lg" aria-hidden="true">
+      <th class="text-xs-center">
+        <i class="fa fa-calendar grey-text" aria-hidden="true"></i>
+        <span class="hidden-xs-down">Posted</span>
       </th>
-      <th class="text-xs-center" data-toggle="tooltip" title="Flagged">
-        <i class="fa fa-flag fa-lg" aria-hidden="true">
-      </th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
