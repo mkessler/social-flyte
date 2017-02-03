@@ -10,6 +10,11 @@
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
           $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
           $('table tbody [data-toggle="tooltip"]').tooltip();
+          if (settings._iRecordsDisplay < 11) {
+            $('#'+settings.sTableId+'_paginate').hide();
+          } else {
+            $('#'+settings.sTableId+'_paginate').show();
+          }
         },
         initComplete: function(settings, json) {
           var table = this.api();
