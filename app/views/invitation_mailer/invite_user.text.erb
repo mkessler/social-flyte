@@ -3,7 +3,7 @@ You're invited to join Groala!
 
 <%= @sender.name %> has invited you to join <%= @organization.name %> on Groala.
 
-<% if invitation.recipient_id %>
+<% if @invitation.recipient_id %>
   To join, access your profile to accept the invitation: <%= @url %>
 <% else %>
   To join, just follow this link and sign up for an account: <%= @url %>

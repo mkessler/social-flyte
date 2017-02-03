@@ -34,6 +34,19 @@
         serverSide: false
       });
     },
+    invitations: function() {
+      $('#groala-invitations-table').DataTable({
+        columns: [
+          null,
+          { width: '10%' }
+        ],
+        language: {
+          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Invitations</small>'
+        },
+        processing: false,
+        serverSide: false
+      });
+    },
     organizations: function() {
       $('#groala-organizations-table').DataTable({
         columns: [
@@ -81,6 +94,7 @@
   $(document).on('ready', function() {
     App.dataTables.groala.campaigns();
     App.dataTables.groala.flagged_interactions();
+    App.dataTables.groala.invitations();
     App.dataTables.groala.organizations();
     App.dataTables.groala.posts();
     App.dataTables.groala.users();
