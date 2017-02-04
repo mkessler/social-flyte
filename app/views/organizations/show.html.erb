@@ -12,67 +12,69 @@
   </h2>
 <% end %>
 
-<div class="row mb-3">
-  <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#campaigns-list" role="tab"><i class="fa fa-th-list" aria-hidden="true"></i> Campaigns</a>
-    </li>
-  </ul>
+<div class="row">
+  <div class="col-lg-12 mb-3">
+    <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#campaigns-list" role="tab"><i class="fa fa-th-list" aria-hidden="true"></i> Campaigns</a>
+      </li>
+    </ul>
 
-  <div class="tab-content card">
-    <div class="tab-pane fade in active" id="campaigns-list" role="tabpanel">
-      <% if @campaigns.present? %>
-        <%= render "campaigns/datatable", organization: @organization, campaigns: @campaigns %>
-      <% else %>
-        <div class="row m-t-1">
-          <div class="col-md-12">
-            <ul class="stepper stepper-vertical">
-              <li class="active">
-                <a href="<%= new_organization_campaign_path(@organization) %>">
-                  <span class="circle">1</span>
-                  <span class="label">Add your first campaign</span>
-                </a>
-                <div class="step-content grey lighten-4">
-                  <p>Get started by kicking off a new campaign to track posts from today's most popular social networks! Campaigns provide a feature rich experience that will boost your social marketing initiatives to save you time and build your audience.</p>
-                </div>
-              </li>
-              <li class="active">
-                <a href="<%= new_organization_campaign_path(@organization) %>">
-                  <span class="circle">2</span>
-                  <span class="label">Import posts</span>
-                </a>
-                <div class="step-content grey lighten-4">
-                  <p>Our platform is built with simplicity in mind and groala removes all of the hassle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
-                </div>
-              </li>
-              <li class="active">
-                <a href="<%= new_organization_campaign_path(@organization) %>">
-                  <span class="circle">3</span>
-                  <span class="label">Analyze &amp; reward</span>
-                </a>
-                <div class="step-content grey lighten-4">
-                  <p>Monitor your posts' interactions all in one centralized location to quickly track top contributors among your audience and tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
-                </div>
-              </li>
-            </ul>
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="campaigns-list" role="tabpanel">
+        <% if @campaigns.present? %>
+          <%= render "campaigns/datatable", organization: @organization, campaigns: @campaigns %>
+        <% else %>
+          <div class="row m-t-1">
+            <div class="col-md-12">
+              <ul class="stepper stepper-vertical">
+                <li class="active">
+                  <a href="<%= new_organization_campaign_path(@organization) %>">
+                    <span class="circle">1</span>
+                    <span class="label">Add your first campaign</span>
+                  </a>
+                  <div class="step-content grey lighten-4">
+                    <p>Get started by kicking off a new campaign to track posts from today's most popular social networks! Campaigns provide a feature rich experience that will boost your social marketing initiatives to save you time and build your audience.</p>
+                  </div>
+                </li>
+                <li class="active">
+                  <a href="<%= new_organization_campaign_path(@organization) %>">
+                    <span class="circle">2</span>
+                    <span class="label">Import posts</span>
+                  </a>
+                  <div class="step-content grey lighten-4">
+                    <p>Our platform is built with simplicity in mind and groala removes all of the hassle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
+                  </div>
+                </li>
+                <li class="active">
+                  <a href="<%= new_organization_campaign_path(@organization) %>">
+                    <span class="circle">3</span>
+                    <span class="label">Analyze &amp; reward</span>
+                  </a>
+                  <div class="step-content grey lighten-4">
+                    <p>Monitor your posts' interactions all in one centralized location to quickly track top contributors among your audience and tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
+                  </div>
+                </li>
+              </ul>
 
+            </div>
           </div>
-        </div>
 
-        <div class="row m-t-1">
-          <div class="col-md-12 text-xs-right">
-            <%= link_to new_organization_campaign_path(@organization), class: 'btn green accent-4' do %>
-              <i class="fa fa-hashtag left" aria-hidden="true"></i> Add Campaign
-            <% end %>
+          <div class="row m-t-1">
+            <div class="col-md-12 text-xs-right">
+              <%= link_to new_organization_campaign_path(@organization), class: 'btn green accent-4' do %>
+                <i class="fa fa-hashtag left" aria-hidden="true"></i> Add Campaign
+              <% end %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-sm-6 mb-3">
+  <div class="col-md-6 mb-3">
     <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#users-list" role="tab"><i class="fa fa-users" aria-hidden="true"></i> Users</a>
@@ -86,7 +88,7 @@
     </div>
   </div>
 
-  <div class="col-sm-6 mb-3">
+  <div class="col-md-6 mb-3">
     <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#invitations-list" role="tab"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Invitations</a>

@@ -7,16 +7,20 @@
   </h2>
 <% end %>
 
-<ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
-  <li class="nav-item">
-    <%= link_to '#new-invitation', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
-      <i class="fa fa-envelope-open-o" aria-hidden="true"></i> Invitation
-    <% end %>
-  </li>
-</ul>
+<div class="row">
+  <div class="col-lg-12 mb-3">
+    <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
+      <li class="nav-item">
+        <%= link_to '#new-invitation', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
+          <i class="fa fa-envelope-open-o" aria-hidden="true"></i> Invitation
+        <% end %>
+      </li>
+    </ul>
 
-<div class="tab-content card">
-  <div class="tab-pane fade in active" id="new-invitation" role="tabpanel">
-    <%= render 'form', organization: @organization, invitation: @invitation %>
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="new-invitation" role="tabpanel">
+        <%= render 'form', organization: @organization, invitation: @invitation %>
+      </div>
+    </div>
   </div>
 </div>

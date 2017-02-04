@@ -24,14 +24,14 @@
         <td class="text-xs-center" data-search="<%= campaign.networks.join(', ') %>"><%= campaign_networks_icons(campaign) %></td>
         <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(campaign.engagement_count) %> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Interactions"></i></td>
         <td class="text-xs-center groala-no-wrap">
-          <%= link_to organization_campaign_path(organization, campaign), class: 'btn-floating btn-xtra-small light-blue white-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'View' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-eye', aria: { hidden: true }) %>
+          <%= link_to organization_campaign_path(organization, campaign) do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg light-blue-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
           <% end %>
-          <%= link_to edit_organization_campaign_path(organization, campaign), class: 'btn-floating btn-xtra-small purple white-text', data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-pencil', aria: { hidden: true }) %>
+          <%= link_to edit_organization_campaign_path(organization, campaign) do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-pencil fa-lg purple-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit') %>
           <% end %>
-          <%= link_to organization_campaign_path(organization, campaign), class: 'btn-floating btn-xtra-small pink white-text', method: :delete, data: { confirm: 'Are you sure?', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-times', aria: { hidden: true }) %>
+          <%= link_to organization_campaign_path(organization, campaign), method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <%= content_tag(:i, nil, :class => 'fa fa-times fa-lg red-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'Delete') %>
           <% end %>
         </td>
       </tr>
