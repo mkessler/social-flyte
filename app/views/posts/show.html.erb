@@ -1,6 +1,15 @@
 <% content_for :page_title do %>
-  <h2 class="dashboard-title mb-1">
+  <h2 class="dashboard-title extended-title-nav mb-1">
     <%= @post.network.name %>
+    <% if @post.can_be_synced? %>
+      <%= button_tag type: :button, id: 'post-sync-trigger', class: 'btn-floating btn-small green accent-4 mr-0 extended-nav-1', disabled: true do %>
+        <i class="fa fa-refresh" aria-hidden="true" data-toggle="tooltip" title="Sync Post"></i>
+      <% end %>
+    <% else %>
+      <%= button_tag type: :button, class: 'btn-floating btn-small grey mr-0 extended-nav-1', disabled: true do %>
+        <i class="fa fa-ban" aria-hidden="true" data-toggle="tooltip" title="Sync Unavailable"></i>
+      <% end %>
+    <% end %>
     <%= link_to organization_campaign_path(@organization, @campaign), class: 'btn-floating btn-small mr-0' do %>
       <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
     <% end %>
@@ -19,3 +28,11 @@
 <% else %>
   <%= render "posts/#{@network_slug}/show", organization: @organization, campaign: @campaign, post: @post %>
 <% end %>
+
+<script type="text/javascript">
+  $(document).on('ready', function() {
+    $('#post-sync-trigger').on('click', function(){
+      App.posts.sync();
+    });
+  });
+</script>
