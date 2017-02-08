@@ -13,14 +13,6 @@ RSpec.feature 'Campaigns Edit', :type => :feature do
     login_as(@user, :scope => :user)
   end
 
-  scenario 'clicks campaigns' do
-    visit edit_organization_campaign_path(@organization, @campaign)
-
-    find(:xpath, "//a[@class='nav-link'][@href='#{organization_path(@organization)}']").click
-
-    expect(page).to have_selector("div#campaigns-list")
-  end
-
   scenario 'clicks submit with empty name' do
     visit edit_organization_campaign_path(@organization, @campaign)
 
