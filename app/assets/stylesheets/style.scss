@@ -35,12 +35,11 @@ a {
   }
 }
 
-.btn-floating.btn-xtra-small {
-  height: 40px;
-  width: 40px;
-  .fa {
-    font-size: 16px;
-    margin-top: 2px;
+.btn-floating.btn-small {
+  border: 0;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }
 
