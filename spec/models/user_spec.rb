@@ -11,10 +11,6 @@ RSpec.describe User, type: :model do
     it 'has many organizations' do
       expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
     end
-
-    it 'has many authentications' do
-      expect(User.reflect_on_association(:authentications).macro).to eql(:has_many)
-    end
   end
 
   describe 'validations' do
@@ -63,22 +59,6 @@ RSpec.describe User, type: :model do
       user = User.new(invalid_attributes)
 
       expect(user).to_not be_valid
-    end
-  end
-
-  describe '.facebook_authentication' do
-    it "should return the user's Facebook Authentication record if exists" do
-      authentication = FactoryGirl.create(
-        :authentication,
-        user: user,
-        network: Network.facebook
-      )
-
-      expect(user.facebook_authentication).to eq(authentication)
-    end
-
-    it "should return nil if the user's Facebook Authentication record does not exist" do
-      expect(user.facebook_authentication).to be_nil
     end
   end
 

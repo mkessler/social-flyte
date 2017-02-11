@@ -130,10 +130,10 @@
 <script type="text/javascript">
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
-      App.authentications.facebook.init();
-      App.authentications.facebook.status();
+      App.facebook.init();
+      App.facebook.status();
     }
-    App.authentications.facebook.loadSDK();
+    App.facebook.loadSDK();
     console.log('Facebook Authentication ready.');
   });
 </script>

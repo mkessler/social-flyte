@@ -1,5 +1,4 @@
 class Network < ApplicationRecord
-  has_many :authentications
   has_many :posts
 
   before_validation :set_slug, on: [:create, :update]

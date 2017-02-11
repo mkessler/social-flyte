@@ -1,7 +1,7 @@
 (function() {
   this.App || (this.App = {});
 
-  App.authentications.facebook = {
+  App.facebook = {
     init: function() {
       FB.init({
         appId: <%= Rails.application.secrets.facebook_app_id %>,
@@ -22,10 +22,12 @@
     login: function(args={}) {
       FB.login(function(response) {
         if (response.authResponse) {
-          App.authentications.create({
-            network_id: '<%= Network.facebook.id %>',
-            response: response.authResponse
+          App.networkTokens.set({
+            network: '<%= Network.facebook.slug %>',
+            token: response.authResponse.accessToken,
+            expires_at: response.authResponse.expiresIn
           });
+          App.facebook.userLoggedIn();
         } else {
           alert('Authentication cancelled. Please try again.');
         }
@@ -36,19 +38,24 @@
         if (response.status === 'connected') {
           var uid = response.authResponse.userID;
           var accessToken = response.authResponse.accessToken;
+          App.networkTokens.set({
+            network: '<%= Network.facebook.slug %>',
+            token: response.authResponse.accessToken,
+            expires_at: response.authResponse.expiresIn
+          });
           $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
           $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         } else if (response.status === 'not_authorized') {
           // the user is logged in to Facebook,
           // but has not authenticated your app
-          App.authentications.facebook.userLoggedOut(response.status);
+          App.facebook.userLoggedOut(response.status);
         } else {
           // the user isn't logged in to Facebook.
-          App.authentications.facebook.userLoggedOut();
+          App.facebook.userLoggedOut();
         }
       });
       $('body').on('click', '.facebook-login', function(){
-        App.authentications.facebook.login();
+        App.facebook.login();
       });
     },
     userLoggedIn: function() {
