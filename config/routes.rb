@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   # Users
   devise_for :users, path: 'account', controllers: { registrations: 'users/registrations' }
 
-  # Authentications
-  resources :authentications, except: [:new, :edit, :show]
+  # Network Tokens
+  post 'network_tokens/set'
 
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do

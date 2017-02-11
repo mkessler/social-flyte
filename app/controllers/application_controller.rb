@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def network_token_exists?(network_name)
+    session["#{network_name}_token"].present? && Time.now.utc < session["#{network_name}_token_expires_at"]
+  end
+
   def set_organization
     if params[:organization_id]
       @organization = current_user.organizations.friendly.find(params[:organization_id])

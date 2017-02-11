@@ -1,8 +1,8 @@
 require 'koala'
 
 class FacebookService
-  def initialize(user, post)
-    @graph = Koala::Facebook::API.new(user.facebook_authentication.token)
+  def initialize(user, post, token)
+    @graph = Koala::Facebook::API.new(token)
     @user = user
     @post = post
     @object_id = "#{post.network_parent_id}_#{post.network_post_id}"

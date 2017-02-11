@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe FacebookService, type: :service do
   let(:user) { FactoryGirl.create(:user) }
+  let(:token) { 'EAAXuaK0yoQIBAAis6UZBoMsQmZBN1mOwHmiEk41YF3wjyb3nDhrIk9nGfzoKUM2F832ZBHHse3buq9Av9XHn8GZBIKaPkfzSphMCLy0WtyyLTf1egq0YuFCnO5SkdKZCkP7ZB2KbYmQcfFqJZAMBxXKAplIqUwZBrOoUQPdqVjaEwZAZAGPel7HIG8K6vYugZB4g9UZD' }
   let(:post) {
     FactoryGirl.create(
       :post,
@@ -9,18 +10,7 @@ RSpec.describe FacebookService, type: :service do
       network_parent_id: '564071993697787'
     )
   }
-  let(:service) { FacebookService.new(user, post) }
-  let(:authentication) {
-    FactoryGirl.create(
-      :authentication,
-      user: user,
-      token: 'EAAXuaK0yoQIBAD1TqcWcO8hw57ze9PfdFyfFZAsyIRXOkYo5CbwnfJc1oDiFtbfEAbJ1PX61p524MbicZC0MbxPGOHYKOVvUfvNNsgn8qvbkYyUy6S0ZAZAZBOcbJf0ZCj6HybFA4iLxalhxEKcyt0kN9GOyuZChGsZD'
-    )
-  }
-
-  before(:example) do
-    authentication
-  end
+  let(:service) { FacebookService.new(user, post, token) }
 
   describe 'initialize' do
     it 'creates a new service object' do
@@ -75,7 +65,7 @@ RSpec.describe FacebookService, type: :service do
   describe 'aggregate_comments' do
     it 'creates comments' do
       VCR.use_cassette('facebook_service_aggregate_comments') do
-        expect{service.aggregate_comments}.to change(Comment, :count) 
+        expect{service.aggregate_comments}.to change(Comment, :count)
       end
     end
   end

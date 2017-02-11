@@ -47,8 +47,8 @@ class Post < ApplicationRecord
     self.synced_at.nil? || Time.now.utc > self.synced_at + 15.minutes
   end
 
-  def sync(user)
-    job = SyncPostJob.perform_later(user, self)
+  def sync(user, token)
+    job = SyncPostJob.perform_later(user, self, token)
     update_attribute(:job_id, job.job_id)
   end
 
