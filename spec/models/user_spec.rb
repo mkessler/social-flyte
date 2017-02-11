@@ -62,37 +62,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.has_valid_network_token?' do
-    context 'facebook' do
-      context 'does not have valid token' do
-        it 'returns false if token doesn\'t exist' do
-          expect(user.has_valid_network_token?(Network.facebook)).to eql(false)
-        end
-
-        it 'returns false if token is expired' do
-          authentication = FactoryGirl.create(
-            :authentication,
-            user: user,
-            network: Network.facebook,
-            expires_at: 1.day.ago
-          )
-          expect(user.has_valid_network_token?(Network.facebook)).to eql(false)
-        end
-      end
-
-      context 'does have valid token' do
-        it 'returns true' do
-          authentication = FactoryGirl.create(
-            :authentication,
-            user: user,
-            network: Network.facebook
-          )
-          expect(user.has_valid_network_token?(Network.facebook)).to eql(true)
-        end
-      end
-    end
-  end
-
   describe '.process_invitation' do
     context 'has valid invitation' do
       it 'returns true' do

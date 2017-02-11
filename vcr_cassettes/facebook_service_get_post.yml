@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://graph.facebook.com/564071993697787_958246924280290?access_token=EAAXuaK0yoQIBAD1TqcWcO8hw57ze9PfdFyfFZAsyIRXOkYo5CbwnfJc1oDiFtbfEAbJ1PX61p524MbicZC0MbxPGOHYKOVvUfvNNsgn8qvbkYyUy6S0ZAZAZBOcbJf0ZCj6HybFA4iLxalhxEKcyt0kN9GOyuZChGsZD&fields=from,created_time,permalink_url
+    uri: https://graph.facebook.com/564071993697787_958246924280290?access_token=EAAXuaK0yoQIBAAis6UZBoMsQmZBN1mOwHmiEk41YF3wjyb3nDhrIk9nGfzoKUM2F832ZBHHse3buq9Av9XHn8GZBIKaPkfzSphMCLy0WtyyLTf1egq0YuFCnO5SkdKZCkP7ZB2KbYmQcfFqJZAMBxXKAplIqUwZBrOoUQPdqVjaEwZAZAGPel7HIG8K6vYugZB4g9UZD&fields=from,created_time,permalink_url
     body:
       encoding: US-ASCII
       string: ''
@@ -33,22 +33,22 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       X-Fb-Trace-Id:
-      - Ey36BBBfB4C
+      - HwGkpAV80N/
       X-Fb-Rev:
-      - '2702404'
+      - '2828561'
       Vary:
       - Accept-Encoding
       X-Fb-Debug:
-      - 3WhPsADy5cBTyAJ9KIXzAlZqgrpqZ+KZp3VLC42qsQulpj8Syg4Xh3qUtLwgwt1OmxafmkHn7l0FXYCpZWzuAA==
+      - Q0fxPfh7BYusc4M7zhB/G2TZPPwDnufBK8ozjrYenTLiEt7a9QHb2P95X7PZyj07RMXAF2hgCpFSamrfbUyFuQ==
       Date:
-      - Sat, 26 Nov 2016 04:35:12 GMT
+      - Sat, 11 Feb 2017 19:33:40 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '185'
+      - '184'
     body:
       encoding: ASCII-8BIT
       string: '{"from":{"name":"Charlotte Independence","id":"564071993697787"},"created_time":"2016-11-16T19:48:11+0000","permalink_url":"https:\/\/www.facebook.com\/charlotteindependence\/posts\/958246924280290","id":"564071993697787_958246924280290"}'
     http_version: 
-  recorded_at: Sat, 26 Nov 2016 04:35:12 GMT
+  recorded_at: Sat, 11 Feb 2017 19:33:40 GMT
 recorded_with: VCR 3.0.3

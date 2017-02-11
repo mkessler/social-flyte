@@ -185,12 +185,12 @@ RSpec.describe Post, type: :model do
 
   describe '.sync' do
     it 'enqueues post sync job' do
-      expect{post.sync(user)}.to have_enqueued_job(SyncPostJob)
+      expect{post.sync(user, Faker::Number.number(10))}.to have_enqueued_job(SyncPostJob)
     end
 
     it 'updates job id' do
       job_id = post.job_id
-      post.sync(user)
+      post.sync(user, Faker::Number.number(10))
       expect(post.job_id).to be_truthy
       expect(post.job_id).to_not eql(job_id)
     end

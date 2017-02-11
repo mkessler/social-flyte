@@ -28,7 +28,6 @@ class PostsController < ApplicationController
 
   # POST o/:organization_id/c/:campaign_id/posts/:id/sync_post.json
   def sync_post
-    byebug
     respond_to do |format|
       if @post.can_be_synced? && network_token_exists?(@post.network.slug) && @post.sync(current_user, session["#{@post.network.slug}_token"])
         format.json { render json: status.to_json }
