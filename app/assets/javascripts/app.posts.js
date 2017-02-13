@@ -6,6 +6,12 @@
       error: ['pink', 'exclamation-triangle', 'Error - There was an error trying to sync your post.'],
       success: ['green accent-4', 'refresh fa-spin', 'Syncing - This page will automatically refresh when your sync is complete.']
     },
+    disableButton: function() {
+      $('#post-sync-trigger').addClass('grey').removeClass('green accent-4').attr({
+        'id': '',
+        'disabled': true
+      });
+    },
     poll: function(statuses) {
       if (statuses === undefined) statuses = [];
 
@@ -31,6 +37,7 @@
           message: App.posts.messages.success[2]
         });
         App.posts.poll(['queued', 'working']);
+        App.posts.disableButton();
       }).error(function(data) {
         App.utility.alert({
           class: App.posts.messages.error[0],

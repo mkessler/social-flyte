@@ -1,7 +1,10 @@
 <% content_for :page_title do %>
-  <h2 class="dashboard-title">
+  <h2 class="dashboard-title extended-title-nav">
     Profile
-    <%= link_to request.referrer, class: 'btn-floating btn-small mr-0' do %>
+    <%= link_to new_organization_path, class: 'btn-floating btn-small green accent-4 mr-0 extended-nav-1' do %>
+      <i class="fa fa-bank" aria-hidden="true" data-toggle="tooltip" title="New Organization"></i>
+    <% end %>
+    <%= link_to root_path, class: 'btn-floating btn-small mr-0' do %>
       <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
     <% end %>
   </h2>
@@ -101,26 +104,6 @@
         <div class="groala-user-network" id="connected-facebook">
           <a type="button" class="btn-floating btn-large btn-fb"><i class="fa fa-facebook"></i></a>
           <span>Status: Checking <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 mb-3">
-    <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
-      <li class="nav-item">
-        <%= link_to '#new-organization', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
-          <i class="fa fa-plus" aria-hidden="true"></i> New Organization
-        <% end %>
-      </li>
-    </ul>
-
-    <div class="tab-content card">
-      <div class="tab-pane fade in active" id="new-organization" role="tabpanel">
-        Interested in adding a new organization? Get started below, now!
-        <div class="text-xs-right mt-1">
-          <%= link_to new_organization_path, class: 'btn green accent-4 waves-effect waves-light' do %>
-            <i class="fa fa-plus" aria-hidden="true"></i> New Organization
-          <% end %>
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@
             }
           },
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
+          infoEmpty: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Showing 0 to 0 of 0 entries</small>',
           infoFiltered: '<br/><small><i class="fa fa-filter orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
           paginate: {
             next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
