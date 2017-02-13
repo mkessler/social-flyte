@@ -2,7 +2,7 @@
   this.App || (this.App = {});
 
   App.utility ={
-    alert: function(args={}) {
+    alert: function(args) {
       $('<div class="row">'+
           '<div class="groala-alert col-lg-12 mb-3" style="display:none;">'+
             '<div class="card '+args.class+' text-xs-center z-depth-1">'+

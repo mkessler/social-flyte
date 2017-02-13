@@ -2,7 +2,7 @@
   this.App || (this.App = {});
 
   App.networkTokens = {
-    set: function(args={}) {
+    set: function(args) {
       $.ajax({
         url: '/network_tokens/set',
         type: 'POST',
