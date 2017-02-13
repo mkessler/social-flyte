@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
   # GET /o
   # Platform dashboard
   def index
+    set_meta_tags site: meta_title('My Organizations')
     add_breadcrumb 'My Organizations', organizations_path
     @organizations = current_user.organizations
 
@@ -17,17 +18,20 @@ class OrganizationsController < ApplicationController
   # GET /o/:id
   # GET /o/:id.json
   def show
+    set_meta_tags site: meta_title(@organization.name)
     @campaigns = @organization.campaigns
   end
 
   # GET /o/new
   def new
+    set_meta_tags site: meta_title('New Organization')
     add_breadcrumb 'New Organization', new_organization_path
     @organization = Organization.new
   end
 
   # GET /o/:id/edit
   def edit
+    set_meta_tags site: meta_title("Edit #{@organization.name}")
     add_breadcrumb 'Edit', edit_organization_path(@organization)
   end
 

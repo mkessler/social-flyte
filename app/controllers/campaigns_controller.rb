@@ -8,18 +8,21 @@ class CampaignsController < ApplicationController
   # GET /o/:organization_id/c/:campaign_id
   # GET /o/:organization_id/c/:campaign_id.json
   def show
+    set_meta_tags site: meta_title(@campaign.name)
     @posts = @campaign.posts
     @flagged_interactions = @campaign.flagged_interactions
   end
 
   # GET /o/:organization_id/c/:campaign_id/new
   def new
+    set_meta_tags site: meta_title('New Campaign')
     add_breadcrumb 'Add Campaign', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 
   # GET /o/:organization_id/c/:campaign_id/edit
   def edit
+    set_meta_tags site: meta_title("Edit #{@campaign.name}")
     add_breadcrumb 'Edit', edit_organization_campaign_path(@organization)
   end
 
