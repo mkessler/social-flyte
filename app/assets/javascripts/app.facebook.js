@@ -19,7 +19,7 @@
         ref.parentNode.insertBefore(js, ref);
       }(document));
     },
-    login: function(args={}) {
+    login: function(args) {
       FB.login(function(response) {
         if (response.authResponse) {
           App.facebook.setToken(response);
