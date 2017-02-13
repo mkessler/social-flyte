@@ -2,9 +2,9 @@
   this.App || (this.App = {});
 
   App.facebook = {
-    init: function() {
+    init: function(id) {
       FB.init({
-        appId: <%= Rails.application.secrets.facebook_app_id %>,
+        appId: id,
         status: false,
         cookie: true,
         xfbml: true

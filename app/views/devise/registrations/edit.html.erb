@@ -113,7 +113,7 @@
 <script type="text/javascript">
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
-      App.facebook.init();
+      App.facebook.init(<%= Rails.application.secrets.facebook_app_id %>);
       App.facebook.status();
     }
     App.facebook.loadSDK();
