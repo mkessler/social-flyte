@@ -9,7 +9,9 @@ class PostsController < ApplicationController
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
-    @network_slug = @post.network.slug
+    @network = @post.network
+    set_meta_tags site: meta_title("#{@network.name} Post")
+    @network_slug = @network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
 
     if @post.sync_count > 0
@@ -39,6 +41,7 @@ class PostsController < ApplicationController
 
   # GET o/:organization_id/c/:campaign_id/p/new
   def new
+    set_meta_tags site: meta_title('Import Post')
     add_breadcrumb 'Import Post', new_organization_campaign_post_path(@organization, @campaign)
     @post = @campaign.posts.new
   end

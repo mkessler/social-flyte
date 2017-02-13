@@ -90,5 +90,9 @@ gem 'redis-namespace'
 # Font Awesome
 gem 'font-awesome-rails'
 
-# pagination
+# Pagination
 gem 'kaminari'
+
+# SEO
+gem 'meta-tags'
+gem 'sitemap_generator'

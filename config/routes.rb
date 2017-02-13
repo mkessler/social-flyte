@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   # Users
-  devise_for :users, path: 'account', controllers: { registrations: 'users/registrations' }
+  devise_for :users, path: 'account', controllers: {
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   # Network Tokens
   post 'network_tokens/set'

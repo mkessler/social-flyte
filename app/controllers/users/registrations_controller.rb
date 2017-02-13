@@ -1,8 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :profile_breadcrumb
+
+  # GET /resource/sign_up
+  def new
+    set_meta_tags site: meta_title('Sign Up')
+    super
+  end
 
   # POST /resource
   def create
+    set_meta_tags site: meta_title('Sign Up')
     build_resource(sign_up_params)
 
     resource.save
@@ -25,15 +31,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  # GET /resource/edit
+  def edit
+    set_meta_tags site: meta_title('My Profile')
+    add_breadcrumb 'My Profile', edit_user_registration_path
+    super
+  end
+
+  # PUT /resource
+  # We need to use a copy of the resource because we don't want to change
+  # the current user in place.
+  def update
+    set_meta_tags site: meta_title('My Profile')
+    add_breadcrumb 'My Profile', edit_user_registration_path
+    super
+  end
+
   protected
 
   def after_update_path_for(resource)
     edit_user_registration_path
-  end
-
-  private
-
-  def profile_breadcrumb
-    add_breadcrumb 'My Profile', edit_user_registration_path
   end
 end

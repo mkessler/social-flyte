@@ -6,6 +6,7 @@ class InvitationsController < ApplicationController
 
   # GET /o/:organization_id/invitations/new
   def new
+    set_meta_tags site: meta_title('Invite Users')
     add_breadcrumb 'Invitation', new_organization_invitation_path(@organization)
     @invitation = @organization.invitations.new
   end
