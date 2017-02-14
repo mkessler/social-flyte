@@ -20,7 +20,7 @@ module Yoala
     config.autoload_paths += %W(#{config.root}/services)
 
     # Redis
-    config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 90.minutes }
+    config.cache_store = :redis_store, "#{Rails.application.secrets.redis_url}cache", { expires_in: 90.minutes }
 
     # Configure sidekiq
     config.active_job.queue_adapter = :sidekiq
