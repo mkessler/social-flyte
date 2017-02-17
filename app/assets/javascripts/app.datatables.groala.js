@@ -46,8 +46,8 @@
         },
         order: [
           [1, 'asc']
-        ]
-        //pageLength: 3
+        ],
+        pageLength: 3
       });
     },
     invitations: function() {

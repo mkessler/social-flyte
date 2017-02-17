@@ -16,7 +16,7 @@ private
   end
 
   def per_page
-    params[:length].to_i > 0 ? params[:length].to_i : 10
+    params[:length].to_i > 0 ? params[:length].to_i : 5
   end
 
   def sort_direction
