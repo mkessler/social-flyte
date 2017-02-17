@@ -10,7 +10,7 @@
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
           $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
           $('table tbody [data-toggle="tooltip"]').tooltip();
-          if (settings._iRecordsDisplay < 11) {
+          if (settings.aiDisplay.length < settings._iDisplayLength) {
             $('#'+settings.sTableId+'_paginate').hide();
           } else {
             $('#'+settings.sTableId+'_paginate').show();

@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :sync_status, :sync_post, :destroy]
+  before_action :set_post, only: [:show, :interactions, :sync_status, :sync_post, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -17,6 +17,13 @@ class PostsController < ApplicationController
     if @post.sync_count > 0
       flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
       flash[:notice] = 'This post is currently syncing - occassionally refresh the page to for the latest status update.' if @status.working?
+    end
+  end
+
+  # GET o/:organization_id/c/:campaign_id/posts/:id/interactions.json
+  def interactions
+    respond_to do |format|
+      format.json { render json: FlaggedInteractionsDatatable.new(view_context, @post) }
     end
   end
 
