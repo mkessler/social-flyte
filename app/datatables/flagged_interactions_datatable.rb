@@ -64,7 +64,7 @@ private
       flagged_interactions = @parent.flagged_interactions.sort_by(&sort_column.to_sym)
     end
     flagged_interactions = flagged_interactions.reverse if sort_direction == 'desc'
-    flagged_interactions = Kaminari.paginate_array(flagged_interactions).page(params[:page]).per(per_page)
+    flagged_interactions = Kaminari.paginate_array(flagged_interactions).page(page).per(per_page)
     flagged_interactions
   end
 
