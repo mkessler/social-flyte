@@ -11,4 +11,8 @@ class Reaction < ApplicationRecord
   scope :sad, -> { where(category: 'SAD') }
   scope :wow, -> { where(category: 'WOW') }
   scope :flagged, -> { where(flagged: true) }
+
+  def posted_at
+    nil
+  end
 end

@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :interactions]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -11,6 +11,13 @@ class CampaignsController < ApplicationController
     set_meta_tags site: meta_title(@campaign.name)
     @posts = @campaign.posts
     @flagged_interactions = @campaign.flagged_interactions
+  end
+
+  # GET /o/:organization_id/c/:campaign_id/interactions.json
+  def interactions
+    respond_to do |format|
+      format.json { render json: FlaggedInteractionsDatatable.new(view_context, @campaign) }
+    end
   end
 
   # GET /o/:organization_id/c/:campaign_id/new

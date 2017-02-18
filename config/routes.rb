@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   resources :organizations, path: 'o' do
     resources :invitations, except: [:index, :show, :edit]
     resources :campaigns, path: 'c', except: [:index] do
+      get :interactions
       resources :posts, path: 'p', except: [:index, :edit, :update] do
         resources :comments, except: [:new, :edit, :show, :create, :destroy]
         resources :reactions, except: [:new, :edit, :show, :create, :destroy]
+        get :interactions
         get :sync_status
         post :sync_post
       end

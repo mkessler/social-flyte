@@ -17,21 +17,75 @@
         serverSide: false
       });
     },
-    flagged_interactions: function() {
-      $('#campaign-flagged-interactions-table').DataTable({
+    flagged_interactions: function(network_column_visibility) {
+      $('#groala-flagged-interactions-table').DataTable({
+        ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
-          { width: '10%' },
-          null,
-          { width: '20%' },
+          { data: 'network', width: '5%', className: 'text-xs-center' },
+          { data: 'class', width: '15%', className: 'text-xs-center' },
+          { data: 'user', width: '25%' },
+          { data: 'content' },
+          { data: 'posted_at', width: '15%', className: 'text-xs-center' },
+        ],
+        columnDefs: [
+          {
+            targets: 0,
+            data: 'network',
+            visible: network_column_visibility == 'show' ? true : false,
+            render: function ( data, type, full, meta ) {
+              return '<i class="fa fa-'+data+'-official fa-lg" aria-hidden="true"></i>';
+            }
+          },
+          {
+            targets: 2,
+            data: 'user',
+            render: function ( data, type, full, meta ) {
+              return '<a class="light-blue-text groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
+            }
+          },
+          {
+            targets: 3,
+            data: 'content',
+            render: function ( data, type, full, meta ) {
+              var output;
+              
+              if (full.class == 'Comment') {
+                if (data.attachment.url !== null && data.attachment.image !== null) {
+                  output = '<div class="media">' +
+                    '<a href="'+data.attachment.url+'" class="media-left" target="_blank">' +
+                      '<img class="media-object" src="'+data.attachment.image+'" alt="Comment Media">' +
+                    '</a>' +
+                    '<br class="hidden-sm-up">' +
+                    '<div class="media-body">'+data.message+'</div>' +
+                  '</div>';
+                } else {
+                  output = data.message;
+                }
+              } else if (full.class == 'Reaction') {
+                output = '<span class="facebook-reaction '+data.category+'"></span>';
+              }
+
+              return output;
+            }
+          },
+          {
+            targets: 4,
+            data: 'posted_at',
+            render: function ( data, type, full, meta ) {
+              if(data.time == 'Not Available') {
+                return data.time;
+              } else {
+                return data.time + '<br/><small>'+data.date+'</small>';
+              }
+            }
+          }
         ],
         language: {
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Flagged Interactions</small>'
         },
         order: [
-          [1, 'asc']
-        ],
-        processing: false,
-        serverSide: false
+          [2, 'asc']
+        ]
       });
     },
     invitations: function() {
@@ -93,7 +147,6 @@
 
   $(document).on('ready', function() {
     App.dataTables.groala.campaigns();
-    App.dataTables.groala.flagged_interactions();
     App.dataTables.groala.invitations();
     App.dataTables.groala.organizations();
     App.dataTables.groala.posts();

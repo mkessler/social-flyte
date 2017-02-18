@@ -10,7 +10,7 @@
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
           $('#'+settings.sTableId+'_paginate ul.pagination li a').addClass('waves-effect');
           $('table tbody [data-toggle="tooltip"]').tooltip();
-          if (settings._iRecordsDisplay < 11) {
+          if (settings.aiDisplay.length < settings._iDisplayLength) {
             $('#'+settings.sTableId+'_paginate').hide();
           } else {
             $('#'+settings.sTableId+'_paginate').show();
@@ -41,6 +41,7 @@
           processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span>'
         },
         lengthChange: false,
+        pageLength: 5,
         processing: true,
         responsive: {
           details: {
@@ -71,6 +72,10 @@
     },
     flagToggle: function($el, status, update_link) {
       var tooltip = status ? 'Unflag' : 'Flag'
+      var table = $('#groala-flagged-interactions-table').DataTable();
+
+      table.ajax.reload();
+
       $el.attr('href', update_link);
 
       if (status == true) {
