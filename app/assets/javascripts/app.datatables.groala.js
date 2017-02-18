@@ -18,13 +18,13 @@
       });
     },
     flagged_interactions: function(network_column_visibility) {
-      console.log("network_column_visibility = "+network_column_visibility);
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
           { data: 'network', width: '5%', className: 'text-xs-center' },
           { data: 'class', width: '15%', className: 'text-xs-center' },
-          { data: 'user' },
+          { data: 'user', width: '25%' },
+          { data: 'content' },
           { data: 'posted_at', width: '15%', className: 'text-xs-center' },
         ],
         columnDefs: [
@@ -45,6 +45,31 @@
           },
           {
             targets: 3,
+            data: 'content',
+            render: function ( data, type, full, meta ) {
+              var output;
+              
+              if (full.class == 'Comment') {
+                if (data.attachment.url !== null && data.attachment.image !== null) {
+                  output = '<div class="media">' +
+                    '<a href="'+data.attachment.url+'" class="media-left" target="_blank">' +
+                      '<img class="media-object" src="'+data.attachment.image+'" alt="Comment Media">' +
+                    '</a>' +
+                    '<br class="hidden-sm-up">' +
+                    '<div class="media-body">'+data.message+'</div>' +
+                  '</div>';
+                } else {
+                  output = data.message;
+                }
+              } else if (full.class == 'Reaction') {
+                output = '<span class="facebook-reaction '+data.category+'"></span>';
+              }
+
+              return output;
+            }
+          },
+          {
+            targets: 4,
             data: 'posted_at',
             render: function ( data, type, full, meta ) {
               if(data.time == 'Not Available') {

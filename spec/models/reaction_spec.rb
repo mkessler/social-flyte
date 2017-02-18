@@ -146,4 +146,11 @@ RSpec.describe Reaction, type: :model do
       end
     end
   end
+
+  describe '.posted_at' do
+    it 'returns nil' do
+      reaction = FactoryGirl.create(:reaction)
+      expect(reaction.posted_at).to be_nil
+    end
+  end
 end
