@@ -22,11 +22,15 @@ private
     flagged_interactions.map do |flagged_interaction|
       {
         network: flagged_interaction.post.network.slug,
+        class: flagged_interaction.class.name,
         user: {
           name: flagged_interaction.network_user_name,
           url: flagged_interaction.post.network.user_link(flagged_interaction.network_user_id)
         },
-        class: flagged_interaction.class.name,
+        posted_at: {
+          time: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%l:%M%P') : 'Not Available',
+          date: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%b %-d %Y') : 'Not Available'
+        }
       }
     end
   end
@@ -40,19 +44,18 @@ private
       flagged_interactions = @parent.flagged_interactions.sort_by {|i| i.post.network.slug}
     elsif sort_column == "class"
       flagged_interactions = @parent.flagged_interactions.sort_by {|i| i.class.name}
+    elsif sort_column == "posted_at"
+      flagged_interactions = @parent.flagged_interactions.select(&sort_column.to_sym).sort_by(&sort_column.to_sym) + @parent.flagged_interactions.reject(&sort_column.to_sym)
     else
       flagged_interactions = @parent.flagged_interactions.sort_by(&sort_column.to_sym)
     end
     flagged_interactions = flagged_interactions.reverse if sort_direction == 'desc'
     flagged_interactions = Kaminari.paginate_array(flagged_interactions).page(params[:page]).per(per_page)
-    # if params[:search].present?
-    #   flagged_interactions = flagged_interactions.where("LOWER(network_user_name) like :search or LOWER(class) like :search", search: "%#{params[:search].try(:[], :value).downcase}%")
-    # end
     flagged_interactions
   end
 
   def sort_column
-    columns = %w[network network_user_name class]
+    columns = %w[network class network_user_name posted_at]
     columns[params[:order].try(:[], "0").try(:[], :column).to_i]
   end
 end
