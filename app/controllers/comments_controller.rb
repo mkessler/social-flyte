@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
   def index
     respond_to do |format|
       format.json { render json: CommentsDatatable.new(view_context, @post) }
+      format.csv { send_data(@post.comments.to_csv, :filename => "#{@post.campaign.name.parameterize}-#{@post.network.slug}-comments-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
     end
   end
 
