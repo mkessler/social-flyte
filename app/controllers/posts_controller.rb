@@ -21,9 +21,11 @@ class PostsController < ApplicationController
   end
 
   # GET o/:organization_id/c/:campaign_id/posts/:id/interactions.json
+  # GET o/:organization_id/c/:campaign_id/posts/:id/interactions.csv
   def interactions
     respond_to do |format|
       format.json { render json: FlaggedInteractionsDatatable.new(view_context, @post) }
+      format.csv { send_data(@post.flagged_interactions_to_csv, :filename => "#{@post.campaign.name.parameterize}-#{@post.network.slug}-flagged-interactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
     end
   end
 
