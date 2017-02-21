@@ -59,6 +59,7 @@
           }
         ],
         language: {
+          emptyTable: 'No comments exist!',
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Comments</small>'
         },
         order: [
@@ -102,6 +103,7 @@
           }
         ],
         language: {
+          emptyTable: 'No reactions exist!',
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
         },
         order: [

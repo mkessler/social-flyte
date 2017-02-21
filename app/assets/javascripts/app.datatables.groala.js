@@ -48,7 +48,7 @@
             data: 'content',
             render: function ( data, type, full, meta ) {
               var output;
-              
+
               if (full.class == 'Comment') {
                 if (data.attachment.url !== null && data.attachment.image !== null) {
                   output = '<div class="media">' +
@@ -81,6 +81,7 @@
           }
         ],
         language: {
+          emptyTable: 'No interactions flagged!',
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Flagged Interactions</small>'
         },
         order: [
@@ -95,6 +96,7 @@
           { width: '10%' }
         ],
         language: {
+          emptyTable: 'No invitations sent!',
           info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Invitations</small>'
         },
         processing: false,
