@@ -62,7 +62,7 @@
         <% end %>
       </div>
       <div class="tab-pane fade in" id="flagged-interactions" role="tabpanel">
-        <%= render "shared/flagged_interactions_datatable", flagged_interactions: @flagged_interactions, data_source: organization_campaign_interactions_url(@organization, @campaign, format: :json) %>
+        <%= render "shared/flagged_interactions_datatable", organization: @organization, campaign: @campaign, flagged_interactions: @flagged_interactions, data_source: organization_campaign_interactions_url(@organization, @campaign, format: :json) %>
       </div>
     </div>
   </div>

@@ -43,6 +43,25 @@ class Post < ApplicationRecord
     end
   end
 
+  def flagged_interactions_to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << ['Interaction Type', 'User Name', 'Content', 'Posted']
+
+      flagged_interactions.each do |flagged_interaction|
+        case flagged_interaction
+          when Comment
+            content = "#{flagged_interaction.message} --- #{flagged_interaction.attachment_url}"
+          when Reaction
+            content = flagged_interaction.category
+          else
+            content = nil
+        end
+
+        csv << [flagged_interaction.class.name, flagged_interaction.network_user_name, content, (flagged_interaction.posted_at || 'Not Available')]
+      end
+    end
+  end
+
   def can_be_synced?
     self.synced_at.nil? || Time.now.utc > self.synced_at + 15.minutes
   end

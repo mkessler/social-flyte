@@ -9,8 +9,8 @@ class ReactionsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
       format.json { render json: ReactionsDatatable.new(view_context, @post) }
+      format.csv { send_data(@post.reactions.to_csv, :filename => "#{@post.campaign.name.parameterize}-#{@post.network.slug}-reactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
     end
   end
 

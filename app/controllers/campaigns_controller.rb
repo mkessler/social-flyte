@@ -14,9 +14,11 @@ class CampaignsController < ApplicationController
   end
 
   # GET /o/:organization_id/c/:campaign_id/interactions.json
+  # GET /o/:organization_id/c/:campaign_id/interactions.csv
   def interactions
     respond_to do |format|
       format.json { render json: FlaggedInteractionsDatatable.new(view_context, @campaign) }
+      format.csv { send_data(@campaign.flagged_interactions_to_csv, :filename => "#{@campaign.name.parameterize}-flagged-interactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
     end
   end
 

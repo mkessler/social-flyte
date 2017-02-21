@@ -10,10 +10,10 @@ class Comment < ApplicationRecord
     attributes = [:network_user_name, :message, :attachment_url, :posted_at, :like_count, :flagged]
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes
+      csv << ['User Name', 'Comment', 'Media', 'Posted', 'Likes', 'Flagged']
 
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
+      all.each do |comment|
+        csv << attributes.map{ |attr| comment.send(attr) }
       end
     end
   end
