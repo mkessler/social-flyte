@@ -17,7 +17,7 @@
           <% if invitation.accepted? %>
             <%= content_tag(:i, nil, :class => 'fa fa-check fa-lg green-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'Accepted') %>
           <% else %>
-            <%= link_to organization_invitation_path(organization, invitation), method: :delete, data: { confirm: 'Are you sure? Continue to rescind the invitation.', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
+            <%= link_to organization_invitation_path(organization, invitation), method: :delete, data: { confirm: 'Are you sure you want to delete this invitation? The invited user will no longer be able to join your organization on Groala unless you send them a new invitation.', toggle: 'tooltip', placement: 'top' }, title: 'Delete' do %>
               <%= content_tag(:i, nil, :class => 'fa fa-times fa-lg red-text', aria: { hidden: true }) %>
             <% end %>
           <% end %>
