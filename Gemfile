@@ -64,6 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # User authentication
 gem 'devise'
+gem 'omniauth'
 
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
