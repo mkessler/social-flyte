@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :campaign
   belongs_to :network
-  has_many :reactions, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :reactions, dependent: :destroy
+  has_many :tweets, dependent: :destroy
 
   # Make network_parent_id conditional on facebook when more networks added
   validates :campaign_id, :network_id, :network_parent_id, presence: true
