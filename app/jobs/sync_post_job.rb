@@ -8,7 +8,7 @@ class SyncPostJob < ApplicationJob
       when 'Facebook'
         FacebookService.new(user, post, token).sync
       when 'Twitter'
-
+        TwitterService.new(post).sync
       when 'Instagram'
 
     end

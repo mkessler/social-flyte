@@ -5,7 +5,7 @@ class CreateTweets < ActiveRecord::Migration[5.0]
       t.string :network_tweet_id, null: false
       t.string :network_user_id, null: false
       t.string :network_user_name, null: false
-      t.integer :favorites_count, null: false, default: 0
+      t.integer :favorite_count, null: false, default: 0
       t.integer :retweet_count, null: false, default: 0
       t.text :message, null: false
       t.text :hashtags

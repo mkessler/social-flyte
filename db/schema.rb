@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227063651) do
+ActiveRecord::Schema.define(version: 20170228034410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,18 +124,19 @@ ActiveRecord::Schema.define(version: 20170227063651) do
   end
 
   create_table "tweets", force: :cascade do |t|
-    t.integer  "post_id",                           null: false
-    t.string   "network_tweet_id",                  null: false
-    t.string   "network_user_id",                   null: false
-    t.string   "network_user_name",                 null: false
-    t.integer  "favorites_count",   default: 0,     null: false
-    t.integer  "retweet_count",     default: 0,     null: false
-    t.text     "message",                           null: false
+    t.integer  "post_id",                                  null: false
+    t.string   "network_tweet_id",                         null: false
+    t.string   "network_user_id",                          null: false
+    t.string   "network_user_name",                        null: false
+    t.integer  "favorite_count",           default: 0,     null: false
+    t.integer  "retweet_count",            default: 0,     null: false
+    t.text     "message",                                  null: false
     t.text     "hashtags"
-    t.datetime "posted_at",                         null: false
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "flagged",           default: false, null: false
+    t.datetime "posted_at",                                null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.boolean  "flagged",                  default: false, null: false
+    t.string   "network_user_screen_name",                 null: false
     t.index ["post_id", "network_tweet_id"], name: "index_tweets_on_post_id_and_network_tweet_id", unique: true, using: :btree
     t.index ["post_id"], name: "index_tweets_on_post_id", using: :btree
   end

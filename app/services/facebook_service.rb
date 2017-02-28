@@ -9,11 +9,17 @@ class FacebookService
   end
 
   def sync
-    aggregate_comments
-    aggregate_reactions
-    @post.reload
-    @post.update_sync_status
+    if @post.network == Network.facebook
+      aggregate_comments
+      aggregate_reactions
+      @post.reload
+      @post.update_sync_status
+    else
+      false
+    end
   end
+
+  private
 
   def aggregate_reactions
     results = get_reactions
