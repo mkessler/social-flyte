@@ -144,4 +144,11 @@ RSpec.describe Tweet, type: :model do
       end
     end
   end
+
+  describe '.network_user_screen_name' do
+    it 'preprends @ to screen name' do
+      tweet = FactoryGirl.create(:tweet, network_user_screen_name: 'groala')
+      expect(tweet.network_user_screen_name).to eql('@groala')
+    end
+  end
 end

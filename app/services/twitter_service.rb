@@ -1,7 +1,6 @@
 require 'twitter'
 
 class TwitterService
-
   def initialize(post)
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.secrets.twitter_consumer_key

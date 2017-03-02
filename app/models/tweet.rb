@@ -5,4 +5,8 @@ class Tweet < ApplicationRecord
   validates :network_tweet_id, presence: true, uniqueness: { scope: :post_id }
 
   scope :flagged, -> { where(flagged: true) }
+
+  def network_user_screen_name
+    "@#{self[:network_user_screen_name]}" if self[:network_user_screen_name].present?
+  end
 end
