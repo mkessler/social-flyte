@@ -63,11 +63,22 @@ RSpec.describe Tweet, type: :model do
       expect(tweet).to_not be_valid
     end
 
-    it 'is not valid with missing favorites_count' do
+    it 'is not valid with missing network_user_screen_name' do
       invalid_attributes = FactoryGirl.attributes_for(
         :tweet,
         post_id: post.id,
-        favorites_count: nil
+        network_user_screen_name: nil
+      )
+      tweet = Tweet.new(invalid_attributes)
+
+      expect(tweet).to_not be_valid
+    end
+
+    it 'is not valid with missing favorite_count' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :tweet,
+        post_id: post.id,
+        favorite_count: nil
       )
       tweet = Tweet.new(invalid_attributes)
 
@@ -131,6 +142,13 @@ RSpec.describe Tweet, type: :model do
         expect(Tweet.flagged).to eq(Tweet.where(flagged: true))
         expect(Tweet.flagged.count).to eql(4)
       end
+    end
+  end
+
+  describe '.network_user_screen_name' do
+    it 'preprends @ to screen name' do
+      tweet = FactoryGirl.create(:tweet, network_user_screen_name: 'groala')
+      expect(tweet.network_user_screen_name).to eql('@groala')
     end
   end
 end
