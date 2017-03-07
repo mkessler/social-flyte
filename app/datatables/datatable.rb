@@ -9,7 +9,7 @@ class Datatable
     @organization = @campaign.organization
   end
 
-private
+  private
 
   def page
     params[:start].to_i/per_page + 1

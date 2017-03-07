@@ -17,14 +17,14 @@ class AccessTokensController < ApplicationController
 
   protected
 
-    def auth_hash
-      request.env['omniauth.auth']
-    end
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 
   private
 
-    def record_invalid
-      flash[:error] = "There was an issue trying to authorize #{params[:network].titleize}, please try again."
-      redirect_to root_url
-    end
+  def record_invalid
+    flash[:error] = "There was an issue trying to authorize #{params[:network].titleize}, please try again."
+    redirect_to root_url
+  end
 end

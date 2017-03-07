@@ -25,28 +25,29 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_comment
-      @comment = @post.comments.find(params[:id])
-    end
+  
+  def set_comment
+    @comment = @post.comments.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:flagged)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:flagged)
+  end
 
-    def record_not_found
-      if @organization.present? && @campaign.present? && @post.present
-        flash[:notice] = 'Uh-oh, looks like you tried to access a comment that doesn\'t exist for this post.'
-        redirect_to organization_campaign_url(@organization, @campaign)
-      elsif @organization.present? && @campaign.present?
-        flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
-        redirect_to organization_campaign_url(@organization, @campaign)
-      elsif @organization.present?
-        flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
-        redirect_to organization_campaigns_url(@organization)
-      else
-        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
-        redirect_to organizations_url
-      end
+  def record_not_found
+    if @organization.present? && @campaign.present? && @post.present
+      flash[:notice] = 'Uh-oh, looks like you tried to access a comment that doesn\'t exist for this post.'
+      redirect_to organization_campaign_url(@organization, @campaign)
+    elsif @organization.present? && @campaign.present?
+      flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
+      redirect_to organization_campaign_url(@organization, @campaign)
+    elsif @organization.present?
+      flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
+      redirect_to organization_campaigns_url(@organization)
+    else
+      flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+      redirect_to organizations_url
     end
+  end
 end

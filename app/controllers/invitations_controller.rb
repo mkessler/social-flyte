@@ -55,22 +55,23 @@ class InvitationsController < ApplicationController
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def invitation_params
-      params.require(:invitation).permit(:email).merge(sender_id: current_user.id)
-    end
+  
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def invitation_params
+    params.require(:invitation).permit(:email).merge(sender_id: current_user.id)
+  end
 
-    def update_invitation_params
-      params.require(:invitation).permit(:accepted)
-    end
+  def update_invitation_params
+    params.require(:invitation).permit(:accepted)
+  end
 
-    def record_not_found
-      if @organization.present?
-        flash[:notice] = 'Uh-oh, looks like you tried to access an invitation that doesn\'t exist for this organization.'
-        redirect_to organization_campaigns_url(@organization)
-      else
-        flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
-        redirect_to organizations_url
-      end
+  def record_not_found
+    if @organization.present?
+      flash[:notice] = 'Uh-oh, looks like you tried to access an invitation that doesn\'t exist for this organization.'
+      redirect_to organization_campaigns_url(@organization)
+    else
+      flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
+      redirect_to organizations_url
     end
+  end
 end

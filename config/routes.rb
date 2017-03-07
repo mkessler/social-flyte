@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  # Network authorization
-  get '/auth/:network/callback', to: 'access_tokens#authorization'
+  # Twitter accounts
+  get '/auth/:network/callback', to: 'organizations#create_or_update_twitter_account'
 
   # Network Tokens
   post 'network_tokens/set'

@@ -34,11 +34,11 @@ class User < ApplicationRecord
 
   private
 
-    def set_name
-      self.name = "#{first_name} #{last_name}"
-    end
+  def set_name
+    self.name = "#{first_name} #{last_name}"
+  end
 
-    def has_valid_invitation?(token)
-      Invitation.where(email: self.email, token: token).exists?
-    end
+  def has_valid_invitation?(token)
+    Invitation.where(email: self.email, token: token).exists?
+  end
 end
