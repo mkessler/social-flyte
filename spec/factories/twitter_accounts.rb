@@ -1,12 +1,10 @@
 FactoryGirl.define do
   factory :twitter_account do
     organization
-    twitter_id Faker::Number.number(10)
-    encrypted_token Faker::Number.number(10)
-    encrypted_secret Faker::Number.number(10)
-    encrypted_token_iv Faker::Number.number(10)
-    encrypted_secret_iv Faker::Number.number(10)
-    screen_name Faker::Twitter.user[:screen_name]
+    twitter_id 109068078
+    token Rails.application.secrets.twitter_access_token
+    secret Rails.application.secrets.twitter_access_token_secret
+    screen_name 'mikaelkessler'
     image_url Faker::Avatar.image
   end
 end

@@ -15,22 +15,6 @@ ActiveRecord::Schema.define(version: 20170307061459) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "access_tokens", force: :cascade do |t|
-    t.integer  "network_id",          null: false
-    t.integer  "user_id",             null: false
-    t.string   "network_user_id",     null: false
-    t.string   "encrypted_token",     null: false
-    t.string   "encrypted_secret"
-    t.datetime "expires_at"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.string   "encrypted_token_iv",  null: false
-    t.string   "encrypted_secret_iv"
-    t.index ["network_id"], name: "index_access_tokens_on_network_id", using: :btree
-    t.index ["user_id", "network_id"], name: "index_access_tokens_on_user_id_and_network_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_access_tokens_on_user_id", using: :btree
-  end
-
   create_table "campaigns", force: :cascade do |t|
     t.integer  "organization_id", null: false
     t.string   "name",            null: false
@@ -193,8 +177,6 @@ ActiveRecord::Schema.define(version: 20170307061459) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "access_tokens", "networks"
-  add_foreign_key "access_tokens", "users"
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "posts"
   add_foreign_key "invitations", "organizations"

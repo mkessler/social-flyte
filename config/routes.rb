@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'access_tokens/authorization'
-
   require 'sidekiq/web'
 
   # Sidekiq Monitoring

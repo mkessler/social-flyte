@@ -5,7 +5,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :access_tokens, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
   has_many :invitations, foreign_key: 'recipient_id', dependent: :destroy
@@ -26,10 +25,6 @@ class User < ApplicationRecord
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later
-  end
-
-  def twitter_access_token
-    access_tokens.find_by_network_id(Network.twitter.id)
   end
 
   private
