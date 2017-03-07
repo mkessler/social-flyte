@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'access_tokens/authorization'
+
   require 'sidekiq/web'
 
   # Sidekiq Monitoring
@@ -10,6 +12,9 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+
+  # Network authorization
+  get '/auth/:network/callback', to: 'access_tokens#authorization'
 
   # Network Tokens
   post 'network_tokens/set'

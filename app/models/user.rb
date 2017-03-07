@@ -5,6 +5,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :access_tokens, dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
   has_many :invitations, foreign_key: 'recipient_id', dependent: :destroy
@@ -27,13 +28,17 @@ class User < ApplicationRecord
     devise_mailer.send(notification, self, *args).deliver_later
   end
 
+  def twitter_access_token
+    access_tokens.find_by_network_id(Network.twitter.id)
+  end
+
   private
 
-  def set_name
-    self.name = "#{first_name} #{last_name}"
-  end
+    def set_name
+      self.name = "#{first_name} #{last_name}"
+    end
 
-  def has_valid_invitation?(token)
-    Invitation.where(email: self.email, token: token).exists?
-  end
+    def has_valid_invitation?(token)
+      Invitation.where(email: self.email, token: token).exists?
+    end
 end
