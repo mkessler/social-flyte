@@ -6,7 +6,7 @@ FactoryGirl.define do
     encrypted_secret Faker::Number.number(10)
     encrypted_token_iv Faker::Number.number(10)
     encrypted_secret_iv Faker::Number.number(10)
-    screen_name Faker::Twitter.user.screen_name
+    screen_name Faker::Twitter.user[:screen_name]
     image_url Faker::Avatar.image
   end
 end
