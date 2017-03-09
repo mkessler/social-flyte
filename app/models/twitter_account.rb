@@ -8,6 +8,6 @@ class TwitterAccount < ApplicationRecord
   validates :twitter_id, presence: true, uniqueness: { scope: :organization_id }
 
   def screen_name
-    "@#{self[:screen_name]}"
+    "@#{self[:screen_name]}" if self[:screen_name].present?
   end
 end

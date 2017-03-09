@@ -89,6 +89,6 @@ class Post < ApplicationRecord
   end
 
   def twitter_account_validation
-    errors.add(:twitter_account, "Twitter account does not exist for this organization.") unless campaign.organization.twitter_accounts.include?(twitter_account)
+    errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_accounts.include?(twitter_account)
   end
 end

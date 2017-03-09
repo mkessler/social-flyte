@@ -16,6 +16,10 @@ RSpec.describe Post, type: :model do
       expect(Post.reflect_on_association(:network).macro).to eql(:belongs_to)
     end
 
+    it 'belongs to twitter_account' do
+      expect(Post.reflect_on_association(:twitter_account).macro).to eql(:belongs_to)
+    end
+
     it 'has many reactions' do
       expect(Post.reflect_on_association(:reactions).macro).to eql(:has_many)
     end
@@ -93,6 +97,17 @@ RSpec.describe Post, type: :model do
         :post,
         campaign_id: campaign.id,
         network_post_id: '1234'
+      )
+      post = Post.new(invalid_attributes)
+
+      expect(post).to_not be_valid
+    end
+
+    it 'is not valid if post is for twitter and is missing twitter account' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :post,
+        campaign_id: campaign.id,
+        network_id: Network.twitter.id
       )
       post = Post.new(invalid_attributes)
 
