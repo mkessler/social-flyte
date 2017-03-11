@@ -64,6 +64,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # User authentication
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-twitter'
 
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
@@ -99,3 +101,6 @@ gem 'kaminari'
 # SEO
 gem 'meta-tags'
 gem 'sitemap_generator'
+
+# Utility
+gem 'attr_encrypted', '~> 3.0.0'

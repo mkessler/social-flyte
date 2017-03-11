@@ -10,7 +10,7 @@ class ReactionsDatatable < Datatable
     }
   end
 
-private
+  private
 
   def data
     reactions.map do |reaction|

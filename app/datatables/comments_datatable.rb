@@ -10,7 +10,7 @@ class CommentsDatatable < Datatable
     }
   end
 
-private
+  private
 
   def data
     comments.map do |comment|

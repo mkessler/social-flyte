@@ -9,12 +9,12 @@ class Network < ApplicationRecord
     find_by_slug('facebook')
   end
 
-  def self.twitter
-    find_by_slug('twitter')
-  end
-
   def self.instagram
     find_by_slug('instagram')
+  end
+
+  def self.twitter
+    find_by_slug('twitter')
   end
 
   def user_link(user_id)

@@ -102,9 +102,10 @@ RSpec.describe Campaign, type: :model do
 
   describe '.networks' do
     it 'returns an array of post networks' do
-      campaign = FactoryGirl.create(:campaign)
+      campaign = FactoryGirl.create(:campaign, organization: organization)
+      twitter_account = FactoryGirl.create(:twitter_account, organization: organization)
       FactoryGirl.create(:post, campaign: campaign)
-      FactoryGirl.create(:post, campaign: campaign, network: Network.twitter)
+      FactoryGirl.create(:post, campaign: campaign, network: Network.twitter, twitter_account: twitter_account)
       FactoryGirl.create(:post, campaign: campaign, network: Network.instagram)
 
       expect(campaign.networks).to eql(['facebook', 'instagram', 'twitter'])

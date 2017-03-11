@@ -16,7 +16,7 @@ class FlaggedInteractionsDatatable < Datatable
     }
   end
 
-private
+  private
 
   def data
     flagged_interactions.map do |flagged_interaction|
