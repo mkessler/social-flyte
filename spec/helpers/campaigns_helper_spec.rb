@@ -11,7 +11,7 @@ RSpec.describe CampaignsHelper, type: :helper do
       FactoryGirl.create(:post, campaign: campaign, network: Network.twitter, twitter_account: twitter_account)
       FactoryGirl.create(:post, campaign: campaign, network: Network.instagram)
 
-      expect(campaign_networks_icons(campaign)).to eql('<i class="fa fa-facebook-official fa-lg"></i><i class="fa fa-instagram-official fa-lg"></i><i class="fa fa-twitter-official fa-lg"></i>')
+      expect(campaign_networks_icons(campaign)).to eql('<i class="fa fa-facebook-official fa-lg fa-fw mx-quarter" aria-hidden="true"></i><i class="fa fa-instagram fa-lg fa-fw mx-quarter" aria-hidden="true"></i><i class="fa fa-twitter fa-lg fa-fw mx-quarter" aria-hidden="true"></i>')
     end
   end
 end

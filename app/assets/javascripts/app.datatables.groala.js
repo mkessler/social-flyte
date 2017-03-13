@@ -33,7 +33,7 @@
             data: 'network',
             visible: network_column_visibility == 'show' ? true : false,
             render: function ( data, type, full, meta ) {
-              return '<i class="fa fa-'+data+'-official fa-lg" aria-hidden="true"></i>';
+              return App.utility.networkIcon(data);
             }
           },
           {

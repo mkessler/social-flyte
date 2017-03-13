@@ -31,6 +31,13 @@
       if (!results) return null;
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, " "));
+    },
+    networkIcon: function(network_slug) {
+      if (network_slug == 'facebook') {
+        return '<i class="fa fa-'+network_slug+'-official fa-lg fa-fw" aria-hidden="true"></i>';
+      } else {
+        return '<i class="fa fa-'+network_slug+' fa-lg fa-fw" aria-hidden="true"></i>';
+      }
     }
   }
 
