@@ -7,6 +7,7 @@ class InvitationsController < ApplicationController
   # GET /o/:organization_id/invitations/new
   def new
     set_meta_tags site: meta_title('Invite Users')
+    add_breadcrumb 'Users', organization_users_path(@organization)
     add_breadcrumb 'Invitation', new_organization_invitation_path(@organization)
     @invitation = @organization.invitations.new
   end
@@ -19,7 +20,7 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         InvitationMailer.invite_user(@invitation).deliver_later
-        format.html { redirect_to @organization, notice: 'Invitation sent!' }
+        format.html { redirect_to organization_users_url(@organization), notice: 'Invitation sent!' }
         format.json { render json: @invitation, status: :created }
       else
         format.html { render :new }
@@ -49,13 +50,13 @@ class InvitationsController < ApplicationController
     @invitation = current_user.sent_invitations.find(params[:id])
     @invitation.destroy
     respond_to do |format|
-      format.html { redirect_to @invitation.organization, notice: 'Invitation was successfully destroyed.' }
+      format.html { redirect_to organization_users_url(@invitation.organization), notice: 'Invitation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-  
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def invitation_params
     params.require(:invitation).permit(:email).merge(sender_id: current_user.id)

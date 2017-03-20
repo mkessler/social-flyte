@@ -9,24 +9,20 @@
   <li>
     <ul class="collapsible collapsible-accordion">
       <li>
-        <% if current_user.organizations.count > 1 %>
-          <a class="collapsible-header waves-effect arrow-r">
-            <i class="fa fa-hand-pointer-o"></i>
-            Organizations<i class="fa fa-angle-down rotate-icon">
-            </i>
-          </a>
-          <div class="collapsible-body">
-            <ul>
-              <li>
-                <% current_user.organizations.each do |organization| %>
-                  <%= link_to organization.name, organization_path(organization), class: 'waves-effect' %>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        <% elsif current_user.organizations.present? %>
-          <%= link_to organization_path(current_user.organizations.first), class: 'waves-effect' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o', aria: { hidden: true }) %> <%= current_user.organizations.first.name %>
+        <% if current_user.organizations.present? %>
+          <% current_user.organizations.each do |organization| %>
+            <a class="collapsible-header waves-effect arrow-r">
+              <i class="fa fa-hand-pointer-o"></i>
+              <%= organization.name.truncate(12) %><i class="fa fa-angle-down rotate-icon">
+              </i>
+            </a>
+            <div class="collapsible-body">
+              <ul>
+                <li>
+                  <%= link_to 'Users', organization_users_path(organization), class: 'waves-effect' %>
+                </li>
+              </ul>
+            </div>
           <% end %>
         <% else %>
           <%= link_to new_organization_path, class: 'waves-effect' do %>
