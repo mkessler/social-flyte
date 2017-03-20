@@ -15,7 +15,7 @@ RSpec.feature 'Campaigns New', :type => :feature do
   scenario 'clicks back' do
     visit new_organization_campaign_path(@organization)
 
-    find(:xpath, "//a[contains(@class, 'btn-floating')][@href='#{organization_path(@organization)}']").click
+    find(:xpath, "//a[contains(@class, 'btn-floating')][@href='#{organization_campaigns_path(@organization)}']").click
 
     expect(page).to have_selector("div#campaigns-list")
   end

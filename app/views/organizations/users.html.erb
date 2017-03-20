@@ -1,6 +1,6 @@
 <% content_for :page_title do %>
   <h2 class="<%= organization_title_class(current_user) %>">
-    <%= organization_title(@organization) %> Users
+    <%= organization_title(@organization) %>
     <%= link_to new_organization_invitation_path(@organization), class: "btn-floating btn-small green accent-4 mr-0 extended-nav-1" do %>
       <i class="fa fa-envelope-open-o" aria-hidden="true" data-toggle="tooltip"  title="Invite New User"></i>
     <% end %>
