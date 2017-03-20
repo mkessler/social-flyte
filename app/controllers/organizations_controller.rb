@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_organization, only: [:show, :edit, :update, :destroy, :create_or_update_twitter_account]
+  before_action :set_organization, only: [:show, :edit, :update, :users, :destroy, :create_or_update_twitter_account]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
@@ -21,6 +21,13 @@ class OrganizationsController < ApplicationController
   def show
     set_meta_tags site: meta_title(@organization.name)
     @campaigns = @organization.campaigns
+  end
+
+  # GET /o/:id/users
+  def users
+    set_meta_tags site: meta_title("#{@organization.name} Users")
+    add_breadcrumb 'Users', organization_users_path(@organization)
+    @users = @organization.users
   end
 
   # GET /o/new
