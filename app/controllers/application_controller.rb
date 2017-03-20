@@ -44,7 +44,9 @@ class ApplicationController < ActionController::Base
     else
       @post = @campaign.posts.find(params[:id])
     end
-    add_breadcrumb '<i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i>', organization_campaign_post_path(@organization, @campaign, @post)
+    network_slug = @post.network.slug
+    icon_class = (network_slug == 'facebook') ? network_slug + '-official' : network_slug
+    add_breadcrumb "<i class=\"fa fa-#{icon_class} fa-lg\" aria-hidden=\"true\"></i>", organization_campaign_post_path(@organization, @campaign, @post)
   end
 
   protected
