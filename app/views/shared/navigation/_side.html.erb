@@ -19,7 +19,10 @@
             <div class="collapsible-body">
               <ul>
                 <li>
-                  <%= link_to 'Home', organization, class: 'waves-effect' %>
+                  <%= link_to 'Control Center', organization, class: 'waves-effect' %>
+                </li>
+                <li>
+                  <%= link_to 'Accounts', organization_accounts_path(organization), class: 'waves-effect' %>
                 </li>
                 <li>
                   <%= link_to 'Campaigns', organization_campaigns_path(organization), class: 'waves-effect' %>
