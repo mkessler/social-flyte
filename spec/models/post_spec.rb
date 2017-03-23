@@ -16,8 +16,8 @@ RSpec.describe Post, type: :model do
       expect(Post.reflect_on_association(:network).macro).to eql(:belongs_to)
     end
 
-    it 'belongs to twitter_account' do
-      expect(Post.reflect_on_association(:twitter_account).macro).to eql(:belongs_to)
+    it 'belongs to twitter_token' do
+      expect(Post.reflect_on_association(:twitter_token).macro).to eql(:belongs_to)
     end
 
     it 'has many reactions' do

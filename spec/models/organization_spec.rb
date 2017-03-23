@@ -15,7 +15,7 @@ RSpec.describe Organization, type: :model do
     end
 
     it 'has many twitter accounts' do
-      expect(Organization.reflect_on_association(:twitter_accounts).macro).to eql(:has_many)
+      expect(Organization.reflect_on_association(:twitter_tokens).macro).to eql(:has_many)
     end
   end
 

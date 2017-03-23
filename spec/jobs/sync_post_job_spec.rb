@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SyncPostJob, type: :job do
   let(:user) { FactoryGirl.create(:user) }
-  let(:token) { 'EAAXuaK0yoQIBAAis6UZBoMsQmZBN1mOwHmiEk41YF3wjyb3nDhrIk9nGfzoKUM2F832ZBHHse3buq9Av9XHn8GZBIKaPkfzSphMCLy0WtyyLTf1egq0YuFCnO5SkdKZCkP7ZB2KbYmQcfFqJZAMBxXKAplIqUwZBrOoUQPdqVjaEwZAZAGPel7HIG8K6vYugZB4g9UZD' }
+  let(:facebook_token) { FactoryGirl.create(:facebook_token, user: user) }
   let(:post) {
     FactoryGirl.create(
       :post,
@@ -13,6 +13,10 @@ RSpec.describe SyncPostJob, type: :job do
 
   describe '#perform' do
     context 'facebook' do
+      before(:example) do
+        facebook_token
+      end
+
       it 'aggregates and builds post reactions' do
         VCR.use_cassette('facebook_sync_post_job') do
           SyncPostJob.perform_now(post, user)

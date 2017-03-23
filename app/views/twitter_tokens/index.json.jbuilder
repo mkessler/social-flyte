@@ -1,1 +1,0 @@
-json.array! @twitter_tokens, partial: 'twitter_tokens/twitter_token', as: :twitter_token

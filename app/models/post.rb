@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :campaign
   belongs_to :network
-  belongs_to :twitter_account
+  belongs_to :twitter_token
   has_many :comments, dependent: :destroy
   has_many :reactions, dependent: :destroy
   has_many :tweets, dependent: :destroy
