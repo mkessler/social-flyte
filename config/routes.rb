@@ -14,14 +14,17 @@ Rails.application.routes.draw do
   # Twitter accounts
   get '/auth/:network/callback', to: 'organizations#create_or_update_twitter_account'
 
-  # Network Tokens
-  post 'network_tokens/set'
+  # Facebook Tokens
+  resources :facebook_tokens, except: [:index, :show, :new, :edit] do
+    post :create_or_update, on: :collection
+  end
 
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
     get :accounts
     get :users
     resources :invitations, except: [:index, :show, :edit]
+    resources :twitter_tokens, except: [:index, :show, :new, :edit]
     resources :campaigns, path: 'c' do
       get :interactions
       resources :posts, path: 'p', except: [:index, :edit, :update] do

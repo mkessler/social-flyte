@@ -6,7 +6,7 @@ class Organization < ApplicationRecord
   has_many :users, through: :memberships
   has_many :invitations, dependent: :destroy
   has_many :campaigns, dependent: :destroy
-  has_many :twitter_accounts, dependent: :destroy
+  has_many :twitter_tokens, dependent: :destroy
 
   validates :name, presence: true
   validates :slug, presence: true, uniqueness: true

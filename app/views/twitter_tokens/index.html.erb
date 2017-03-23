@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Twitter Tokens</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Organization</th>
+      <th>Encrypted token</th>
+      <th>Encrypted secret</th>
+      <th>Encrypted token iv</th>
+      <th>Encrypted secret iv</th>
+      <th>Network user</th>
+      <th>Network user name</th>
+      <th>Network user image url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @twitter_tokens.each do |twitter_token| %>
+      <tr>
+        <td><%= twitter_token.organization %></td>
+        <td><%= twitter_token.encrypted_token %></td>
+        <td><%= twitter_token.encrypted_secret %></td>
+        <td><%= twitter_token.encrypted_token_iv %></td>
+        <td><%= twitter_token.encrypted_secret_iv %></td>
+        <td><%= twitter_token.network_user_id %></td>
+        <td><%= twitter_token.network_user_name %></td>
+        <td><%= twitter_token.network_user_image_url %></td>
+        <td><%= link_to 'Show', twitter_token %></td>
+        <td><%= link_to 'Edit', edit_twitter_token_path(twitter_token) %></td>
+        <td><%= link_to 'Destroy', twitter_token, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Twitter Token', new_twitter_token_path %>

@@ -7,7 +7,6 @@
 //= require dataTables.responsive.min
 //= require responsive.bootstrap4.min
 //= require app.utility
-//= require app.network_tokens
 //= require app.facebook
 //= require app.mdb
 //= require app.datatables

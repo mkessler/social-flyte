@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_tags
 
-  def network_token_exists?(network_name)
-    session["#{network_name}_token"].present? && Time.now.utc < session["#{network_name}_token_expires_at"]
-  end
-
   def meta_title(title=nil)
     title.present? ? "Groala | #{title}" : 'Groala'
   end

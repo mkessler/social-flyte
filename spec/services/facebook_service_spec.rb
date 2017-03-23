@@ -10,7 +10,7 @@ RSpec.describe FacebookService, type: :service do
       network_parent_id: '564071993697787'
     )
   }
-  let(:service) { FacebookService.new(user, post, token) }
+  let(:service) { FacebookService.new(user, post) }
 
   describe 'initialize' do
     it 'creates a new service object' do

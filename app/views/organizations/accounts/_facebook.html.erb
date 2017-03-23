@@ -1,0 +1,19 @@
+<div class="col-md-4 mb-2">
+  <div class="card testimonial-card">
+    <div class="card-up facebook-blue"></div>
+    <div class="avatar text-xs-center">
+      <%= facebook_user_image_url_for(current_user) %>
+    </div>
+    <div class="card-block">
+      <h4 class="card-title"><%= facebook_user_name_for(current_user) %></h4>
+      <hr>
+      <p><i class="fa fa-facebook-official"></i> Facebook</p>
+      <% if current_user.facebook_token.nil? %>
+        <%= button_tag type: :button, class: 'btn green accent-4 facebook-login' do %>
+          <i class="fa fa-random left" aria-hidden="true"></i>
+          Connect
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

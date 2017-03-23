@@ -3,10 +3,10 @@ class SyncPostJob < ApplicationJob
 
   queue_as :default
 
-  def perform(user, post, token)
+  def perform(post, user=nil)
     case post.network.name
       when 'Facebook'
-        FacebookService.new(user, post, token).sync
+        FacebookService.new(user, post).sync
       when 'Twitter'
         TwitterService.new(post).sync
       when 'Instagram'

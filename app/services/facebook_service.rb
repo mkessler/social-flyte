@@ -1,11 +1,12 @@
 require 'koala'
 
 class FacebookService
-  def initialize(user, post, token)
-    @graph = Koala::Facebook::API.new(token)
+  def initialize(user, post=nil)
     @user = user
+    @token = user.facebook_token
+    @graph = Koala::Facebook::API.new(@token.token)
     @post = post
-    @object_id = "#{post.network_parent_id}_#{post.network_post_id}"
+    @object_id = "#{@post.network_parent_id}_#{@post.network_post_id}" if @post.present?
   end
 
   def sync
@@ -17,6 +18,13 @@ class FacebookService
     else
       false
     end
+  end
+
+  def update_user_details
+    response = get_user
+    @token.network_user_name = response['name']
+    @token.network_user_image_url = response['picture']['data']['url']
+    @token.save
   end
 
   private
@@ -69,6 +77,12 @@ class FacebookService
         end
       end
     end
+  end
+
+  def get_user
+    @graph.get_object("me?fields=id,name,picture.type(large)")
+  rescue Koala::Facebook::APIError => e
+    Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id}) - #{e.message}")
   end
 
   def get_post
