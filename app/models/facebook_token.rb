@@ -15,6 +15,6 @@ class FacebookToken < ApplicationRecord
   private
 
   def get_user_details
-    FacebookDetailsJob.perform_later(self.user)
+    FacebookService.new(self.user).update_user_details
   end
 end

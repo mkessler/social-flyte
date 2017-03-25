@@ -9,21 +9,7 @@
 
 <div class="row mb-1">
   <%= render 'organizations/accounts/facebook' %>
-  <% @organization.twitter_tokens.each do |twitter_account| %>
-    <div class="col-md-4 mb-2">
-      <div class="card testimonial-card">
-        <div class="card-up twitter-blue"></div>
-        <div class="avatar text-xs-center">
-          <%= image_tag twitter_account.image_url, class: 'rounded-circle img-responsive', alt: twitter_account.screen_name %>
-        </div>
-        <div class="card-block">
-          <h4 class="card-title"><%= twitter_account.screen_name %></h4>
-          <hr>
-          <p><i class="fa fa-twitter fa-lg"></i> Twitter</p>
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render 'organizations/accounts/twitter', organization: @organization %>
 </div>
 
 <script type="text/javascript">

@@ -7,7 +7,15 @@ class TwitterToken < ApplicationRecord
   validates :organization_id, :encrypted_token, :encrypted_token_iv, :network_user_name, :network_user_image_url, presence: true
   validates :network_user_id, presence: true, uniqueness: { scope: :organization_id }
 
-  def screen_name
-    "@#{network_user_name}" if network_user_name.present?
+  before_validation :set_network_user_image_url, on: [:create, :update]
+
+  def network_user_name
+    "@#{self[:network_user_name]}" if self[:network_user_name].present?
+  end
+
+  private
+
+  def set_network_user_image_url
+    self.network_user_image_url = "https://twitter.com/#{network_user_name}/profile_image?size=original"
   end
 end

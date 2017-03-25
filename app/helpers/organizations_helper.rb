@@ -1,6 +1,6 @@
 module OrganizationsHelper
   def organization_title(organization)
-    organization.campaigns.exists? ? organization.name : 'Welcome to groala'
+    organization.campaigns.present? ? organization.name : 'Welcome to groala'
   end
 
   def organization_title_class(user)

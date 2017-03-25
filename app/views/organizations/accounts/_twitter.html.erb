@@ -1,0 +1,41 @@
+<% if organization.twitter_tokens.present? %>
+  <% organization.twitter_tokens.each do |twitter_token| %>
+    <div class="col-md-4 mb-2">
+      <div class="card testimonial-card">
+        <div class="card-up twitter-blue"></div>
+        <div class="avatar text-xs-center">
+          <%= account_user_image(twitter_token) %>
+        </div>
+        <div class="card-block">
+          <h4 class="card-title"><%= account_user_name(twitter_token) %></h4>
+          <hr>
+          <p><i class="fa fa-twitter fa-lg"></i> Twitter</p>
+        </div>
+        <div class="card-data grey darken-1">
+          <small><i class="fa fa-eye fa-lg"></i> Visible to entire organization</small>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="col-md-4 mb-2">
+    <div class="card testimonial-card">
+      <div class="card-up twitter-blue"></div>
+      <div class="avatar text-xs-center">
+        <%= account_user_image %>
+      </div>
+      <div class="card-block">
+        <h4 class="card-title"><%= account_user_name %></h4>
+        <hr>
+        <p><i class="fa fa-twitter fa-lg"></i> Twitter</p>
+        <%= link_to twitter_authentication_path(params: { organization_id: organization.id }), class: 'btn green accent-4' do %>
+          <i class="fa fa-random left" aria-hidden="true"></i>
+          Connect
+        <% end %>
+      </div>
+      <div class="card-data grey darken-1">
+        <small><i class="fa fa-eye fa-lg"></i> Visible to entire organization</small>
+      </div>
+    </div>
+  </div>
+<% end %>

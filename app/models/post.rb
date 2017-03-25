@@ -7,10 +7,11 @@ class Post < ApplicationRecord
   has_many :tweets, dependent: :destroy
 
   # Make network_parent_id conditional on facebook when more networks added
-  validates :campaign_id, :network_id, :network_parent_id, presence: true
+  validates :campaign_id, :network_id, presence: true
   validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
-  validates_presence_of :twitter_account_id, if: :for_twitter?
-  validate :twitter_account_validation, if: :for_twitter?
+  validates_presence_of :network_parent_id, if: :for_facebook?
+  validates_presence_of :twitter_token_id, if: :for_twitter?
+  validate :twitter_token_validation, if: :for_twitter?
 
   def engagement_count
     case network
@@ -84,11 +85,15 @@ class Post < ApplicationRecord
 
   private
 
+  def for_facebook?
+    network == Network.facebook
+  end
+
   def for_twitter?
     network == Network.twitter
   end
 
-  def twitter_account_validation
-    errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_accounts.include?(twitter_account)
+  def twitter_token_validation
+    errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_tokens.include?(twitter_token)
   end
 end

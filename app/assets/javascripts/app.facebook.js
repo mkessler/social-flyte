@@ -23,7 +23,6 @@
       FB.login(function(response) {
         if (response.authResponse) {
           App.facebook.setToken(response);
-          location.reload();
         } else {
           alert('Authentication cancelled. Please try again.');
         }
@@ -43,6 +42,7 @@
         dataType: 'json',
         success: function(data){
           console.log(data);
+          location.reload();
         }
       });
     },
