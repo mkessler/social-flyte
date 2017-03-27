@@ -6,7 +6,6 @@ class TwitterTokensController < ApplicationController
   # GET /twitter_tokens/create_or_update
   # GET /twitter_tokens/create_or_update.json
   def create_or_update
-    byebug
     if @twitter_token.present?
       update
     else

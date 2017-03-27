@@ -1,11 +1,8 @@
 FactoryGirl.define do
   factory :facebook_token do
     user
-    encrypted_token "H0rdTxbeesAIjGU2GCYttf4levpgTwMIGb6lcZVhr2NwWm6e+gwpLW9VvU9h\n5SEpBhseo4Gdw8LzANyynkVIZt15bzuibDlGxxHLGzMJJxPU7Ue+q13I/rn2\ntFrJpS/HTfRHJ4P+ghQHWSAKxmyZm+BaeJWguF1V1JByNx3477pBWyyOOcQ7\nChDO8o5/msbawObZnhS15QuiS03GWUJILsr4n3/WP9lL4QJiJn852f0igtzx\nUEBwbdS619LLUt66yfAREpY9QG+JL/1I4fEmRWrVcDk=\n"
-    encrypted_token_iv "JCjQ8/u5pt+zcVt4\n"
-    network_user_id Faker::Number.number(10)
-    network_user_name Faker::Name.name
-    network_user_image_url Faker::Avatar.image
+    token 'EAAYWqqyPLBQBAOfZAd9NGZBVr5wCRNwx2S8qGKn9ZCC4sisKD5jOGgN9tCqxoZC6E4RAoKRXLqMJU5fmu28tcIbQzZCGTEV0F01NYdsGnelZB7IyxCvZBQAD0aE7zPOji2vZBNiULZClpZC2QrfZB0s9c1SZB7sgZC3vcjJwbeAsbddfp3Dm6RR8TTJrBTAZBUvcIoEs0ZD'
+    network_user_id '10106147434913000'
     expires_at Time.now + 1.day
   end
 end

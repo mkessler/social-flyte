@@ -185,7 +185,7 @@ RSpec.describe 'Posts', type: :request do
       before(:example) do
         sign_in(user)
         campaign_post
-        post network_tokens_set_path, params: { network: 'facebook', token: Faker::Number.number(10), expires_at: 3600, format: :json }
+        #post network_tokens_set_path, params: { network: 'facebook', token: Faker::Number.number(10), expires_at: 3600, format: :json }
       end
 
       context 'when member' do

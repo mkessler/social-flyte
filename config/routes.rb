@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   }
 
   # Facebook Tokens
-  resources :facebook_tokens, except: [:index, :show, :new, :edit] do
+  resources :facebook_tokens, except: [:index, :new, :edit] do
     post :create_or_update, on: :collection
   end
 
   #Twitter Tokens
-  resources :twitter_tokens, except: [:index, :show, :new, :edit]
+  resources :twitter_tokens, except: [:index, :new, :edit]
   get '/auth/twitter', as: 'twitter_authentication'
   get '/auth/twitter/callback', to: 'twitter_tokens#create_or_update'
 

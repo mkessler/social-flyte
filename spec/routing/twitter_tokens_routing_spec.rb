@@ -3,20 +3,8 @@ require "rails_helper"
 RSpec.describe TwitterTokensController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(:get => "/twitter_tokens").to route_to("twitter_tokens#index")
-    end
-
-    it "routes to #new" do
-      expect(:get => "/twitter_tokens/new").to route_to("twitter_tokens#new")
-    end
-
     it "routes to #show" do
-      expect(:get => "/twitter_tokens/1").to route_to("twitter_tokens#show", :id => "1")
-    end
-
-    it "routes to #edit" do
-      expect(:get => "/twitter_tokens/1/edit").to route_to("twitter_tokens#edit", :id => "1")
+      expect(:get => "/twitter_tokens/1.json").to route_to("twitter_tokens#show", :id => "1", format: 'json')
     end
 
     it "routes to #create" do

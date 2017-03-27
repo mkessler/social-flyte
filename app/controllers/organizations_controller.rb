@@ -25,13 +25,13 @@ class OrganizationsController < ApplicationController
 
   # GET /o/:id/accounts
   def accounts
-    set_meta_tags site: meta_title("#{@organization.name} Accounts")
+    set_meta_tags site: meta_title("#{@organization.name} | Accounts")
     add_breadcrumb 'Accounts', organization_accounts_path(@organization)
   end
 
   # GET /o/:id/users
   def users
-    set_meta_tags site: meta_title("#{@organization.name} Users")
+    set_meta_tags site: meta_title("#{@organization.name} | Users")
     add_breadcrumb 'Users', organization_users_path(@organization)
     @users = @organization.users
   end

@@ -12,19 +12,19 @@ RSpec.describe FacebookService, type: :service do
   }
   let(:service) { FacebookService.new(user, post) }
 
-  before(:example) do
-    facebook_token
-  end
-
   describe 'initialize' do
     it 'creates a new service object' do
-      expect(service).to be_truthy
+      VCR.use_cassette('facebook_service_sync') do
+        facebook_token
+        expect(service).to be_truthy
+      end
     end
   end
 
   describe 'sync' do
     it 'returns post data' do
       VCR.use_cassette('facebook_service_sync') do
+        facebook_token
         response = service.sync
         expect(response).to be_truthy
       end
