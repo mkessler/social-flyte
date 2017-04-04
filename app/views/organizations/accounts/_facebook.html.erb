@@ -1,5 +1,11 @@
 <div class="col-md-4 mb-2">
   <div class="card testimonial-card">
+    <% if current_user.facebook_token.nil? %>
+      <%= button_tag type: :button, class: 'groala-account-connect btn btn-sm green accent-4 facebook-login' do %>
+        <i class="fa fa-random left" aria-hidden="true"></i>
+        Connect
+      <% end %>
+    <% end %>
     <div class="card-up facebook-blue"></div>
     <div class="avatar text-xs-center">
       <%= account_user_image(current_user.facebook_token) %>
@@ -8,12 +14,6 @@
       <h4 class="card-title"><%= account_user_name(current_user.facebook_token) %></h4>
       <hr>
       <p><i class="fa fa-facebook-official"></i> Facebook</p>
-      <% if current_user.facebook_token.nil? %>
-        <%= button_tag type: :button, class: 'btn green accent-4 facebook-login' do %>
-          <i class="fa fa-random left" aria-hidden="true"></i>
-          Connect
-        <% end %>
-      <% end %>
     </div>
     <div class="card-data grey darken-1">
       <small><i class="fa fa-eye fa-lg"></i> Visible only to you</small>

@@ -133,12 +133,24 @@ footer.page-footer {
   }
 }
 
+.groala-account-connect {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+}
+
 .groala-break-word {
   word-break: break-word;
 }
 
 .groala-datatable {
   opacity: 0;
+}
+
+.groala-organization-accounts {
+  .card {
+    position: relative;
+  }
 }
 
 .groala-page-header-details {
