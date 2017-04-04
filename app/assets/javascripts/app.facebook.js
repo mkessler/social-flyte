@@ -23,26 +23,33 @@
       FB.login(function(response) {
         if (response.authResponse) {
           App.facebook.setToken(response);
-          App.facebook.userLoggedIn();
         } else {
           alert('Authentication cancelled. Please try again.');
         }
       });
     },
     setToken: function(response) {
-      App.networkTokens.set({
-        network: 'facebook',
-        token: response.authResponse.accessToken,
-        expires_at: response.authResponse.expiresIn
+      $.ajax({
+        url: '/facebook_tokens/create_or_update',
+        type: 'POST',
+        data: {
+          facebook_token: {
+            network_user_id: response.authResponse.userID,
+            token: response.authResponse.accessToken,
+            expires_at: response.authResponse.expiresIn
+          }
+        },
+        dataType: 'json',
+        success: function(data){
+          console.log(data);
+          location.reload();
+        }
       });
     },
     status: function() {
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
-          var uid = response.authResponse.userID;
-          var accessToken = response.authResponse.accessToken;
           App.facebook.setToken(response);
-          $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
           $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         } else if (response.status === 'not_authorized') {
           // the user is logged in to Facebook,
@@ -56,18 +63,6 @@
       $('body').on('click', '.facebook-login', function(){
         App.facebook.login();
       });
-    },
-    userLoggedIn: function() {
-      if ($('#connected-facebook span').length) {
-        $('.facebook-login').remove();
-        $('#connected-facebook span').html('Status: Connected <i class="fa fa-check-circle-o fa-lg fa-fw green-text"></i>');
-      }
-      if ($('#new_post').length) {
-        $('#new_post').submit();
-      }
-      if ($('#last-sync').length) {
-        App.posts.sync();
-      }
     },
     userLoggedOut: function(status) {
       if (status === 'not_authorized') {

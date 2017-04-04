@@ -11,14 +11,19 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  # Twitter accounts
-  get '/auth/:network/callback', to: 'organizations#create_or_update_twitter_account'
+  # Facebook Tokens
+  resources :facebook_tokens, except: [:index, :new, :edit] do
+    post :create_or_update, on: :collection
+  end
 
-  # Network Tokens
-  post 'network_tokens/set'
+  #Twitter Tokens
+  resources :twitter_tokens, except: [:index, :new, :edit]
+  get '/auth/twitter', as: 'twitter_authentication'
+  get '/auth/twitter/callback', to: 'twitter_tokens#create_or_update'
 
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
+    get :accounts
     get :users
     resources :invitations, except: [:index, :show, :edit]
     resources :campaigns, path: 'c' do

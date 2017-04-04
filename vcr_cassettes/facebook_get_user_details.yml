@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAAYWqqyPLBQBAOfZAd9NGZBVr5wCRNwx2S8qGKn9ZCC4sisKD5jOGgN9tCqxoZC6E4RAoKRXLqMJU5fmu28tcIbQzZCGTEV0F01NYdsGnelZB7IyxCvZBQAD0aE7zPOji2vZBNiULZClpZC2QrfZB0s9c1SZB7sgZC3vcjJwbeAsbddfp3Dm6RR8TTJrBTAZBUvcIoEs0ZD&fields=id,name,picture.type(large)
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Etag:
+      - '"ae256d5179ec64b69cd32c4e50d15af84d333e98"'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Rev:
+      - '2915971'
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - CkGUXRb6BXw
+      Facebook-Api-Version:
+      - v2.8
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - vj0PTau2MyGVAmblWJB1YWJ+uU6K5E2XIKHvtteHq5Z/qncMe30rxo+30q+fK7lb/3VWuEVnNpAw/nNLBrWmvQ==
+      Date:
+      - Mon, 27 Mar 2017 05:50:59 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '227'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"10106147434913000","name":"Mikael Kessler","picture":{"data":{"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p200x200\/16472938_10106647559698920_6513462413499394065_n.jpg?oh=fcc9dd4061a68990249e422abd975ef7&oe=596BE341"}}}'
+    http_version: 
+  recorded_at: Mon, 27 Mar 2017 05:50:59 GMT
+recorded_with: VCR 3.0.3

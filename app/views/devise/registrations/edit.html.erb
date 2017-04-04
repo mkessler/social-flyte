@@ -88,35 +88,3 @@
     </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-md-6 mb-3">
-    <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
-      <li class="nav-item">
-        <%= link_to '#connected-networks', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
-          <i class="fa fa-globe" aria-hidden="true"></i> Connected Accounts
-        <% end %>
-      </li>
-    </ul>
-
-    <div class="tab-content card">
-      <div class="tab-pane fade in active text-xs-center" id="connected-networks" role="tabpanel">
-        <div class="groala-user-network" id="connected-facebook">
-          <a type="button" class="btn-floating btn-large btn-fb"><i class="fa fa-facebook"></i></a>
-          <span>Status: Checking <i class="fa fa-refresh fa-spin fa-lg fa-fw"></i></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $(document).on('ready', function() {
-    window.fbAsyncInit = function() {
-      App.facebook.init(<%= Rails.application.secrets.facebook_app_id %>);
-      App.facebook.status();
-    }
-    App.facebook.loadSDK();
-    console.log('Facebook Authentication ready.');
-  });
-</script>

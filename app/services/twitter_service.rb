@@ -5,15 +5,15 @@ class TwitterService
     @client = Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.secrets.twitter_consumer_key
       config.consumer_secret     = Rails.application.secrets.twitter_consumer_secret
-      config.access_token        = post.twitter_account.token
-      config.access_token_secret = post.twitter_account.secret
+      config.access_token        = post.twitter_token.token
+      config.access_token_secret = post.twitter_token.secret
     end
     @post = post
   end
 
   def sync
     if @post.network == Network.twitter
-      update_account
+      update_token
       build_mentions
       @post.reload
       @post.update_sync_status
@@ -39,11 +39,10 @@ class TwitterService
     end
   end
 
-  def update_account
-    account = @client.user(@post.twitter_account.twitter_id.to_i)
-    @post.twitter_account.update_attributes(
-      screen_name: account.screen_name,
-      image_url: account.profile_image_uri_https.to_s
+  def update_token
+    account = @client.user(@post.twitter_token.network_user_id.to_i)
+    @post.twitter_token.update_attributes(
+      network_user_name: account.screen_name,
     )
   end
 end

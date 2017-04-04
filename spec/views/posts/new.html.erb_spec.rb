@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'posts/new', type: :view do
+  let(:user) { FactoryGirl.create(:user) }
+
   before(:each) do
     @organization = FactoryGirl.create(:organization)
     @campaign = FactoryGirl.create(:campaign)
@@ -9,6 +11,7 @@ RSpec.describe 'posts/new', type: :view do
       :network_post_id => 'MyString',
       :network_parent_id => 'MyString'
     ))
+    sign_in(user)
   end
 
   it 'renders new post form' do

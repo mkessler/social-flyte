@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   # POST o/:organization_id/c/:campaign_id/posts/:id/sync_post.json
   def sync_post
     respond_to do |format|
-      if @post.can_be_synced? && network_token_exists?(@post.network.slug) && @post.sync(current_user, session["#{@post.network.slug}_token"])
+      if @post.can_be_synced? && @post.sync(current_user)
         format.json { render json: status.to_json }
       else
         format.json { render json: {error: true}.to_json, status: :unprocessable_entity }
@@ -59,15 +59,13 @@ class PostsController < ApplicationController
   # POST o/:organization_id/c/:campaign_id/posts.json
   def create
     @post = @campaign.posts.new(post_params)
-    network = Network.find(post_params[:network_id])
-    network_token_exists = network_token_exists?(network.slug)
     respond_to do |format|
-      if network_token_exists && post_params.present? && @post.save
-        @post.sync(current_user, session["#{network.slug}_token"])
+      if post_params.present? && @post.save
+        @post.sync(current_user)
         format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
       else
-        flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
+        #flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end

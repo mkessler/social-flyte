@@ -16,8 +16,8 @@ RSpec.describe Post, type: :model do
       expect(Post.reflect_on_association(:network).macro).to eql(:belongs_to)
     end
 
-    it 'belongs to twitter_account' do
-      expect(Post.reflect_on_association(:twitter_account).macro).to eql(:belongs_to)
+    it 'belongs to twitter_token' do
+      expect(Post.reflect_on_association(:twitter_token).macro).to eql(:belongs_to)
     end
 
     it 'has many reactions' do
@@ -44,16 +44,16 @@ RSpec.describe Post, type: :model do
       expect(post).to be_valid
     end
 
-    # it 'is valid with valid with missing network_parent_id' do
-    #   valid_attributes = FactoryGirl.attributes_for(
-    #     :post,
-    #     campaign_id: campaign.id,
-    #     network_parent_id: nil
-    #   )
-    #   post = Post.new(valid_attributes)
-    #
-    #   expect(post).to be_valid
-    # end
+    it 'is not valid with valid with missing network_parent_id for facebook' do
+      valid_attributes = FactoryGirl.attributes_for(
+        :post,
+        campaign_id: campaign.id,
+        network_parent_id: nil
+      )
+      post = Post.new(valid_attributes)
+
+      expect(post).to_not be_valid
+    end
 
     it 'is not valid with missing campaign' do
       invalid_attributes = FactoryGirl.attributes_for(
@@ -200,12 +200,12 @@ RSpec.describe Post, type: :model do
 
   describe '.sync' do
     it 'enqueues post sync job' do
-      expect{post.sync(user, Faker::Number.number(10))}.to have_enqueued_job(SyncPostJob)
+      expect{post.sync(user)}.to have_enqueued_job(SyncPostJob)
     end
 
     it 'updates job id' do
       job_id = post.job_id
-      post.sync(user, Faker::Number.number(10))
+      post.sync(user)
       expect(post.job_id).to be_truthy
       expect(post.job_id).to_not eql(job_id)
     end

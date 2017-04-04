@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307061459) do
+ActiveRecord::Schema.define(version: 20170325074043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,20 @@ ActiveRecord::Schema.define(version: 20170307061459) do
     t.boolean  "flagged",            default: false, null: false
     t.index ["post_id", "network_comment_id"], name: "index_comments_on_post_id_and_network_comment_id", unique: true, using: :btree
     t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+  end
+
+  create_table "facebook_tokens", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.string   "encrypted_token",        null: false
+    t.string   "encrypted_token_iv",     null: false
+    t.string   "network_user_id",        null: false
+    t.string   "network_user_name"
+    t.string   "network_user_image_url"
+    t.datetime "expires_at",             null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id", "network_user_id"], name: "index_facebook_tokens_on_user_id_and_network_user_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_facebook_tokens_on_user_id", using: :btree
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -95,16 +109,16 @@ ActiveRecord::Schema.define(version: 20170307061459) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "network_id",                     null: false
-    t.string   "network_post_id",                null: false
+    t.integer  "network_id",                    null: false
+    t.string   "network_post_id",               null: false
     t.string   "network_parent_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "campaign_id",                    null: false
-    t.integer  "sync_count",         default: 0, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "campaign_id",                   null: false
+    t.integer  "sync_count",        default: 0, null: false
     t.datetime "synced_at"
     t.string   "job_id"
-    t.integer  "twitter_account_id"
+    t.integer  "twitter_token_id"
     t.index ["campaign_id", "network_id", "network_post_id"], name: "index_posts_on_campaign_id_and_network_id_and_network_post_id", unique: true, using: :btree
     t.index ["campaign_id"], name: "index_posts_on_campaign_id", using: :btree
     t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
@@ -142,19 +156,19 @@ ActiveRecord::Schema.define(version: 20170307061459) do
     t.index ["post_id"], name: "index_tweets_on_post_id", using: :btree
   end
 
-  create_table "twitter_accounts", force: :cascade do |t|
-    t.integer  "organization_id",     null: false
-    t.string   "twitter_id",          null: false
-    t.string   "encrypted_token",     null: false
-    t.string   "encrypted_secret",    null: false
-    t.string   "encrypted_token_iv",  null: false
-    t.string   "encrypted_secret_iv", null: false
-    t.string   "screen_name",         null: false
-    t.string   "image_url",           null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-    t.index ["organization_id", "twitter_id"], name: "index_twitter_accounts_on_organization_id_and_twitter_id", unique: true, using: :btree
-    t.index ["organization_id"], name: "index_twitter_accounts_on_organization_id", using: :btree
+  create_table "twitter_tokens", force: :cascade do |t|
+    t.integer  "organization_id",        null: false
+    t.string   "encrypted_token",        null: false
+    t.string   "encrypted_secret",       null: false
+    t.string   "encrypted_token_iv",     null: false
+    t.string   "encrypted_secret_iv",    null: false
+    t.string   "network_user_id",        null: false
+    t.string   "network_user_name",      null: false
+    t.string   "network_user_image_url", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["organization_id", "network_user_id"], name: "index_twitter_tokens_on_organization_id_and_network_user_id", unique: true, using: :btree
+    t.index ["organization_id"], name: "index_twitter_tokens_on_organization_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -179,6 +193,7 @@ ActiveRecord::Schema.define(version: 20170307061459) do
 
   add_foreign_key "campaigns", "organizations"
   add_foreign_key "comments", "posts"
+  add_foreign_key "facebook_tokens", "users"
   add_foreign_key "invitations", "organizations"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
@@ -186,5 +201,5 @@ ActiveRecord::Schema.define(version: 20170307061459) do
   add_foreign_key "posts", "networks"
   add_foreign_key "reactions", "posts"
   add_foreign_key "tweets", "posts"
-  add_foreign_key "twitter_accounts", "organizations"
+  add_foreign_key "twitter_tokens", "organizations"
 end

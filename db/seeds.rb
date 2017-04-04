@@ -14,13 +14,12 @@ if Rails.env.development?
     name: Faker::Space.company
   )
 
-  twitter_account = TwitterAccount.create(
+  twitter_token = TwitterToken.create(
     organization: organization,
-    twitter_id: 109068078,
+    network_user_id: 109068078,
     token: Rails.application.secrets.twitter_access_token,
     secret: Rails.application.secrets.twitter_access_token_secret,
-    screen_name: 'mikaelkessler',
-    image_url: Faker::Avatar.image
+    network_user_name: 'mikaelkessler'
   )
 
   Membership.create(user: user, organization: organization)
@@ -30,5 +29,5 @@ if Rails.env.development?
   end
 
   Post.create(network: Network.facebook, campaign: Campaign.first, network_post_id: '10154368835501263', network_parent_id: '68680511262')
-  Post.create(network: Network.twitter, campaign: Campaign.first, network_post_id: '614092454652981248', network_parent_id: twitter_account.twitter_id, twitter_account_id: twitter_account.id)
+  Post.create(network: Network.twitter, campaign: Campaign.first, network_post_id: '614092454652981248', twitter_token_id: twitter_token.id)
 end

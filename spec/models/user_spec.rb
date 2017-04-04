@@ -11,6 +11,10 @@ RSpec.describe User, type: :model do
     it 'has many organizations' do
       expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
     end
+
+    it 'has one facebook token' do
+      expect(User.reflect_on_association(:facebook_token).macro).to eql(:has_one)
+    end
   end
 
   describe 'validations' do

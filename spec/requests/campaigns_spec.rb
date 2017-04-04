@@ -259,7 +259,7 @@ RSpec.describe 'Campaigns', type: :request do
               expect(response).to have_http_status(302)
             end
 
-            it 'redirects to organization' do
+            it 'redirects to campaign' do
               expect(response).to redirect_to(organization_campaign_url(organization, assigns(:campaign)))
             end
           end
@@ -389,7 +389,7 @@ RSpec.describe 'Campaigns', type: :request do
               expect(response).to have_http_status(422)
             end
 
-            it 'renders organization errors' do
+            it 'renders campaign errors' do
               expect(response.body).to eq(assigns(:campaign).errors.to_json)
             end
           end
@@ -620,7 +620,7 @@ RSpec.describe 'Campaigns', type: :request do
               expect(response).to have_http_status(422)
             end
 
-            it 'renders organization errors' do
+            it 'renders campaign errors' do
               expect(response.body).to eq(assigns(:campaign).errors.to_json)
             end
           end
