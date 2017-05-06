@@ -19,9 +19,12 @@ a {
   }
 }
 
-@media (min-width: 1441px) {
+@media (min-width: 480px) {
   .breadcrumb {
     margin-left: 240px;
+  }
+  .side-nav.fixed {
+    transform: translateX(0) !important;
   }
 }
 
@@ -121,6 +124,18 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 
 .fixed-sn main {
   padding-top: 3.5rem;
+}
+
+@media (min-width: 480px) {
+  .fixed-sn .double-nav, .fixed-sn main, .fixed-sn footer {
+    padding-left: 240px;
+  }
+}
+
+@media (min-width: 480px) {
+  .navbar .button-collapse {
+    display: none;
+  }
 }
 
 footer.page-footer {
