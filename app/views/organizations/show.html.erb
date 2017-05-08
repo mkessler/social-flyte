@@ -20,7 +20,7 @@
         <h4 class="card-title">Campaigns</h4>
         <hr>
         <p><i class="fa fa-hashtag"></i> <%= @organization.campaigns.count %> total</p>
-        <%= link_to organization_campaigns_path(@organization), class: 'btn primary-color' do %>
+        <%= link_to organization_campaigns_path(@organization), class: 'btn primary-color-dark' do %>
           <i class="fa fa-eye left"></i> View
         <% end %>
       </div>
@@ -36,7 +36,7 @@
         <h4 class="card-title">Users</h4>
         <hr>
         <p><i class="fa fa-hashtag"></i> <%= @organization.users.count %> total</p>
-        <%= link_to organization_users_path(@organization), class: 'btn primary-color' do %>
+        <%= link_to organization_users_path(@organization), class: 'btn primary-color-dark' do %>
           <i class="fa fa-eye left"></i> View
         <% end %>
       </div>
@@ -44,7 +44,7 @@
   </div>
   <div class="col-md-4 mb-2">
     <div class="card testimonial-card">
-      <div class="card-up primary-color-dark"></div>
+      <div class="card-up primary-color"></div>
       <div class="avatar text-xs-center">
         <%= content_tag(:i, nil, class: 'fa fa-superpowers fa-4x mt-2', aria: { hidden: true }) %>
       </div>
@@ -52,7 +52,7 @@
         <h4 class="card-title">Social Accounts</h4>
         <hr>
         <p><i class="fa fa-hashtag"></i> <%= @organization.twitter_tokens.count %> total</p>
-        <%= link_to organization_accounts_path(@organization), class: 'btn primary-color' do %>
+        <%= link_to organization_accounts_path(@organization), class: 'btn primary-color-dark' do %>
           <i class="fa fa-eye left"></i> View
         <% end %>
       </div>
