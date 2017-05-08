@@ -19,9 +19,12 @@ a {
   }
 }
 
-@media (min-width: 1441px) {
+@media (min-width: 768px) {
   .breadcrumb {
     margin-left: 240px;
+  }
+  .side-nav.fixed {
+    transform: translateX(0) !important;
   }
 }
 
@@ -123,6 +126,18 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
   padding-top: 3.5rem;
 }
 
+@media (min-width: 768px) {
+  .fixed-sn .double-nav, .fixed-sn main, .fixed-sn footer {
+    padding-left: 240px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar .button-collapse {
+    display: none;
+  }
+}
+
 footer.page-footer {
   background-color: transparent;
   margin-top: 0;
@@ -205,6 +220,12 @@ footer.page-footer {
     height: auto;
     margin: 0 0 0.5em;
     padding: 1.25em 0;
+  }
+  .collapsible-body {
+    a {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+    }
   }
   .logo-container {
     width: 80%;
