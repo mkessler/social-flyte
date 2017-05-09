@@ -40,7 +40,7 @@
             targets: 2,
             data: 'user',
             render: function ( data, type, full, meta ) {
-              return '<a class="light-blue-text groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
+              return '<a class=" groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
             }
           },
           {

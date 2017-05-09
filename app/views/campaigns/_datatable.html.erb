@@ -20,12 +20,12 @@
   <tbody>
     <% campaigns.each do |campaign| %>
       <tr id="campaign-<%= campaign.id %>">
-        <td><i class="fa fa-hashtag grey-text" aria-hidden="true"></i><%= link_to campaign.name, organization_campaign_path(organization, campaign), class: 'light-blue-text groala-standard-link' %></td>
+        <td><i class="fa fa-hashtag grey-text" aria-hidden="true"></i><%= link_to campaign.name, organization_campaign_path(organization, campaign), class: ' groala-standard-link' %></td>
         <td class="text-xs-center" data-search="<%= campaign.networks.join(', ') %>"><%= campaign_networks_icons(campaign) %></td>
         <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(campaign.engagement_count) %> <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" title="Interactions"></i></td>
         <td class="text-xs-center groala-no-wrap">
           <%= link_to organization_campaign_path(organization, campaign) do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg light-blue-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
+            <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg ', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
           <% end %>
           <%= link_to edit_organization_campaign_path(organization, campaign) do %>
             <%= content_tag(:i, nil, :class => 'fa fa-pencil fa-lg purple-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit') %>

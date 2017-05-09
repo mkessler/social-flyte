@@ -1,7 +1,7 @@
 <% content_for :page_title do %>
   <h2 class="dashboard-title extended-title-nav">
     Profile
-    <%= link_to new_organization_path, class: 'btn-floating btn-small green accent-4 mr-0 extended-nav-1' do %>
+    <%= link_to new_organization_path, class: 'btn-floating btn-small default-color mr-0 extended-nav-1' do %>
       <i class="fa fa-bank" aria-hidden="true" data-toggle="tooltip" title="New Organization"></i>
     <% end %>
     <%= link_to root_path, class: 'btn-floating btn-small mr-0' do %>
@@ -30,7 +30,7 @@
 
 <div class="row">
   <div class="col-lg-12 mb-3">
-    <ul class="nav nav-tabs tabs-1 light-blue darken-2" role="tablist">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
         <%= link_to '#edit-profile', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
           <i class="fa fa-pencil" aria-hidden="true"></i> Edit

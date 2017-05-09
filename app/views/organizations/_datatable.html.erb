@@ -20,12 +20,12 @@
   <tbody>
     <% organizations.each do |organization| %>
       <tr id="organization-<%= organization.id %>">
-        <td><%= link_to organization.name, organization_path(organization), class: 'light-blue-text groala-standard-link' %></td>
+        <td><%= link_to organization.name, organization_path(organization), class: ' groala-standard-link' %></td>
         <td class="text-xs-center"><%= number_with_delimiter(organization.campaigns.count) %></td>
         <td class="text-xs-center groala-no-wrap"><%= number_with_delimiter(organization.users.count) %></td>
         <td class="text-xs-center groala-no-wrap">
           <%= link_to organization_path(organization) do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg light-blue=text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
+            <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
           <% end %>
           <%= link_to edit_organization_path(organization) do %>
             <%= content_tag(:i, nil, :class => 'fa fa-pencil fa-lg purple-text', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'Edit') %>
