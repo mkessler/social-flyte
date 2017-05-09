@@ -1,12 +1,11 @@
-<ul id="slide-out" class="side-nav fixed primary-color custom-scrollbar" style="transform: translateX(-100%);">
-  <div>
+<ul id="slide-out" class="side-nav fixed primary-color custom-scrollbar">
   <li class="text-xs-center">
     <%= link_to edit_user_registration_path, class: 'user-image waves-effect' do %>
       <%= gravatar_for(current_user) %>
     <% end %>
   </li>
 
-  <li>
+  <li class="side-nav-menu-container">
     <ul class="collapsible collapsible-accordion">
       <% if current_user.organizations.present? %>
         <% current_user.organizations.each do |organization| %>

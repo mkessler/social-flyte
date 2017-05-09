@@ -1,7 +1,7 @@
 # Use this setup block to configure all options available in SimpleForm.
 SimpleForm.setup do |config|
   config.error_notification_class = 'alert danger-color white-text mb-2'
-  config.button_class = 'btn green accent-4'
+  config.button_class = 'btn default-color'
   config.boolean_label_class = nil
 
   config.wrappers :vertical_form, tag: 'div', class: 'md-form', error_class: 'has-error' do |b|

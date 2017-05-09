@@ -70,8 +70,8 @@
       } else {
         $('#connected-facebook span').html('Status: Logged Out <button type="button" class="btn light-blue btn-sm waves-effect waves-light facebook-login">Log In</button>');
       }
-      $('#new_post button[type="submit"]').replaceWith('<button type="button" class="btn green accent-4 facebook-login waves-effect waves-light"><i class="fa fa-check-circle-o left" aria-hidden="true"></i> Submit</button>');
-      $('#post-sync-trigger').replaceWith('<button type="button" class="btn green accent-4 facebook-login waves-effect waves-light"><i class="fa fa-refresh left" aria-hidden="true"></i> Sync Now</button>');
+      $('#new_post button[type="submit"]').replaceWith('<button type="button" class="btn default-color facebook-login waves-effect waves-light"><i class="fa fa-check-circle-o left" aria-hidden="true"></i> Submit</button>');
+      $('#post-sync-trigger').replaceWith('<button type="button" class="btn default-color facebook-login waves-effect waves-light"><i class="fa fa-refresh left" aria-hidden="true"></i> Sync Now</button>');
     }
   };
 

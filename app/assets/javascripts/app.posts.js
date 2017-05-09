@@ -4,10 +4,10 @@
   App.posts ={
     messages: {
       error: ['pink', 'exclamation-triangle', 'Error - There was an error trying to sync your post.'],
-      success: ['green accent-4', 'refresh fa-spin', 'Syncing - This page will automatically refresh when your sync is complete.']
+      success: ['default-color', 'refresh fa-spin', 'Syncing - This page will automatically refresh when your sync is complete.']
     },
     disableButton: function() {
-      $('#post-sync-trigger').addClass('grey').removeClass('green accent-4').attr({
+      $('#post-sync-trigger').addClass('grey').removeClass('default-color').attr({
         'id': '',
         'disabled': true
       });

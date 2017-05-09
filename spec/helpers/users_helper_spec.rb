@@ -7,7 +7,7 @@ RSpec.describe UsersHelper, type: :helper do
         user = FactoryGirl.create(:user)
         gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
 
-        expect(gravatar_for(user)).to eql("<img alt=\"#{user.name}\" class=\"gravatar rounded-circle\" src=\"https://secure.gravatar.com/avatar/#{gravatar_id}?d=identicon&amp;s=74\" />")
+        expect(gravatar_for(user)).to eql("<img alt=\"#{user.name}\" class=\"gravatar rounded-circle\" src=\"https://secure.gravatar.com/avatar/#{gravatar_id}?d=identicon&amp;s=96\" />")
       end
     end
 

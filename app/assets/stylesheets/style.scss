@@ -19,6 +19,10 @@ a {
   }
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+  content: '\203A';
+}
+
 @media (min-width: 768px) {
   .breadcrumb {
     margin-left: 240px;
@@ -213,6 +217,10 @@ footer.page-footer {
 }
 
 .side-nav {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  padding-bottom: 0;
   i {
     opacity: 0.6;
   }
@@ -227,6 +235,9 @@ footer.page-footer {
       border-radius: 2px;
     }
   }
+  .side-nav-menu-container {
+    flex-grow: 1;
+  }
   .logo-container {
     width: 80%;
     border-top: 1px solid rgba(255,255,255,0.6);
@@ -234,9 +245,6 @@ footer.page-footer {
     padding: 0.5em 0 1em;
     color: rgba(255,255,255,0.6);
     font-size: 2em;
-    position: absolute;
-    left: 10%;
-    bottom: 0;
     .logo {
       display: inline;
       height: 32px;
