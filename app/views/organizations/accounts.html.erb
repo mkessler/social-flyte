@@ -16,7 +16,7 @@
 <script type="text/javascript">
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
-      App.facebook.init(<%= Rails.application.secrets.facebook_app_id %>);
+      App.facebook.init('<%= Rails.application.secrets.facebook_app_id %>');
       <% if current_user.facebook_token.nil? or current_user.facebook_token.expired? %>
         App.facebook.status();
       <% end %>

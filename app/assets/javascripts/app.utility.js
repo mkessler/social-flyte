@@ -38,15 +38,11 @@
       } else {
         return '<i class="fa fa-'+network_slug+' fa-lg fa-fw" aria-hidden="true"></i>';
       }
-    },
-    openSideNav: function() {
-      $('.groala-org-side').trigger('click');
     }
   }
 
   $(document).on('ready', function() {
     console.log('Utility ready.');
-    App.utility.openSideNav();
   });
 
 }).call(this);

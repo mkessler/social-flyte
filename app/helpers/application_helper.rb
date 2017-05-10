@@ -8,4 +8,8 @@ module ApplicationHelper
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">'.html_safe
   end
+
+  def sidenav_active_class(controllers=[])
+    controllers.include?(params[:controller]) ? 'active' : ''
+  end
 end

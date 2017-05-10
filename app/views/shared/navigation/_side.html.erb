@@ -9,8 +9,8 @@
     <ul class="collapsible collapsible-accordion">
       <% if current_user.organizations.present? %>
         <% current_user.organizations.each do |organization| %>
-          <li>
-            <a class="collapsible-header waves-effect arrow-r groala-org-side">
+          <li class="<%= sidenav_active_class(['organizations', 'campaigns', 'posts']) %>">
+            <a class="collapsible-header waves-effect arrow-r <%= sidenav_active_class(['organizations', 'campaigns', 'posts']) %>">
               <i class="fa fa-cube"></i>
               <%= organization.name.truncate(15) %>
               <i class="fa fa-angle-down rotate-icon"></i>
@@ -29,7 +29,6 @@
               </ul>
             </div>
           </li>
-
         <% end %>
       <% else %>
         <li>
@@ -38,8 +37,8 @@
           <% end %>
         </li>
       <% end %>
-      <li>
-        <%= link_to edit_user_registration_path, class: 'waves-effect' do %>
+      <li class="<%= sidenav_active_class(['users/registrations']) %>">
+        <%= link_to edit_user_registration_path, class: "waves-effect #{sidenav_active_class(['users/registrations'])}" do %>
           <%= content_tag(:i, nil, :class => 'fa fa-user-o', aria: { hidden: true }) %> Profile
         <% end %>
       </li>
