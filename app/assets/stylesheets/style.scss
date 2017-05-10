@@ -224,6 +224,12 @@ footer.page-footer {
   i {
     opacity: 0.6;
   }
+  li {
+    > .active:not(.collapsible-header) {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 2px;
+    }
+  }
   .user-image{
     height: auto;
     margin: 0 0 0.5em;

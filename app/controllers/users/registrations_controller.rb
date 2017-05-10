@@ -37,8 +37,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    set_meta_tags site: meta_title('My Profile')
-    add_breadcrumb 'My Profile', edit_user_registration_path
+    set_meta_tags site: meta_title('Profile')
+    add_breadcrumb 'Profile', edit_user_registration_path
     super
   end
 
@@ -46,8 +46,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # We need to use a copy of the resource because we don't want to change
   # the current user in place.
   def update
-    set_meta_tags site: meta_title('My Profile')
-    add_breadcrumb 'My Profile', edit_user_registration_path
+    set_meta_tags site: meta_title('Profile')
+    add_breadcrumb 'Profile', edit_user_registration_path
     super
   end
 
