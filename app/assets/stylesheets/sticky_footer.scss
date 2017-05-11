@@ -1,18 +1,25 @@
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 58px;
-}
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 50px;
-  line-height: 50px; /* Vertically center the text there */
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html {
+    position: relative;
+    min-height: 100%;
+  }
+  body {
+    /* Margin bottom by footer height */
+    margin-bottom: 58px;
+  }
+  footer {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 50px;
+    line-height: 50px; /* Vertically center the text there */
+  }
 }

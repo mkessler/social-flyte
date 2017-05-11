@@ -9,7 +9,7 @@ module ApplicationHelper
     <meta name="theme-color" content="#ffffff">'.html_safe
   end
 
-  def sidenav_active_class(controllers=[])
-    controllers.include?(params[:controller]) ? 'active' : ''
+  def sidenav_active_class(controllers=[], action=nil)
+    controllers.include?(params[:controller]) || action == params[:action] ? 'active' : ''
   end
 end
