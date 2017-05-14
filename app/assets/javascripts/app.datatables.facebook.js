@@ -60,7 +60,7 @@
         ],
         language: {
           emptyTable: 'No comments exist!',
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Comments</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Comments</span>'
         },
         order: [
           [3, 'desc']
@@ -104,7 +104,7 @@
         ],
         language: {
           emptyTable: 'No reactions exist!',
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Reactions</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Reactions</span>'
         },
         order: [
           [1, 'asc']

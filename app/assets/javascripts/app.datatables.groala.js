@@ -11,7 +11,7 @@
           { width: '15%' }
         ],
         language: {
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Campaigns</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Campaigns</span>'
         },
         processing: false,
         serverSide: false
@@ -82,7 +82,7 @@
         ],
         language: {
           emptyTable: 'No interactions flagged!',
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Flagged Interactions</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Flagged Interactions</span>'
         },
         order: [
           [2, 'asc']
@@ -97,7 +97,7 @@
         ],
         language: {
           emptyTable: 'No invitations sent!',
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Invitations</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Invitations</span>'
         },
         processing: false,
         serverSide: false
@@ -112,7 +112,7 @@
           { width: '15%' }
         ],
         language: {
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Organizations</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Organizations</span>'
         },
         processing: false,
         serverSide: false
@@ -126,7 +126,7 @@
           { width: '10%' }
         ],
         language: {
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Posts</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Posts</span>'
         },
         processing: false,
         serverSide: false
@@ -139,7 +139,7 @@
           { width: '10%' }
         ],
         language: {
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Users</small>'
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Users</span>'
         },
         processing: false,
         serverSide: false

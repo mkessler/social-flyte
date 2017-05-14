@@ -5,6 +5,7 @@
     defaults: function() {
       $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,
+        dom: '<rt><"text-xs-center" p><"text-xs-center" i><"clear">',
         deferRender: true,
         drawCallback: function(settings) {
           $('#'+settings.sTableId+'_paginate ul.pagination').wrap('<nav/>');
@@ -32,9 +33,9 @@
             }
           },
           emptyTable: 'No data available!',
-          info: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Displaying _START_ - _END_ of _TOTAL_ Records</small>',
-          infoEmpty: '<small><i class="fa fa-list orange-text" aria-hidden="true"></i> Showing 0 to 0 of 0 entries</small>',
-          infoFiltered: '<br/><small><i class="fa fa-filter orange-text" aria-hidden="true"></i> Filtered from _MAX_ Records</small>',
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Records</span>',
+          infoEmpty: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> 0 Records</span>',
+          infoFiltered: '<span class="tag tag-default"><i class="fa fa-filter" aria-hidden="true"></i> Filtered from _MAX_ Records</span>',
           paginate: {
             next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
             previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
@@ -42,7 +43,7 @@
           processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span>'
         },
         lengthChange: false,
-        pageLength: 5,
+        pageLength: 10,
         processing: true,
         responsive: {
           details: {
