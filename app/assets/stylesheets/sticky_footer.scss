@@ -2,6 +2,13 @@
 -------------------------------------------------- */
 footer {
   display: none;
+  background-color: transparent;
+  margin-top: 0;
+  opacity: 0.8;
+  padding-top: 0;
+  .logo {
+    height: 22px;
+  }
 }
 
 @media (max-width: 768px) {

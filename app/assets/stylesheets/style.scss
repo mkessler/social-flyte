@@ -75,18 +75,6 @@ a {
   }
 }
 
-.dataTables_filter {
-  display: none;
-}
-
-.dataTables_wrapper .dataTables_paginate {
-  padding-top: 0.85em;
-}
-
-.dataTables_wrapper .dataTables_paginate .pagination {
-  font-size: .85em;
-}
-
 .facebook-blue {
   background-color: #3b5998;
 }
@@ -101,7 +89,7 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
   border: 0;
   border-radius: 0;
   box-shadow: 0 0 0 #000;
-  color: #00c853;
+  color: #2bbbad;
   content: "\f0fe";
   font: normal normal normal 18px/1 FontAwesome;
   left: 6px;
@@ -119,11 +107,20 @@ div.dataTables_wrapper div.dataTables_processing {
 
 div.dataTables_paginate li.first > a, div.dataTables_paginate li.previous > a,
 div.dataTables_paginate li.next > a, div.dataTables_paginate li.last > a {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   &:before, &:after {
     content: "";
   }
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+  text-align: inherit;
+  padding-bottom: 0.85em;
+}
+
+div.dataTables_wrapper div.dataTables_info {
+  padding-top: 0;
 }
 
 table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:before, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:before, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:before, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:before, table.dataTable thead .sorting_desc_disabled:after {
@@ -135,7 +132,7 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 }
 
 @media (min-width: 768px) {
-  .fixed-sn .double-nav, .fixed-sn main, .fixed-sn footer {
+  .fixed-sn .double-nav, .fixed-sn main {
     padding-left: 240px;
   }
 }
@@ -143,16 +140,6 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 @media (min-width: 768px) {
   .navbar .button-collapse {
     display: none;
-  }
-}
-
-footer.page-footer {
-  background-color: transparent;
-  margin-top: 0;
-  opacity: 0.8;
-  padding-top: 0;
-  .logo {
-    height: 22px;
   }
 }
 
@@ -257,10 +244,6 @@ footer.page-footer {
   }
 }
 
-.tab-content {
-  padding: 3.5rem 2rem 2.25rem;
-}
-
 .table {
   font-size: .95em;
   margin-bottom: 0;
@@ -297,6 +280,11 @@ footer.page-footer {
   .jumbotron {
     margin-bottom: 0;
   }
+}
+
+.tag {
+  font-size: 85%;
+  font-weight: 200;
 }
 
 .utility-inline-block {
