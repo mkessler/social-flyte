@@ -21,11 +21,11 @@
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
-          { data: 'network', width: '5%', className: 'text-xs-center' },
-          { data: 'class', width: '15%', className: 'text-xs-center' },
+          { data: 'network', width: '5%' },
+          { data: 'class', width: '15%' },
           { data: 'user', width: '25%' },
           { data: 'content' },
-          { data: 'posted_at', width: '15%', className: 'text-xs-center' },
+          { data: 'posted_at', width: '15%' },
         ],
         columnDefs: [
           {

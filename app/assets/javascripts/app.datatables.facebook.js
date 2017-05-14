@@ -6,11 +6,11 @@
       $('#facebook-comments-table').DataTable({
         ajax: $('#facebook-comments-table').data('source'),
         columns: [
-          { data: 'like_count', width: '10%', className: 'text-xs-center' },
+          { data: 'like_count', width: '10%' },
           { data: 'user', width: '15%' },
           { data: 'comment', className: 'groala-break-word' },
-          { data: 'posted_at', width: '15%', className: 'text-xs-center' },
-          { data: 'flagged', width: '10%', className: 'text-xs-center' }
+          { data: 'posted_at', width: '15%' },
+          { data: 'flagged', width: '10%' }
         ],
         columnDefs: [
           {
@@ -71,9 +71,9 @@
       $('#facebook-reactions-table').DataTable({
         ajax: $('#facebook-reactions-table').data('source'),
         columns: [
-          { data: 'category', width: '10%', className: 'text-xs-center' },
+          { data: 'category', width: '20%' },
           { data: 'user' },
-          { data: 'flagged', width: '10%', className: 'text-xs-center' }
+          { data: 'flagged', width: '10%' }
         ],
         columnDefs: [
           {
