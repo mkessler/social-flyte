@@ -4,7 +4,7 @@
   App.utility ={
     alert: function(args) {
       $('<div class="row">'+
-          '<div class="groala-alert col-lg-12 mb-3" style="display:none;">'+
+          '<div class="groala-alert col-lg-12 mb-2" style="display:none;">'+
             '<div class="card '+args.class+' text-xs-center z-depth-1">'+
               '<div class="card-block">'+
                 '<span class="white-text">'+

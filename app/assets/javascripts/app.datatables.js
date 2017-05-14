@@ -40,9 +40,10 @@
             next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
             previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
           },
-          processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span>'
+          processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span>',
+          search: ''
         },
-        lengthChange: false,
+        //lengthChange: false,
         pageLength: 10,
         processing: true,
         responsive: {
