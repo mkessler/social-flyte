@@ -1,11 +1,8 @@
 <% content_for :page_title do %>
   <h2 class="<%= organization_title_class(current_user) %>">
     <%= organization_title(@organization) %>
-    <%= link_to new_organization_campaign_path(@organization), class: "btn-floating btn-small default-color mr-0 extended-nav-1" do %>
-      <i class="fa fa-hashtag" aria-hidden="true" data-toggle="tooltip"  title="Add Campaign"></i>
-    <% end %>
-    <%= link_to @organization, class: 'btn-floating btn-small mr-0' do %>
-      <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip"  title="Back"></i>
+    <%= link_to new_organization_campaign_path(@organization), class: "btn-floating btn-small default-color mr-0" do %>
+      <i class="fa fa-plus" aria-hidden="true" data-toggle="tooltip"  title="New Campaign"></i>
     <% end %>
   </h2>
 <% end %>
