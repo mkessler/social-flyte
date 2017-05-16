@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170325074043) do
+ActiveRecord::Schema.define(version: 20170516173442) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,8 +167,10 @@ ActiveRecord::Schema.define(version: 20170325074043) do
     t.string   "network_user_image_url", null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "user_id",                null: false
     t.index ["organization_id", "network_user_id"], name: "index_twitter_tokens_on_organization_id_and_network_user_id", unique: true, using: :btree
     t.index ["organization_id"], name: "index_twitter_tokens_on_organization_id", using: :btree
+    t.index ["user_id"], name: "index_twitter_tokens_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -202,4 +204,5 @@ ActiveRecord::Schema.define(version: 20170325074043) do
   add_foreign_key "reactions", "posts"
   add_foreign_key "tweets", "posts"
   add_foreign_key "twitter_tokens", "organizations"
+  add_foreign_key "twitter_tokens", "users"
 end

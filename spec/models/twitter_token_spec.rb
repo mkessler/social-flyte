@@ -2,11 +2,16 @@ require 'rails_helper'
 
 RSpec.describe TwitterToken, type: :model do
   let(:organization) { FactoryGirl.create(:organization) }
+  let(:user) { FactoryGirl.create(:user) }
   let(:twitter_token) { FactoryGirl.create(:twitter_token) }
 
   describe 'associations' do
     it 'belongs to organization' do
       expect(TwitterToken.reflect_on_association(:organization).macro).to eql(:belongs_to)
+    end
+
+    it 'belongs to user' do
+      expect(TwitterToken.reflect_on_association(:user).macro).to eql(:belongs_to)
     end
   end
 
@@ -14,7 +19,8 @@ RSpec.describe TwitterToken, type: :model do
     it 'is valid with valid attributes' do
       valid_attributes = FactoryGirl.attributes_for(
         :twitter_token,
-        organization_id: organization.id
+        organization_id: organization.id,
+        user_id: user.id
       )
       twitter_token = TwitterToken.new(valid_attributes)
 
@@ -31,10 +37,22 @@ RSpec.describe TwitterToken, type: :model do
       expect(twitter_token).to_not be_valid
     end
 
+    it 'is not valid with missing user' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :twitter_token,
+        organization_id: organization.id,
+        user_id: nil
+      )
+      twitter_token = TwitterToken.new(invalid_attributes)
+
+      expect(twitter_token).to_not be_valid
+    end
+
     it 'is not valid with missing token' do
       invalid_attributes = FactoryGirl.attributes_for(
         :twitter_token,
         organization_id: organization.id,
+        user_id: user.id,
         token: nil
       )
       twitter_token = TwitterToken.new(invalid_attributes)
@@ -46,6 +64,7 @@ RSpec.describe TwitterToken, type: :model do
       invalid_attributes = FactoryGirl.attributes_for(
         :twitter_token,
         organization_id: organization.id,
+        user_id: user.id,
         secret: nil
       )
       twitter_token = TwitterToken.new(invalid_attributes)
@@ -57,6 +76,7 @@ RSpec.describe TwitterToken, type: :model do
       invalid_attributes = FactoryGirl.attributes_for(
         :twitter_token,
         organization_id: organization.id,
+        user_id: user.id,
         network_user_name: nil
       )
       twitter_token = TwitterToken.new(invalid_attributes)
@@ -68,11 +88,13 @@ RSpec.describe TwitterToken, type: :model do
       FactoryGirl.create(
         :twitter_token,
         organization_id: organization.id,
+        user_id: user.id,
         network_user_id: '1234'
       )
       invalid_attributes = FactoryGirl.attributes_for(
         :twitter_token,
         organization_id: organization.id,
+        user_id: user.id,
         network_user_id: '1234'
       )
       twitter_token = TwitterToken.new(invalid_attributes)

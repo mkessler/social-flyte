@@ -71,7 +71,8 @@ class TwitterTokensController < ApplicationController
         token: auth_hash.credentials.token,
         secret: auth_hash.credentials.secret,
         network_user_id: auth_hash.uid,
-        network_user_name: auth_hash.extra.raw_info.screen_name
+        network_user_name: auth_hash.extra.raw_info.screen_name,
+        user_id: current_user.id
       }
     end
 end
