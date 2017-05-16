@@ -23,21 +23,4 @@ RSpec.describe OrganizationsHelper, type: :helper do
       end
     end
   end
-
-  describe 'organization_title_class' do
-    context 'member of more than 1 organization' do
-      it 'returns extended class name' do
-        organization_two = FactoryGirl.create(:organization)
-        FactoryGirl.create(:membership, organization: organization_two, user: user)
-
-        expect(organization_title_class(user)).to eql('dashboard-title extended-title-nav')
-      end
-    end
-
-    context 'not member of more than 1 organization' do
-      it 'returns standard class name' do
-        expect(organization_title_class(user)).to eql('dashboard-title')
-      end
-    end
-  end
 end

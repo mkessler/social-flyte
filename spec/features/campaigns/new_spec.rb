@@ -12,14 +12,6 @@ RSpec.feature 'Campaigns New', :type => :feature do
     login_as(@user, :scope => :user)
   end
 
-  scenario 'clicks back' do
-    visit new_organization_campaign_path(@organization)
-
-    find(:xpath, "//a[contains(@class, 'btn-floating')][@href='#{organization_campaigns_path(@organization)}']").click
-
-    expect(page).to have_selector("div#campaigns-list")
-  end
-
   scenario 'clicks submit with empty name' do
     visit new_organization_campaign_path(@organization)
 

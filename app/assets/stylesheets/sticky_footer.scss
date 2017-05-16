@@ -2,10 +2,10 @@
 -------------------------------------------------- */
 footer {
   display: none;
-  background-color: transparent;
-  margin-top: 0;
+  background-color: transparent !important;
+  margin-top: 0 !important;
   opacity: 0.8;
-  padding-top: 0;
+  padding-top: 0 !important;
   .logo {
     height: 22px;
   }

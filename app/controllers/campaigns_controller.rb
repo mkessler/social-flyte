@@ -33,7 +33,7 @@ class CampaignsController < ApplicationController
   # GET /o/:organization_id/c/:campaign_id/new
   def new
     set_meta_tags site: meta_title('New Campaign')
-    add_breadcrumb 'Add Campaign', new_organization_campaign_path(@organization)
+    add_breadcrumb 'New Campaign', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 

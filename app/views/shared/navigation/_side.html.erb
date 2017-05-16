@@ -9,8 +9,8 @@
     <ul class="collapsible collapsible-accordion">
       <% if current_user.organizations.present? %>
         <% current_user.organizations.each do |organization| %>
-          <li class="<%= sidenav_active_class(['organizations', 'campaigns', 'posts']) %>">
-            <a class="collapsible-header waves-effect arrow-r <%= sidenav_active_class(['organizations', 'campaigns', 'posts']) %>">
+          <li class="<%= sidenav_active_class(['organizations', 'invitations', 'campaigns', 'posts']) %>">
+            <a class="collapsible-header waves-effect arrow-r <%= sidenav_active_class(['organizations', 'invitations', 'campaigns', 'posts']) %>">
               <i class="fa fa-cube"></i>
               <%= organization.name.truncate(15) %>
               <i class="fa fa-angle-down rotate-icon"></i>
@@ -21,7 +21,7 @@
                   <%= link_to 'Campaigns', organization_campaigns_path(organization), class: "waves-effect #{sidenav_active_class(['campaigns'])}" %>
                 </li>
                 <li>
-                  <%= link_to 'Users', organization_users_path(organization), class: "waves-effect #{sidenav_active_class([], 'users')}" %>
+                  <%= link_to 'Users', organization_users_path(organization), class: "waves-effect #{sidenav_active_class(['invitations'], 'users')}" %>
                 </li>
                 <li>
                   <%= link_to 'Social Accounts', organization_accounts_path(organization), class: 'waves-effect' %>

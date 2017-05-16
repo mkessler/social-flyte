@@ -1,5 +1,5 @@
 <% content_for :page_title do %>
-  <h2 class="<%= organization_title_class(current_user) %>">
+  <h2 class="dashboard-title">
     <%= organization_title(@organization) %>
     <%= link_to new_organization_campaign_path(@organization), class: "btn-floating btn-small default-color mr-0" do %>
       <i class="fa fa-plus" aria-hidden="true" data-toggle="tooltip"  title="New Campaign"></i>
@@ -58,7 +58,7 @@
           <div class="row m-t-1">
             <div class="col-md-12 text-xs-right">
               <%= link_to new_organization_campaign_path(@organization), class: 'btn default-color' do %>
-                <i class="fa fa-hashtag left" aria-hidden="true"></i> Add Campaign
+                <i class="fa fa-hashtag left" aria-hidden="true"></i> New Campaign
               <% end %>
             </div>
           </div>

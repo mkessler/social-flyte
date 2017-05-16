@@ -13,13 +13,6 @@ RSpec.feature 'Campaigns New', :type => :feature do
     login_as(@user, :scope => :user)
   end
 
-  scenario 'clicks back' do
-    visit new_organization_campaign_post_path(@organization, @campaign)
-    find(:xpath, "//a[contains(@class, 'btn-floating')][@href='#{organization_campaign_path(@organization, @campaign)}']").click
-
-    expect(page).to have_selector("div#posts-list")
-  end
-
   # context 'with user access token' do
   #   before(:all) do
   #     FactoryGirl.create(:authentication, user: @user)

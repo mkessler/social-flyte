@@ -20,7 +20,7 @@ RSpec.feature 'Campaigns Index', :type => :feature do
     expect(page).to have_text(@campaign.name)
   end
 
-  scenario 'clicks add campaign' do
+  scenario 'clicks new campaign' do
     visit organization_campaigns_path(@organization)
 
     find(:xpath, "//a[@href='#{new_organization_campaign_path(@organization)}']").click
