@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :organizations, through: :memberships
   has_many :invitations, foreign_key: 'recipient_id', dependent: :destroy
   has_many :sent_invitations, class_name: 'Invitation', foreign_key: 'sender_id'
+  has_many :twitter_tokens, dependent: :destroy
   has_one :facebook_token, dependent: :destroy
 
   before_validation :set_name, on: [:create, :update]
