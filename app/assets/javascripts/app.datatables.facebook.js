@@ -10,7 +10,7 @@
           { data: 'user', width: '15%' },
           { data: 'comment', className: 'groala-break-word' },
           { data: 'posted_at', width: '15%' },
-          { data: 'flagged', width: '10%' }
+          { data: 'flagged', width: '15%', className: 'groala-flag-toggle' }
         ],
         columnDefs: [
           {
@@ -50,10 +50,12 @@
             targets: 4,
             data: 'flagged',
             render: function ( data, type, full, meta ) {
-              var tooltip = data.status ? 'Unflag' : 'Flag';
-              var flagged_class = data.status ? 'orange' : 'grey';
-              return '<a id="comment-flag-'+data.id+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
-                '<i class="fa fa-flag fa-lg '+flagged_class+'-text" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="'+tooltip+'"></i>' +
+              var checked = data.status ? 'checked="checked"' : '';
+              return '<a id="comment-flag-'+data.id+'" class="switch" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<label class="mb-0">' +
+                  '<input type="checkbox" '+checked+'>' +
+                  '<span class="lever"></span>' +
+                '</label>' +
               '</a>';
             }
           }
@@ -73,7 +75,7 @@
         columns: [
           { data: 'category', width: '20%' },
           { data: 'user' },
-          { data: 'flagged', width: '10%' }
+          { data: 'flagged', width: '15%', className: 'groala-flag-toggle' }
         ],
         columnDefs: [
           {
@@ -94,10 +96,12 @@
             targets: 2,
             data: 'flagged',
             render: function ( data, type, full, meta ) {
-              var tooltip = data.status ? 'Unflag' : 'Flag';
-              var flagged_class = data.status ? 'orange' : 'grey';
-              return '<a id="reaction-flag-'+data.id+'" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
-                '<i class="fa fa-flag '+flagged_class+'-text" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="'+tooltip+'"></i>' +
+              var checked = data.status ? 'checked="checked"' : '';
+              return '<a id="reaction-flag-'+data.id+'" class="switch" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<label class="mb-0">' +
+                  '<input type="checkbox" '+checked+'>' +
+                  '<span class="lever"></span>' +
+                '</label>' +
               '</a>';
             }
           }
