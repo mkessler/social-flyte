@@ -1,14 +1,11 @@
 <% content_for :page_title do %>
   <h2 class="dashboard-title">
     New Organization
-    <%= link_to root_path, class: 'btn-floating btn-small mr-0' do %>
-      <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
-    <% end %>
   </h2>
 <% end %>
 
 <div class="row">
-  <div class="col-lg-12 mb-3">
+  <div class="col-lg-12 mb-2">
     <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
         <%= link_to '#new-organization', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>

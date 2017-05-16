@@ -1,11 +1,8 @@
 <% content_for :page_title do %>
-  <h2 class="dashboard-title extended-title-nav">
+  <h2 class="dashboard-title">
     Profile
-    <%= link_to new_organization_path, class: 'btn-floating btn-small default-color mr-0 extended-nav-1' do %>
+    <%= link_to new_organization_path, class: 'btn-floating btn-small default-color mr-0' do %>
       <i class="fa fa-bank" aria-hidden="true" data-toggle="tooltip" title="New Organization"></i>
-    <% end %>
-    <%= link_to root_path, class: 'btn-floating btn-small mr-0' do %>
-      <i class="fa fa-reply" aria-hidden="true" data-toggle="tooltip" title="Back"></i>
     <% end %>
   </h2>
 <% end %>
@@ -13,7 +10,7 @@
 <% if current_user.invitations.pending.any? %>
   <% current_user.invitations.pending.each do |invitation| %>
     <div class="row">
-      <div class="groala-alert col-lg-12 mb-3">
+      <div class="groala-alert col-lg-12 mb-2">
         <div class="card purple lighten-1 accent-4 text-xs-center z-depth-1">
           <div class="card-block">
             <span class="white-text">
@@ -29,7 +26,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-lg-12 mb-3">
+  <div class="col-lg-12 mb-2">
     <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
         <%= link_to '#edit-profile', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
