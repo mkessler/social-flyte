@@ -73,23 +73,10 @@
       $.fn.DataTable.ext.pager.numbers_length = 5;
     },
     flagToggle: function($el, status, update_link) {
-      var tooltip = status ? 'Unflag' : 'Flag'
       var table = $('#groala-flagged-interactions-table').DataTable();
-
       table.ajax.reload();
-
       $el.attr('href', update_link);
-
-      if (status == true) {
-        $('i', $el).addClass('orange-text').removeClass('grey-text');
-      } else {
-        $('i', $el).addClass('grey-text').removeClass('orange-text');
-      }
-
-      $('i', $el).tooltip('hide')
-        .attr('data-original-title', tooltip)
-        .tooltip('fixTitle')
-        .tooltip('show');
+      $('input:checkbox', $el).prop('checked', status);
     },
     history: function(table) {
       table.on( 'xhr', function () {

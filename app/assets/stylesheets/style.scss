@@ -158,6 +158,17 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
   opacity: 0;
 }
 
+.groala-flag-toggle {
+  position: relative;
+  .switch {
+    margin-top: -10px;
+    margin-left: -36px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}
+
 .groala-organization-accounts {
   .card {
     position: relative;
@@ -249,6 +260,14 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
       opacity: 0.6;
     }
   }
+}
+
+.switch label .lever:after {
+  box-shadow: 0 0 0 #000;
+}
+
+[type="checkbox"]:not(:checked) + .lever:after {
+  background: #d1d1d1
 }
 
 .tab-content {
