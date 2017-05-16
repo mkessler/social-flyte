@@ -1,4 +1,4 @@
-<% organization.twitter_tokens.each do |twitter_token| %>
+<% current_user.twitter_tokens.each do |twitter_token| %>
   <div class="col-md-6 mb-2">
     <div class="card testimonial-card">
       <div class="card-up twitter-blue"></div>
@@ -9,9 +9,6 @@
         <h4 class="card-title"><%= account_user_name(twitter_token) %></h4>
         <hr>
         <p><i class="fa fa-twitter fa-lg"></i> Twitter</p>
-      </div>
-      <div class="card-data grey darken-1">
-        <small><i class="fa fa-eye fa-lg"></i> Visible to entire organization</small>
       </div>
     </div>
   </div>

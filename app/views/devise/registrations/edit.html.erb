@@ -11,7 +11,7 @@
   <% current_user.invitations.pending.each do |invitation| %>
     <div class="row">
       <div class="groala-alert col-lg-12 mb-2">
-        <div class="card purple lighten-1 accent-4 text-xs-center z-depth-1">
+        <div class="card secondary-color lighten-1 accent-4 text-xs-center">
           <div class="card-block">
             <span class="white-text">
               <i class="fa fa-envelope-open-o fa-lg fa-fw"></i>
@@ -30,7 +30,7 @@
     <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
         <%= link_to '#edit-profile', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
-          <i class="fa fa-user" aria-hidden="true"></i> Profile
+          <i class="fa fa-user" aria-hidden="true"></i> Edit
         <% end %>
       </li>
     </ul>
