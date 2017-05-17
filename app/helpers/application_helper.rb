@@ -10,6 +10,15 @@ module ApplicationHelper
   end
 
   def sidenav_active_class(controllers=[], action=nil)
-    controllers.include?(params[:controller]) || action == params[:action] ? 'active' : ''
+    active = false
+    if controllers.present? && action.present?
+      active = controllers.include?(params[:controller]) && action == params[:action]
+    elsif controllers.present?
+      active = controllers.include?(params[:controller])
+    elsif action.present?
+      active = action == params[:action]
+    end
+
+    active ? 'active' : ''
   end
 end

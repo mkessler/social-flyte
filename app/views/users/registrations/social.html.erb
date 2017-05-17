@@ -1,13 +1,12 @@
 <% content_for :page_title do %>
   <h2 class="dashboard-title">
-    <%= @organization.name %>
+    Social Accounts
   </h2>
 <% end %>
 
 <div class="row groala-organization-accounts mb-1">
-  <%= render 'organizations/accounts/facebook' %>
-  <%= render 'organizations/accounts/twitter', organization: @organization %>
-  <%= render 'organizations/accounts/twitter/add_new', organization: @organization if @organization.twitter_tokens.present? %>
+  <%= render 'users/registrations/social/facebook' %>
+  <%= render 'users/registrations/social/twitter/connected' %>
 </div>
 
 <script type="text/javascript">

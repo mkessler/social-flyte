@@ -20,10 +20,10 @@ class TwitterTokensController < ApplicationController
 
     respond_to do |format|
       if @twitter_token.save
-        format.html { redirect_to organization_accounts_path(@organization), notice: 'Twitter account connected!' }
+        format.html { redirect_to organization_campaigns_path(@organization), notice: 'Twitter account connected!' }
         format.json { render :show, status: :created, location: @twitter_token }
       else
-        format.html { redirect_to organization_accounts_path(@organization), error: 'Twitter account failed to connect.' }
+        format.html { redirect_to organization_campaigns_path(@organization), error: 'Twitter account failed to connect.' }
         format.json { render json: @twitter_token.errors, status: :unprocessable_entity }
       end
     end
@@ -34,10 +34,10 @@ class TwitterTokensController < ApplicationController
   def update
     respond_to do |format|
       if @twitter_token.update(twitter_token_params)
-        format.html { redirect_to organization_accounts_path(@organization), notice: 'Twitter account was successfully updated.' }
+        format.html { redirect_to organization_campaigns_path(@organization), notice: 'Twitter account was successfully updated.' }
         format.json { render :show, status: :ok, location: @twitter_token }
       else
-        format.html { redirect_to organization_accounts_path(@organization), error: 'Twitter account failed to update.' }
+        format.html { redirect_to organization_campaigns_path(@organization), error: 'Twitter account failed to update.' }
         format.json { render json: @twitter_token.errors, status: :unprocessable_entity }
       end
     end
@@ -48,7 +48,7 @@ class TwitterTokensController < ApplicationController
   def destroy
     @twitter_token.destroy
     respond_to do |format|
-      format.html { redirect_to organization_accounts_path(@organization), notice: 'Twitter account removed!' }
+      format.html { redirect_to social_accounts_path, notice: 'Twitter account removed!' }
       format.json { head :no_content }
     end
   end
