@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Campaigns Show', :type => :feature do
   before(:all) do
     @user = FactoryGirl.create(:user)
+    FactoryGirl.create(:facebook_token, user: @user)
     @organization = FactoryGirl.create(:organization)
     FactoryGirl.create(:membership, user: @user, organization: @organization)
     @campaign = FactoryGirl.create(:campaign, organization: @organization)
