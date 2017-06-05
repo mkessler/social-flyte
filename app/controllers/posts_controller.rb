@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :set_organization
   before_action :set_campaign
   before_action :set_post, only: [:show, :interactions, :sync_status, :sync_post, :destroy]
+  before_action :facebook_token_validation_check, only: [:show, :sync_post]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -100,6 +101,12 @@ class PostsController < ApplicationController
     else
       flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
       redirect_to organizations_url
+    end
+  end
+
+  def facebook_token_validation_check
+    if @post.for_facebook? && current_user.facebook_token.expired?
+      current_user.facebook_token.renew_token
     end
   end
 end

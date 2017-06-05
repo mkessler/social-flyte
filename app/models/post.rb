@@ -13,6 +13,10 @@ class Post < ApplicationRecord
   validates_presence_of :twitter_token_id, if: :for_twitter?
   validate :twitter_token_validation, if: :for_twitter?
 
+  def can_be_synced?
+    self.synced_at.nil? || Time.now.utc > self.synced_at + 15.minutes
+  end
+
   def engagement_count
     case network
       when Network.facebook
@@ -67,8 +71,12 @@ class Post < ApplicationRecord
     end
   end
 
-  def can_be_synced?
-    self.synced_at.nil? || Time.now.utc > self.synced_at + 15.minutes
+  def for_facebook?
+    network == Network.facebook
+  end
+
+  def for_twitter?
+    network == Network.twitter
   end
 
   def sync(user=nil)
@@ -84,14 +92,6 @@ class Post < ApplicationRecord
   end
 
   private
-
-  def for_facebook?
-    network == Network.facebook
-  end
-
-  def for_twitter?
-    network == Network.twitter
-  end
 
   def twitter_token_validation
     errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_tokens.include?(twitter_token)

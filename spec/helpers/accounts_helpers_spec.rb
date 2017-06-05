@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccountsHelper, type: :helper do
-  let(:facebook_token) { FactoryGirl.create(:facebook_token) }
+  let(:facebook_token) { FactoryGirl.create(:facebook_token, :with_after_create_callback) }
   let(:twitter_token) { FactoryGirl.create(:twitter_token) }
 
   describe '.account_user_name' do

@@ -2,7 +2,7 @@
   <h2 class="dashboard-title mb-0">
     <%= @post.network.name %>
     <% if @post.can_be_synced? %>
-      <%= button_tag type: :button, id: 'post-sync-trigger', class: 'btn-floating btn-small default-color mr-0', disabled: true do %>
+      <%= button_tag type: :button, id: 'post-sync-trigger', class: 'btn-floating btn-small default-color mr-0' do %>
         <i class="fa fa-refresh" aria-hidden="true" data-toggle="tooltip" title="Sync Post"></i>
       <% end %>
     <% else %>
