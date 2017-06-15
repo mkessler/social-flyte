@@ -16,6 +16,17 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :name, presence: true
 
+  def has_valid_network_token?(network)
+    case network
+      when Network.facebook
+        facebook_token.present? && !facebook_token.expired?
+      when Network.twitter
+        twitter_token.present?
+      else
+        false
+      end
+  end
+
   def process_invitation(token)
     if has_valid_invitation?(token)
       Invitation.find_by_email_and_token(self.email, token).update_attributes(

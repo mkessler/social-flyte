@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_organization
   before_action :set_campaign
   before_action :set_post, only: [:show, :interactions, :sync_status, :sync_post, :destroy]
-  before_action :facebook_token_validation_check, only: [:show, :sync_post]
+  before_action :facebook_token_validation_check, only: [:sync_post]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -106,7 +106,8 @@ class PostsController < ApplicationController
 
   def facebook_token_validation_check
     if @post.for_facebook? && current_user.facebook_token.expired?
-      current_user.facebook_token.renew_token
+      flash[:error] = "Facebook token is currently expired. Please try syncing again."
+      redirect_to :show
     end
   end
 end

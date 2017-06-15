@@ -12,16 +12,16 @@ class FacebookToken < ApplicationRecord
     DateTime.now.utc >= expires_at
   end
 
-  def renew_token
+  def exchange_for_long_lived_token(short_term_token)
     # immediately get 60 day auth token
     oauth = Koala::Facebook::OAuth.new(
       Rails.application.secrets.facebook_app_id,
       Rails.application.secrets.facebook_app_secret
     )
-    new_access_info = oauth.exchange_access_token_info self.token
+    new_access_info = oauth.exchange_access_token_info(short_term_token)
 
     new_access_token = new_access_info['access_token']
-    new_access_expires_at = DateTime.now + new_access_info['expires'].to_i.seconds
+    new_access_expires_at = DateTime.now + new_access_info['expires_in'].to_i.seconds
 
     self.update_attributes(
       token: new_access_token,
