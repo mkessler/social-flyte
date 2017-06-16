@@ -47,7 +47,6 @@ RSpec.describe FacebookToken, type: :model do
     it 'returns true if token has expired' do
       VCR.use_cassette('facebook_get_user_details') do
         facebook_token.expires_at = Time.now - 1.day
-        facebook_token.save
         expect(facebook_token.expired?).to be true
       end
     end

@@ -8,7 +8,7 @@ RSpec.describe 'Posts', type: :request do
   let(:membership) { FactoryGirl.create(:membership, user: user, organization: organization) }
   let(:campaign) { FactoryGirl.create(:campaign, organization: organization) }
   let(:campaign_post) { FactoryGirl.create(:post, campaign: campaign) }
-  let(:facebook_token) {FactoryGirl.create(:facebook_token, user: user)}
+  let(:facebook_token) { FactoryGirl.create(:facebook_token, user: user) }
   let(:valid_attributes) { FactoryGirl.attributes_for(:post, network_post_id: Faker::Number.number(10)) }
   let(:invalid_attributes) { FactoryGirl.attributes_for(:post, network_post_id: nil) }
   let(:protected_attributes) { { campaign_id: campaign.id } }
@@ -94,7 +94,9 @@ RSpec.describe 'Posts', type: :request do
     context 'when logged in' do
       before(:example) do
         sign_in(user)
-        facebook_token
+        VCR.use_cassette('facebook_get_user_details') do
+          facebook_token
+        end
       end
 
       context 'when member' do

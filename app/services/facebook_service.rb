@@ -20,11 +20,12 @@ class FacebookService
     end
   end
 
-  def update_user_details
+  def user_details
     response = get_user
-    @token.network_user_name = response['name']
-    @token.network_user_image_url = response['picture']['data']['url']
-    @token.save
+    {
+      network_user_name: response['name'],
+      network_user_image_url: response['picture']['data']['url']
+    }
   end
 
   private

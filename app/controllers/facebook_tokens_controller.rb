@@ -16,8 +16,6 @@ class FacebookTokensController < ApplicationController
   # POST /facebook_tokens.json
   def create
     @facebook_token = current_user.build_facebook_token(facebook_token_params)
-    set_expires_at
-
     respond_to do |format|
       if @facebook_token.save
         format.json { render :show, status: :created, location: @facebook_token }
@@ -30,8 +28,6 @@ class FacebookTokensController < ApplicationController
   # PATCH/PUT /facebook_tokens/1
   # PATCH/PUT /facebook_tokens/1.json
   def update
-    set_expires_at
-
     respond_to do |format|
       if @facebook_token.update(facebook_token_params)
         format.json { render :show, status: :ok, location: @facebook_token }
@@ -54,10 +50,6 @@ class FacebookTokensController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_facebook_token
       @facebook_token = current_user.facebook_token
-    end
-
-    def set_expires_at
-      @facebook_token.expires_at = Time.now.utc + params[:facebook_token][:expires_at].to_i
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

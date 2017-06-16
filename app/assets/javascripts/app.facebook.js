@@ -35,13 +35,13 @@
         data: {
           facebook_token: {
             network_user_id: response.authResponse.userID,
-            token: response.authResponse.accessToken,
-            expires_at: response.authResponse.expiresIn
+            token: response.authResponse.accessToken
           }
         },
         dataType: 'json',
         success: function(data){
           console.log(data);
+          $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         }
       });
     },
@@ -49,7 +49,6 @@
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
           App.facebook.setToken(response);
-          $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         } else if (response.status === 'not_authorized') {
           // the user is logged in to Facebook,
           // but has not authenticated your app

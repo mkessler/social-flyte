@@ -27,11 +27,11 @@ http_interactions:
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       X-Fb-Rev:
-      - '3095137'
+      - '3095403'
       Content-Type:
       - application/json; charset=UTF-8
       X-Fb-Trace-Id:
-      - FsyB3E3agSa
+      - HblRoduz4dZ
       Facebook-Api-Version:
       - v2.3
       Expires:
@@ -39,29 +39,27 @@ http_interactions:
       Vary:
       - Accept-Encoding
       X-Fb-Debug:
-      - T5d3FE6eHSzNJEF7SaynBOUIhgXbi6Sh2AN+bSueKHR/w3fj8kBIBNAUCZin2MEj5P65Z6cMQ/UP/AQolBuOMw==
+      - gMO4AfWfzOmGiSiL7IrbgwVhBRTntBepZijKgUO6XA4pX5XAOSTjTdt4yir4RQJpCLwYN/vx8X+iOp55oY+QFw==
       Date:
-      - Fri, 16 Jun 2017 14:36:21 GMT
+      - Fri, 16 Jun 2017 20:08:33 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '221'
+      - '223'
     body:
       encoding: ASCII-8BIT
-      string: '{"access_token":"EAAYWqqyPLBQBAKQrzxcjKgZCbuX7WB9cY5B1Q73xE1AHQ3pdAOCUks1jlZCPcEFmJU9mEADTqErKdMxh3libfcIV560uW3H49TYOlQU7UWBvajEtEwflyt8lakVWoFaxEcVZAv4CF5FTLoNJ5AwwLpS9X2KcdIZD","token_type":"bearer","expires_in":5153623}'
+      string: '{"access_token":"EAAYWqqyPLBQBAA0oMDksu8vmF6lVQdwvZA1OjS14eYr9ZCYMEiBtbZAbC2QudMRIZBnuqOG2Prsz7MIejkGLXIocQsnm03soHuKvGH3aE1ruLL1ZAKdQZCksqJJBDZBJoLOccqR5jh1bfJSZCuAWQEQGk8ZBGdv1LpFsZD","token_type":"bearer","expires_in":5133691}'
     http_version: 
-  recorded_at: Fri, 16 Jun 2017 14:36:20 GMT
+  recorded_at: Fri, 16 Jun 2017 20:08:32 GMT
 - request:
-    method: post
-    uri: https://graph.facebook.com/oauth/access_token
+    method: get
+    uri: https://graph.facebook.com/me?access_token=EAAYWqqyPLBQBAA0oMDksu8vmF6lVQdwvZA1OjS14eYr9ZCYMEiBtbZAbC2QudMRIZBnuqOG2Prsz7MIejkGLXIocQsnm03soHuKvGH3aE1ruLL1ZAKdQZCksqJJBDZBJoLOccqR5jh1bfJSZCuAWQEQGk8ZBGdv1LpFsZD&fields=id,name,picture.type(large)
     body:
-      encoding: UTF-8
-      string: client_id=1713772155579412&client_secret=fd6a05caf29b4047975a74691a19ca8d&fb_exchange_token=EAAYWqqyPLBQBAKQrzxcjKgZCbuX7WB9cY5B1Q73xE1AHQ3pdAOCUks1jlZCPcEFmJU9mEADTqErKdMxh3libfcIV560uW3H49TYOlQU7UWBvajEtEwflyt8lakVWoFaxEcVZAv4CF5FTLoNJ5AwwLpS9X2KcdIZD&grant_type=fb_exchange_token
+      encoding: US-ASCII
+      string: ''
     headers:
       User-Agent:
       - Faraday v0.9.2
-      Content-Type:
-      - application/x-www-form-urlencoded
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -73,33 +71,35 @@ http_interactions:
     headers:
       Access-Control-Allow-Origin:
       - "*"
+      Etag:
+      - '"b878ded9672de4d67fa438746d2e0ef6186f7d90"'
       Pragma:
       - no-cache
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       X-Fb-Rev:
-      - '3095137'
+      - '3095403'
       Content-Type:
       - application/json; charset=UTF-8
       X-Fb-Trace-Id:
-      - GwD9FavmTgj
+      - DbCHZLdyDX3
       Facebook-Api-Version:
-      - v2.3
+      - v2.8
       Expires:
       - Sat, 01 Jan 2000 00:00:00 GMT
       Vary:
       - Accept-Encoding
       X-Fb-Debug:
-      - cw6mlyVA0FB6aeMJGYtoEbwdZl5WUAL3H3+7cBktZ/tYaaAM3vpmc9Qiclpjt/IeOlIvLDiOhA5UQUqk8LZPdA==
+      - OzEm1IQ8idiv5O9HGoGVPewEjZ5fbWo6SiIzjpVwW2AnMu2pBITh7sY1k7KMbpG4b/NE7zpnrvB/7RzGYLFxMA==
       Date:
-      - Fri, 16 Jun 2017 14:36:21 GMT
+      - Fri, 16 Jun 2017 20:08:33 GMT
       Connection:
       - keep-alive
       Content-Length:
-      - '223'
+      - '227'
     body:
       encoding: ASCII-8BIT
-      string: '{"access_token":"EAAYWqqyPLBQBAOtz95J0AU610Lj9Eg1c8AeMXRHx0DtCQ5OnhK4nNcT4W5Pwwfc6YTpOtLYDi4JdZAqPm6Ns43dnFZC5VS7fAgTMouLTsx5Ir81ZCZCkjiuDu9ZCUptOnygkmw7Q4aRjICxwdxrRC73oh9MwGExkZD","token_type":"bearer","expires_in":5153623}'
+      string: '{"id":"10106147434913000","name":"Mikael Kessler","picture":{"data":{"is_silhouette":false,"url":"https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/p200x200\/16472938_10106647559698920_6513462413499394065_n.jpg?oh=8a573587c678e921a84ebfc3349631d0&oe=59E28A41"}}}'
     http_version: 
-  recorded_at: Fri, 16 Jun 2017 14:36:20 GMT
+  recorded_at: Fri, 16 Jun 2017 20:08:32 GMT
 recorded_with: VCR 3.0.3

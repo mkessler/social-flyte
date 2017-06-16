@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://graph.facebook.com/oauth/access_token
+    body:
+      encoding: UTF-8
+      string: client_id=1713772155579412&client_secret=fd6a05caf29b4047975a74691a19ca8d&fb_exchange_token=EAAYWqqyPLBQBAEnffxqvbW0tJ3s7aJUPSDCRwKJPqxC0WdxD6NDnNy1JG9lla92VxZBUqNXwqCKDXeZBWBDYJwpnV4REeYnO126WVsRd4l7n7NePQOxcRmOE5VKDYHHxckDZBv6n1470iHnvLBR5O5rEiFafP0ZD&grant_type=fb_exchange_token
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - "*"
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Fb-Rev:
+      - '3095137'
+      Content-Type:
+      - application/json; charset=UTF-8
+      X-Fb-Trace-Id:
+      - Dl8w8o8d1ql
+      Facebook-Api-Version:
+      - v2.3
+      Expires:
+      - Sat, 01 Jan 2000 00:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      X-Fb-Debug:
+      - hkwG71jjFBmibB/IvYKtufq42hEIPZYNwBClcIsKO3CphJ86yb7HB5428WR6Bfr4IBqVhBlTCMus95pFeNmgEw==
+      Date:
+      - Fri, 16 Jun 2017 14:42:55 GMT
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '225'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"access_token":"EAAYWqqyPLBQBAC9iiEqIHLaROokP6v13QVa52ZAnBZAIpCnhgzMaeTAI4LzgyTsZAwHsuZAQJgO3U0ZC7ZCBIEUqvrnm8bvB7QgCJloKmc0i53jvrFf8PAkZBShHP6k7lMQYCJGAqNj6PHrydoWkcZCHCIoFZC7ZCjKWMZD","token_type":"bearer","expires_in":5153229}'
+    http_version: 
+  recorded_at: Fri, 16 Jun 2017 14:42:54 GMT
+recorded_with: VCR 3.0.3

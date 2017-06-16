@@ -12,6 +12,10 @@ th {
   font-weight: 400;
 }
 
+.breadcrumb-container {
+  margin-top: 60px;
+}
+
 .breadcrumb {
   background: transparent;
   margin-bottom: 0;
@@ -31,6 +35,12 @@ th {
   content: '\203A';
 }
 
+@media (max-width: 768px) {
+  .breadcrumb-item {
+    float: none;
+  }
+}
+
 @media (min-width: 768px) {
   .breadcrumb {
     margin-left: 240px;
@@ -38,10 +48,6 @@ th {
   .side-nav.fixed {
     transform: translateX(0) !important;
   }
-}
-
-.breadcrumb-container {
-  margin-top: 60px;
 }
 
 @media (max-width: 992px) {

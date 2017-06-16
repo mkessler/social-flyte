@@ -70,6 +70,32 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.has_valid_network_token?' do
+    context 'facebook' do
+      it 'returns true' do
+        VCR.use_cassette('facebook_get_user_details') do
+          FactoryGirl.create(:facebook_token, user_id: user.id)
+        end
+        expect(user.has_valid_network_token?(Network.facebook)).to be true
+      end
+
+      it 'returns false' do
+        expect(user.has_valid_network_token?(Network.facebook)).to be false
+      end
+    end
+
+    context 'twitter' do
+      it 'returns true' do
+        FactoryGirl.create(:twitter_token, user_id: user.id)
+        expect(user.has_valid_network_token?(Network.twitter)).to be true
+      end
+
+      it 'returns false' do
+        expect(user.has_valid_network_token?(Network.twitter)).to be false
+      end
+    end
+  end
+
   describe '.process_invitation' do
     context 'has valid invitation' do
       it 'returns true' do
