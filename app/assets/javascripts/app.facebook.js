@@ -35,8 +35,7 @@
         data: {
           facebook_token: {
             network_user_id: response.authResponse.userID,
-            token: response.authResponse.accessToken,
-            expires_at: response.authResponse.expiresIn
+            token: response.authResponse.accessToken
           }
         },
         dataType: 'json',

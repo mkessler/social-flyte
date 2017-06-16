@@ -21,7 +21,7 @@ class User < ApplicationRecord
       when Network.facebook
         facebook_token.present? && !facebook_token.expired?
       when Network.twitter
-        twitter_token.present?
+        twitter_tokens.any?
       else
         false
       end

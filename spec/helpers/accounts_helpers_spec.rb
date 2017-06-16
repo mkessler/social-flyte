@@ -1,21 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe AccountsHelper, type: :helper do
-  let(:facebook_token) { FactoryGirl.create(:facebook_token, :with_after_create_callback) }
+  let(:facebook_token) { FactoryGirl.create(:facebook_token, :with_before_save_callback) }
   let(:twitter_token) { FactoryGirl.create(:twitter_token) }
 
   describe '.account_user_name' do
     context 'facebook' do
       it 'returns user name when present' do
-        VCR.use_cassette('facebook_get_user_details') do
+        VCR.use_cassette('account_helper_facebook') do
           expect(account_user_name(facebook_token)).to eql(facebook_token.network_user_name)
         end
       end
 
       it 'returns Connected user name when not present' do
-        VCR.use_cassette('facebook_get_user_details') do
+        VCR.use_cassette('account_helper_facebook') do
           facebook_token.network_user_name = nil
-          facebook_token.save
           expect(account_user_name(facebook_token)).to eql('Connected')
         end
       end
@@ -43,15 +42,14 @@ RSpec.describe AccountsHelper, type: :helper do
   describe '.account_user_image' do
     context 'facebook' do
       it 'returns user name when present' do
-        VCR.use_cassette('facebook_get_user_details') do
+        VCR.use_cassette('account_helper_facebook') do
           expect(account_user_image(facebook_token)).to eql(image_tag(facebook_token.network_user_image_url, alt: facebook_token.network_user_name, class: 'rounded-circle img-responsive'))
         end
       end
 
       it 'returns Connected user name when not present' do
-        VCR.use_cassette('facebook_get_user_details') do
+        VCR.use_cassette('account_helper_facebook') do
           facebook_token.network_user_image_url = nil
-          facebook_token.save
           expect(account_user_image(facebook_token)).to eql(account_connected_missing_profile_image)
         end
       end

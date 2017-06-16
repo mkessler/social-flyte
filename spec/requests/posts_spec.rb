@@ -94,7 +94,9 @@ RSpec.describe 'Posts', type: :request do
     context 'when logged in' do
       before(:example) do
         sign_in(user)
-        facebook_token
+        VCR.use_cassette('facebook_get_user_details') do
+          facebook_token
+        end
       end
 
       context 'when member' do

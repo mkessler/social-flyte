@@ -4,10 +4,10 @@ RSpec.describe "FacebookTokens", type: :request do
   let(:user) { FactoryGirl.create(:user) }
   let(:user_two) { FactoryGirl.create(:user) }
   let(:facebook_token) { FactoryGirl.create(:facebook_token, user_id: user.id) }
-  let(:valid_attributes) { FactoryGirl.attributes_for(:facebook_token) }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:facebook_token).except!(:expires_at) }
   let(:invalid_attributes) { FactoryGirl.attributes_for(:facebook_token, token: nil) }
   let(:protected_attributes) { { user_id: user_two.id } }
-  let(:update_attributes) { { token: '1234' } }
+  let(:update_attributes) { { token: 'EAAYWqqyPLBQBAEnffxqvbW0tJ3s7aJUPSDCRwKJPqxC0WdxD6NDnNy1JG9lla92VxZBUqNXwqCKDXeZBWBDYJwpnV4REeYnO126WVsRd4l7n7NePQOxcRmOE5VKDYHHxckDZBv6n1470iHnvLBR5O5rEiFafP0ZD' } }
   let(:invalid_update_attributes) { { token: nil } }
 
   describe 'CREATE /facebook_tokens' do
@@ -40,7 +40,7 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'with valid attributes' do
         it 'increases FacebookToken count by 1' do
-          VCR.use_cassette('facebook_get_user_details') do
+          VCR.use_cassette('create_facebook_token') do
             expect{
               post facebook_tokens_path, params: { facebook_token: valid_attributes, format: :json }
             }.to change(FacebookToken, :count).by(1)
@@ -49,7 +49,7 @@ RSpec.describe "FacebookTokens", type: :request do
 
         context 'json request' do
           before(:example) do
-            VCR.use_cassette('facebook_get_user_details') do
+            VCR.use_cassette('create_facebook_token') do
               post facebook_tokens_path, params: { facebook_token: valid_attributes, format: :json }
             end
           end
@@ -74,7 +74,7 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'with invalid attributes' do
         it 'does not change FacebookToken count' do
-          VCR.use_cassette('facebook_get_user_details') do
+          VCR.use_cassette('create_facebook_token') do
             expect{
               post facebook_tokens_path, params: { facebook_token: invalid_attributes, format: :json }
             }.to_not change(FacebookToken, :count)
@@ -102,14 +102,18 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'with protected attributes' do
         it 'does not change FacebookToken count' do
-          expect{
-            post facebook_tokens_path, params: { facebook_token: protected_attributes, format: :json }
-          }.to_not change(FacebookToken, :count)
+          VCR.use_cassette('update_facebook_token') do
+            expect{
+              post facebook_tokens_path, params: { facebook_token: protected_attributes, format: :json }
+            }.to_not change(FacebookToken, :count)
+          end
         end
 
         context 'json request' do
           before(:example) do
-            post facebook_tokens_path, params: { facebook_token: protected_attributes, format: :json }
+            VCR.use_cassette('update_facebook_token') do
+              post facebook_tokens_path, params: { facebook_token: protected_attributes, format: :json }
+            end
           end
 
           it 'assigns facebook_token' do
@@ -130,21 +134,25 @@ RSpec.describe "FacebookTokens", type: :request do
 
   describe 'UPDATE /facebook_token/:id' do
     before(:example) do
-      VCR.use_cassette('facebook_get_user_details') do
+      VCR.use_cassette('update_facebook_token') do
         facebook_token
       end
     end
 
     context 'when logged out' do
       it 'does not update facebook token' do
-        previous_name = facebook_token.network_user_name
-        put facebook_token_url(facebook_token), params: { facebook_token: { network_user_name: 'New Name' }, format: :json }
-        expect(facebook_token.network_user_name).to eq(previous_name)
+        VCR.use_cassette('update_facebook_token') do
+          previous_name = facebook_token.network_user_name
+          put facebook_token_url(facebook_token), params: { facebook_token: { network_user_name: 'New Name' }, format: :json }
+          expect(facebook_token.network_user_name).to eq(previous_name)
+        end
       end
 
       context 'json request' do
         before(:example) do
-          put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
+          VCR.use_cassette('update_facebook_token') do
+            put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
+          end
         end
 
         it 'responds with json' do
@@ -164,20 +172,19 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'with valid attributes' do
         it 'updates facebook token' do
-          previous_token = facebook_token.token
-          put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
-          facebook_token.reload
-          expect(facebook_token.token).to_not eql(previous_token)
-        end
-
-        it 'updates expires_at' do
-          put facebook_token_url(facebook_token), params: { facebook_token: { expires_at: '3600' }, format: :json }
-          expect(facebook_token.expires_at).to be > Time.now
+          VCR.use_cassette('update_facebook_token_new') do
+            previous_token = facebook_token.token
+            put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
+            facebook_token.reload
+            expect(facebook_token.token).to_not eql(previous_token)
+          end
         end
 
         context 'json request' do
           before(:example) do
-            put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
+            VCR.use_cassette('update_facebook_token_new') do
+              put facebook_token_url(facebook_token), params: { facebook_token: update_attributes, format: :json }
+            end
           end
 
           it 'assigns facebook_token' do
@@ -200,14 +207,18 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'with invalid attributes' do
         it 'does not update campaign' do
-          previous_token = facebook_token.token
-          put facebook_token_url(facebook_token), params: { facebook_token: invalid_update_attributes, format: :json }
-          expect(facebook_token.token).to eq(previous_token)
+          VCR.use_cassette('update_facebook_token') do
+            previous_token = facebook_token.token
+            put facebook_token_url(facebook_token), params: { facebook_token: invalid_update_attributes, format: :json }
+            expect(facebook_token.token).to eq(previous_token)
+          end
         end
 
         context 'json request' do
           before(:example) do
-            put facebook_token_url(facebook_token), params: { facebook_token: invalid_update_attributes, format: :json }
+            VCR.use_cassette('update_facebook_token') do
+              put facebook_token_url(facebook_token), params: { facebook_token: invalid_update_attributes, format: :json }
+            end
           end
 
           it 'assigns facebook token' do
@@ -230,7 +241,7 @@ RSpec.describe "FacebookTokens", type: :request do
     context 'when logged out' do
       context 'json request' do
         before(:example) do
-          VCR.use_cassette('facebook_get_user_details') do
+          VCR.use_cassette('update_facebook_token') do
             delete facebook_token_path(facebook_token), params: { format: :json }
           end
         end
@@ -252,7 +263,7 @@ RSpec.describe "FacebookTokens", type: :request do
 
       context 'json request' do
         it 'deletes campaign' do
-          VCR.use_cassette('facebook_get_user_details') do
+          VCR.use_cassette('update_facebook_token') do
             facebook_token
             expect{
               delete facebook_token_path(facebook_token), params: { format: :json }
@@ -261,7 +272,7 @@ RSpec.describe "FacebookTokens", type: :request do
         end
 
         it 'assigns facebook token' do
-          VCR.use_cassette('facebook_get_user_details') do
+          VCR.use_cassette('update_facebook_token') do
             facebook_token
             delete facebook_token_path(facebook_token), params: { format: :json }
             expect(assigns(:facebook_token)).to eql(facebook_token)
