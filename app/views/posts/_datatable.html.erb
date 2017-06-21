@@ -2,7 +2,7 @@
 <table id="groala-posts-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%">
   <thead>
     <tr>
-      <th>Network</th>
+      <th>Post</th>
       <th>Engagement</th>
       <th data-orderable="false"></th>
     </tr>
@@ -10,7 +10,7 @@
   <tbody>
     <% posts.each do |post| %>
       <tr id="post-<%= post.id %>">
-        <td data-order="<%= post.network.slug %>"><%= network_icon(post.network.slug) %><%= link_to post.network.name, organization_campaign_post_path(organization, campaign, post), class: '' %></td>
+        <td data-order="<%= post.network.slug %>"><%= link_to "Add Post Name", organization_campaign_post_path(organization, campaign, post), class: '' %></td>
         <td class="groala-no-wrap"><%= number_with_delimiter(post.engagement_count) %></td>
         <td class="groala-no-wrap">
           <%= link_to organization_campaign_post_path(organization, campaign, post) do %>

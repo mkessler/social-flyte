@@ -6,14 +6,13 @@
 
 <div class="row groala-organization-accounts mb-1">
   <%= render 'users/registrations/social/facebook' %>
-  <%= render 'users/registrations/social/twitter/connected' %>
 </div>
 
 <script type="text/javascript">
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
       App.facebook.init('<%= Rails.application.secrets.facebook_app_id %>');
-      <% if current_user.facebook_token.nil? or current_user.facebook_token.expired? %>
+      <% unless current_user.has_valid_facebook_token? %>
         App.facebook.status();
       <% end %>
     }

@@ -3,7 +3,6 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show, :edit, :update, :accounts, :users, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
   # GET /o
   # Platform dashboard
@@ -95,10 +94,5 @@ class OrganizationsController < ApplicationController
   def record_not_found
     flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
     redirect_to organizations_url
-  end
-
-  def record_invalid
-    flash[:error] = "There was an issue trying to authorize your Twitter account, please try again."
-    redirect_to root_url
   end
 end

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe AccountsHelper, type: :helper do
   let(:facebook_token) { FactoryGirl.create(:facebook_token, :with_before_save_callback) }
-  let(:twitter_token) { FactoryGirl.create(:twitter_token) }
 
   describe '.account_user_name' do
     context 'facebook' do
@@ -17,18 +16,6 @@ RSpec.describe AccountsHelper, type: :helper do
           facebook_token.network_user_name = nil
           expect(account_user_name(facebook_token)).to eql('Connected')
         end
-      end
-    end
-
-    context 'twitter' do
-      it 'returns user name when present' do
-        expect(account_user_name(twitter_token)).to eql(twitter_token.network_user_name)
-      end
-
-      it 'returns Connected user name when not present' do
-        twitter_token.network_user_name = nil
-        twitter_token.save
-        expect(account_user_name(twitter_token)).to eql('Connected')
       end
     end
 
@@ -52,12 +39,6 @@ RSpec.describe AccountsHelper, type: :helper do
           facebook_token.network_user_image_url = nil
           expect(account_user_image(facebook_token)).to eql(account_connected_missing_profile_image)
         end
-      end
-    end
-
-    context 'twitter' do
-      it 'returns user name when present' do
-        expect(account_user_image(twitter_token)).to eql(image_tag(twitter_token.network_user_image_url, alt: twitter_token.network_user_name, class: 'rounded-circle img-responsive'))
       end
     end
 

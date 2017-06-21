@@ -19,7 +19,7 @@ RSpec.feature 'Campaigns Show', :type => :feature do
   scenario 'clicks post name' do
     visit organization_campaign_path(@organization, @campaign)
 
-    click_link @post.network.name
+    click_link "Add Post Name"
 
     expect(page).to have_text('Comments')
     expect(page).to have_text('Reactions')

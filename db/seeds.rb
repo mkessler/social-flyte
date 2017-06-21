@@ -1,4 +1,4 @@
-['Facebook', 'Twitter', 'Instagram'].each do |network|
+['Facebook'].each do |network|
   Network.create(name: network)
 end
 
@@ -14,14 +14,6 @@ if Rails.env.development?
     name: Faker::Space.company
   )
 
-  twitter_token = TwitterToken.create(
-    organization: organization,
-    network_user_id: 109068078,
-    token: Rails.application.secrets.twitter_access_token,
-    secret: Rails.application.secrets.twitter_access_token_secret,
-    network_user_name: 'mikaelkessler'
-  )
-
   Membership.create(user: user, organization: organization)
 
   ["#{Faker::Space.nasa_space_craft} Contest", "#{Faker::Space.nasa_space_craft} Contest", "#{Faker::Space.nasa_space_craft} Contest"].each do |campaign|
@@ -29,5 +21,4 @@ if Rails.env.development?
   end
 
   Post.create(network: Network.facebook, campaign: Campaign.first, network_post_id: '10154368835501263', network_parent_id: '68680511262')
-  Post.create(network: Network.twitter, campaign: Campaign.first, network_post_id: '614092454652981248', twitter_token_id: twitter_token.id)
 end

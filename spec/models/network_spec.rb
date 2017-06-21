@@ -34,20 +34,6 @@ RSpec.describe Network, type: :model do
     end
   end
 
-  describe '.twitter' do
-    it 'returns twitter record' do
-      twitter = Network.find_by_slug('twitter')
-      expect(Network.twitter).to eql(twitter)
-    end
-  end
-
-  describe '.instagram' do
-    it 'returns instagram record' do
-      instagram = Network.find_by_slug('instagram')
-      expect(Network.instagram).to eql(instagram)
-    end
-  end
-
   describe '.set_slug' do
     context 'create' do
       it 'sets slug' do
