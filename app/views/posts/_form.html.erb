@@ -2,13 +2,14 @@
   <div class="col-lg-12">
     <%= simple_form_for([organization, campaign, post]) do |f| %>
       <div class="form-inputs">
-        <%= f.input :network_id, icon: 'thumbs-o-up', as: :string, :input_html => { :value => Network.facebook.name}, disabled: true %>
-        <%= f.input :network_post_id, icon: 'commenting', label: 'Post ID' %>
+        <%= f.input :network_id, collection: [[Network.facebook.name, Network.facebook.id], [Network.twitter.name, Network.twitter.id]], as: :radio_buttons, label: false %>
+        <%= f.input :network_post_id, icon: 'comment-o', label: 'Post ID' %>
         <%= f.input :network_parent_id, icon: 'newspaper-o', label: 'Page ID' %>
+        <%= f.input :twitter_token_id, as: :hidden, label: false, input_html: { value: current_user.twitter_tokens.sample.id } %>
       </div>
 
       <div class="form-actions text-xs-right">
-        <%= f.button :button, disabled: true do %>
+        <%= f.button :button do %>
           <i class="fa fa-check-circle-o left" aria-hidden="true"></i>
           Submit
         <% end %>

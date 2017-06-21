@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-lg-5 mb-2">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
+      <li class="nav-item">
+        <%= link_to '#post-embed', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
+          <i class="fa fa-sticky-note" aria-hidden="true"></i> Post
+        <% end %>
+      </li>
+    </ul>
+    <div class="tab-content card">
+      <div class="tab-pane fade in active text-xs-center" id="post-embed" role="tabpanel">
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7 mb-2">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
+      <li class="nav-item">
+        <%= link_to '#post-flagged-interactions', class: 'nav-link active', role: 'tab', data: { toggle: 'tab' } do %>
+          <i class="fa fa-flag" aria-hidden="true"></i> Flagged
+        <% end %>
+      </li>
+    </ul>
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="post-flagged-interactions" role="tabpanel">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 mb-2">
+    <ul class="nav nav-tabs tabs-2 primary-color" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#post-comments" role="tab"><i class="fa fa-comments" aria-hidden="true"></i> Comments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#post-reactions" role="tab"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Reactions</a>
+      </li>
+    </ul>
+
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="post-comments" role="tabpanel">
+
+      </div>
+      <div class="tab-pane fade in" id="post-reactions" role="tabpanel">
+
+      </div>
+    </div>
+  </div>
+</div>

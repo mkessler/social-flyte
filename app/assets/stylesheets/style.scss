@@ -227,6 +227,12 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
   background-position: center;
 }
 
+.radio_buttons {
+  span {
+    display: block;
+  }
+}
+
 .registration {
   padding-top: 6em;
 }

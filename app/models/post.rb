@@ -6,7 +6,6 @@ class Post < ApplicationRecord
   has_many :reactions, dependent: :destroy
   has_many :tweets, dependent: :destroy
 
-  # Make network_parent_id conditional on facebook when more networks added
   validates :campaign_id, :network_id, presence: true
   validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
   validates_presence_of :network_parent_id, if: :for_facebook?
@@ -94,6 +93,6 @@ class Post < ApplicationRecord
   private
 
   def twitter_token_validation
-    errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_tokens.include?(twitter_token)
+    errors.add(:twitter_account, "does not exist for this organization.") unless campaign.organization.twitter_tokens.include?(self.twitter_token)
   end
 end
