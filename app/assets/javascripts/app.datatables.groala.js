@@ -7,7 +7,6 @@
         columns: [
           null,
           { width: '20%' },
-          { width: '20%' },
           { width: '15%' }
         ],
         language: {

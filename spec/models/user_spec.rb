@@ -12,10 +12,6 @@ RSpec.describe User, type: :model do
       expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
     end
 
-    it 'has many twitter tokens' do
-      expect(User.reflect_on_association(:twitter_tokens).macro).to eql(:has_many)
-    end
-
     it 'has one facebook token' do
       expect(User.reflect_on_association(:facebook_token).macro).to eql(:has_one)
     end
@@ -70,28 +66,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '.has_valid_network_token?' do
+  describe '.has_valid_facebook_token?' do
     context 'facebook' do
       it 'returns true' do
         VCR.use_cassette('facebook_get_user_details') do
           FactoryGirl.create(:facebook_token, user_id: user.id)
         end
-        expect(user.has_valid_network_token?(Network.facebook)).to be true
+        expect(user.has_valid_facebook_token?).to be true
       end
 
       it 'returns false' do
-        expect(user.has_valid_network_token?(Network.facebook)).to be false
-      end
-    end
-
-    context 'twitter' do
-      it 'returns true' do
-        FactoryGirl.create(:twitter_token, user_id: user.id)
-        expect(user.has_valid_network_token?(Network.twitter)).to be true
-      end
-
-      it 'returns false' do
-        expect(user.has_valid_network_token?(Network.twitter)).to be false
+        expect(user.has_valid_facebook_token?).to be false
       end
     end
   end

@@ -1,1 +1,0 @@
-json.partial! "twitter_tokens/twitter_token", twitter_token: @twitter_token

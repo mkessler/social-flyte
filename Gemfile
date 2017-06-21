@@ -64,8 +64,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # User authentication
 gem 'devise'
-gem 'omniauth'
-gem 'omniauth-twitter'
 
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
@@ -79,9 +77,6 @@ gem 'rubycritic', require: false
 
 # Facebook API wrapper
 gem 'koala', '~> 2.2'
-
-# Twitter API wrapper
-gem 'twitter'
 
 # Friendly IDs
 gem 'friendly_id', '~> 5.1.0'

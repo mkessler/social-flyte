@@ -20,11 +20,6 @@ Rails.application.routes.draw do
     post :create_or_update, on: :collection
   end
 
-  #Twitter Tokens
-  resources :twitter_tokens, except: [:index, :new, :edit]
-  get '/auth/twitter', as: 'twitter_authentication'
-  get '/auth/twitter/callback', to: 'twitter_tokens#create_or_update'
-
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
     get :users

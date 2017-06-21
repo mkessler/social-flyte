@@ -3,7 +3,6 @@
   <thead>
     <tr>
       <th>Campaign</th>
-      <th>Networks</th>
       <th>Engagement</th>
       <th data-orderable="false"></th>
     </tr>
@@ -12,7 +11,6 @@
     <% campaigns.each do |campaign| %>
       <tr id="campaign-<%= campaign.id %>">
         <td><%= link_to campaign.name, organization_campaign_path(organization, campaign), class: ' groala-standard-link' %></td>
-        <td data-search="<%= campaign.networks.join(', ') %>"><%= campaign_networks_icons(campaign) %></td>
         <td class="groala-no-wrap"><%= number_with_delimiter(campaign.engagement_count) %></td>
         <td class="groala-no-wrap">
           <%= link_to organization_campaign_path(organization, campaign) do %>

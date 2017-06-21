@@ -1,7 +1,7 @@
 <% content_for :page_title do %>
   <h2 class="dashboard-title mb-0">
     <%= @post.network.name %>
-    <% if current_user.has_valid_network_token?(@post.network) && @post.can_be_synced? %>
+    <% if current_user.has_valid_facebook_token? && @post.can_be_synced? %>
       <%= button_tag type: :button, id: 'post-sync-trigger', class: 'btn-floating btn-small default-color mr-0' do %>
         <i class="fa fa-refresh" aria-hidden="true" data-toggle="tooltip" title="Sync Post"></i>
       <% end %>

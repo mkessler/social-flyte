@@ -9,22 +9,14 @@ class User < ApplicationRecord
   has_many :organizations, through: :memberships
   has_many :invitations, foreign_key: 'recipient_id', dependent: :destroy
   has_many :sent_invitations, class_name: 'Invitation', foreign_key: 'sender_id'
-  has_many :twitter_tokens, dependent: :destroy
   has_one :facebook_token, dependent: :destroy
 
   before_validation :set_name, on: [:create, :update]
 
   validates :first_name, :last_name, :name, presence: true
 
-  def has_valid_network_token?(network)
-    case network
-      when Network.facebook
-        facebook_token.present? && !facebook_token.expired?
-      when Network.twitter
-        twitter_tokens.any?
-      else
-        false
-      end
+  def has_valid_facebook_token?
+    facebook_token.present? && !facebook_token.expired?
   end
 
   def process_invitation(token)
