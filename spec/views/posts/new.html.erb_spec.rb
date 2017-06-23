@@ -19,7 +19,7 @@ RSpec.describe 'posts/new', type: :view do
 
     assert_select 'form[action=?][method=?]', organization_campaign_posts_path(@organization, @campaign), 'post' do
 
-      assert_select 'input#post_network_id[name=?]', 'post[network_id]'
+      assert_select 'input#post_name[name=?]', 'post[name]'
 
       assert_select 'input#post_network_post_id[name=?]', 'post[network_post_id]'
 

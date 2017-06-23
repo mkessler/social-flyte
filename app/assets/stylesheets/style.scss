@@ -66,7 +66,7 @@ th {
 
 .dashboard-title {
   font-weight: 700;
-  margin: 0rem 0 3rem;
+  margin: 0rem 0 2rem;
   padding: 0 5rem 0 0;
   position: relative;
   text-transform: uppercase;
@@ -131,7 +131,14 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 }
 
 .fixed-sn main {
-  padding-top: 3rem;
+  padding-top: 2rem;
+}
+
+@media (min-width: 992px) {
+  .fixed-sn main {
+    margin-left: 3%;
+    margin-right: 3%;
+  }
 }
 
 @media (min-width: 768px) {

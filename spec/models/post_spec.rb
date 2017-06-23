@@ -61,6 +61,16 @@ RSpec.describe Post, type: :model do
       expect(post).to_not be_valid
     end
 
+    it 'is not valid with missing name' do
+      invalid_attributes = FactoryGirl.attributes_for(
+        :post,
+        name: nil
+      )
+      post = Post.new(invalid_attributes)
+
+      expect(post).to_not be_valid
+    end
+
     it 'is not valid with missing network' do
       invalid_attributes = FactoryGirl.attributes_for(
         :post,

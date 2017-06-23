@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :reactions, dependent: :destroy
 
   # Make network_parent_id conditional on facebook when more networks added
-  validates :campaign_id, :network_id, presence: true
+  validates :name, :campaign_id, :network_id, presence: true
   validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
   validates_presence_of :network_parent_id
 
