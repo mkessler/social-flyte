@@ -6,6 +6,7 @@
       $('#groala-campaigns-table').DataTable({
         columns: [
           null,
+          { width: '15%' },
           { width: '20%' },
           { width: '15%' }
         ],

@@ -10,7 +10,7 @@
   <tbody>
     <% posts.each do |post| %>
       <tr id="post-<%= post.id %>">
-        <td data-order="<%= post.network.slug %>"><%= link_to "Add Post Name", organization_campaign_post_path(organization, campaign, post), class: '' %></td>
+        <td><%= link_to post.name, organization_campaign_post_path(organization, campaign, post) %></td>
         <td class="groala-no-wrap"><%= number_with_delimiter(post.engagement_count) %></td>
         <td class="groala-no-wrap">
           <%= link_to organization_campaign_post_path(organization, campaign, post) do %>

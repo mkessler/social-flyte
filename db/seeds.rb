@@ -17,8 +17,17 @@ if Rails.env.development?
   Membership.create(user: user, organization: organization)
 
   ["#{Faker::Space.nasa_space_craft} Contest", "#{Faker::Space.nasa_space_craft} Contest", "#{Faker::Space.nasa_space_craft} Contest"].each do |campaign|
-    Campaign.create(organization: organization, name: campaign)
+    Campaign.create(
+      organization: organization,
+      name: campaign
+    )
   end
 
-  Post.create(network: Network.facebook, campaign: Campaign.first, network_post_id: '10154368835501263', network_parent_id: '68680511262')
+  Post.create(
+    network: Network.facebook,
+    campaign: Campaign.first,
+    name: Faker::Friends.quote,
+    network_post_id: '10154368835501263',
+    network_parent_id: '68680511262'
+  )
 end

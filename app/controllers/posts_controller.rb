@@ -88,7 +88,7 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   # Don't allow :campaign_id
   def post_params
-    params.require(:post).permit(:network_post_id, :network_parent_id, :sync_count, :synced_at).merge(network_id: Network.facebook.id)
+    params.require(:post).permit(:name, :network_post_id, :network_parent_id, :sync_count, :synced_at).merge(network_id: Network.facebook.id)
   end
 
   def record_not_found
@@ -105,7 +105,7 @@ class PostsController < ApplicationController
   end
 
   def facebook_token_validation_check
-    if @post.for_facebook? && current_user.facebook_token.expired?
+    unless current_user.has_valid_facebook_token?
       flash[:error] = "Facebook token is currently expired. Please try syncing again."
       redirect_to :show
     end
