@@ -12,7 +12,7 @@ RSpec.describe OrganizationsHelper, type: :helper do
   describe 'organization_title' do
     context 'has no campaigns' do
       it 'returns welcome title' do
-        expect(organization_title(organization)).to eql('Welcome to groala')
+        expect(organization_title(organization)).to eql('Welcome to SocialFlyte')
       end
     end
 

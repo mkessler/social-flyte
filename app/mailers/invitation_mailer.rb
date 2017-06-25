@@ -1,5 +1,5 @@
 class InvitationMailer < ApplicationMailer
-  default from: 'invitations@groala.com'
+  default from: 'invitations@socialflyte.com'
 
   def invite_user(invitation)
     @invitation = invitation

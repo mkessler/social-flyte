@@ -1,5 +1,5 @@
 # Mailer
 class ApplicationMailer < ActionMailer::Base
-  default from: 'notifications@groala.com'
+  default from: 'notifications@socialflyte.com'
   layout 'mailer'
 end

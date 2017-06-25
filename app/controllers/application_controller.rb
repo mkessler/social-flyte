@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
   before_action :set_tags
 
   def meta_title(title=nil)
-    title.present? ? "Groala | #{title}" : 'Groala'
+    title.present? ? "SocialFlyte | #{title}" : 'SocialFlyte'
   end
 
   def set_tags
     set_meta_tags site: meta_title,
-                  description: 'Groala is the easiest way to monitor and analyze your native social promotions.',
-                  keywords: 'Groala, Social, Media, Promotion, Contest, Platform, Analyze, Monitor, Native'
+                  description: 'SocialFlyte is the easiest way to monitor and analyze your native social promotions.',
+                  keywords: 'SocialFlyte, Social, Flyte, Media, Promotion, Contest, Platform, Analyze, Monitor, Native'
   end
 
   def set_organization
