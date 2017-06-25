@@ -102,21 +102,6 @@
         serverSide: false
       });
     },
-    organizations: function() {
-      $('#groala-organizations-table').DataTable({
-        columns: [
-          null,
-          { width: '90px', className: 'text-xs-center' },
-          { width: '90px', className: 'text-xs-center' },
-          { width: '120px', className: 'text-xs-center' }
-        ],
-        language: {
-          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Organizations</span>'
-        },
-        processing: false,
-        serverSide: false
-      });
-    },
     posts: function() {
       $('#groala-posts-table').DataTable({
         columns: [
