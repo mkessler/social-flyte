@@ -1,6 +1,6 @@
 module OrganizationsHelper
   def organization_title(organization)
-    organization.campaigns.present? ? organization.name : 'Welcome to groala'
+    organization.campaigns.present? ? organization.name : 'Welcome to SocialFlyte'
   end
 
   def organization_sidenav_active_class(organization_id)
