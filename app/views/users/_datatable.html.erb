@@ -1,9 +1,9 @@
 <%= render "shared/datatables_search", table_id: 'groala-users-table' %>
-<table id="groala-users-table" class="table table-striped table-bordered groala-datatable" cellspacing="0" width="100%">
-  <thead>
+<table id="groala-users-table" class="table table-bordered groala-datatable" cellspacing="0" width="100%">
+  <thead class="thead-default">
     <tr>
       <th>User</th>
-      <th data-orderable="false"></th>
+      <th data-orderable="false">Message</th>
     </tr>
   </thead>
   <tbody>
@@ -11,7 +11,7 @@
       <tr id="user-<%= user.id %>">
         <td><%= user.name %></td>
         <td class="groala-no-wrap">
-          <%= mail_to user.email, data: { toggle: 'tooltip', placement: 'top' }, title: 'Message' do %>
+          <%= mail_to user.email, data: { toggle: 'tooltip', placement: 'top' }, title: 'Email' do %>
             <%= content_tag(:i, nil, :class => 'fa fa-commenting fa-lg ', aria: { hidden: true }) %>
           <% end %>
         </td>

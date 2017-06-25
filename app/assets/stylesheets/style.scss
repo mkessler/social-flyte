@@ -188,6 +188,10 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
   margin-top: -2em;
 }
 
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search-md], input[type=search], textarea.md-textarea {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
 .modal {
   .table {
     tr {
@@ -280,7 +284,24 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
 }
 
 .tab-content {
-  padding-top: 1rem;
+  padding: 1.5rem !important;
+}
+
+.table-bordered {
+  border: 1px solid rgba(0,0,0,.1);
+  border-top: 0;
+}
+
+.table-bordered td, .table-bordered th {
+  border: 1px solid rgba(0,0,0,.1);
+}
+
+.table-bordered thead td, .table-bordered thead th {
+  border-bottom-width: 1px;
+}
+
+.table-bordered tr:first-of-type td {
+  border-top: 0;
 }
 
 table.dataTable {
@@ -300,9 +321,6 @@ table.dataTable {
   }
   tbody {
     font-size: .95em;
-  }
-  td, th {
-    border-top: 0;
   }
   th, .groala-no-wrap {
     white-space: nowrap;

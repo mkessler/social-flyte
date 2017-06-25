@@ -6,11 +6,11 @@
       $('#facebook-comments-table').DataTable({
         ajax: $('#facebook-comments-table').data('source'),
         columns: [
-          { data: 'like_count', width: '10%' },
-          { data: 'user', width: '15%' },
-          { data: 'comment', className: 'groala-break-word' },
-          { data: 'posted_at', width: '15%' },
-          { data: 'flagged', width: '15%', className: 'groala-flag-toggle' }
+          { data: 'like_count', width: '50px', className: 'text-xs-center' },
+          { data: 'user', width: '110px' },
+          { data: 'comment', className: 'groala-break-word', responsivePriority: 1 },
+          { data: 'posted_at', width: '85px' },
+          { data: 'flagged', width: '60px', className: 'groala-flag-toggle' }
         ],
         columnDefs: [
           {
@@ -73,9 +73,9 @@
       $('#facebook-reactions-table').DataTable({
         ajax: $('#facebook-reactions-table').data('source'),
         columns: [
-          { data: 'category', width: '20%' },
+          { data: 'category', width: '100px', className: 'text-xs-center' },
           { data: 'user' },
-          { data: 'flagged', width: '15%', className: 'groala-flag-toggle' }
+          { data: 'flagged', width: '60px', className: 'groala-flag-toggle' }
         ],
         columnDefs: [
           {

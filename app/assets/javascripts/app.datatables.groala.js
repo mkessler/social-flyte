@@ -6,9 +6,9 @@
       $('#groala-campaigns-table').DataTable({
         columns: [
           null,
-          { width: '15%' },
-          { width: '20%' },
-          { width: '15%' }
+          { width: '60px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' }
         ],
         language: {
           info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Campaigns</span>'
@@ -21,30 +21,29 @@
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
-          { data: 'network', width: '5%' },
-          { data: 'class', width: '15%' },
-          { data: 'user', width: '25%' },
-          { data: 'content' },
-          { data: 'posted_at', width: '15%' },
+          { data: 'class', width: '50px', className: 'text-xs-center' },
+          { data: 'user', width: '110px' },
+          { data: 'content', responsivePriority: 1 },
+          { data: 'posted_at', width: '85px' },
         ],
         columnDefs: [
           {
             targets: 0,
-            data: 'network',
-            visible: network_column_visibility == 'show' ? true : false,
+            data: 'class',
             render: function ( data, type, full, meta ) {
-              return App.utility.networkIcon(data);
+              var icon = data === 'Comment' ? 'comment' : 'thumbs-up';
+              return '<i class="fa fa-'+ icon +' fa-lg grey-text" aria-hidden="true"></i>';
             }
           },
           {
-            targets: 2,
+            targets: 1,
             data: 'user',
             render: function ( data, type, full, meta ) {
               return '<a class=" groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
             }
           },
           {
-            targets: 3,
+            targets: 2,
             data: 'content',
             render: function ( data, type, full, meta ) {
               var output;
@@ -69,7 +68,7 @@
             }
           },
           {
-            targets: 4,
+            targets: 3,
             data: 'posted_at',
             render: function ( data, type, full, meta ) {
               if(data.time == 'Not Available') {
@@ -93,7 +92,7 @@
       $('#groala-invitations-table').DataTable({
         columns: [
           null,
-          { width: '10%' }
+          { width: '80px', className: 'text-xs-center' }
         ],
         language: {
           emptyTable: 'No invitations sent!',
@@ -107,9 +106,9 @@
       $('#groala-organizations-table').DataTable({
         columns: [
           null,
-          { width: '20%' },
-          { width: '20%' },
-          { width: '15%' }
+          { width: '90px', className: 'text-xs-center' },
+          { width: '90px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' }
         ],
         language: {
           info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Organizations</span>'
@@ -122,8 +121,8 @@
       $('#groala-posts-table').DataTable({
         columns: [
           null,
-          { width: '20%' },
-          { width: '10%' }
+          { width: '120px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' }
         ],
         language: {
           info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Posts</span>'
@@ -136,7 +135,7 @@
       $('#groala-users-table').DataTable({
         columns: [
           null,
-          { width: '10%' }
+          { width: '80px', className: 'text-xs-center' }
         ],
         language: {
           info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Users</span>'

@@ -31,6 +31,7 @@ class ApplicationController < ActionController::Base
     else
       @campaign = @organization.campaigns.friendly.find(params[:id])
     end
+    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
     add_breadcrumb @campaign.name, organization_campaign_path(@organization, @campaign)
   end
 
