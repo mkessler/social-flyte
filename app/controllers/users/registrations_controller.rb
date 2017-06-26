@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     # set_meta_tags site: meta_title('Sign Up')
     # super
-    flash[:notice] = 'Groala is currently not accepting registrations. Please check back later.'
+    flash[:notice] = 'SocialFlyte is currently not accepting registrations. Please check back later.'
     redirect_to root_url
   end
 
@@ -31,7 +31,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   set_minimum_password_length
     #   respond_with resource
     # end
-    flash[:notice] = 'Groala is currently not accepting registrations. Please check back later.'
+    flash[:notice] = 'SocialFlyte is currently not accepting registrations. Please check back later.'
     redirect_to root_url
   end
 
@@ -49,12 +49,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     set_meta_tags site: meta_title('Edit Profile')
     add_breadcrumb 'Profile', edit_user_registration_path
     super
-  end
-
-  def social
-    set_meta_tags site: meta_title('Social Accounts')
-    add_breadcrumb 'Profile', edit_user_registration_path
-    add_breadcrumb 'Social Accounts', social_accounts_path
   end
 
   protected

@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   # Sidekiq Monitoring
   mount Sidekiq::Web => '/sidekiq'
 
-  devise_scope :user do
-    get 'account/social', to: 'users/registrations#social', as: 'social_accounts'
-  end
-
   # Users
   devise_for :users, path: 'account', controllers: {
     passwords: 'users/passwords',

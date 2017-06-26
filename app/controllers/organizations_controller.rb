@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_organization, only: [:show, :edit, :update, :accounts, :users, :destroy]
+  before_action :set_organization, only: [:show, :edit, :update, :users, :destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
