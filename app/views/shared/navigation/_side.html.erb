@@ -35,21 +35,9 @@
         </li>
       <% end %>
       <li class="<%= profile_sidenav_active_class('users/registrations') %>">
-        <a class="collapsible-header waves-effect arrow-r <%= profile_sidenav_active_class('users/registrations') %>">
-          <i class="fa fa-user-o"></i>
-          Profile
-          <i class="fa fa-angle-down rotate-icon"></i>
-        </a>
-        <div class="collapsible-body">
-          <ul>
-            <li>
-              <%= link_to 'Edit', edit_user_registration_path, class: "waves-effect #{profile_sidenav_subactive_class('users/registrations', 'edit')}" %>
-            </li>
-            <li>
-              <%= link_to 'Social', social_accounts_path, class: "waves-effect #{profile_sidenav_subactive_class('users/registrations', 'social')}" %>
-            </li>
-          </ul>
-        </div>
+        <%= link_to edit_user_registration_path, class: "waves-effect #{profile_sidenav_active_class(['users/registrations'])}" do %>
+          <%= content_tag(:i, nil, :class => 'fa fa-user-o', aria: { hidden: true }) %> Profile
+        <% end %>
       </li>
       <li>
         <a class="collapsible-header waves-effect arrow-r">
