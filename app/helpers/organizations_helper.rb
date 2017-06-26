@@ -7,8 +7,12 @@ module OrganizationsHelper
     organization_is_active?(organization_id) ? 'active' : ''
   end
 
-  def organization_sidenav_subactive_class(organization_id, controller=nil, action=nil)
-    organization_is_active?(organization_id) && (controller == params[:controller] || action == params[:action]) ? 'active' : ''
+  def organization_sidenav_arrow_class(organization_id)
+    organization_is_active?(organization_id) ? 'rotate-element' : ''
+  end
+
+  def organization_sidenav_subactive_class(organization_id, controller=[], action=nil)
+    organization_is_active?(organization_id) && (controller.include?(params[:controller]) || action == params[:action]) ? 'active' : ''
   end
 
   def organization_is_active?(organization_id)

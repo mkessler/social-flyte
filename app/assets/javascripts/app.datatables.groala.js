@@ -134,7 +134,6 @@
   $(document).on('ready', function() {
     App.dataTables.groala.campaigns();
     App.dataTables.groala.invitations();
-    App.dataTables.groala.organizations();
     App.dataTables.groala.posts();
     App.dataTables.groala.users();
   });
