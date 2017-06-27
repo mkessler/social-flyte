@@ -1,3 +1,5 @@
+require 'active_record'
+require 'activerecord-import'
 require 'koala'
 
 class FacebookService
@@ -55,29 +57,66 @@ class FacebookService
   end
 
   def build_reactions(results)
+    reactions = []
     results.each do |result|
-      @post.reactions.find_or_create_by(network_user_id: result['id']) do |reaction|
-        reaction.network_user_name = result['name']
-        reaction.network_user_picture = result['pic_square']
-        reaction.category = result['type']
-      end
+      reaction = Reaction.new(
+        post_id: @post.id,
+        network_user_id: result['id'],
+        network_user_name: result['name'],
+        network_user_picture: result['pic_square'],
+        category: result['type']
+      )
+
+      reactions << reaction
     end
+
+    Reaction.import(
+      reactions,
+      on_duplicate_key_update: {
+        conflict_target: [:post_id, :network_user_id],
+        index_name: :index_reactions_on_post_id_and_network_user_id,
+        columns: [:network_user_name, :network_user_picture, :category]
+      }
+    )
   end
 
   def build_comments(results)
+    comments = []
     results.each do |result|
-      @post.comments.find_or_create_by(network_comment_id: result['id']) do |comment|
-        comment.network_user_id = result['from']['id']
-        comment.network_user_name = result['from']['name']
-        comment.like_count = result['like_count']
-        comment.message = result['message']
-        comment.posted_at = result['created_time']
-        if result['attachment'].present?
-          comment.attachment_image = result['attachment']['media']['image']['src'] if result['attachment']['media'].present?
-          comment.attachment_url = result['attachment']['url']
-        end
+      comment = Comment.new(
+        post_id: @post.id,
+        network_comment_id: result['id'],
+        network_user_id:  result['from']['id'],
+        network_user_name: result['from']['name'],
+        like_count: result['like_count'],
+        message: result['message'],
+        posted_at: result['created_time']
+      )
+
+      if result['attachment'].present?
+        comment.attachment_image = result['attachment']['media']['image']['src'] if result['attachment']['media'].present?
+        comment.attachment_url = result['attachment']['url']
       end
+
+      comments << comment
     end
+
+    Comment.import(
+      comments,
+      on_duplicate_key_update: {
+        conflict_target: [:post_id, :network_comment_id],
+        index_name: :index_comments_on_post_id_and_network_comment_id,
+        columns: [
+          :network_user_id,
+          :network_user_name,
+          :like_count,
+          :message,
+          :posted_at,
+          :attachment_image,
+          :attachment_url
+        ]
+      }
+    )
   end
 
   def get_user

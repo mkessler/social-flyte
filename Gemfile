@@ -98,4 +98,5 @@ gem 'meta-tags'
 gem 'sitemap_generator'
 
 # Utility
+gem 'activerecord-import'
 gem 'attr_encrypted', '~> 3.0.0'

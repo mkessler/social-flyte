@@ -215,6 +215,11 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  .fb-post {
+    span {
+      background: #fff;
+    }
+  }
 }
 
 .registration {
