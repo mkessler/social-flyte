@@ -19,13 +19,20 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if comment_params.present? && @comment.update(comment_params)
+        if @comment.flagged?
+          flash.now[:notice] = "Comment flagged!"
+        else
+          flash.now[:warning] = "Comment unflagged!"
+        end
         format.js { render :update }
+      else
+        format.js { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
 
   private
-  
+
   def set_comment
     @comment = @post.comments.find(params[:id])
   end

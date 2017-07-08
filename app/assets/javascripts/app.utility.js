@@ -1,7 +1,7 @@
 (function() {
   this.App || (this.App = {});
 
-  App.utility ={
+  App.utility = {
     alert: function(args) {
       $('<div class="row">'+
           '<div class="groala-alert col-lg-12 mb-2" style="display:none;">'+
@@ -20,6 +20,11 @@
       $('html, body').animate({
         scrollTop: $('.groala-alert').offset().top - 80
       }, 2000);
+    },
+    flagRandomInteractionButton: function() {
+      $('.groala-flag-random-interaction').on('click', function() {
+        $('i', this).removeClass('fa-comments fa-thumbs-up').addClass('fa-refresh fa-spin');
+      });
     },
     getParameterByName: function(name, url) {
       if (!url) {
@@ -42,6 +47,7 @@
   }
 
   $(document).on('ready', function() {
+    App.utility.flagRandomInteractionButton();
     console.log('Utility ready.');
   });
 

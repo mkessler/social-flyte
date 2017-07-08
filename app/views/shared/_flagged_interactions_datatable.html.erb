@@ -3,21 +3,30 @@
     <tr>
       <th>Type</th>
       <th>User</th>
-      <th>Content</th>
+      <th style="min-width: 180px;">Content</th>
       <th>Posted</th>
+      <th class="text-xs-center" data-orderable="false">Manage</th>
     </tr>
   </thead>
   <tbody>
   </tbody>
 </table>
-<% if params[:controller] == 'campaigns' %>
-  <%= render 'shared/datatables_buttons', csv_download_link: organization_campaign_interactions_path(organization, campaign, format: :csv), csv_object: 'Flagged Interactions' %>
-<% elsif params[:controller] == 'posts' %>
-  <%= render 'shared/datatables_buttons', csv_download_link: organization_campaign_post_interactions_path(organization, campaign, post, format: :csv), csv_object: 'Flagged Interactions' %>
-<% end %>
+<div class="mt-2">
+  <hr>
+  <%= link_to @csv_download_url, class: 'btn btn-md secondary-color', data: { toggle: 'tooltip', placement: 'top' }, title: 'Download Flagged Interactions' do %>
+    <i class="fa fa-download left"></i> <b>CSV</b>
+  <% end %>
+  <%= link_to @flag_random_comment_url, class: 'btn btn-md secondary-color groala-flag-random-interaction', data: { toggle: 'tooltip', placement: 'top' }, method: :post, title: 'Flag Random Comment', remote: true do %>
+    <i class="fa fa-comments left"></i> <b>Flag</b>
+  <% end %>
+  <%= link_to @flag_random_reaction_url, class: 'btn btn-md secondary-color groala-flag-random-interaction', data: { toggle: 'tooltip', placement: 'top' }, method: :post, title: 'Flag Random Reaction', remote: true do %>
+    <i class="fa fa-thumbs-up left"></i> <b>Flag</b>
+  <% end %>
+</div>
+
 
 <script type="text/javascript">
   $(document).on('ready', function() {
-    App.dataTables.groala.flagged_interactions('<%= params[:controller] != 'posts' ? 'show' : 'hide' %>');
+    App.dataTables.groala.flagged_interactions();
   });
 </script>

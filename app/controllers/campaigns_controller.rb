@@ -1,7 +1,7 @@
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
-  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :interactions]
+  before_action :set_campaign, only: [:show, :edit, :update, :destroy, :flag_random_interaction, :interactions]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -17,12 +17,15 @@ class CampaignsController < ApplicationController
   # GET /o/:organization_id/c/:campaign_id.json
   def show
     set_meta_tags site: meta_title(@campaign.name)
-    @posts = @campaign.posts
+    @csv_download_url = organization_campaign_interactions_path(@organization, @campaign, format: :csv)
     @flagged_interactions = @campaign.flagged_interactions
+    @flag_random_comment_url = organization_campaign_flag_random_interaction_path(@organization, @campaign, interaction_class: 'comment')
+    @flag_random_reaction_url = organization_campaign_flag_random_interaction_path(@organization, @campaign, interaction_class: 'reaction')
+    @posts = @campaign.posts
   end
 
-  # GET /o/:organization_id/c/:campaign_id/interactions.json
-  # GET /o/:organization_id/c/:campaign_id/interactions.csv
+  # GET /o/:organization_id/c/:id/interactions.json
+  # GET /o/:organization_id/c/:id/interactions.csv
   def interactions
     respond_to do |format|
       format.json { render json: FlaggedInteractionsDatatable.new(view_context, @campaign) }
@@ -30,14 +33,38 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # GET /o/:organization_id/c/:campaign_id/new
+  # POST /o/:organization_id/c/:id/flag_random_reaction
+  def flag_random_interaction
+    post = @campaign.posts.select{|post| post.engagement_count > 0}.sample
+    case params[:interaction_class]
+      when 'comment'
+        @interaction = post.comments.where(flagged: false).sample
+        @flag_url = organization_campaign_post_comment_path(@organization, @campaign, post, @interaction, comment: { flagged: !@interaction.flagged })
+      when 'reaction'
+        @interaction = post.reactions.where(flagged: false).sample
+        @flag_url = organization_campaign_post_reaction_path(@organization, @campaign, post, @interaction, reaction: { flagged: !@interaction.flagged })
+    end
+
+    @interaction.flagged = true
+
+    respond_to do |format|
+      if @interaction.save
+        flash.now[:notice] = "#{@interaction.class.name} flagged!"
+        format.js { render :flag_random_interaction }
+      else
+        format.js { render json: @interaction.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /o/:organization_id/c/:id/new
   def new
     set_meta_tags site: meta_title('New Campaign')
     add_breadcrumb 'New Campaign', new_organization_campaign_path(@organization)
     @campaign = @organization.campaigns.new
   end
 
-  # GET /o/:organization_id/c/:campaign_id/edit
+  # GET /o/:organization_id/c/:id/edit
   def edit
     set_meta_tags site: meta_title("Edit #{@campaign.name}")
     add_breadcrumb 'Edit', edit_organization_campaign_path(@organization)

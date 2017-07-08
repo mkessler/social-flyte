@@ -19,7 +19,14 @@ class ReactionsController < ApplicationController
   def update
     respond_to do |format|
       if reaction_params.present? && @reaction.update(reaction_params)
+        if @reaction.flagged?
+          flash.now[:notice] = "Reaction flagged!"
+        else
+          flash.now[:warning] = "Reaction unflagged!"
+        end
         format.js { render :update }
+      else
+        format.js { render json: @reaction.errors, status: :unprocessable_entity }
       end
     end
   end
