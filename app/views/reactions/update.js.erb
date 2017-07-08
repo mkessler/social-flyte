@@ -2,4 +2,9 @@
   var $el = $('#reaction-flag-<%= @reaction.id %>');
   var update_link = '<%= organization_campaign_post_reaction_path(@organization, @campaign, @post, @reaction, reaction: { flagged: !@reaction.flagged }) %>'
   App.dataTables.flagToggle($el, <%= @reaction.flagged? %>, update_link);
+
+  <% flash.each do |f| %>
+    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+    toastr['<%= type %>']('<%= f[1] %>');
+  <% end %>
 })();

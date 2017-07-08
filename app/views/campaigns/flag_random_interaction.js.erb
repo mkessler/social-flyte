@@ -1,0 +1,10 @@
+(function() {
+  var $el = $('#<%= @interaction.class.name.downcase %>-flag-<%= @interaction.id %>');
+  $('.groala-flag-random-interaction i.fa-refresh').removeClass('fa-refresh fa-spin').addClass('<%= @interaction.class.name == "Comment" ? "fa-comments" : "fa-thumbs-up" %>');
+  App.dataTables.flagToggle($el, <%= @interaction.flagged? %>, '<%= @flag_url %>');
+
+  <% flash.each do |f| %>
+    <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+    toastr['<%= type %>']('<%= f[1] %>');
+  <% end %>
+})();

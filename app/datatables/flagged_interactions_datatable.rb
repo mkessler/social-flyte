@@ -31,6 +31,10 @@ class FlaggedInteractionsDatatable < Datatable
         posted_at: {
           time: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%l:%M%P') : 'Not Available',
           date: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%b %-d %Y') : 'Not Available'
+        },
+        flagged: {
+          id: flagged_interaction.id,
+          status: flagged_interaction.flagged
         }
       }.tap do |hash|
         if flagged_interaction.is_a?(Comment)
@@ -39,9 +43,27 @@ class FlaggedInteractionsDatatable < Datatable
             url: flagged_interaction.attachment_url
           }
           hash[:content][:message] = flagged_interaction.message
+          hash[:flagged][:url] = organization_campaign_post_comment_path(
+            flagged_interaction.post.campaign.organization,
+            flagged_interaction.post.campaign,
+            flagged_interaction.post,
+            flagged_interaction,
+            comment: {
+              flagged: !flagged_interaction.flagged
+            }
+          )
         end
         if flagged_interaction.is_a?(Reaction)
           hash[:content][:category] = flagged_interaction.category.downcase
+          hash[:flagged][:url] = organization_campaign_post_reaction_path(
+            flagged_interaction.post.campaign.organization,
+            flagged_interaction.post.campaign,
+            flagged_interaction.post,
+            flagged_interaction,
+            reaction: {
+              flagged: !flagged_interaction.flagged
+            }
+          )
         end
       end
     end

@@ -17,7 +17,7 @@
         serverSide: false
       });
     },
-    flagged_interactions: function(network_column_visibility) {
+    flagged_interactions: function() {
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
@@ -25,6 +25,7 @@
           { data: 'user', width: '110px' },
           { data: 'content', responsivePriority: 1 },
           { data: 'posted_at', width: '85px' },
+          { data: 'flagged', width: '80px', className: 'text-xs-center', responsivePriority: 2 }
         ],
         columnDefs: [
           {
@@ -77,6 +78,15 @@
                 return data.time + '<br/><small>'+data.date+'</small>';
               }
             }
+          },
+          {
+            targets: 4,
+            data: 'flagged',
+            render: function ( data, type, full, meta ) {
+              return '<a data-confirm="Are you sure you want to unflag this interaction?" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<i class="fa fa-times fa-lg red-text" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Unflag"></i>' +
+              '</a>'
+            }
           }
         ],
         language: {
@@ -85,7 +95,8 @@
         },
         order: [
           [2, 'asc']
-        ]
+        ],
+        pageLength: 5
       });
     },
     invitations: function() {

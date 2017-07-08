@@ -12,4 +12,9 @@
   <tbody>
   </tbody>
 </table>
-<%= render 'shared/datatables_buttons', csv_download_link: organization_campaign_post_reactions_path(organization, campaign, post, format: :csv), csv_object: 'Reactions' %>
+<div class="mt-2">
+  <hr>
+  <%= link_to organization_campaign_post_reactions_path(organization, campaign, post, format: :csv), class: 'btn btn-md secondary-color', data: { toggle: 'tooltip', placement: 'top' }, title: 'Download Reactions' do %>
+    <i class="fa fa-download left"></i> <b>CSV</b>
+  <% end %>
+</div>

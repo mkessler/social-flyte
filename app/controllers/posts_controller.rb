@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_organization
   before_action :set_campaign
-  before_action :set_post, only: [:show, :interactions, :sync_status, :sync_post, :destroy]
+  before_action :set_post, only: [:show, :flag_random_interaction, :interactions, :sync_status, :sync_post, :destroy]
   before_action :facebook_token_validation_check, only: [:sync_post]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
@@ -10,10 +10,13 @@ class PostsController < ApplicationController
   # GET o/:organization_id/c/:campaign_id/posts/:id
   # GET o/:organization_id/c/:campaign_id/posts/:id.json
   def show
+    @csv_download_url = organization_campaign_post_interactions_path(@organization, @campaign, @post, format: :csv)
+    @flag_random_comment_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'comment')
+    @flag_random_reaction_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'reaction')
     @network = @post.network
-    set_meta_tags site: meta_title("#{@network.name} Post")
     @network_slug = @network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
+    set_meta_tags site: meta_title("#{@network.name} Post")
 
     if @post.sync_count > 0
       flash[:notice] = 'This post is scheduled for another sync - occassionally refresh the page to for the latest status update.' if @status.queued?
@@ -27,6 +30,29 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.json { render json: FlaggedInteractionsDatatable.new(view_context, @post) }
       format.csv { send_data(@post.flagged_interactions_to_csv, :filename => "#{@post.campaign.name.parameterize}-#{@post.network.slug}-flagged-interactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
+    end
+  end
+
+  # POST /o/:organization_id/c/:campaign_id/posts/:id/flag_random_reaction
+  def flag_random_interaction
+    case params[:interaction_class]
+      when 'comment'
+        @interaction = @post.comments.where(flagged: false).sample
+        @flag_url = organization_campaign_post_comment_path(@organization, @campaign, @post, @interaction, comment: { flagged: !@interaction.flagged })
+      when 'reaction'
+        @interaction = @post.reactions.where(flagged: false).sample
+        @flag_url = organization_campaign_post_reaction_path(@organization, @campaign, @post, @interaction, reaction: { flagged: !@interaction.flagged })
+    end
+
+    @interaction.flagged = true
+
+    respond_to do |format|
+      if @interaction.save
+        flash[:notice] = "#{@interaction.class.name} flagged!"
+        format.js { render :flag_random_interaction }
+      else
+        format.js { render json: @interaction.errors, status: :unprocessable_entity }
+      end
     end
   end
 
