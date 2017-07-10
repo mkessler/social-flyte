@@ -193,9 +193,9 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 }
 
 .mx {
-  &-quarter {
-    margin-right: 0.25rem!important;
-    margin-left: 0.25rem!important;
+  &-half {
+    margin-right: 0.5rem !important;
+    margin-left: 0.5rem !important;
   }
 }
 

@@ -14,7 +14,9 @@
           if (settings._iRecordsDisplay < settings._iDisplayLength) {
             $('#'+settings.sTableId+'_paginate').hide();
           } else {
+            $('li.next, li.previous', '#'+settings.sTableId+'_paginate').remove();
             $('#'+settings.sTableId+'_paginate').show();
+            $('#'+settings.sTableId+'_paginate .pagination').rPage();
           }
         },
         initComplete: function(settings, json) {
@@ -37,6 +39,8 @@
           infoEmpty: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> 0 Records</span>',
           infoFiltered: '<span class="tag tag-default"><i class="fa fa-filter" aria-hidden="true"></i> Filtered from _MAX_ Records</span>',
           paginate: {
+            first: '<i class="fa fa-step-backward mx-half" aria-hidden="true"></i>',
+            last: '<i class="fa fa-step-forward mx-half" aria-hidden="true"></i>',
             next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
             previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
           },
@@ -44,6 +48,7 @@
         },
         lengthChange: false,
         pageLength: 10,
+        pagingType: 'full_numbers_no_ellipses',
         processing: true,
         responsive: {
           details: {
@@ -70,7 +75,7 @@
         },
         serverSide: true
       });
-      $.fn.DataTable.ext.pager.numbers_length = 5;
+      $.fn.DataTable.ext.pager.numbers_length = 20;
     },
     flagToggle: function($el, status, update_link) {
       var table = $('#groala-flagged-interactions-table').DataTable();
@@ -88,6 +93,14 @@
         }
       });
     },
+    redrawOnShow: function() {
+      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target_id = $(e.target).attr('href');
+        var tab = $(target_id);
+        var table = $('.groala-datatable', tab).DataTable();
+        table.draw('page');
+      });
+    },
     search: function(table, id) {
       $(id).on('keyup', function() {
         table.search(this.value).draw();
@@ -97,6 +110,7 @@
 
   $(document).on('ready', function() {
     App.dataTables.defaults();
+    App.dataTables.redrawOnShow();
     console.log('DataTables ready.');
   });
 
