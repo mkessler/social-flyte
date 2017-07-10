@@ -28,6 +28,7 @@ class FlaggedInteractionsDatatable < Datatable
           url: flagged_interaction.post.network.user_link(flagged_interaction.network_user_id)
         },
         content: {},
+        post_name: flagged_interaction.post.name.truncate(64),
         posted_at: {
           time: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%l:%M%P') : 'Not Available',
           date: flagged_interaction.try(:posted_at) ? flagged_interaction.posted_at.strftime('%b %-d %Y') : 'Not Available'
@@ -80,6 +81,8 @@ class FlaggedInteractionsDatatable < Datatable
       flagged_interactions = @parent.flagged_interactions.sort_by {|i| i.class.name}
     elsif sort_column == "content"
       flagged_interactions = @parent.flagged_interactions.sort_by {|i| i.try(:message) || i.try(:category)}
+    elsif sort_column == "post_name"
+      flagged_interactions = @parent.flagged_interactions.sort_by {|i| i.post.name}
     elsif sort_column == "posted_at"
       flagged_interactions = @parent.flagged_interactions.select(&sort_column.to_sym).sort_by(&sort_column.to_sym) + @parent.flagged_interactions.reject(&sort_column.to_sym)
     else
@@ -91,7 +94,7 @@ class FlaggedInteractionsDatatable < Datatable
   end
 
   def sort_column
-    columns = %w[network class network_user_name content posted_at]
+    columns = %w[post_name class network_user_name content posted_at]
     columns[params[:order].try(:[], "0").try(:[], :column).to_i]
   end
 end

@@ -21,7 +21,8 @@
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
-          { data: 'class', width: '50px', className: 'text-xs-center' },
+          { data: 'post_name', width: '85px' },
+          { data: 'class', width: '40px', className: 'text-xs-center' },
           { data: 'user', width: '110px' },
           { data: 'content', responsivePriority: 1 },
           { data: 'posted_at', width: '85px' },
@@ -29,7 +30,7 @@
         ],
         columnDefs: [
           {
-            targets: 0,
+            targets: 1,
             data: 'class',
             render: function ( data, type, full, meta ) {
               var icon = data === 'Comment' ? 'comment' : 'thumbs-up';
@@ -37,14 +38,14 @@
             }
           },
           {
-            targets: 1,
+            targets: 2,
             data: 'user',
             render: function ( data, type, full, meta ) {
               return '<a class=" groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
             }
           },
           {
-            targets: 2,
+            targets: 3,
             data: 'content',
             render: function ( data, type, full, meta ) {
               var output;
@@ -69,7 +70,7 @@
             }
           },
           {
-            targets: 3,
+            targets: 4,
             data: 'posted_at',
             render: function ( data, type, full, meta ) {
               if(data.time == 'Not Available') {
@@ -80,7 +81,7 @@
             }
           },
           {
-            targets: 4,
+            targets: 5,
             data: 'flagged',
             render: function ( data, type, full, meta ) {
               return '<a data-confirm="Are you sure you want to unflag this interaction?" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +

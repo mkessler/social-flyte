@@ -93,14 +93,22 @@ table.dataTable thead>tr>th.sorting_asc, table.dataTable thead>tr>th.sorting_des
   padding-left: .75em;
 }
 
+div.dataTables_wrapper > div:first-of-type{
+  min-height: 160px;
+  position: relative;
+}
+
 div.dataTables_wrapper div.dataTables_processing {
+  width: 140px;
   background: rgba(0,0,0,0.5);
   color: white;
-  margin-top: -70px;
+  margin-top: -56px;
+  margin-left: -70px;
   padding: 2em 0;
   position: absolute;
   top: 50%;
   left: 50%;
+  z-index: 5;
 }
 
 div.dataTables_paginate li.first > a, div.dataTables_paginate li.previous > a,
