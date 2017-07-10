@@ -44,7 +44,7 @@
             next: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
             previous: '<i class="fa fa-chevron-left" aria-hidden="true"></i>'
           },
-          processing: '<i class="fa fa-refresh fa-spin fa-5x fa-fw"></i><span class="sr-only">Loading...</span>'
+          processing: '<i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
         },
         lengthChange: false,
         pageLength: 10,
@@ -79,9 +79,14 @@
     },
     flagToggle: function($el, status, update_link) {
       var table = $('#groala-flagged-interactions-table').DataTable();
-      table.ajax.reload();
+      if (table.page.info().end - table.page.info().start === 1) {
+        table.ajax.reload();
+      } else {
+        table.ajax.reload(null, false);
+      }
       $el.attr('href', update_link);
       $('input:checkbox', $el).prop('checked', status);
+      $('[data-toggle="tooltip"]').tooltip('hide');
     },
     history: function(table) {
       table.on( 'xhr', function () {
