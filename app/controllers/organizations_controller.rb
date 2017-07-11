@@ -22,13 +22,6 @@ class OrganizationsController < ApplicationController
     @campaigns = @organization.campaigns
   end
 
-  # GET /o/:id/users
-  def users
-    set_meta_tags site: meta_title("#{@organization.name} Users")
-    add_breadcrumb 'Users', organization_users_path(@organization)
-    @users = @organization.users
-  end
-
   # GET /o/new
   def new
     set_meta_tags site: meta_title('New Organization')

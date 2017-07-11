@@ -10,6 +10,6 @@ class InvitationMailer < ApplicationMailer
     else
       @url = new_user_registration_url(email: invitation.email, invitation: invitation.token)
     end
-    mail(to: invitation.email, subject: "You're invited to join #{@organization.name} on Groala")
+    mail(to: invitation.email, subject: "You're invited to join #{@organization.name} on SocialFlyte")
   end
 end

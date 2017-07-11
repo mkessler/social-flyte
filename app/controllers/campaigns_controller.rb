@@ -5,14 +5,6 @@ class CampaignsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET /o/:organization_id/c
-  # GET /o/:organization_id/c.json
-  def index
-    set_meta_tags site: meta_title("#{@organization.name} Campaigns")
-    add_breadcrumb 'Campaigns', organization_campaigns_path(@organization)
-    @campaigns = @organization.campaigns
-  end
-
   # GET /o/:organization_id/c/:campaign_id
   # GET /o/:organization_id/c/:campaign_id.json
   def show

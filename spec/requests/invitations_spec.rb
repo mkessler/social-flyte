@@ -143,8 +143,8 @@ RSpec.describe "Invitations", type: :request do
               expect(response).to have_http_status(302)
             end
 
-            it 'redirects to organization users' do
-              expect(response).to redirect_to(organization_users_url(organization))
+            it 'redirects to organization' do
+              expect(response).to redirect_to(organization)
             end
           end
 
@@ -531,9 +531,9 @@ RSpec.describe "Invitations", type: :request do
             expect(response).to have_http_status(302)
           end
 
-          it 'redirects to organization users' do
+          it 'redirects to organization' do
             delete organization_invitation_path(organization, invitation)
-            expect(response).to redirect_to(organization_users_url(organization))
+            expect(response).to redirect_to(organization)
           end
         end
 
