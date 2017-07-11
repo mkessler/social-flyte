@@ -18,9 +18,8 @@ Rails.application.routes.draw do
 
   # Organzations, Campaigns, & Posts
   resources :organizations, path: 'o' do
-    get :users
     resources :invitations, except: [:index, :show, :edit]
-    resources :campaigns, path: 'c' do
+    resources :campaigns, path: 'c', except: [:index] do
       get :interactions
       post :flag_random_interaction
       resources :posts, path: 'p', except: [:index, :edit, :update] do

@@ -1,9 +1,9 @@
 [ ![Codeship Status for mkessler/yoala](https://app.codeship.com/projects/c3298b20-7cae-0134-5149-164a30546007/status?branch=master)](https://app.codeship.com/projects/181143)
 
-Groala
+SocialFlyte
 ==============================================
 
-Groala is a social media campaign analysis tool that allows users to easily import and consume post interactions across today's most popular social networks. Groala enables end users the ability to monitor cross-network campaigns and digest engagement in an intuitive, meaningful way.
+SocialFlyte is a social media campaign analysis tool that allows users to easily import and consume post interactions across today's most popular social networks. SocialFlyte enables end users the ability to monitor cross-network campaigns and digest engagement in an intuitive, meaningful way.
 
 
 Required Environment / Minimum Setup
@@ -90,7 +90,7 @@ Is there a particular release process?
 Design
 ----------------------------------------------
 
-Groala uses [Material Bootsrap Design](http://mdbootstrap.com/components/).
+SocialFlyte uses [Material Bootsrap Design](http://mdbootstrap.com/components/).
 
 
 Known Issues / Gotcha

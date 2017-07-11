@@ -10,21 +10,10 @@
       <% if current_user.organizations.present? %>
         <% current_user.organizations.each do |organization| %>
           <li class="<%= organization_sidenav_active_class(organization.id) %>">
-            <a class="collapsible-header waves-effect arrow-r <%= organization_sidenav_active_class(organization.id) %>">
-              <i class="fa fa-cube"></i>
-              <%= organization.name.truncate(15) %>
-              <i class="fa fa-angle-down rotate-icon <%= organization_sidenav_arrow_class(organization.id) %>"></i>
-            </a>
-            <div class="collapsible-body">
-              <ul>
-                <li>
-                  <%= link_to 'Campaigns', organization_campaigns_path(organization), class: "waves-effect #{organization_sidenav_subactive_class(organization.id, ['campaigns', 'posts'])}" %>
-                </li>
-                <li>
-                  <%= link_to 'Users', organization_users_path(organization), class: "waves-effect #{organization_sidenav_subactive_class(organization.id, ['invitations'], 'users')}" %>
-                </li>
-              </ul>
-            </div>
+            <%= link_to organization, class: "waves-effect #{organization_sidenav_active_class(organization.id)}" do %>
+              <%= content_tag(:i, nil, :class => 'fa fa-cube', aria: { hidden: true }) %>
+              <%= organization.name.truncate(18) %>
+            <% end %>
           </li>
         <% end %>
       <% else %>
