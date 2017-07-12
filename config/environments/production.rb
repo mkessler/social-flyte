@@ -67,7 +67,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'www.groala.com' }
+  config.action_mailer.default_url_options = { host: 'www.socialflyte.com' }
   config.action_mailer.smtp_settings = {
     enable_starttls_auto: true,
     address: ENV['MAILGUN_SMTP_SERVER'],
@@ -75,7 +75,7 @@ Rails.application.configure do
     authentication: 'plain',
     user_name: ENV['MAILGUN_SMTP_LOGIN'],
     password: ENV['MAILGUN_SMTP_PASSWORD'],
-    domain: 'groala.com'
+    domain: 'socialflyte.com'
   }
 
   config.action_mailer.delivery_method = :smtp

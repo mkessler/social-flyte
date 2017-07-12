@@ -6,7 +6,7 @@ module SimpleForm
       end
 
       def icon_class
-        icon_tag = template.content_tag(:i, '', class: "fa fa-#{options[:icon]} prefix")
+        icon_tag = template.content_tag(:i, '', class: "fa fa-#{options[:icon]} fa-fw prefix")
       end
     end
   end

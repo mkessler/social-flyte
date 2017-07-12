@@ -40,7 +40,6 @@
         },
         dataType: 'json',
         success: function(data){
-          console.log(data);
           $('#new_post button, #post-sync-trigger').removeAttr('disabled');
         }
       });
