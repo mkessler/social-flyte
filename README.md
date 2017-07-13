@@ -1,4 +1,4 @@
-[ ![Codeship Status for mkessler/yoala](https://app.codeship.com/projects/c3298b20-7cae-0134-5149-164a30546007/status?branch=master)](https://app.codeship.com/projects/181143)
+[ ![Codeship Status for mkessler/socialflyte](https://app.codeship.com/projects/c3298b20-7cae-0134-5149-164a30546007/status?branch=master)](https://app.codeship.com/projects/181143)
 
 SocialFlyte
 ==============================================
