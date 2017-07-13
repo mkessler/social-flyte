@@ -12,18 +12,14 @@ Required Environment / Minimum Setup
 Requirements:
 
 * Ruby (v2.3.0)
-
+* Rails (v5.0.0.1)
 * PostgreSQL (v9.5.4)
-
 
 Setup:
 
-1. Clone repo `git clone git@bitbucket.org:USERNAME/yoala.git`
-
-2. `cd yoala`
-
+1. Clone repo `git clone git@bitbucket.org:USERNAME/socialflyte.git`
+2. `cd socialflyte`
 3. `./bin/setup`
-
 
 Notable Deviations
 ----------------------------------------------
@@ -81,11 +77,18 @@ Production Environment
 ----------------------------------------------
 
 Where is it?
-How do I access it?
-Who do I speak with to get access?
-Is there a CDN? How does it work?
-Is there a particular release process?
+ - Heroku
 
+How do I access it?
+ - https://heroku.com or using [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+How do I deploy?
+ - Add Heroku remote
+
+ `git remote add heroku https://git.heroku.com/socialflyte.git`
+ - Push changes to Heroku
+
+ `git push heroku master`
 
 Design
 ----------------------------------------------
