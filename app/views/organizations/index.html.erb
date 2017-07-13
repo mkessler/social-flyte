@@ -2,7 +2,7 @@
   <h2 class="dashboard-title">
     My Organizations
     <%= link_to new_organization_path, class: 'btn-floating btn-small default-color mr-0' do %>
-      <i class="fa fa-bank" aria-hidden="true" data-toggle="tooltip" title="New Organization"></i>
+      <i class="fa fa-rocket" aria-hidden="true" data-toggle="tooltip" title="New Organization"></i>
     <% end %>
   </h2>
 <% end %>
@@ -13,7 +13,7 @@
       <div class="card testimonial-card">
         <div class="card-up default-color"></div>
         <div class="avatar text-xs-center">
-          <%= content_tag(:i, nil, class: 'fa fa-cloud fa-4x mt-2', aria: { hidden: true }) %>
+          <%= content_tag(:i, nil, class: 'fa fa-rocket fa-4x mt-2', aria: { hidden: true }) %>
         </div>
         <div class="card-block">
           <h4 class="card-title"><%= organization.name %></h4>

@@ -11,7 +11,7 @@
         <% current_user.organizations.each do |organization| %>
           <li class="<%= organization_sidenav_active_class(organization.id) %>">
             <%= link_to organization, class: "waves-effect #{organization_sidenav_active_class(organization.id)}" do %>
-              <%= content_tag(:i, nil, :class => 'fa fa-cloud fa-fw', aria: { hidden: true }) %>
+              <%= content_tag(:i, nil, :class => 'fa fa-rocket fa-fw', aria: { hidden: true }) %>
               <%= organization.name.truncate(18) %>
             <% end %>
           </li>
@@ -19,7 +19,7 @@
       <% else %>
         <li>
           <%= link_to new_organization_path, class: 'waves-effect' do %>
-            <%= content_tag(:i, nil, :class => 'fa fa-hand-pointer-o fa-fw', aria: { hidden: true }) %> New Organization
+            <%= content_tag(:i, nil, :class => 'fa fa-rocket fa-fw', aria: { hidden: true }) %> New Organization
           <% end %>
         </li>
       <% end %>

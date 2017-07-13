@@ -271,6 +271,15 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   }
 }
 
+.stepper li.active a .label, .stepper li.completed a .label {
+  font-size: 1.1em;
+}
+
+.stepper-vertical li .step-content p {
+  font-size: .9rem;
+  margin-bottom: 0;
+}
+
 .switch label .lever:after {
   box-shadow: 0 0 0 #000;
 }

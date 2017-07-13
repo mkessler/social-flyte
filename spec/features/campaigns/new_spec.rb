@@ -18,7 +18,7 @@ RSpec.feature 'Campaigns New', :type => :feature do
     click_button 'Submit'
 
     expect(page).to have_selector('input.invalid')
-    expect(page).to have_content('can\'t be blank')
+    expect(page).to have_content('required')
   end
 
   scenario 'clicks submit with existing name' do
