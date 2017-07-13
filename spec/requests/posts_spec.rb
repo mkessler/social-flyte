@@ -493,7 +493,7 @@ RSpec.describe 'Posts', type: :request do
 
           it 'redirects to index' do
             delete organization_campaign_post_path(organization, campaign, campaign_post)
-            expect(response).to redirect_to(organization_campaign_posts_path(organization, campaign))
+            expect(response).to redirect_to(organization_campaign_path(organization, campaign))
           end
         end
 

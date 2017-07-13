@@ -1,7 +1,7 @@
 <table id="groala-flagged-interactions-table" class="table table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= data_source %>">
   <thead class="thead-default">
     <tr>
-      <th <%= 'style="display:none;"' if params[:controller] == "posts" %>>Post</th>
+      <th>Post</th>
       <th>Type</th>
       <th>User</th>
       <th style="min-width: 180px;">Content</th>
@@ -28,6 +28,6 @@
 
 <script type="text/javascript">
   $(document).on('ready', function() {
-    App.dataTables.groala.flagged_interactions();
+    App.dataTables.groala.flagged_interactions('<%= params[:controller] == "posts" ? "hide" : "show" %>');
   });
 </script>

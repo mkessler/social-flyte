@@ -17,7 +17,8 @@
         serverSide: false
       });
     },
-    flagged_interactions: function() {
+    flagged_interactions: function(visible_status) {
+      var show_post_name_column = visible_status == 'show' ? true : false;
       $('#groala-flagged-interactions-table').DataTable({
         ajax: $('#groala-flagged-interactions-table').data('source'),
         columns: [
@@ -29,6 +30,10 @@
           { data: 'flagged', width: '80px', className: 'text-xs-center', responsivePriority: 2 }
         ],
         columnDefs: [
+          {
+            targets: 0,
+            visible: show_post_name_column
+          },
           {
             targets: 1,
             data: 'class',
