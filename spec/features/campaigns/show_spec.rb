@@ -28,7 +28,7 @@ RSpec.feature 'Campaigns Show', :type => :feature do
   scenario 'clicks add' do
     visit organization_campaign_path(@organization, @campaign)
 
-    find(:xpath, "//a[@href='#{new_organization_campaign_post_path(@organization, @campaign)}']").click
+    first(:xpath, "//a[@href='#{new_organization_campaign_post_path(@organization, @campaign)}']").click
 
     expect(page).to have_selector("form#new_post")
   end

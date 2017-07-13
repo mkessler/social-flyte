@@ -2,7 +2,7 @@
   <h2 class="dashboard-title">
     <%= @campaign.name %>
     <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn-floating btn-small default-color mr-0' do %>
-      <i class="fa fa-cloud-download" aria-hidden="true" data-toggle="tooltip" title="Import Post"></i>
+      <i class="fa fa-sticky-note" aria-hidden="true" data-toggle="tooltip" title="New Post"></i>
     <% end %>
   </h2>
 <% end %>
@@ -23,38 +23,30 @@
         <% if @posts.present? %>
           <%= render "posts/datatable", organization: @organization, campaign: @campaign, posts: @posts %>
         <% else %>
-          <div class="row m-t-1">
-            <div class="col-md-12">
-              <ul class="stepper stepper-vertical">
-                <li class="active">
-                  <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
-                    <span class="circle">1</span>
-                    <span class="label">Import your first post</span>
-                  </a>
-                  <div class="step-content grey lighten-4">
-                    <p>Our platform is built with simplicity in mind and SocialFlyte removes all of the hassle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
-                  </div>
-                </li>
-                <li class="active">
-                  <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
-                    <span class="circle">2</span>
-                    <span class="label">Analyze &amp; reward</span>
-                  </a>
-                  <div class="step-content grey lighten-4">
-                    <p>Monitor your posts' interactions all in one centralized location to quickly track top contributors among your audience. Tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
-                  </div>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-
-          <div class="row m-t-1">
-            <div class="col-md-12 text-xs-center">
-              <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn default-color' do %>
-                <i class="fa fa-cloud-download left" aria-hidden="true"></i> Import Post
-              <% end %>
-            </div>
+          <ul class="stepper stepper-vertical mr-2">
+            <li class="active">
+              <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
+                <span class="circle">1</span>
+                <span class="label">Import your first post</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Our platform is built with simplicity in mind and SocialFlyte removes all of the hassle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
+              </div>
+            </li>
+            <li class="active">
+              <a href="<%= new_organization_campaign_post_path(@organization, @campaign) %>">
+                <span class="circle">2</span>
+                <span class="label">Analyze &amp; reward</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Monitor your posts' interactions all in one centralized location to quickly track top contributors among your audience. Tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
+              </div>
+            </li>
+          </ul>
+          <div class="text-xs-center mt-2">
+            <%= link_to new_organization_campaign_post_path(@organization, @campaign), class: 'btn btn-lg default-color' do %>
+              <i class="fa fa-plus left" aria-hidden="true"></i> Post
+            <% end %>
           </div>
         <% end %>
       </div>
