@@ -1,5 +1,9 @@
 # Application Helper
 module ApplicationHelper
+  def app_meta_tags
+    '<meta name="google-site-verification" content="W4IBXqiBX_4P7c60rNXv3Ij9On6yw5HhY7TGZB-CmrQ" />'.html_safe
+  end
+
   def icons_meta_tags
     '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
