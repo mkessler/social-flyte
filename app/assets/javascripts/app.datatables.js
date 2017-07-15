@@ -1,7 +1,7 @@
 (function() {
   this.App || (this.App = {});
 
-  App.dataTables ={
+  App.dataTables = {
     defaults: function() {
       $.extend( $.fn.dataTable.defaults, {
         autoWidth: false,

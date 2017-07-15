@@ -13,7 +13,6 @@
       </div>
     </div>
   </div>
-
   <div class="col-lg-7 mb-2">
     <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
@@ -52,6 +51,24 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-6 mb-2">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#reactions-analysis" role="tab">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> Feedback
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="reactions-analysis" role="tabpanel">
+        <canvas id="reactions-chart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript">
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
@@ -61,6 +78,29 @@
       <% end %>
     }
     App.facebook.loadSDK();
+    App.charts.bar(
+      document.getElementById('reactions-chart'),
+      {
+        labels: ['Angry', 'Haha', 'Like', 'Love', 'Sad', 'Wow'],
+        datasets: [
+          {
+            label: 'Reactions Analysis',
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [
+              <%= post.reactions.angry.count %>,
+              <%= post.reactions.haha.count %>,
+              <%= post.reactions.like.count %>,
+              <%= post.reactions.love.count %>,
+              <%= post.reactions.sad.count %>,
+              <%= post.reactions.wow.count %>
+            ]
+          }
+        ]
+      }
+    );
     console.log('Facebook Authentication ready.');
   });
 </script>
