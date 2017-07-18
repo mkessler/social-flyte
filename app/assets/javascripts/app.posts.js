@@ -51,7 +51,8 @@
         data,
         {
           autoResize: true,
-          height: $('#reactions-chart').height() + 6
+          height: $('#reactions-chart').height() + 6,
+          shape: 'elliptic'
         }
       );
     }

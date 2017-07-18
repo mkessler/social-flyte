@@ -74,7 +74,7 @@ class Post < ApplicationRecord
 
     occurrences = occurrences.sort_by { |word, occurence_count| occurence_count }
     occurrences.each do |word, occurence_count|
-      next if word.length < 3 || word.first === "'" || word.first === "’"
+      next if word.length < 3 || !(word.first =~ /[[:alpha:]]/) || !(word.last =~ /[[:alpha:]]/)
       data << {
         text: word,
         weight: occurence_count
