@@ -12,4 +12,5 @@
 //= require app.mdb
 //= require app.datatables
 //= require full_numbers_no_ellipses
+//= require jqcloud.min
 //= require_tree .

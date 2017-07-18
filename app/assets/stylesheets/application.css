@@ -16,6 +16,7 @@
  *= require responsive.bootstrap4.min
  *= require dataTables.fontAwesome
  *= require mdb
+ *= require jqcloud
  *= require style
  *= require_tree .
  *= require_self
