@@ -45,6 +45,16 @@
           message: App.posts.messages.error[2]
         });
       });
+    },
+    wordCloud: function($element, data) {
+      $element.empty().jQCloud(
+        data,
+        {
+          autoResize: true,
+          height: $('#reactions-chart').height() + 6,
+          shape: 'elliptic'
+        }
+      );
     }
   }
 

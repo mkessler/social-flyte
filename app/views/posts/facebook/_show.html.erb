@@ -52,7 +52,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6 mb-2">
+  <div class="col-lg-6 mb-2">
     <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#reactions-analysis" role="tab">
@@ -64,6 +64,22 @@
     <div class="tab-content card">
       <div class="tab-pane fade in active" id="reactions-analysis" role="tabpanel">
         <canvas id="reactions-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 mb-2">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#comments-words" role="tab">
+          <i class="fa fa-cloud" aria-hidden="true"></i> Word Cloud
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="comments-words" role="tabpanel">
+        <div id="comments-word-cloud"></div>
       </div>
     </div>
   </div>
@@ -101,6 +117,18 @@
         ]
       }
     );
+
+    App.posts.wordCloud(
+      $('#comments-word-cloud'),
+      <%= post.word_cloud_data.to_json.html_safe %>
+    );
+
+    $(window).on('resize', function(){
+      App.posts.wordCloud(
+        $('#comments-word-cloud'),
+        <%= post.word_cloud_data.to_json.html_safe %>
+      );
+    });
     console.log('Facebook Authentication ready.');
   });
 </script>
