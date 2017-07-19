@@ -9,6 +9,8 @@ class Post < ApplicationRecord
   validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
   validates_presence_of :network_parent_id
 
+  include Stopwords
+
   def can_be_synced?
     self.synced_at.nil? || Time.now.utc > self.synced_at + 15.minutes
   end
