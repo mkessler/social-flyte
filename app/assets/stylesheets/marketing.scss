@@ -1,0 +1,61 @@
+// html,
+// body,
+// .socialflyte-intro {
+//   height: 100%;
+// }
+
+// .navbar-lg {
+//   .navbar-brand {
+//     font-size: 2em;
+//   }
+// }
+
+body {
+  position: relative;
+}
+
+.top-nav-collapse {
+  background: #fff;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  a {
+    color: #373a3c !important;
+  }
+}
+
+.socialflyte {
+  &-intro {
+    background: asset-url('intro-bg.jpg') no-repeat top center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding-top: 8em;
+    position: relative;
+    .bg-overlay {
+      background: #0D478C;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  }
+  &-features {
+    i {
+      color: #90a4ae;
+    }
+  }
+  &-logo {
+    font-family: 'Baloo', cursive;
+  }
+}
+
+@media (max-width: 768px) {
+  .socialflyte {
+    &-intro {
+      padding-top: 6em;
+    }
+  }
+}
