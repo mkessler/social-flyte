@@ -1,26 +1,17 @@
-// html,
-// body,
-// .socialflyte-intro {
-//   height: 100%;
-// }
-
-// .navbar-lg {
-//   .navbar-brand {
-//     font-size: 2em;
-//   }
-// }
-
-body {
+body.marketing {
   position: relative;
+  .top-nav-collapse {
+    background: #fff;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    a {
+      color: #373a3c !important;
+    }
+  }
 }
 
-.top-nav-collapse {
-  background: #fff;
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-  a {
-    color: #373a3c !important;
-  }
+.custom-grey {
+  background: #f2f7f9;
 }
 
 .socialflyte {
@@ -41,6 +32,9 @@ body {
       bottom: 0;
       left: 0;
     }
+    .intro-description {
+      margin-top: 6em;
+    }
   }
   &-features {
     i {
@@ -56,6 +50,9 @@ body {
   .socialflyte {
     &-intro {
       padding-top: 6em;
+      .intro-description {
+        margin-top: 0;
+      }
     }
   }
 }
