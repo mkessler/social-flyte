@@ -1,2 +1,171 @@
-<h1>Marketing#index</h1>
-<p>Find me in app/views/marketing/index.html.erb</p>
+<div class="socialflyte-intro">
+  <div class="bg-overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-lg-7 intro-description mb-3">
+        <h1 class="h1-responsive text-white mb-2 wow fadeInLeft">Facebook Engagment Analysis Made Simple</h1>
+        <p class="text-white mb-2 wow fadeInLeft" data-wow-delay="0.4s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem repellendus quasi fuga nesciunt dolorum nulla magnam veniam sapiente, fugiat! Commodi sequi non animi ea dolor molestiae, quisquam iste, maiores. Nulla.</p>
+        <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.7s">
+          <i class="fa fa-angle-down left" aria-hidden="true"></i>
+          Learn more
+        </a>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <div class="card wow fadeInRight mb-4">
+          <div class="card-block">
+            <h3 class="text-xs-center mb-1">Get Started</h3>
+            <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
+            <%= hidden_field_tag :invitation_token, params[:invitation] %>
+            <%= f.hidden_field :email, value: params[:email] if params[:email].present? %>
+            <div class="form-inputs">
+              <%= f.input :first_name, label: 'First Name', icon: 'user', required: true %>
+              <%= f.input :last_name, label: 'Last Name', icon: 'user', required: true %>
+              <%= f.input :email, icon: 'envelope', required: true, input_html: { value: params[:email] }, disabled: params[:email].present? %>
+              <%= f.input :password, icon: 'lock', required: true %>
+            </div>
+            <div class="form-actions text-xs-center">
+              <%= f.button :button, class: 'btn-lg' do %>
+                <i class="fa fa-check-circle-o left" aria-hidden="true"></i>
+                Register
+              <% end %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section custom-grey mb-0 pt-3 pb-3 socialflyte-features">
+  <div class="container">
+    <h2 class="h1-responsive text-xs-center mt-0 mb-3 wow fadeIn">Only On SocialFlyte</h2>
+    <p class="section-description">Our feature-rich platform provides you with the tools you need to effectively analyze engagement across your social media posts.</p>
+    <div class="row">
+      <div class="col-md-5 mb-4 wow fadeIn">
+        <div class="media">
+          <div class="media-left">
+            <i class="fa fa-search fa-3x fa-fw media-object"></i>
+          </div>
+          <div class="media-body">
+            <h4 class="h4-responive media-heading mb-1">Dynamic Search</h4>
+            Whether you're sifting through hundreds of interactions or hundreds of thousands, quickly search through your posts for specific terms or users.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 offset-md-1 mb-4 wow fadeIn">
+        <div class="media">
+          <div class="media-left">
+            <i class="fa fa-tasks fa-3x fa-fw media-object"></i>
+          </div>
+          <div class="media-body">
+            <h4 class="h4-responive media-heading mb-1">Quick Sort</h4>
+            View and interact with engagement across your posts and campaigns in ways that are meaningful to your objectives.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5 mb-4 wow fadeIn">
+        <div class="media">
+          <div class="media-left">
+            <i class="fa fa-flag fa-3x fa-fw media-object"></i>
+          </div>
+          <div class="media-body">
+            <h4 class="h4-responive media-heading mb-1">Flag</h4>
+            Running a contest or crowd-sourcing ideas? Flag comments, reactions, and other forms of engagement within our platform to highlight the best interactions across your campaigns.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 offset-md-1 mb-4 wow fadeIn">
+        <div class="media">
+          <div class="media-left">
+            <i class="fa fa-thermometer-three-quarters fa-3x fa-fw media-object"></i>
+          </div>
+          <div class="media-body">
+            <h4 class="h4-responive media-heading mb-1">Sentiment Analysis</h4>
+            Gauge your audience's response to each post with
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if false %>
+<section class="section mb-0 pt-3 pb-3">
+  <div class="container">
+    <h2 class="h1-responsive text-xs-center mt-0 mb-3">Simplicity Is Our Story</h2>
+    <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam. Quia, minima?</p>
+    <div class="row">
+    </div>
+  </div>
+</section>
+
+<section class="hidden custom-grey mb-0 pt-3 pb-3">
+  <div class="container">
+    <h2 class="h1-responsive text-xs-center mt-0 mb-3">Pricing For All</h2>
+    <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam. Quia, minima?</p>
+    <div class="row">
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card">
+          <div class="text-center">
+            <div class="card-block">
+              <h5>Basic plan</h5>
+              <div class="flex-center">
+                <div class="card-circle">
+                  <i class="fa fa-home blue-text"></i>
+                </div>
+              </div>
+              <h2>
+                <strong>59$</strong>
+              </h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa pariatur id nobis accusamus deleniti cumque hic laborum.</p>
+              <a class="btn btn-primary btn-rounded">Buy now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card teal">
+          <div class="text-center white-text">
+            <div class="card-block">
+              <h5>Premium plan</h5>
+              <div class="flex-center">
+                <div class="card-circle">
+                  <i class="fa fa-group white-text"></i>
+                </div>
+              </div>
+              <h2>
+                <strong>79$</strong>
+              </h2>
+              <p>Esse corporis saepe laudantium velit adipisci cumque iste ratione facere non distinctio cupiditate sequi atque.</p>
+              <a class="btn btn-outline-white btn-rounded">Buy now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 mb-r">
+        <div class="card">
+          <div class="text-center">
+            <div class="card-block">
+              <h5>Advanced plan</h5>
+              <div class="flex-center">
+                <div class="card-circle">
+                  <i class="fa fa-bar-chart blue-text"></i>
+                </div>
+              </div>
+              <h2>
+                <strong>99$</strong>
+              </h2>
+              <p>At ab ea a molestiae corrupti numquam quo beatae minima ratione magni accusantium repellat eveniet quia vitae.</p>
+              <a class="btn btn-primary btn-rounded">Buy now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% end %>

@@ -9,6 +9,7 @@
       var el = document.querySelector('.custom-scrollbar');
       Ps.initialize(el);
     }
+    new WOW().init();
   };
 
   $(document).on('ready', function() {
