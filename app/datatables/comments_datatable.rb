@@ -17,6 +17,7 @@ class CommentsDatatable < Datatable
       {
         like_count: comment.like_count,
         user: {
+          id: comment.network_user_id,
           name: comment.network_user_name,
           url: @post.network.user_link(comment.network_user_id)
         },

@@ -10,6 +10,7 @@
           { data: 'user', width: '110px' },
           { data: 'comment', className: 'groala-break-word', responsivePriority: 1 },
           { data: 'posted_at', width: '85px' },
+          { data: 'user', width: '30px' },
           { data: 'flagged', width: '60px', className: 'groala-flag-toggle' }
         ],
         columnDefs: [
@@ -48,6 +49,13 @@
           },
           {
             targets: 4,
+            data: 'user',
+            render: function ( data, type, full, meta ) {
+              return '<a href="https://m.me/'+data.id+'" target="_blank"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+            }
+          },
+          {
+            targets: 5,
             data: 'flagged',
             render: function ( data, type, full, meta ) {
               var checked = data.status ? 'checked="checked"' : '';
