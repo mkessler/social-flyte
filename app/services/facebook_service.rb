@@ -32,18 +32,6 @@ class FacebookService
 
   private
 
-  def aggregate_reactions
-    results = get_reactions
-    build_reactions(results)
-
-    results = results.next_page
-
-    while results.present?
-      build_reactions(results)
-      results = results.next_page
-    end
-  end
-
   def aggregate_comments
     results = get_comments
     build_comments(results)
@@ -56,28 +44,28 @@ class FacebookService
     end
   end
 
-  def build_reactions(results)
-    reactions = []
-    results.each do |result|
-      reaction = Reaction.new(
-        post_id: @post.id,
-        network_user_id: result['id'],
-        network_user_name: result['name'],
-        network_user_picture: result['pic_square'],
-        category: result['type']
-      )
+  def aggregate_reactions
+    results = get_reactions
+    build_reactions(results)
 
-      reactions << reaction
+    results = results.next_page
+
+    while results.present?
+      build_reactions(results)
+      results = results.next_page
     end
+  end
 
-    Reaction.import(
-      reactions,
-      on_duplicate_key_update: {
-        conflict_target: [:post_id, :network_user_id],
-        index_name: :index_reactions_on_post_id_and_network_user_id,
-        columns: [:network_user_name, :network_user_picture, :category]
-      }
-    )
+  def aggregate_shares
+    results = get_shares
+    build_shares(results)
+
+    results = results.next_page
+
+    while results.present?
+      build_shares(results)
+      results = results.next_page
+    end
   end
 
   def build_comments(results)
@@ -119,6 +107,53 @@ class FacebookService
     )
   end
 
+  def build_reactions(results)
+    reactions = []
+    results.each do |result|
+      reaction = Reaction.new(
+        post_id: @post.id,
+        network_user_id: result['id'],
+        network_user_name: result['name'],
+        network_user_picture: result['pic_square'],
+        category: result['type']
+      )
+
+      reactions << reaction
+    end
+
+    Reaction.import(
+      reactions,
+      on_duplicate_key_update: {
+        conflict_target: [:post_id, :network_user_id],
+        index_name: :index_reactions_on_post_id_and_network_user_id,
+        columns: [:network_user_name, :network_user_picture, :category]
+      }
+    )
+  end
+
+  def build_shares(results)
+    shares = []
+    results.each do |result|
+      share = Share.new(
+        post_id: @post.id,
+        network_share_id: result['id'],
+        network_user_id:  result['from']['id'],
+        network_user_name: result['from']['name']
+      )
+
+      shares << share
+    end
+
+    Share.import(
+      shares,
+      on_duplicate_key_update: {
+        conflict_target: [:post_id, :network_share_id],
+        index_name: :index_shares_on_post_id_and_network_share_id,
+        columns: [:network_user_id, :network_user_name]
+      }
+    )
+  end
+
   def get_user
     @graph.get_object("me?fields=id,name,picture.type(large)")
   rescue Koala::Facebook::APIError => e
@@ -144,7 +179,7 @@ class FacebookService
   end
 
   def get_shares
-    @graph.get_object("#{@object_id}/sharedposts?limit=1000")
+    @graph.get_object("#{@object_id}/sharedposts?fields=from,id&limit=1000")
   rescue Koala::Facebook::APIError => e
     Rails.logger.error("Koala::Facebook API Error (User ID: #{@user.id} | Post ID: #{@post.id}) - #{e.message}")
   end

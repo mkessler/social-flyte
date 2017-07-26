@@ -1,0 +1,20 @@
+<%= render "shared/datatables_search", table_id: 'facebook-shares-table' %>
+<table id="facebook-shares-table" class="table table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_shares_url(organization, campaign, post, format: :json) %>">
+  <thead class="thead-default">
+    <tr>
+      <th>Share</th>
+      <th style="min-width: 110px;">User</th>
+      <th class="text-xs-center">
+        <i class="fa fa-flag fa-lg" aria-hidden="true"></i>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<div class="mt-2">
+  <hr>
+  <%= link_to organization_campaign_post_shares_path(organization, campaign, post, format: :csv), class: 'btn btn-md secondary-color', data: { toggle: 'tooltip', placement: 'top' }, title: 'Download Shares' do %>
+    <i class="fa fa-download left"></i> <b>CSV</b>
+  <% end %>
+</div>

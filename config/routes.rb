@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :posts, path: 'p', except: [:index, :edit, :update] do
         resources :comments, except: [:new, :edit, :show, :create, :destroy]
         resources :reactions, except: [:new, :edit, :show, :create, :destroy]
+        resources :shares, except: [:new, :edit, :show, :create, :destroy]
         get :interactions
         get :sync_status
         post :flag_random_interaction
