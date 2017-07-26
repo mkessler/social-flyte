@@ -4,6 +4,8 @@ class Share < ApplicationRecord
   validates :post_id, :network_user_name, :network_user_id, presence: true
   validates :network_share_id, presence: true, uniqueness: { scope: :post_id }
 
+  scope :flagged, -> { where(flagged: true) }
+
   def self.to_csv
     attributes = [:network_user_name, :network_share_id]
 

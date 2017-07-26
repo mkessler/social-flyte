@@ -25,7 +25,7 @@ class Post < ApplicationRecord
   end
 
   def flagged_interactions
-    comments.flagged.sort + reactions.flagged.sort
+    comments.flagged.sort + reactions.flagged.sort + shares.flagged.sort
   end
 
   def flagged_interactions_to_csv
@@ -38,6 +38,8 @@ class Post < ApplicationRecord
             content = "#{flagged_interaction.message} --- #{flagged_interaction.attachment_url}"
           when Reaction
             content = flagged_interaction.category
+          when Share
+            content = "https://facebook.com/#{flagged_interaction.network_share_id}"
           else
             content = nil
         end

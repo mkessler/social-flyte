@@ -66,6 +66,18 @@ class FlaggedInteractionsDatatable < Datatable
             }
           )
         end
+        if flagged_interaction.is_a?(Share)
+          hash[:content][:share_link] = "https://facebook.com/#{flagged_interaction.network_share_id}"
+          hash[:flagged][:url] = organization_campaign_post_share_path(
+            flagged_interaction.post.campaign.organization,
+            flagged_interaction.post.campaign,
+            flagged_interaction.post,
+            flagged_interaction,
+            share: {
+              flagged: !flagged_interaction.flagged
+            }
+          )
+        end
       end
     end
   end

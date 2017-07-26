@@ -15,6 +15,7 @@ class FacebookService
     if @post.network == Network.facebook
       aggregate_comments
       aggregate_reactions
+      aggregate_shares
       @post.reload
       @post.update_sync_status
     else

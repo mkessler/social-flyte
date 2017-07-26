@@ -6,7 +6,7 @@
       $('#facebook-comments-table').DataTable({
         ajax: $('#facebook-comments-table').data('source'),
         columns: [
-          { data: 'like_count', width: '50px', className: 'text-xs-center' },
+          { data: 'like_count', width: '60px', className: 'text-xs-center' },
           { data: 'user', width: '110px' },
           { data: 'comment', className: 'groala-break-word', responsivePriority: 1 },
           { data: 'posted_at', width: '85px' },
@@ -73,7 +73,7 @@
       $('#facebook-reactions-table').DataTable({
         ajax: $('#facebook-reactions-table').data('source'),
         columns: [
-          { data: 'category', width: '100px', className: 'text-xs-center' },
+          { data: 'category', width: '60px', className: 'text-xs-center' },
           { data: 'user' },
           { data: 'flagged', width: '60px', className: 'groala-flag-toggle' }
         ],
@@ -114,12 +114,61 @@
           [1, 'asc']
         ]
       });
+    },
+    shares: function() {
+      $('#facebook-shares-table').DataTable({
+        ajax: $('#facebook-shares-table').data('source'),
+        columns: [
+          { data: 'network_share_id', width: '60px', className: 'text-xs-center' },
+          { data: 'user' },
+          { data: 'flagged', width: '60px', className: 'groala-flag-toggle' }
+        ],
+        columnDefs: [
+          {
+            targets: 0,
+            data: 'network_share_id',
+            render: function ( data, type, full, meta ) {
+              return '<a href="https://facebook.com'+data+'" target="_blank">' +
+                '<i class="fa fa-share-alt" aria-hidden="true"></i>' +
+              '</a>';
+            }
+          },
+          {
+            targets: 1,
+            data: 'user',
+            render: function ( data, type, full, meta ) {
+              return '<a class=" groala-standard-link" target="_blank" href="'+data.url+'">'+data.name+'</a>';
+            }
+          },
+          {
+            targets: 2,
+            data: 'flagged',
+            render: function ( data, type, full, meta ) {
+              var checked = data.status ? 'checked="checked"' : '';
+              return '<a id="share-flag-'+data.id+'" class="switch" data-remote="true" data-method="put" rel="nofollow" href="'+data.url+'">' +
+                '<label class="mb-0">' +
+                  '<input type="checkbox" '+checked+'>' +
+                  '<span class="lever"></span>' +
+                '</label>' +
+              '</a>';
+            }
+          }
+        ],
+        language: {
+          emptyTable: 'No shares exist!',
+          info: '<span class="tag tag-default"><i class="fa fa-list" aria-hidden="true"></i> _START_ - _END_ of _TOTAL_ Shares</span>'
+        },
+        order: [
+          [1, 'asc']
+        ]
+      });
     }
   }
 
   $(document).on('ready', function() {
     App.dataTables.facebook.comments();
     App.dataTables.facebook.reactions();
+    App.dataTables.facebook.shares();
   });
 
 }).call(this);
