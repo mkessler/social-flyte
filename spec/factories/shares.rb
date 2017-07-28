@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :share do
-    post nil
-    network_user_id "MyString"
-    network_user_name "MyString"
-    network_share_id "MyString"
+    post
+    network_user_id Faker::Number.number(10)
+    network_user_name Faker::Name.name
+    network_share_id Faker::Number.number(10)
   end
 end
