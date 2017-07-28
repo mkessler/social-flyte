@@ -1,13 +1,13 @@
 class Post < ApplicationRecord
-  belongs_to :campaign
+  belongs_to :user
   belongs_to :network
   has_many :comments, dependent: :delete_all
   has_many :reactions, dependent: :delete_all
   has_many :shares, dependent: :delete_all
 
   # Make network_parent_id conditional on facebook when more networks added
-  validates :name, :campaign_id, :network_id, presence: true
-  validates :network_post_id, presence: true, uniqueness: { scope: [:campaign_id, :network_id] }
+  validates :name, :user_id, :network_id, presence: true
+  validates :network_post_id, presence: true, uniqueness: { scope: [:user_id, :network_id, :network_id] }
   validates_presence_of :network_parent_id
 
   include Stopwords

@@ -5,8 +5,6 @@ class Datatable
   def initialize(view, post)
     @view = view
     @post = post
-    @campaign = @post.campaign
-    @organization = @campaign.organization
   end
 
   private

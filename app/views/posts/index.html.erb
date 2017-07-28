@@ -1,0 +1,52 @@
+<% content_for :page_title do %>
+  <h2 class="dashboard-title">
+    Posts
+    <%= link_to new_post_path, class: 'btn-floating btn-small default-color mr-0' do %>
+      <i class="fa fa-sticky-note" aria-hidden="true" data-toggle="tooltip" title="New Post"></i>
+    <% end %>
+  </h2>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12 mb-2">
+    <ul class="nav nav-tabs tabs-1 primary-color" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#posts-list" role="tab"><i class="fa fa-sticky-note" aria-hidden="true"></i> Posts</a>
+      </li>
+    </ul>
+
+    <div class="tab-content card">
+      <div class="tab-pane fade in active" id="posts-list" role="tabpanel">
+        <% if @posts.present? %>
+          <%= render "posts/datatable", posts: @posts %>
+        <% else %>
+          <ul class="stepper stepper-vertical mr-2">
+            <li class="active">
+              <a href="<%= new_post_path %>">
+                <span class="circle">1</span>
+                <span class="label">Import your first post</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Our platform is built with simplicity in mind and SocialFlyte removes all of the hassle of importing and analyzing your brand's audience engagement across mulitiple social networks.</p>
+              </div>
+            </li>
+            <li class="active">
+              <a href="<%= new_post_path %>">
+                <span class="circle">2</span>
+                <span class="label">Analyze &amp; reward</span>
+              </a>
+              <div class="step-content grey lighten-4">
+                <p>Monitor your posts' interactions all in one centralized location to quickly track top contributors among your audience. Tap into the power of our platform to search, sort, and flag up to hundreds of thousands of interactions per post!</p>
+              </div>
+            </li>
+          </ul>
+          <div class="text-xs-center mt-2">
+            <%= link_to new_post_path, class: 'btn btn-lg default-color' do %>
+              <i class="fa fa-plus left" aria-hidden="true"></i> Post
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 (function() {
   var $el = $('#reaction-flag-<%= @reaction.id %>');
-  var update_link = '<%= organization_campaign_post_reaction_path(@organization, @campaign, @post, @reaction, reaction: { flagged: !@reaction.flagged }) %>'
+  var update_link = '<%= post_reaction_path(@post, @reaction, reaction: { flagged: !@reaction.flagged }) %>'
   App.dataTables.flagToggle($el, <%= @reaction.flagged? %>, update_link);
 
   <% flash.each do |f| %>

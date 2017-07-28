@@ -4,12 +4,16 @@ RSpec.describe User, type: :model do
   let (:user) { FactoryGirl.create(:user) }
 
   describe 'associations' do
-    it 'has many memberships' do
-      expect(User.reflect_on_association(:memberships).macro).to eql(:has_many)
-    end
+    # it 'has many memberships' do
+    #   expect(User.reflect_on_association(:memberships).macro).to eql(:has_many)
+    # end
+    #
+    # it 'has many organizations' do
+    #   expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
+    # end
 
-    it 'has many organizations' do
-      expect(User.reflect_on_association(:organizations).macro).to eql(:has_many)
+    it 'has many posts' do
+      expect(User.reflect_on_association(:posts).macro).to eql(:has_many)
     end
 
     it 'has one facebook token' do
@@ -77,30 +81,6 @@ RSpec.describe User, type: :model do
 
       it 'returns false' do
         expect(user.has_valid_facebook_token?).to be false
-      end
-    end
-  end
-
-  describe '.process_invitation' do
-    context 'has valid invitation' do
-      it 'returns true' do
-        invitation = FactoryGirl.create(:invitation, email: user.email)
-        user.process_invitation(invitation.token)
-        invitation.reload
-
-        expect(invitation.accepted).to eql(true)
-        expect(invitation.recipient_id).to eql(user.id)
-      end
-    end
-
-    context 'does not have valid invitation' do
-      it 'returns false' do
-        invitation = FactoryGirl.create(:invitation)
-        user.process_invitation(invitation.token)
-        invitation.reload
-
-        expect(invitation.accepted).to eql(false)
-        expect(invitation.recipient_id).to be_nil
       end
     end
   end

@@ -44,9 +44,7 @@ class FlaggedInteractionsDatatable < Datatable
             url: flagged_interaction.attachment_url
           }
           hash[:content][:message] = flagged_interaction.message
-          hash[:flagged][:url] = organization_campaign_post_comment_path(
-            flagged_interaction.post.campaign.organization,
-            flagged_interaction.post.campaign,
+          hash[:flagged][:url] = post_comment_path(
             flagged_interaction.post,
             flagged_interaction,
             comment: {
@@ -56,9 +54,7 @@ class FlaggedInteractionsDatatable < Datatable
         end
         if flagged_interaction.is_a?(Reaction)
           hash[:content][:category] = flagged_interaction.category.downcase
-          hash[:flagged][:url] = organization_campaign_post_reaction_path(
-            flagged_interaction.post.campaign.organization,
-            flagged_interaction.post.campaign,
+          hash[:flagged][:url] = post_reaction_path(
             flagged_interaction.post,
             flagged_interaction,
             reaction: {
@@ -68,9 +64,7 @@ class FlaggedInteractionsDatatable < Datatable
         end
         if flagged_interaction.is_a?(Share)
           hash[:content][:share_link] = "https://facebook.com/#{flagged_interaction.network_share_id}"
-          hash[:flagged][:url] = organization_campaign_post_share_path(
-            flagged_interaction.post.campaign.organization,
-            flagged_interaction.post.campaign,
+          hash[:flagged][:url] = post_share_path(
             flagged_interaction.post,
             flagged_interaction,
             share: {

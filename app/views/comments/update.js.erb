@@ -1,6 +1,6 @@
 (function() {
   var $el = $('#comment-flag-<%= @comment.id %>');
-  var update_link = '<%= organization_campaign_post_comment_path(@organization, @campaign, @post, @comment, comment: { flagged: !@comment.flagged }) %>';
+  var update_link = '<%= post_comment_path(@post, @comment, comment: { flagged: !@comment.flagged }) %>';
   App.dataTables.flagToggle($el, <%= @comment.flagged? %>, update_link);
 
   <% flash.each do |f| %>

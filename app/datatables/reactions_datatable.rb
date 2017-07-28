@@ -23,7 +23,7 @@ class ReactionsDatatable < Datatable
         flagged: {
           id: reaction.id,
           status: reaction.flagged,
-          url: organization_campaign_post_reaction_path(@organization, @campaign, @post, reaction, reaction: { flagged: !reaction.flagged })
+          url: post_reaction_path(@post, reaction, reaction: { flagged: !reaction.flagged })
         }
       }
     end

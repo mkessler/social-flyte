@@ -15,34 +15,38 @@ class ApplicationController < ActionController::Base
                   keywords: 'SocialFlyte, Social, Flyte, Media, Promotion, Contest, Platform, Analyze, Monitor, Native'
   end
 
-  def set_organization
-    if params[:organization_id]
-      @organization = current_user.organizations.friendly.find(params[:organization_id])
-    else
-      @organization = current_user.organizations.friendly.find(params[:id])
-    end
-    add_breadcrumb 'My Organizations', root_url if current_user.organizations.count > 1
-    add_breadcrumb @organization.name, organization_path(@organization)
-  end
-
-  def set_campaign
-    if params[:campaign_id]
-      @campaign = @organization.campaigns.friendly.find(params[:campaign_id])
-    else
-      @campaign = @organization.campaigns.friendly.find(params[:id])
-    end
-    add_breadcrumb @campaign.name, organization_campaign_path(@organization, @campaign)
-  end
+  # def set_organization
+  #   if params[:organization_id]
+  #     @organization = current_user.organizations.friendly.find(params[:organization_id])
+  #   else
+  #     @organization = current_user.organizations.friendly.find(params[:id])
+  #   end
+  #   add_breadcrumb 'My Organizations', root_url if current_user.organizations.count > 1
+  #   add_breadcrumb @organization.name, organization_path(@organization)
+  # end
+  #
+  # def set_campaign
+  #   if params[:campaign_id]
+  #     @campaign = @organization.campaigns.friendly.find(params[:campaign_id])
+  #   else
+  #     @campaign = @organization.campaigns.friendly.find(params[:id])
+  #   end
+  #   add_breadcrumb @campaign.name, organization_campaign_path(@organization, @campaign)
+  # end
 
   def set_post
     if params[:post_id]
-      @post = @campaign.posts.find(params[:post_id])
+      @post = current_user.posts.find(params[:post_id])
     else
-      @post = @campaign.posts.find(params[:id])
+      @post = current_user.posts.find(params[:id])
     end
     network_slug = @post.network.slug
     icon_class = (network_slug == 'facebook') ? network_slug + '-official' : network_slug
-    add_breadcrumb "<i class=\"fa fa-#{icon_class} fa-lg\" aria-hidden=\"true\"></i>", organization_campaign_post_path(@organization, @campaign, @post)
+    add_breadcrumb 'Home', posts_url
+    add_breadcrumb(
+      "<i class=\"fa fa-#{icon_class} fa-lg\" aria-hidden=\"true\"></i> #{@post.name}",
+      post_path(@post)
+    )
   end
 
   protected

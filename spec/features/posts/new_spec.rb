@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.feature 'Campaigns New', :type => :feature do
   before(:all) do
     @user = FactoryGirl.create(:user)
-    @organization = FactoryGirl.create(:organization)
-    FactoryGirl.create(:membership, user: @user, organization: @organization)
-    @campaign = FactoryGirl.create(:campaign, organization: @organization)
-    @post = FactoryGirl.create(:post, campaign: @campaign)
+    @post = FactoryGirl.create(:post, user: @user)
   end
 
   before(:each) do

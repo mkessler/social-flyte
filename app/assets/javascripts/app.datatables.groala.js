@@ -139,6 +139,8 @@
         columns: [
           null,
           { width: '120px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' },
+          { width: '120px', className: 'text-xs-center' },
           { width: '120px', className: 'text-xs-center' }
         ],
         language: {
