@@ -4,24 +4,6 @@
   </h2>
 <% end %>
 
-<% if current_user.invitations.pending.any? %>
-  <% current_user.invitations.pending.each do |invitation| %>
-    <div class="row">
-      <div class="groala-alert col-lg-12 mb-2">
-        <div class="card secondary-color lighten-1 accent-4 text-xs-center">
-          <div class="card-block">
-            <span class="white-text">
-              <i class="fa fa-envelope-open-o fa-lg fa-fw"></i>
-              You've been invited to join <b><%= invitation.organization.name%></b>
-              <%= render 'invitations/accept_form', organization: invitation.organization, invitation: invitation %>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% end %>
-
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
   <div class="row">

@@ -3,7 +3,9 @@
   <thead class="thead-default">
     <tr>
       <th>Post</th>
-      <th>Engagement</th>
+      <th>Comments</th>
+      <th>Reactions</th>
+      <th>Shares</th>
       <th data-orderable="false">Manage</th>
     </tr>
   </thead>
@@ -11,7 +13,9 @@
     <% posts.each do |post| %>
       <tr id="post-<%= post.id %>">
         <td><%= link_to post.name, post, class: ' groala-standard-link' %></td>
-        <td class="groala-no-wrap"><%= number_with_delimiter(post.engagement_count) %></td>
+        <td class="groala-no-wrap"><%= number_with_delimiter(post.comments.count) %></td>
+        <td class="groala-no-wrap"><%= number_with_delimiter(post.reactions.count) %></td>
+        <td class="groala-no-wrap"><%= number_with_delimiter(post.shares.count) %></td>
         <td class="groala-no-wrap">
           <%= link_to post do %>
             <%= content_tag(:i, nil, :class => 'fa fa-eye fa-lg ', aria: { hidden: true }, data: { toggle: 'tooltip', placement: 'top' }, title: 'View') %>
