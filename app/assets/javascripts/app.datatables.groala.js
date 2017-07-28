@@ -38,7 +38,18 @@
             targets: 1,
             data: 'class',
             render: function ( data, type, full, meta ) {
-              var icon = data === 'Comment' ? 'comment' : 'thumbs-up';
+              var icon = (function(interaction_type) {
+                switch(interaction_type) {
+                  case 'Comment':
+                    return 'comment';
+                  case 'Reaction':
+                    return 'thumbs-up';
+                  case 'Share':
+                    return 'share-alt';
+                  default:
+                    return 'question';
+                }
+              })(data);
               return '<i class="fa fa-'+ icon +' fa-lg grey-text" aria-hidden="true"></i>';
             }
           },
@@ -69,6 +80,10 @@
                 }
               } else if (full.class == 'Reaction') {
                 output = '<span class="facebook-reaction '+data.category+'"></span>';
+              } else if (full.class == 'Share') {
+                output = '<a href="'+data.share_link+'" target="_blank">' +
+                  '<i class="fa fa-share-alt" aria-hidden="true"></i>' +
+                '</a>';
               }
 
               return output;

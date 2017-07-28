@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :facebook_token do
     user
-    token 'EAAYWqqyPLBQBAEnffxqvbW0tJ3s7aJUPSDCRwKJPqxC0WdxD6NDnNy1JG9lla92VxZBUqNXwqCKDXeZBWBDYJwpnV4REeYnO126WVsRd4l7n7NePQOxcRmOE5VKDYHHxckDZBv6n1470iHnvLBR5O5rEiFafP0ZD'
+    token 'EAAYWqqyPLBQBAEWIPYZAWuQ6uYSjoBEzqc1o24fX9QbWAQinXhggdLjWZCBAJg187qZBYD26Qh37lrYJ6L6Mc2TcBZC9GNVRO2DhHguyU7ec8adBXjl06wlyDZBHQwsqZCqIuE8euDlg2U0cbmnS0kiRZAxaJG7zqcZD'
     network_user_id '10106147434913000'
     expires_at Time.now + 1.day
 

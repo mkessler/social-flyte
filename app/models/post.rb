@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :network
   has_many :comments, dependent: :delete_all
   has_many :reactions, dependent: :delete_all
+  has_many :shares, dependent: :delete_all
 
   # Make network_parent_id conditional on facebook when more networks added
   validates :name, :campaign_id, :network_id, presence: true
@@ -24,7 +25,7 @@ class Post < ApplicationRecord
   end
 
   def flagged_interactions
-    comments.flagged.sort + reactions.flagged.sort
+    comments.flagged.sort + reactions.flagged.sort + shares.flagged.sort
   end
 
   def flagged_interactions_to_csv
@@ -37,6 +38,8 @@ class Post < ApplicationRecord
             content = "#{flagged_interaction.message} --- #{flagged_interaction.attachment_url}"
           when Reaction
             content = flagged_interaction.category
+          when Share
+            content = "https://facebook.com/#{flagged_interaction.network_share_id}"
           else
             content = nil
         end

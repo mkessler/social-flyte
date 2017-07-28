@@ -31,12 +31,15 @@
 
 <div class="row">
   <div class="col-lg-12 mb-2">
-    <ul class="nav nav-tabs tabs-2 primary-color" role="tablist">
+    <ul class="nav nav-tabs tabs-3 primary-color" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#post-comments" role="tab"><i class="fa fa-comments" aria-hidden="true"></i> Comments</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#post-reactions" role="tab"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Reactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#post-shares" role="tab"><i class="fa fa-share-alt" aria-hidden="true"></i> Shares</a>
       </li>
     </ul>
 
@@ -46,6 +49,9 @@
       </div>
       <div class="tab-pane fade in" id="post-reactions" role="tabpanel">
         <%= render "reactions/datatable", organization: organization, campaign: campaign, post: post %>
+      </div>
+      <div class="tab-pane fade in" id="post-shares" role="tabpanel">
+        <%= render "shares/datatable", organization: organization, campaign: campaign, post: post %>
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     @csv_download_url = organization_campaign_post_interactions_path(@organization, @campaign, @post, format: :csv)
     @flag_random_comment_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'comment')
     @flag_random_reaction_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'reaction')
+    @flag_random_share_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'share')
     @network = @post.network
     @network_slug = @network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
@@ -42,6 +43,9 @@ class PostsController < ApplicationController
       when 'reaction'
         @interaction = @post.reactions.where(flagged: false).sample
         @flag_url = organization_campaign_post_reaction_path(@organization, @campaign, @post, @interaction, reaction: { flagged: !@interaction.flagged })
+      when 'share'
+        @interaction = @post.shares.where(flagged: false).sample
+        @flag_url = organization_campaign_post_share_path(@organization, @campaign, @post, @interaction, share: { flagged: !@interaction.flagged })
     end
 
     @interaction.flagged = true
