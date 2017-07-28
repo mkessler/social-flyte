@@ -13,6 +13,7 @@ class CampaignsController < ApplicationController
     @flagged_interactions = @campaign.flagged_interactions
     @flag_random_comment_url = organization_campaign_flag_random_interaction_path(@organization, @campaign, interaction_class: 'comment')
     @flag_random_reaction_url = organization_campaign_flag_random_interaction_path(@organization, @campaign, interaction_class: 'reaction')
+    @flag_random_share_url = organization_campaign_flag_random_interaction_path(@organization, @campaign, interaction_class: 'share')
     @posts = @campaign.posts
   end
 
@@ -35,6 +36,9 @@ class CampaignsController < ApplicationController
       when 'reaction'
         @interaction = post.reactions.where(flagged: false).sample
         @flag_url = organization_campaign_post_reaction_path(@organization, @campaign, post, @interaction, reaction: { flagged: !@interaction.flagged })
+      when 'share'
+        @interaction = post.shares.where(flagged: false).sample
+        @flag_url = organization_campaign_post_share_path(@organization, @campaign, post, @interaction, share: { flagged: !@interaction.flagged })
     end
 
     @interaction.flagged = true
