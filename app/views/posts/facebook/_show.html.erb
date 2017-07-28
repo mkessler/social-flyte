@@ -23,7 +23,7 @@
     </ul>
     <div class="tab-content card">
       <div class="tab-pane fade in active" id="post-flagged-interactions" role="tabpanel">
-        <%= render "shared/flagged_interactions_datatable", organization: @organization, campaign: @campaign, post: @post, flagged_interactions: post.flagged_interactions, data_source: organization_campaign_post_interactions_url(organization, campaign, post, format: :json) %>
+        <%= render "shared/flagged_interactions_datatable", post: @post, flagged_interactions: post.flagged_interactions, data_source: post_interactions_url(post, format: :json) %>
       </div>
     </div>
   </div>
@@ -45,13 +45,13 @@
 
     <div class="tab-content card">
       <div class="tab-pane fade in active" id="post-comments" role="tabpanel">
-        <%= render "comments/datatable", organization: organization, campaign: campaign, post: post %>
+        <%= render "comments/datatable", post: post %>
       </div>
       <div class="tab-pane fade in" id="post-reactions" role="tabpanel">
-        <%= render "reactions/datatable", organization: organization, campaign: campaign, post: post %>
+        <%= render "reactions/datatable", post: post %>
       </div>
       <div class="tab-pane fade in" id="post-shares" role="tabpanel">
-        <%= render "shares/datatable", organization: organization, campaign: campaign, post: post %>
+        <%= render "shares/datatable", post: post %>
       </div>
     </div>
   </div>

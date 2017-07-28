@@ -34,7 +34,7 @@ class CommentsDatatable < Datatable
         flagged: {
           id: comment.id,
           status: comment.flagged,
-          url: organization_campaign_post_comment_path(@organization, @campaign, @post, comment, comment: { flagged: !comment.flagged })
+          url: post_comment_path(@post, comment, comment: { flagged: !comment.flagged })
         }
       }
     end

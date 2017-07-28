@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :post do
-    campaign
+    user
     name Faker::Friends.quote
     network_id 1
     network_post_id Faker::Number.number(10)

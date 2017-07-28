@@ -23,7 +23,7 @@ class SharesDatatable < Datatable
         flagged: {
           id: share.id,
           status: share.flagged,
-          url: organization_campaign_post_share_path(@organization, @campaign, @post, share, share: { flagged: !share.flagged })
+          url: post_share_path(@post, share, share: { flagged: !share.flagged })
         }
       }
     end

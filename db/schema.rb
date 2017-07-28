@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726035402) do
+ActiveRecord::Schema.define(version: 20170728061154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,14 +114,14 @@ ActiveRecord::Schema.define(version: 20170726035402) do
     t.string   "network_parent_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer  "campaign_id",                   null: false
     t.integer  "sync_count",        default: 0, null: false
     t.datetime "synced_at"
     t.string   "job_id"
     t.string   "name",                          null: false
-    t.index ["campaign_id", "network_id", "network_post_id"], name: "index_posts_on_campaign_id_and_network_id_and_network_post_id", unique: true, using: :btree
-    t.index ["campaign_id"], name: "index_posts_on_campaign_id", using: :btree
+    t.integer  "user_id",                       null: false
     t.index ["network_id"], name: "index_posts_on_network_id", using: :btree
+    t.index ["user_id", "network_post_id", "network_id"], name: "index_posts_on_user_id_and_network_post_id_and_network_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
 
   create_table "reactions", force: :cascade do |t|
@@ -176,8 +176,8 @@ ActiveRecord::Schema.define(version: 20170726035402) do
   add_foreign_key "invitations", "organizations"
   add_foreign_key "memberships", "organizations"
   add_foreign_key "memberships", "users"
-  add_foreign_key "posts", "campaigns"
   add_foreign_key "posts", "networks"
+  add_foreign_key "posts", "users"
   add_foreign_key "reactions", "posts"
   add_foreign_key "shares", "posts"
 end

@@ -1,6 +1,6 @@
 (function() {
   var $el = $('#share-flag-<%= @share.id %>');
-  var update_link = '<%= organization_campaign_post_share_path(@organization, @campaign, @post, @share, share: { flagged: !@share.flagged }) %>'
+  var update_link = '<%= post_share_path(@post, @share, share: { flagged: !@share.flagged }) %>'
   App.dataTables.flagToggle($el, <%= @share.flagged? %>, update_link);
 
   <% flash.each do |f| %>

@@ -1,19 +1,25 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_organization
-  before_action :set_campaign
   before_action :set_post, only: [:show, :flag_random_interaction, :interactions, :sync_status, :sync_post, :destroy]
   before_action :facebook_token_validation_check, only: [:sync_post]
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  # GET o/:organization_id/c/:campaign_id/posts/:id
-  # GET o/:organization_id/c/:campaign_id/posts/:id.json
+  # GET posts
+  # GET posts.json
+  def index
+    set_meta_tags site: meta_title("Posts")
+    add_breadcrumb 'Home', posts_url
+    @posts = current_user.posts
+  end
+
+  # GET posts/:id
+  # GET posts/:id.json
   def show
-    @csv_download_url = organization_campaign_post_interactions_path(@organization, @campaign, @post, format: :csv)
-    @flag_random_comment_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'comment')
-    @flag_random_reaction_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'reaction')
-    @flag_random_share_url = organization_campaign_post_flag_random_interaction_path(@organization, @campaign, @post, interaction_class: 'share')
+    @csv_download_url = post_interactions_path(@post, format: :csv)
+    @flag_random_comment_url = post_flag_random_interaction_path(@post, interaction_class: 'comment')
+    @flag_random_reaction_url = post_flag_random_interaction_path(@post, interaction_class: 'reaction')
+    @flag_random_share_url = post_flag_random_interaction_path(@post, interaction_class: 'share')
     @network = @post.network
     @network_slug = @network.slug
     @status = ActiveJobStatus.fetch(@post.job_id)
@@ -25,27 +31,27 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET o/:organization_id/c/:campaign_id/posts/:id/interactions.json
-  # GET o/:organization_id/c/:campaign_id/posts/:id/interactions.csv
+  # GET posts/:id/interactions.json
+  # GET posts/:id/interactions.csv
   def interactions
     respond_to do |format|
       format.json { render json: FlaggedInteractionsDatatable.new(view_context, @post) }
-      format.csv { send_data(@post.flagged_interactions_to_csv, :filename => "#{@post.campaign.name.parameterize}-#{@post.network.slug}-flagged-interactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
+      format.csv { send_data(@post.flagged_interactions_to_csv, :filename => "#{@post.name.parameterize}-#{@post.network.slug}-flagged-interactions-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv") }
     end
   end
 
-  # POST /o/:organization_id/c/:campaign_id/posts/:id/flag_random_reaction
+  # POST /posts/:id/flag_random_reaction
   def flag_random_interaction
     case params[:interaction_class]
       when 'comment'
         @interaction = @post.comments.where(flagged: false).sample
-        @flag_url = organization_campaign_post_comment_path(@organization, @campaign, @post, @interaction, comment: { flagged: !@interaction.flagged })
+        @flag_url = post_comment_path(@post, @interaction, comment: { flagged: !@interaction.flagged })
       when 'reaction'
         @interaction = @post.reactions.where(flagged: false).sample
-        @flag_url = organization_campaign_post_reaction_path(@organization, @campaign, @post, @interaction, reaction: { flagged: !@interaction.flagged })
+        @flag_url = post_reaction_path(@post, @interaction, reaction: { flagged: !@interaction.flagged })
       when 'share'
         @interaction = @post.shares.where(flagged: false).sample
-        @flag_url = organization_campaign_post_share_path(@organization, @campaign, @post, @interaction, share: { flagged: !@interaction.flagged })
+        @flag_url = post_share_path(@post, @interaction, share: { flagged: !@interaction.flagged })
     end
 
     @interaction.flagged = true
@@ -60,7 +66,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET o/:organization_id/c/:campaign_id/posts/:id/sync_status.json
+  # GET posts/:id/sync_status.json
   def sync_status
     status = ActiveJobStatus.fetch(@post.job_id)
     respond_to do |format|
@@ -68,7 +74,7 @@ class PostsController < ApplicationController
     end
   end
 
-  # POST o/:organization_id/c/:campaign_id/posts/:id/sync_post.json
+  # POST posts/:id/sync_post.json
   def sync_post
     respond_to do |format|
       if @post.can_be_synced? && @post.sync(current_user)
@@ -79,22 +85,22 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET o/:organization_id/c/:campaign_id/p/new
+  # GET p/new
   def new
     set_meta_tags site: meta_title('Import Post')
-    add_breadcrumb 'Import Post', new_organization_campaign_post_path(@organization, @campaign)
-    @post = @campaign.posts.new
+    add_breadcrumb 'Import Post', new_post_path
+    @post = current_user.posts.new
   end
 
-  # POST o/:organization_id/c/:campaign_id/posts
-  # POST o/:organization_id/c/:campaign_id/posts.json
+  # POST posts
+  # POST posts.json
   def create
-    @post = @campaign.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
     respond_to do |format|
       if post_params.present? && @post.save
         @post.sync(current_user)
-        format.html { redirect_to organization_campaign_post_url(@organization, @campaign, @post), notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: organization_campaign_post_url(@organization, @campaign, @post) }
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: @post }
       else
         #flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
         format.html { render :new }
@@ -103,12 +109,12 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE o/:organization_id/c/:campaign_id/posts
-  # DELETE o/:organization_id/c/:campaign_id/posts.json
+  # DELETE posts
+  # DELETE posts.json
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to organization_campaign_url(@organization, @campaign), notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -116,22 +122,14 @@ class PostsController < ApplicationController
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  # Don't allow :campaign_id
+  # Don't allow :user_id
   def post_params
     params.require(:post).permit(:name, :network_post_id, :network_parent_id, :sync_count, :synced_at).merge(network_id: Network.facebook.id)
   end
 
   def record_not_found
-    if @organization.present? && @campaign.present?
-      flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist for this campaign.'
-      redirect_to organization_campaign_url(@organization, @campaign)
-    elsif @organization.present?
-      flash[:notice] = 'Uh-oh, looks like you tried to access a campaign that doesn\'t exist for this organization.'
-      redirect_to organization_campaigns_url(@organization)
-    else
-      flash[:notice] = 'Uh-oh, looks like you tried to access an organization that either doesn\'t exist or that you\'re not a member of.'
-      redirect_to organizations_url
-    end
+    flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist.'
+    redirect_to posts_url
   end
 
   def facebook_token_validation_check

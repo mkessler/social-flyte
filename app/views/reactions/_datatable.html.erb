@@ -1,5 +1,5 @@
 <%= render "shared/datatables_search", table_id: 'facebook-reactions-table' %>
-<table id="facebook-reactions-table" class="table table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= organization_campaign_post_reactions_url(organization, campaign, post, format: :json) %>">
+<table id="facebook-reactions-table" class="table table-bordered groala-datatable" cellspacing="0" width="100%" data-source="<%= post_reactions_url(post, format: :json) %>">
   <thead class="thead-default">
     <tr>
       <th>Reaction</th>
@@ -14,7 +14,7 @@
 </table>
 <div class="mt-2">
   <hr>
-  <%= link_to organization_campaign_post_reactions_path(organization, campaign, post, format: :csv), class: 'btn btn-md secondary-color', data: { toggle: 'tooltip', placement: 'top' }, title: 'Download Reactions' do %>
+  <%= link_to post_reactions_path(post, format: :csv), class: 'btn btn-md secondary-color', data: { toggle: 'tooltip', placement: 'top' }, title: 'Download Reactions' do %>
     <i class="fa fa-download left"></i> <b>CSV</b>
   <% end %>
 </div>
