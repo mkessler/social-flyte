@@ -42,7 +42,6 @@ class ApplicationController < ActionController::Base
     end
     network_slug = @post.network.slug
     icon_class = (network_slug == 'facebook') ? network_slug + '-official' : network_slug
-    add_breadcrumb 'Home', posts_url
     add_breadcrumb(
       "<i class=\"fa fa-#{icon_class} fa-lg\" aria-hidden=\"true\"></i> #{@post.name}",
       post_path(@post)

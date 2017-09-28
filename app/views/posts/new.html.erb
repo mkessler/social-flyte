@@ -16,7 +16,70 @@
 
     <div class="tab-content card">
       <div class="tab-pane fade in active" id="new-post" role="tabpanel">
-        <%= render 'form', organization: @organization, campaign: @campaign, post: @post %>
+        <div class="tab-content">
+          <div class="tab-pane fade in <%= 'active' unless @form_errors %>" id="post-search" role="tabpanel">
+            <div class="row">
+              <h3 class="text-xs-center"><b>1.</b> Find Your Post</h3>
+              <div class="col-lg-12">
+                <div class="md-form input-group mb-2">
+                  <i class="fa fa-facebook-official prefix"></i>
+                  <input type="text" id="facebook-page-search" class="form-control mb-0">
+                  <label for="facebook-page-search" class="">Facebook Page</label>
+                </div>
+                <div class="form-actions text-xs-center">
+                  <button class="btn btn-secondary" id="facebook-page-search-submit" type="button" data-toggle="tab" href="#post-page" role="tab">
+                    <i class="fa fa-search left"></i>
+                    Search
+                  </button>
+                  <div class="text-xs-center">
+                    <small>
+                      or
+                      <br>
+                      <%= link_to "Import Manually", manual_import_posts_path %>
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade in" id="post-page" role="tabpanel">
+            <div id="facebook-pages-cards" class="row">
+              <h3 class="text-xs-center"><b>2.</b> Select a Page</h3>
+              <div class="text-xs-center">
+                <small>
+                  or
+                  <br>
+                  <a data-toggle="tab" href="#post-search" role="tab">Go Back</a>
+                </small>
+              </div>
+              <div class="response-grid"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade in" id="post-post" role="tabpanel">
+            <div id="facebook-posts-cards" class="row">
+              <h3 class="text-xs-center"><b>3.</b> Select a Post</h3>
+              <div class="text-xs-center">
+                <small>
+                  or
+                  <br>
+                  <a data-toggle="tab" href="#post-page" role="tab">Go Back</a>
+                </small>
+              </div>
+              <div class="response-grid"></div>
+            </div>
+          </div>
+          <div class="tab-pane fade in <%= 'active' if @form_errors %>" id="post-form" role="tabpanel">
+            <h3 class="text-xs-center"><b>4.</b> Name Your Post</h3>
+            <div class="text-xs-center">
+              <small>
+                or
+                <br>
+                <a data-toggle="tab" href="#post-post" role="tab">Go Back</a>
+              </small>
+            </div>
+            <%= render 'form', organization: @organization, campaign: @campaign, post: @post %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -26,9 +89,10 @@
   $(document).on('ready', function() {
     window.fbAsyncInit = function() {
       App.facebook.init(<%= Rails.application.secrets.facebook_app_id %>);
-      <% unless current_user.has_valid_facebook_token? %>
-        App.facebook.status();
-      <% end %>
+      App.facebook.status();
+      App.posts.facebookPageSearch();
+      App.facebook.setFacebookPage();
+      App.facebook.setFacebookPost();
     }
     App.facebook.loadSDK();
     console.log('Facebook Authentication ready.');

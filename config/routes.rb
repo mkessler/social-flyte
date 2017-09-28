@@ -17,11 +17,12 @@ Rails.application.routes.draw do
   end
 
   # Posts
-  resources :posts, except: [:edit, :update] do
+  resources :posts, except: [:edit, :update], path_names: { new: 'import' } do
     resources :comments, except: [:new, :edit, :show, :create, :destroy]
     resources :reactions, except: [:new, :edit, :show, :create, :destroy]
     resources :shares, except: [:new, :edit, :show, :create, :destroy]
     get :interactions
+    get :manual_import, on: :collection
     get :sync_status
     post :flag_random_interaction
     post :sync_post

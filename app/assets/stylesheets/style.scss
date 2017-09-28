@@ -60,6 +60,19 @@ th {
   }
 }
 
+.btn-floating {
+  i {
+    font-size: 1.2rem;
+  }
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,.1);
+  .view img {
+    width: 100%;
+  }
+}
+
 .dashboard-title {
   font-weight: 700;
   margin: 0rem 0 2rem;
@@ -129,6 +142,18 @@ table.dataTable thead .sorting:before, table.dataTable thead .sorting:after, tab
   bottom: 0.75em;
 }
 
+#facebook-posts-cards {
+  .view {
+    height: 150px;
+    background-image: url('seigaiha.png');
+    background-repeat: repeat;
+    background-position: center;
+    img {
+      min-height: 100%;
+    }
+  }
+}
+
 .fixed-sn main.dashboard {
   padding-top: 2rem;
 }
@@ -179,6 +204,14 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
   border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
+.loading-response {
+  min-height: 200px;
+  background-image: url('loading.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .modal {
   .table {
     tr {
@@ -225,6 +258,18 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 .registration {
   padding-top: 6em;
 }
+
+/*
+ * Row with equal height columns
+ * --------------------------------------------------
+ */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
 
 .side-nav {
   display: flex;
@@ -282,6 +327,9 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 
 .tab-content {
   padding: 1.5rem !important;
+  .tab-content {
+    padding: 0 !important;
+  }
 }
 
 .table-bordered {

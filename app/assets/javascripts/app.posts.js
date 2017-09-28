@@ -12,6 +12,15 @@
         'disabled': true
       });
     },
+    facebookPageSearch: function() {
+      $('#facebook-page-search-submit').on('click', function() {
+        if ($('#facebook-page-search').val().length > 0) {
+          App.facebook.fetchPages(
+            $('#facebook-page-search').val()
+          );
+        }
+      });
+    },
     poll: function(statuses) {
       if (statuses === undefined) statuses = [];
 

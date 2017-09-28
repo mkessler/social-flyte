@@ -2,16 +2,23 @@
   <div class="col-lg-12">
     <%= simple_form_for([organization, campaign, post]) do |f| %>
       <div class="form-inputs">
+        <%= hidden_field_tag :is_manual_import, true %>
+        <%= f.input :network_parent_id, icon: 'facebook-official', label: 'Page ID' %>
+        <%= f.input :network_post_id, icon: 'sticky-note', label: 'Post ID' %>
         <%= f.input :name, icon: 'tag', label: 'Name' %>
-        <%= f.input :network_post_id, as: :hidden %>
-        <%= f.input :network_parent_id, as: :hidden %>
       </div>
 
       <div class="form-actions text-xs-center">
         <%= f.button :button, disabled: !current_user.has_valid_facebook_token? do %>
           <i class="fa fa-check-circle-o left" aria-hidden="true"></i>
-          Import
+          Submit
         <% end %>
+        <div class="text-xs-center">
+          <small>
+            or
+            <br>
+            <%= link_to "Use Import Tool", new_post_path %>
+          </small>
       </div>
     <% end %>
   </div>

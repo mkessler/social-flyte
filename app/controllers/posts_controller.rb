@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :add_post_breadcrumb
   before_action :set_post, only: [:show, :flag_random_interaction, :interactions, :sync_status, :sync_post, :destroy]
   before_action :facebook_token_validation_check, only: [:sync_post]
 
@@ -85,10 +86,16 @@ class PostsController < ApplicationController
     end
   end
 
-  # GET p/new
+  # GET posts/new
   def new
     set_meta_tags site: meta_title('Import Post')
-    add_breadcrumb 'Import Post', new_post_path
+    add_breadcrumb 'Import', new_post_path
+    @post = current_user.posts.new
+  end
+
+  def manual_import
+    set_meta_tags site: meta_title('Manually Import Post')
+    add_breadcrumb 'Manual Import', manual_import_posts_path
     @post = current_user.posts.new
   end
 
@@ -102,8 +109,15 @@ class PostsController < ApplicationController
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
-        #flash[:warning] = "Connected account required for #{network.name}" unless network_token_exists
-        format.html { render :new }
+        flash[:warning] = "Required fields missing."
+        @form_errors = true
+        format.html {
+          if params[:is_manual_import]
+            render :new && return
+          else
+            render :new && return
+          end
+        }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -130,6 +144,10 @@ class PostsController < ApplicationController
   def record_not_found
     flash[:notice] = 'Uh-oh, looks like you tried to access a post that doesn\'t exist.'
     redirect_to posts_url
+  end
+
+  def add_post_breadcrumb
+    add_breadcrumb 'Posts', posts_url
   end
 
   def facebook_token_validation_check
